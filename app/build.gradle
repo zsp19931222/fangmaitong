@@ -19,8 +19,7 @@ android {
                                 JPUSH_PKGNAME: applicationId,
                                 JPUSH_APPKEY : "05f17a90dcb5c8a75b2884e2", //JPush 上注册的包名对应的 Appkey.
                                 JPUSH_CHANNEL: "developer-default",
-                                BAIDU_MAP_KEY: "lnFPGl0asYs1sR6j4al2gddcwZlVW4nG",
-                                qqappid      : "1107813498"
+                                BAIDU_MAP_KEY: "lnFPGl0asYs1sR6j4al2gddcwZlVW4nG"
         ]
     }
     dataBinding {
