@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<me.goldze.mvvmhabit.view.shape.RadiusTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/d20"
+    android:layout_marginStart="@dimen/d2"
+    android:layout_marginEnd="@dimen/d2"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:text="楼盘标签"
+    android:textSize="@dimen/font10"
+    binding:rv_backgroundColor="@color/white"
+    binding:rv_radius="@dimen/d10"
+    binding:rv_strokeColor="@color/color_bfbfbf"
+    binding:rv_strokeWidth="@dimen/d1"
+    binding:rv_textColor="@color/color_gray_999999" />

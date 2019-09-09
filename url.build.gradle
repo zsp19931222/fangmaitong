@@ -1,0 +1,54 @@
+//一些资源配置
+android {
+    dataBinding {
+        enabled true
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+    signingConfigs {
+        release {
+            v1SigningEnabled true
+            v2SigningEnabled true
+//            storeFile file('F:\\WorkSpace\\app_key\\安卓数字证书.keystore')
+//            storePassword 'yhkjydszxy'
+//            keyAlias = 'mykey'
+//            keyPassword 'yhkjydszxy'
+        }
+        debug {
+            v1SigningEnabled true
+            v2SigningEnabled true
+//            storeFile file('F:\\WorkSpace\\app_key\\安卓数字证书.keystore')
+//            storePassword 'yhkjydszxy'
+//            keyAlias = 'mykey'
+//            keyPassword 'yhkjydszxy'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false  //开启混淆编译
+            zipAlignEnabled false  //Zipalign优化
+            shrinkResources false // 移除无用的resource文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "WECHAT_APP_ID", "\"wx7bfeb2862235ac4f\"")
+            buildConfigField("String", "WECHAT_APP_SECRET", "\"e85b1b987847822193c436356bd036fc\"")
+            buildConfigField("String", "QQ_APP_ID", "\"1107813498\"")
+            buildConfigField("String", "QQ_APP_KEY", "\"OAhKuj8qF3mqWmo0\"")
+            buildConfigField("String", "WEB_APP_KEY", "\"689150989\"")
+            buildConfigField("String", "WEB_APP_SECRET", "\"9aa04099decfe1878cd99369b368447d\"")
+            buildConfigField("String", "UMENG_APP_KEY", "\"5d43cf8a4ca357c7450007b8\"")
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "WECHAT_APP_ID", "\"wx7bfeb2862235ac4f\"")
+            buildConfigField("String", "WECHAT_APP_SECRET", "\"e85b1b987847822193c436356bd036fc\"")
+            buildConfigField("String", "QQ_APP_ID", "\"1107813498\"")
+            buildConfigField("String", "QQ_APP_KEY", "\"OAhKuj8qF3mqWmo0\"")
+            buildConfigField("String", "WEB_APP_KEY", "\"689150989\"")
+            buildConfigField("String", "WEB_APP_SECRET", "\"9aa04099decfe1878cd99369b368447d\"")
+            buildConfigField("String", "UMENG_APP_KEY", "\"5d43cf8a4ca357c7450007b8\"")
+        }
+    }
+}

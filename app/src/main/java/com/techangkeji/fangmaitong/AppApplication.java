@@ -2,6 +2,7 @@ package com.techangkeji.fangmaitong;
 
 import com.goldze.base.config.ModuleLifecycleConfig;
 
+import io.reactivex.plugins.RxJavaPlugins;
 import me.goldze.mvvmhabit.base.BaseApplication;
 
 
@@ -14,6 +15,9 @@ public class AppApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        RxJavaPlugins.setErrorHandler(throwable -> {
+            //异常处理
+        });
         //初始化组件(靠前)
         ModuleLifecycleConfig.getInstance().initModuleAhead(this);
         //....

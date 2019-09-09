@@ -21,8 +21,6 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <View style="@style/ViewLineStyle" />
-
         <com.techangkeji.module_main.view.TabGroupView
             android:id="@+id/main_tgv"
             android:layout_width="match_parent"

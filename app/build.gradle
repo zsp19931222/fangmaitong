@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply from: '../url.build.gradle'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -19,51 +20,9 @@ android {
                                 JPUSH_PKGNAME: applicationId,
                                 JPUSH_APPKEY : "05f17a90dcb5c8a75b2884e2", //JPush 上注册的包名对应的 Appkey.
                                 JPUSH_CHANNEL: "developer-default",
-                                BAIDU_MAP_KEY: "lnFPGl0asYs1sR6j4al2gddcwZlVW4nG"
+                                BAIDU_MAP_KEY: "lnFPGl0asYs1sR6j4al2gddcwZlVW4nG",
+                                qqappid      : '1107813498'
         ]
-    }
-    dataBinding {
-        enabled true
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions {
-        sourceCompatibility = '1.8'
-        targetCompatibility = '1.8'
-    }
-    signingConfigs {
-        release {
-            v1SigningEnabled true
-            v2SigningEnabled true
-//            storeFile file('F:\\WorkSpace\\app_key\\安卓数字证书.keystore')
-//            storePassword 'yhkjydszxy'
-//            keyAlias = 'mykey'
-//            keyPassword 'yhkjydszxy'
-        }
-        debug {
-            v1SigningEnabled true
-            v2SigningEnabled true
-//            storeFile file('F:\\WorkSpace\\app_key\\安卓数字证书.keystore')
-//            storePassword 'yhkjydszxy'
-//            keyAlias = 'mykey'
-//            keyPassword 'yhkjydszxy'
-        }
-    }
-    buildTypes {
-        release {
-            minifyEnabled false  //开启混淆编译
-            zipAlignEnabled false  //Zipalign优化
-            shrinkResources false // 移除无用的resource文件
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        debug {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
     }
 
     android.applicationVariants.all { variant ->
