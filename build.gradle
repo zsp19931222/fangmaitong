@@ -1,0 +1,35 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: "config.gradle"
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+        //友盟仓库
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.4.1'
+        //阿里路由器
+        classpath "com.alibaba:arouter-register:1.0.2"
+        // tinkersupport插件, 其中lastest.release指拉取最新版本，也可以指定明确版本号，例如1.0.4
+        classpath "com.tencent.bugly:tinker-support:1.1.5"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+        //友盟仓库
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

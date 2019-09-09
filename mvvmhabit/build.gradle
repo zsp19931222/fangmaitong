@@ -1,0 +1,121 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+    }
+    dataBinding {
+        enabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api rootProject.ext.dependencies.appcompat
+    //rxjava
+    api rootProject.ext.dependencies.rxjava
+    api rootProject.ext.dependencies.rxandroid
+    //rx管理View的生命周期
+    api(rootProject.ext.dependencies.rxlifecycle) {
+        exclude group: 'com.android.support'
+    }
+    api(rootProject.ext.dependencies["rxlifecycle-components"]) {
+        exclude group: 'com.android.support'
+    }
+    //rxbinding
+    api(rootProject.ext.dependencies.rxbinding) {
+        exclude group: 'com.android.support'
+    }
+    //rx权限请求
+    api(rootProject.ext.dependencies.rxpermissions) {
+        exclude group: 'com.android.support'
+    }
+    //network
+    api rootProject.ext.dependencies.okhttp
+    api rootProject.ext.dependencies.retrofit
+    api rootProject.ext.dependencies["converter-gson"]
+    api rootProject.ext.dependencies["adapter-rxjava"]
+    //json解析
+    api rootProject.ext.dependencies.gson
+    //recyclerview的databinding套装
+    api(rootProject.ext.dependencies.bindingcollectionadapter) {
+        exclude group: 'com.android.support'
+    }
+    api(rootProject.ext.dependencies["bindingcollectionadapter-recyclerview"]) {
+        exclude group: 'com.android.support'
+    }
+    //Google LiveData和ViewModel组件
+    api rootProject.ext.dependencies["lifecycle-extensions"]
+    annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
+    //图片选择器
+    api rootProject.ext.dependencies.PictureSelector
+    //design
+    api rootProject.ext.dependencies.design
+    //material-dialogs
+    api(rootProject.ext.dependencies["material-dialogs-core"]) {
+        exclude group: 'com.android.support'
+    }
+    api(rootProject.ext.dependencies["material-dialogs-commons"]) {
+        exclude group: 'com.android.support'
+    }
+    //bugly
+    api rootProject.ext.dependencies.crashreportUpgrade
+    api rootProject.ext.dependencies.tinkerAndroid
+    api rootProject.ext.dependencies.nativecrashreport
+    //multidex分包
+    api rootProject.ext.dependencies.multidex
+    //数据库框架
+    api rootProject.ext.dependencies.LitePal
+    //popupwindow
+    api rootProject.ext.dependencies.popupwindow
+    //toast
+    api rootProject.ext.dependencies.toast
+    //ARouter
+    api rootProject.ext.dependencies.arouter
+    //常用工具类
+    api rootProject.ext.dependencies.utilcode
+    //自适应布局
+    api rootProject.ext.dependencies.autolayout
+    //万能adapter
+    api rootProject.ext.dependencies.adapter
+    //二维码扫描
+    api rootProject.ext.dependencies.zxing
+    //cardview
+    api rootProject.ext.dependencies.cardview
+    //骨架屏
+    api rootProject.ext.dependencies.skeleton
+    //刷新
+    api rootProject.ext.dependencies.SmartRefreshLayout
+    api rootProject.ext.dependencies.SmartRefreshHeader
+    //友盟
+    api rootProject.ext.dependencies.umsdkCommon
+    api rootProject.ext.dependencies.shareCore
+    api rootProject.ext.dependencies.shareQQ
+    api rootProject.ext.dependencies.shareWeChat
+    api rootProject.ext.dependencies.shareSina
+    api rootProject.ext.dependencies.shareWidget
+    //查看手机db数据库文件
+    api rootProject.ext.dependencies.stetho
+    //图片浏览
+    api rootProject.ext.dependencies.photoview
+    //下载文件
+    api rootProject.ext.dependencies.okgo
+    api rootProject.ext.dependencies.okserver
+
+    //消息角标
+    api rootProject.ext.dependencies.ShortcutBadger
+}

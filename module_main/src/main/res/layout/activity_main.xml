@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="me.goldze.mvvmhabit.base.BaseViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/main_vp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <View style="@style/ViewLineStyle" />
+
+        <com.techangkeji.module_main.view.TabGroupView
+            android:id="@+id/main_tgv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d50"
+            android:orientation="horizontal">
+
+            <com.techangkeji.module_main.view.TabView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:gravity="center"
+                app:tab_checked="true"
+                app:tab_name="首页"
+                app:tab_nameColor="@color/color_dark_333333"
+                app:tab_nameSelectColor="@color/color_dark_333333"
+                app:tab_nameSize="@dimen/font10" />
+
+            <com.techangkeji.module_main.view.TabView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:gravity="center"
+                app:tab_name="房源"
+                app:tab_nameColor="@color/color_dark_333333"
+                app:tab_nameSelectColor="@color/color_dark_333333"
+                app:tab_nameSize="@dimen/font10" />
+
+            <com.techangkeji.module_main.view.TabView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:background="@drawable/ripple"
+                android:gravity="center"
+                app:tab_name="资讯"
+                app:tab_nameColor="@color/color_dark_333333"
+                app:tab_nameSelectColor="@color/color_dark_333333"
+                app:tab_nameSize="@dimen/font10" />
+
+            <com.techangkeji.module_main.view.TabView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:gravity="center"
+                app:tab_name="社交"
+                app:tab_nameColor="@color/color_dark_333333"
+                app:tab_nameSelectColor="@color/color_dark_333333"
+                app:tab_nameSize="@dimen/font10" />
+
+            <com.techangkeji.module_main.view.TabView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:gravity="center"
+                app:tab_icon="@mipmap/ic_launcher"
+                app:tab_iconSelect="@mipmap/return_icon"
+                app:tab_name="我的"
+                app:tab_nameColor="@color/color_dark_333333"
+                app:tab_nameSelectColor="@color/color_dark_333333"
+                app:tab_nameSize="@dimen/font10" />
+        </com.techangkeji.module_main.view.TabGroupView>
+    </LinearLayout>
+</layout>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--自定义title-->
+    <declare-styleable name="TitleBar">
+        <attr name="title_height" format="dimension" />
+        <attr name="title_text_color" format="color" />
+        <attr name="title_bg" format="color" />
+        <attr name="title_text" format="string" />
+        <attr name="title_text_size" format="dimension" />
+        <attr name="title_left_image" format="reference" />
+        <attr name="title_right_image" format="reference" />
+
+    </declare-styleable>
+
+    <!-- app样式 -->
+    <style name="MyAppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- 设置无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!--&lt;!&ndash; 解决activity切换时的黑屏问题 &ndash;&gt;-->
+        <!--<item name="android:windowIsTranslucent">true</item>-->
+        <item name="android:windowDisablePreview">true</item>
+        <!-- 设置activity切换动画 -->
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+    </style>
+
+    <!-- 界面跳转动画animation 样式 -->
+    <style name="activityAnimation" parent="@android:style/Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/right_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/left_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/right_out</item>
+    </style>
+
+    <declare-styleable name="XTabItem">
+        <attr name="android:text" />
+        <attr name="android:icon" />
+        <attr name="android:layout" />
+    </declare-styleable>
+
+    <declare-styleable name="TabView">
+        <attr name="tab_checked" format="boolean" />
+        <attr name="tab_name" format="string" />
+        <attr name="tab_nameSize" format="dimension" />
+        <attr name="tab_nameColor" format="color" />
+        <attr name="tab_nameSelectColor" format="color" />
+
+        <attr name="tab_icon" format="reference" />
+        <attr name="tab_iconSelect" format="reference" />
+
+        <attr name="tab_text" format="string" />
+        <attr name="tab_textColor" format="color" />
+        <attr name="tab_textSize" format="dimension" />
+        <attr name="tab_background" format="color" />
+
+    </declare-styleable>
+
+    <declare-styleable name="ZoomHeaderViewPager">
+        <attr name="hvTextSize" format="dimension" type="integer" />
+        <attr name="hvTextColor" format="color" type="integer" />
+        <attr name="hvTextColorActiveTab" format="color" type="integer" />
+        <attr name="hvTextAlpha" format="float" type="integer" />
+        <attr name="hvTextAlphaActiveTab" format="float" type="integer" />
+        <attr name="hvTextScale" format="float" type="integer" />
+        <attr name="hvTextScaleActiveTab" format="float" type="integer" />
+        <attr name="hvPadding" format="dimension" type="integer" />
+    </declare-styleable>
+
+    <!--自定义侧滑菜单-->
+    <declare-styleable name="SwipeMenuLayout">
+        <attr name="swipeEnable" format="boolean" />
+        <attr name="ios" format="boolean" />
+        <attr name="leftSwipe" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="BounceBackViewPager">
+        <!--
+        determines the maximum amount of translation along the z-axis during the overscroll.
+        Default is 150.
+        -->
+        <attr name="overscroll_translation" format="dimension" />
+
+        <!-- Duration of animation when user releases the over scroll. Default is 400 ms. -->
+        <attr name="overscroll_animation_duration" format="integer" />
+    </declare-styleable>
+
+    <!-- 分割线样式 -->
+    <style name="ViewLineStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/color_persona_bggray</item>
+    </style>
+</resources>

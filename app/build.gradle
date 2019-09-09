@@ -1,0 +1,108 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    defaultConfig {
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //阿里路由框架配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+        manifestPlaceholders = [APP_NAME     : "房脉通",
+                                JPUSH_PKGNAME: applicationId,
+                                JPUSH_APPKEY : "05f17a90dcb5c8a75b2884e2", //JPush 上注册的包名对应的 Appkey.
+                                JPUSH_CHANNEL: "developer-default",
+                                BAIDU_MAP_KEY: "lnFPGl0asYs1sR6j4al2gddcwZlVW4nG",
+                                qqappid      : "1107813498"
+        ]
+    }
+    dataBinding {
+        enabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+    signingConfigs {
+        release {
+            v1SigningEnabled true
+            v2SigningEnabled true
+//            storeFile file('F:\\WorkSpace\\app_key\\安卓数字证书.keystore')
+//            storePassword 'yhkjydszxy'
+//            keyAlias = 'mykey'
+//            keyPassword 'yhkjydszxy'
+        }
+        debug {
+            v1SigningEnabled true
+            v2SigningEnabled true
+//            storeFile file('F:\\WorkSpace\\app_key\\安卓数字证书.keystore')
+//            storePassword 'yhkjydszxy'
+//            keyAlias = 'mykey'
+//            keyPassword 'yhkjydszxy'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false  //开启混淆编译
+            zipAlignEnabled false  //Zipalign优化
+            shrinkResources false // 移除无用的resource文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            //def date = new Date().format("yyyyMMdd" , TimeZone.getTimeZone("Asia/Shanghai"))
+            def date = new Date().format("yyyyMMdd", TimeZone.getTimeZone("GMT+08"))
+            if (variant.buildType.name == 'debug') {
+                outputFileName = "${date}-v${variant.versionName}-${variant.flavorName}-debug.apk"
+            }
+            if (variant.buildType.name == 'release') {
+                outputFileName = "${date}-v${variant.versionName}-${variant.flavorName}-release.apk"
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //宿主项目中判断组件是否需要独立运行
+    if (isBuildModule.toBoolean()) {
+        //组件独立运行时，宿主项目直接依赖基础库，避免编译错误
+        implementation project(':library-base')
+    } else {
+        //启动模块
+        implementation project(':module_launcher')
+        //启动模块
+        implementation project(':module_main')
+        //首页模块
+        implementation project(':module_home')
+        //房源模块
+        implementation project(':module_house_resource')
+        //资讯模块
+        implementation project(':module_information')
+        //登录模块
+        implementation project(':module_login')
+        //消息模块
+        implementation project(':module_message')
+        //用户模块
+        implementation project(':module_mine')
+    }
+}
