@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout     xmlns:binding="http://schemas.android.com/apk/res-auto"
+    >
+    <data>
+        <variable
+            name="viewModel"
+            type="com.techangkeji.module_hr.ui.view_model.HRViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include layout="@layout/view_location" />
+
+        <View style="@style/ViewLineStyle" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d35"
+            android:id="@+id/ll_fh_choice"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                binding:onClickCommand="@{viewModel.area}"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="区域"
+                    android:textColor="@color/color_dark_333333"
+                    android:textSize="@dimen/font12" />
+
+                <View
+                    android:layout_width="@dimen/d30"
+                    android:layout_height="@dimen/d3"
+                    android:visibility="@{viewModel.areaShow}"
+                    android:background="@color/color_FF8C00" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                binding:onClickCommand="@{viewModel.type}"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="户型"
+                    android:textColor="@color/color_dark_333333"
+                    android:textSize="@dimen/font12" />
+
+                <View
+                    android:layout_width="@dimen/d30"
+                    android:layout_height="@dimen/d3"
+                    android:visibility="@{viewModel.typeShow}"
+                    android:background="@color/color_FF8C00" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                binding:onClickCommand="@{viewModel.price}"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="价格"
+                    android:textColor="@color/color_dark_333333"
+                    android:textSize="@dimen/font12" />
+
+                <View
+                    android:layout_width="@dimen/d30"
+                    android:layout_height="@dimen/d3"
+                    android:visibility="@{viewModel.priceShow}"
+                    android:background="@color/color_FF8C00" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                binding:onClickCommand="@{viewModel.screen}"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="筛选"
+                    android:textColor="@color/color_dark_333333"
+                    android:textSize="@dimen/font12" />
+
+                <View
+                    android:layout_width="@dimen/d30"
+                    android:layout_height="@dimen/d3"
+                    android:visibility="@{viewModel.screenShow}"
+                    android:background="@color/color_FF8C00" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                binding:onClickCommand="@{viewModel.sort}"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="排序"
+                    android:textColor="@color/color_dark_333333"
+                    android:textSize="@dimen/font12" />
+
+                <View
+                    android:layout_width="@dimen/d30"
+                    android:layout_height="@dimen/d3"
+                    android:visibility="@{viewModel.sortShow}"
+                    android:background="@color/color_FF8C00" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            style="@style/ViewLineStyle"
+            android:layout_height="@dimen/d10" />
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/srl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            binding:srlEnableAutoLoadMore="true"
+            binding:srlEnableRefresh="false">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never" />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    </LinearLayout>
+</layout>

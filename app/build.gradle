@@ -53,7 +53,7 @@ dependencies {
         //首页模块
         implementation project(':module_home')
         //房源模块
-        implementation project(':module_house_resource')
+        implementation project(':module_hr')
         //资讯模块
         implementation project(':module_information')
         //登录模块
@@ -62,5 +62,7 @@ dependencies {
         implementation project(':module_message')
         //用户模块
         implementation project(':module_mine')
+        //公共模块
+        implementation project(':module_public')
     }
 }

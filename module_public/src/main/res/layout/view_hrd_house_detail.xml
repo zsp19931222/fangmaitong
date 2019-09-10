@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/d15"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d5"
+        android:background="@color/color_f6" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/d16"
+        android:layout_marginTop="@dimen/d14"
+        android:layout_marginEnd="@dimen/d16"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="楼盘详情"
+            android:textColor="@color/color_dark_333333"
+            android:textSize="@dimen/font15" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="@dimen/d6"
+            android:layout_height="@dimen/d10"
+            android:src="@mipmap/dipbnianxing" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_hrdhd_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/d13"
+        android:layout_marginEnd="@dimen/d13" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_hrdhd_vertical"
+        android:layout_marginStart="@dimen/d13"
+        android:layout_marginEnd="@dimen/d13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

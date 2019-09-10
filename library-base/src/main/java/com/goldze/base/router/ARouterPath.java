@@ -42,4 +42,21 @@ public class ARouterPath {
         /*用户详情*/
         public static final String MessageFragment = Message + "/MesssageFragment";
     }
+
+    /**
+     * 房源
+     */
+    public static class HouseResource {
+        private static final String HouseResource = "/HouseResource";
+        /*用户详情*/
+        public static final String HRFragment = HouseResource + "/HRFragment";
+    }
+    /**
+     * 公共页面
+     */
+    public static class Public {
+        private static final String Public = "/Public";
+        /*用户详情*/
+        public static final String HRDetailActivity = Public + "/HRFragment";
+    }
 }

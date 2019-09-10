@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.techangkeji.module">
+
+    <application
+       >
+        <activity android:name=".ui.activity.HRDetailActivity" />
+        <activity android:name=".ui.activity.HouseSizeActivity" />
+    </application>
+
+</manifest>

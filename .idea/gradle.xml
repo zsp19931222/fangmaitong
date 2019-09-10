@@ -12,7 +12,7 @@
             <option value="$PROJECT_DIR$/library-base" />
             <option value="$PROJECT_DIR$/library_res" />
             <option value="$PROJECT_DIR$/module_home" />
-            <option value="$PROJECT_DIR$/module_house_resource" />
+            <option value="$PROJECT_DIR$/module_hr" />
             <option value="$PROJECT_DIR$/module_hx_easeui" />
             <option value="$PROJECT_DIR$/module_hx_hmspush" />
             <option value="$PROJECT_DIR$/module_information" />
@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/module_main" />
             <option value="$PROJECT_DIR$/module_message" />
             <option value="$PROJECT_DIR$/module_mine" />
+            <option value="$PROJECT_DIR$/module_public" />
             <option value="$PROJECT_DIR$/mvvmhabit" />
           </set>
         </option>

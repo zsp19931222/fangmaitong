@@ -87,6 +87,12 @@
     <style name="ViewLineStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:background">@color/color_persona_bggray</item>
+        <item name="android:background">@color/color_f6</item>
+    </style>
+
+    <style name="MyTablayoutstyle" parent="Base.Widget.Design.TabLayout">
+        <item name="tabBackground">@color/white</item>
+        <item name="tabIndicatorColor">@color/color_FF8C00</item>
+        <item name="tabIndicatorHeight">2dp</item>
     </style>
 </resources>

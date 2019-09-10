@@ -120,7 +120,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewMode
             fragmentTransaction = fragmentManager.beginTransaction();
             hideFragment(fragmentTransaction);
             if (home_resource == null) {
-                home_resource = (Fragment) ARouter.getInstance().build(ARouterPath.Home.HomeFragment).navigation();
+                home_resource = (Fragment) ARouter.getInstance().build(ARouterPath.HouseResource.HRFragment).navigation();
                 fragmentTransaction.add(R.id.main_vp, home_resource);
             } else {
                 fragmentTransaction.show(home_resource);

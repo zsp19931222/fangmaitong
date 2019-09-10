@@ -14,57 +14,7 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/d44"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingStart="@dimen/d15"
-            android:paddingEnd="@dimen/d15">
-
-            <ImageView
-                android:layout_width="@dimen/d14"
-                android:layout_height="@dimen/d14"
-                android:src="@mipmap/dinwei" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/d3"
-                android:text="上海  普陀区"
-                android:textColor="@color/color_dark_333333"
-                android:textSize="@dimen/font12" />
-
-            <me.goldze.mvvmhabit.view.shape.RadiusLinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/d30"
-                android:layout_marginStart="@dimen/d15"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="@dimen/d10"
-                android:paddingEnd="@dimen/d10"
-                binding:rv_backgroundColor="@color/color_f6"
-                binding:rv_radius="@dimen/d15">
-
-                <ImageView
-                    android:layout_width="@dimen/d14"
-                    android:layout_height="@dimen/d14"
-                    android:src="@mipmap/search" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/d5"
-                    android:layout_marginEnd="@dimen/d5"
-                    android:background="@null"
-                    android:ellipsize="end"
-                    android:hint="搜索本区（开发商名/楼盘名/商圈/标签）"
-                    android:singleLine="true"
-                    android:textColor="@color/color_dark_333333"
-                    android:textColorHint="@color/color_gray_999999"
-                    android:textSize="@dimen/font12" />
-            </me.goldze.mvvmhabit.view.shape.RadiusLinearLayout>
-        </LinearLayout>
+        <include layout="@layout/view_location" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"

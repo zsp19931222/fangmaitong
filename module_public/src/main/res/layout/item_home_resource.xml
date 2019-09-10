@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/d95"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/d16"
+    android:paddingTop="@dimen/d10"
+    android:paddingEnd="@dimen/d16"
+    android:paddingBottom="@dimen/d10">
+
+    <ImageView
+        android:layout_width="@dimen/d100"
+        android:layout_height="@dimen/d75" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/d10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_ihr_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:text="name"
+                android:textColor="@color/color_dark_333333"
+                android:textSize="@dimen/font15" />
+
+            <TextView
+                android:id="@+id/tv_ihr_developers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开发商"
+                android:textColor="@color/color_dark_333333"
+                android:textSize="@dimen/font12" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_ihr_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/d26"
+            android:text="茶园新区  通江大道      建面75-155m"
+            android:textColor="@color/color_dark_333333"
+            android:textSize="@dimen/font12" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/d42"
+            android:text="32000元/m"
+            android:textColor="#FF3333"
+            android:textSize="@dimen/font12" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/d15"
+                android:gravity="center"
+                android:paddingStart="@dimen/d3"
+                android:paddingEnd="@dimen/d3"
+                android:text="住宅"
+                android:textSize="@dimen/font10"
+                binding:rv_backgroundColor="@color/color_FFDEB6"
+                binding:rv_radius="@dimen/d3"
+                binding:rv_textColor="@color/color_FF8C00" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d8"
+                android:text="在售"
+                android:textColor="@color/color_dark_333333"
+                android:textSize="@dimen/font10" />
+
+            <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/d15"
+                android:layout_marginStart="@dimen/d8"
+                android:paddingStart="@dimen/d3"
+                android:paddingEnd="@dimen/d3"
+                android:text="项目在建"
+                android:textSize="@dimen/font10"
+                binding:rv_backgroundColor="@color/color_EEEEEE"
+                binding:rv_radius="@dimen/d3"
+                binding:rv_textColor="@color/color_gray_999999" />
+
+            <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/d15"
+                android:layout_marginStart="@dimen/d8"
+                android:paddingStart="@dimen/d3"
+                android:paddingEnd="@dimen/d3"
+                android:text="高绿化率"
+                android:textSize="@dimen/font10"
+                binding:rv_backgroundColor="@color/color_EEEEEE"
+                binding:rv_radius="@dimen/d3"
+                binding:rv_textColor="@color/color_gray_999999" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

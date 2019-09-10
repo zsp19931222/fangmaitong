@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<me.goldze.mvvmhabit.view.shape.RadiusTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:rv_backgroundColor="@color/color_FF8C00"
+    app:rv_radius="@dimen/d3"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/d2"
+    android:layout_marginEnd="@dimen/d2"
+    android:paddingStart="@dimen/d10"
+    android:paddingTop="@dimen/d3"
+    android:layout_marginTop="@dimen/d5"
+    android:paddingEnd="@dimen/d10"
+    android:paddingBottom="@dimen/d3"
+    android:text="地铁房"
+    android:textColor="@color/white" />
