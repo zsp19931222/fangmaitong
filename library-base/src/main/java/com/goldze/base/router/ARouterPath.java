@@ -35,11 +35,11 @@ public class ARouterPath {
     }
 
     /**
-     * 用户组件
+     * 社交
      */
-    public static class User {
-        private static final String USER = "/user";
+    public static class Message {
+        private static final String Message = "/Message";
         /*用户详情*/
-        public static final String PAGER_USERDETAIL = USER + "/UserDetail";
+        public static final String MessageFragment = Message + "/MesssageFragment";
     }
 }

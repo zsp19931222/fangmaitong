@@ -1,23 +1,45 @@
 package com.techangkeji.module_main;
 
+import android.Manifest;
+import android.annotation.TargetApi;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.goldze.base.router.ARouterPath;
+import com.hyphenate.EMClientListener;
+import com.hyphenate.EMContactListener;
+import com.hyphenate.EMMultiDeviceListener;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.utils.EaseCommonUtils;
+import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.techangkeji.hyphenate.chatuidemo.Constant;
+import com.techangkeji.hyphenate.chatuidemo.HMSPushHelper;
+import com.techangkeji.hyphenate.chatuidemo.ui.ChatActivity;
+import com.techangkeji.hyphenate.chatuidemo.ui.GroupsActivity;
 import com.techangkeji.module_main.databinding.ActivityMainBinding;
 import com.techangkeji.module_main.view.TabGroupView;
 import com.techangkeji.module_main.view.TabView;
 
+import java.util.List;
+
+import io.reactivex.observers.DefaultObserver;
 import me.goldze.mvvmhabit.base.AppManager;
 import me.goldze.mvvmhabit.base.BaseActivity;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.utils.ToastUtil;
+import me.goldze.mvvmhabit.utils.ZLog;
 
 @Route(path = ARouterPath.Main.PAGER_MAIN)
 public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewModel> implements TabGroupView.OnItemClickListener {
@@ -42,6 +64,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewMode
     @Override
     public void initData() {
         fragmentManager = getSupportFragmentManager();
+        binding.mainTgv.setOnItemClickListener(this);
         initHome();
     }
 
@@ -138,14 +161,15 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewMode
         try {
             fragmentTransaction = fragmentManager.beginTransaction();
             hideFragment(fragmentTransaction);
-            if (home == null) {
-                message = (Fragment) ARouter.getInstance().build(ARouterPath.Home.HomeFragment).navigation();
+            if (message == null) {
+                message = (Fragment) ARouter.getInstance().build(ARouterPath.Message.MessageFragment).navigation();
                 fragmentTransaction.add(R.id.main_vp, message);
             } else {
                 fragmentTransaction.show(message);
             }
             fragmentTransaction.commit();
         } catch (Exception e) {
+            ZLog.d(e.toString());
             e.printStackTrace();
         }
     }
@@ -217,4 +241,116 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewMode
         }
         return super.onKeyDown(keyCode, event);
     }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestPermissions();
+
+        registerBroadcastReceiver();
+
+        EMClient.getInstance().contactManager().setContactListener(new MyContactListener());
+        EMClient.getInstance().addClientListener(clientListener);
+        EMClient.getInstance().addMultiDeviceListener(new MyMultiDeviceListener());
+
+        // 获取华为 HMS 推送 token
+        HMSPushHelper.getInstance().getHMSToken(this);
+    }
+    private LocalBroadcastManager broadcastManager;
+    private BroadcastReceiver internalDebugReceiver;
+    private BroadcastReceiver broadcastReceiver;
+    private void registerBroadcastReceiver() {
+        broadcastManager = LocalBroadcastManager.getInstance(this);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Constant.ACTION_CONTACT_CHANAGED);
+        intentFilter.addAction(Constant.ACTION_GROUP_CHANAGED);
+        broadcastReceiver = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+                if(action.equals(Constant.ACTION_GROUP_CHANAGED)){
+                    if (EaseCommonUtils.getTopActivity(MainActivity.this).equals(GroupsActivity.class.getName())) {
+                        GroupsActivity.instance.onResume();
+                    }
+                }
+            }
+        };
+        broadcastManager.registerReceiver(broadcastReceiver, intentFilter);
+    }
+    public class MyMultiDeviceListener implements EMMultiDeviceListener {
+
+        @Override
+        public void onContactEvent(int event, String target, String ext) {
+
+        }
+
+        @Override
+        public void onGroupEvent(int event, String target, final List<String> username) {
+            switch (event) {
+                case EMMultiDeviceListener.GROUP_LEAVE:
+                    ChatActivity.activityInstance.finish();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    public class MyContactListener implements EMContactListener {
+        @Override
+        public void onContactAdded(String username) {}
+        @Override
+        public void onContactDeleted(final String username) {
+            runOnUiThread(() -> {
+                if (ChatActivity.activityInstance != null && ChatActivity.activityInstance.toChatUsername != null &&
+                        username.equals(ChatActivity.activityInstance.toChatUsername)) {
+                    String st10 = getResources().getString(com.techangkeji.model_message.R.string.have_you_removed);
+                    Toast.makeText(MainActivity.this, ChatActivity.activityInstance.getToChatUsername() + st10, Toast.LENGTH_LONG)
+                            .show();
+                    ChatActivity.activityInstance.finish();
+                }
+            });
+        }
+        @Override
+        public void onContactInvited(String username, String reason) {}
+        @Override
+        public void onFriendRequestAccepted(String username) {}
+        @Override
+        public void onFriendRequestDeclined(String username) {}
+    }
+    /**
+    * description: 环信所需权限
+    * author: Andy
+    * date: 2019/9/10 0010 16:41
+    */
+    @TargetApi(23)
+    private void requestPermissions() {
+        new RxPermissions(this)
+                .request(Manifest.permission.READ_PHONE_STATE,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(new DefaultObserver<Boolean>() {
+                    @Override
+                    public void onNext(Boolean aBoolean) {
+                        if (aBoolean) {
+                        } else {
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+    EMClientListener clientListener = success -> {
+        Toast.makeText(MainActivity.this, "onUpgradeFrom 2.x to 3.x " + (success ? "success" : "fail"), Toast.LENGTH_LONG).show();
+    };
 }

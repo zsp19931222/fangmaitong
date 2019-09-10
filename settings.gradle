@@ -1,1 +1,1 @@
-include ':app', ':library-base', ':module_login', ':module_home', ':module_house_resource', ':module_information', ':module_message', ':module_mine', ':library_res', ':module_launcher', ':mvvmhabit', ':module_main'
+include ':app', ':library-base', ':module_login', ':module_home', ':module_house_resource', ':module_information', ':module_message', ':module_mine', ':library_res', ':module_launcher', ':mvvmhabit', ':module_main', ':module_hx_easeui', ':module_hx_hmspush'

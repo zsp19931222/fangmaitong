@@ -3,9 +3,6 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <compositeConfiguration>
-          <compositeBuild compositeDefinitionSource="SCRIPT" />
-        </compositeConfiguration>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
@@ -16,6 +13,8 @@
             <option value="$PROJECT_DIR$/library_res" />
             <option value="$PROJECT_DIR$/module_home" />
             <option value="$PROJECT_DIR$/module_house_resource" />
+            <option value="$PROJECT_DIR$/module_hx_easeui" />
+            <option value="$PROJECT_DIR$/module_hx_hmspush" />
             <option value="$PROJECT_DIR$/module_information" />
             <option value="$PROJECT_DIR$/module_launcher" />
             <option value="$PROJECT_DIR$/module_login" />

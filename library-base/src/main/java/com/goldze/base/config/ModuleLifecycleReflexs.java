@@ -17,7 +17,7 @@ public class ModuleLifecycleReflexs {
     //工作业务模块
     private static final String WorkInit = "com.goldze.work.WorkModuleInit";
     //消息业务模块
-    private static final String MsgInit = "com.goldze.msg.MsgModuleInit";
+    private static final String MsgInit = "com.techangkeji.model_message.MessageModuleInit";
     //用户业务模块
     private static final String UserInit = "com.goldze.user.UserModuleInit";
 
