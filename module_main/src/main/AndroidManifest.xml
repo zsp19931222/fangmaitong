@@ -3,7 +3,8 @@
     package="com.techangkeji.module_main">
 
     <application>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.techangkeji.module_hr">
 
-    <application></application>
+    <application>
+        <activity android:name=".ui.activity.HHPublicActivity" />
+    </application>
 
 </manifest>

@@ -53,7 +53,8 @@ public class LoginViewModel extends BaseViewModel {
      * author: Andy
      * date: 2019/9/9 0009 17:12
      */
-    public BindingCommand intent2MainActivity = new BindingCommand(this::registerHX);
+    public BindingCommand intent2MainActivity = new BindingCommand(() -> ARouter.getInstance().build(ARouterPath.Main.PAGER_MAIN).navigation()
+    );
 
 
     /**
@@ -132,18 +133,18 @@ public class LoginViewModel extends BaseViewModel {
             @Override
             public void onError(final int code, final String message) {
                 ZLog.d("login: onError: " + code);
-                logoutHX(currentUsername,currentPassword);
+                logoutHX(currentUsername, currentPassword);
             }
         });
     }
 
     /**
-    * description:注销环信
-    * author: Andy
-    * date: 2019/9/10 0010 17:23
-    */
-    private void logoutHX(String currentUsername, String currentPassword){
-        DemoHelper.getInstance().logout(true,new EMCallBack() {
+     * description:注销环信
+     * author: Andy
+     * date: 2019/9/10 0010 17:23
+     */
+    private void logoutHX(String currentUsername, String currentPassword) {
+        DemoHelper.getInstance().logout(true, new EMCallBack() {
 
             @Override
             public void onSuccess() {

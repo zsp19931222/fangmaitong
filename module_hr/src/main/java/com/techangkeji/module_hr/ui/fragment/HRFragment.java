@@ -5,15 +5,14 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.goldze.base.base.BaseTabAdapter;
 import com.goldze.base.router.ARouterPath;
-import com.google.android.material.tabs.TabLayout;
 import com.techangkeji.module_hr.BR;
 import com.techangkeji.module_hr.R;
 import com.techangkeji.module_hr.databinding.FragmentHrBinding;
+import com.techangkeji.module_hr.ui.adapter.HRAdapter;
 import com.techangkeji.module_hr.ui.view_model.HRViewModel;
 
 import java.util.ArrayList;
@@ -24,7 +23,13 @@ import me.goldze.mvvmhabit.base.BaseLazyFragment;
 public class HRFragment extends BaseLazyFragment<FragmentHrBinding, HRViewModel> {
     @Override
     public void fetchData() {
-        initTabTitle();
+        List<String> strings=new ArrayList<>();
+        for (int i = 0; i <15 ; i++) {
+            strings.add("");
+        }
+        HRAdapter hrAdapter=new HRAdapter(R.layout.item_home_resource,strings);
+        binding.rv.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rv.setAdapter(hrAdapter);
     }
 
     @Override
@@ -43,14 +48,4 @@ public class HRFragment extends BaseLazyFragment<FragmentHrBinding, HRViewModel>
         return BR.viewModel;
     }
 
-    private void initTabTitle(){
-        List<String> tabStrings=new ArrayList<>();
-        tabStrings.add("区域");
-        tabStrings.add("户型");
-        tabStrings.add("价格");
-        tabStrings.add("筛选");
-        tabStrings.add("排序");
-        List<Fragment> fragments = new ArrayList<>();
-
-    }
 }

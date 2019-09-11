@@ -8,13 +8,17 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.util.MultiTypeDelegate;
+import com.goldze.base.router.ARouterPath;
 import com.goldze.base.utils.BannerSetting;
 import com.techangkeji.module.R;
+import com.techangkeji.module.ui.activity.CommentActivity;
 import com.techangkeji.module.ui.activity.HouseSizeActivity;
+import com.techangkeji.module.ui.activity.HouseStateActivity;
 import com.techangkeji.module.ui.bean.HRDetailAdapterBean;
 
 import java.util.ArrayList;
@@ -118,6 +122,10 @@ public class HRDetailAdapter extends BaseQuickAdapter<HRDetailAdapterBean, BaseV
                 HRDStateAdapter hrdStateAdapter = new HRDStateAdapter(R.layout.item_hrd_state, stringsState);
                 recyclerViewState.setLayoutManager(new LinearLayoutManager(context));
                 recyclerViewState.setAdapter(hrdStateAdapter);
+                helper.getView(R.id.tv_more).setOnClickListener(view -> {
+                    Intent intent = new Intent(context, HouseStateActivity.class);
+                    context.startActivity(intent);
+                });
                 break;
             case HRDetailAdapterBean.Comment:
                 RecyclerView recyclerViewComment = helper.getView(R.id.rv_hc);
@@ -128,6 +136,10 @@ public class HRDetailAdapter extends BaseQuickAdapter<HRDetailAdapterBean, BaseV
                 HRDCommentAdapter hrdCommentAdapter = new HRDCommentAdapter(R.layout.item_hrd_comment, stringsComment);
                 recyclerViewComment.setLayoutManager(new LinearLayoutManager(context));
                 recyclerViewComment.setAdapter(hrdCommentAdapter);
+                helper.getView(R.id.tv_more).setOnClickListener(view -> {
+                    Intent intent = new Intent(context, CommentActivity.class);
+                    context.startActivity(intent);
+                });
                 break;
             case HRDetailAdapterBean.Recommend:
                 RecyclerView recyclerViewRecommend = helper.getView(R.id.rv_hr);

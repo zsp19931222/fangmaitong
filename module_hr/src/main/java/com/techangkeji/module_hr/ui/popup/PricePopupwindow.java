@@ -39,6 +39,11 @@ public class PricePopupwindow extends BasePopupWindow {
         return createPopupById(R.layout.popup_price);
     }
 
+    @Override
+    public BasePopupWindow setAdjustInputMethod(boolean needAdjust) {
+        return super.setAdjustInputMethod(needAdjust);
+    }
+
     private void init(Context context) {
         setBackgroundColor(Color.parseColor("#00000000"));
         rv = findViewById(R.id.rv_pp);

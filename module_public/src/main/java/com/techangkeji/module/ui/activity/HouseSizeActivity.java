@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.goldze.base.view.TitleVIew;
 import com.techangkeji.module.BR;
 import com.techangkeji.module.R;
 import com.techangkeji.module.databinding.ActivityHouseSizeBinding;
@@ -30,6 +31,8 @@ public class HouseSizeActivity extends BaseActivity<ActivityHouseSizeBinding, Ho
 
     @Override
     public void initData() {
+        TitleVIew titleVIew= (TitleVIew) binding.title;
+        titleVIew.setTitle("户型图");
         List<String> strings = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             strings.add("");

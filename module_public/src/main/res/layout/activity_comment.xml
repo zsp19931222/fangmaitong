@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.techangkeji.module.ui.view_model.CommentViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_f6"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/title"
+            layout="@layout/title" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:overScrollMode="never" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d50"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="发表评论"
+            android:textColor="@color/color_dark_333333"
+            android:textSize="@dimen/font15" />
+
+    </LinearLayout>
+</layout>

@@ -6,6 +6,8 @@
        >
         <activity android:name=".ui.activity.HRDetailActivity" />
         <activity android:name=".ui.activity.HouseSizeActivity" />
+        <activity android:name=".ui.activity.HouseStateActivity" />
+        <activity android:name=".ui.activity.CommentActivity" />
     </application>
 
 </manifest>

@@ -43,7 +43,9 @@ public class HRViewModel extends BaseViewModel {
     public BindingCommand price = new BindingCommand(() ->{
         initShow();
         priceShow.set(View.VISIBLE);
-        new PricePopupwindow(context.get()).showPopupWindow(choiceView.get());
+        PricePopupwindow pricePopupwindow= new PricePopupwindow(context.get());
+        pricePopupwindow.setAdjustInputMethod(false);
+        pricePopupwindow.showPopupWindow(choiceView.get());
     });
     public BindingCommand screen = new BindingCommand(() ->{
         initShow();

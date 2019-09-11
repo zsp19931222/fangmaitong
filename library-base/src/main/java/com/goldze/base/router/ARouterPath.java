@@ -41,6 +41,7 @@ public class ARouterPath {
         private static final String Message = "/Message";
         /*用户详情*/
         public static final String MessageFragment = Message + "/MesssageFragment";
+        public static final String MapActivity = Message + "/MapActivity";
     }
 
     /**
@@ -48,8 +49,8 @@ public class ARouterPath {
      */
     public static class HouseResource {
         private static final String HouseResource = "/HouseResource";
-        /*用户详情*/
         public static final String HRFragment = HouseResource + "/HRFragment";
+        public static final String HHPublicActivity = HouseResource + "/HHPublicActivity";
     }
     /**
      * 公共页面

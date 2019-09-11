@@ -3,6 +3,7 @@
     package="com.techangkeji.model_mine">
 
     <application>
+        <activity android:name=".ui.activity.SettingActivity" />
     </application>
 
 </manifest>
