@@ -66,7 +66,7 @@
             android:windowSoftInputMode="adjustPan" />
 
         <!-- 开屏页 -->
-        <!--<activity-->
+        <!--<activity_invite_information-->
             <!--android:name=".ui.SplashActivity"-->
             <!--android:screenOrientation="portrait"-->
             <!--android:theme="@style/horizontal_slide">-->
@@ -75,7 +75,7 @@
 
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
-        <!--</activity>-->
+        <!--</activity_invite_information>-->
 
         <!-- 登陆 -->
         <activity
@@ -277,13 +277,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <!-- Ding msg send activity -->
+        <!-- Ding msg send activity_invite_information -->
         <activity
             android:name="com.hyphenate.easeui.ui.EaseDingMsgSendActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <!-- Ding ack user list activity -->
+        <!-- Ding ack user list activity_invite_information -->
         <activity
             android:name="com.hyphenate.easeui.ui.EaseDingAckUserListActivity"
             android:screenOrientation="portrait"

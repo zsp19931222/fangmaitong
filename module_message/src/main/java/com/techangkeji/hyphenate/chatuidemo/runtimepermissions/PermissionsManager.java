@@ -222,7 +222,7 @@ public class PermissionsManager {
    * This is only nullable as a courtesy for Fragments where getActivity() may yeild null
    * if the Fragment is not currently added to its parent Activity.
    *
-   * @param activity    the activity necessary to request the permissions.
+   * @param activity    the activity_invite_information necessary to request the permissions.
    * @param permissions the list of permissions to request for the {@link PermissionsResultAction}.
    * @param action      the PermissionsResultAction to notify when the permissions are granted or denied.
    */
@@ -256,7 +256,7 @@ public class PermissionsManager {
    * PermissionsResultAction to the queue to be notified of permissions being granted or
    * denied. In the case of pre-Android Marshmallow, permissions will be granted immediately.
    * The Fragment variable is used, but if {@link Fragment#getActivity()} returns null, this method
-   * will fail to work as the activity reference is necessary to check for permissions.
+   * will fail to work as the activity_invite_information reference is necessary to check for permissions.
    *
    * @param fragment    the fragment necessary to request the permissions.
    * @param permissions the list of permissions to request for the {@link PermissionsResultAction}.
@@ -323,7 +323,7 @@ public class PermissionsManager {
    * When request permissions on devices before Android M (Android 6.0, API Level 23)
    * Do the granted or denied work directly according to the permission status
    *
-   * @param activity    the activity to check permissions
+   * @param activity    the activity_invite_information to check permissions
    * @param permissions the permissions names
    * @param action      the callback work object, containing what we what to do after
    *                    permission check
@@ -350,7 +350,7 @@ public class PermissionsManager {
    * If a permission is not granted, add it to the result list
    * if a permission is granted, do the granted work, do not add it to the result list
    *
-   * @param activity    the activity to check permissions
+   * @param activity    the activity_invite_information to check permissions
    * @param permissions all the permissions names
    * @param action      the callback work object, containing what we what to do after
    *                    permission check

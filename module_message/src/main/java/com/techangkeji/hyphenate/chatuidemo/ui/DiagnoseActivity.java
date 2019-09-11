@@ -27,7 +27,7 @@ import com.techangkeji.model_message.R;
  */
 
 /**
- * Diagnose activity；user can upload log for debug purpose
+ * Diagnose activity_invite_information；user can upload log for debug purpose
  * 
  * @author lyuzhao
  * 

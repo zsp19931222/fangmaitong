@@ -184,7 +184,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewMode
             fragmentTransaction = fragmentManager.beginTransaction();
             hideFragment(fragmentTransaction);
             if (mine == null) {
-                mine = (Fragment) ARouter.getInstance().build(ARouterPath.Home.HomeFragment).navigation();
+                mine = (Fragment) ARouter.getInstance().build(ARouterPath.Mine.MinePage).navigation();
                 fragmentTransaction.add(R.id.main_vp, mine);
             } else {
                 fragmentTransaction.show(mine);
@@ -257,9 +257,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewMode
         // 获取华为 HMS 推送 token
         HMSPushHelper.getInstance().getHMSToken(this);
     }
+
     private LocalBroadcastManager broadcastManager;
     private BroadcastReceiver internalDebugReceiver;
     private BroadcastReceiver broadcastReceiver;
+
     private void registerBroadcastReceiver() {
         broadcastManager = LocalBroadcastManager.getInstance(this);
         IntentFilter intentFilter = new IntentFilter();
@@ -270,7 +272,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewMode
             @Override
             public void onReceive(Context context, Intent intent) {
                 String action = intent.getAction();
-                if(action.equals(Constant.ACTION_GROUP_CHANAGED)){
+                if (action.equals(Constant.ACTION_GROUP_CHANAGED)) {
                     if (EaseCommonUtils.getTopActivity(MainActivity.this).equals(GroupsActivity.class.getName())) {
                         GroupsActivity.instance.onResume();
                     }
@@ -279,6 +281,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewMode
         };
         broadcastManager.registerReceiver(broadcastReceiver, intentFilter);
     }
+
     public class MyMultiDeviceListener implements EMMultiDeviceListener {
 
         @Override
@@ -297,9 +300,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewMode
             }
         }
     }
+
     public class MyContactListener implements EMContactListener {
         @Override
-        public void onContactAdded(String username) {}
+        public void onContactAdded(String username) {
+        }
+
         @Override
         public void onContactDeleted(final String username) {
             runOnUiThread(() -> {
@@ -312,18 +318,25 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewMode
                 }
             });
         }
+
         @Override
-        public void onContactInvited(String username, String reason) {}
+        public void onContactInvited(String username, String reason) {
+        }
+
         @Override
-        public void onFriendRequestAccepted(String username) {}
+        public void onFriendRequestAccepted(String username) {
+        }
+
         @Override
-        public void onFriendRequestDeclined(String username) {}
+        public void onFriendRequestDeclined(String username) {
+        }
     }
+
     /**
-    * description: 环信所需权限
-    * author: Andy
-    * date: 2019/9/10 0010 16:41
-    */
+     * description: 环信所需权限
+     * author: Andy
+     * date: 2019/9/10 0010 16:41
+     */
     @TargetApi(23)
     private void requestPermissions() {
         new RxPermissions(this)
@@ -350,6 +363,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewMode
                     }
                 });
     }
+
     EMClientListener clientListener = success -> {
         Toast.makeText(MainActivity.this, "onUpgradeFrom 2.x to 3.x " + (success ? "success" : "fail"), Toast.LENGTH_LONG).show();
     };

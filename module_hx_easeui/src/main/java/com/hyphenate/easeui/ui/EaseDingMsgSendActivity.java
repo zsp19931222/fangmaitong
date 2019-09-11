@@ -49,7 +49,7 @@ public class EaseDingMsgSendActivity extends EaseBaseActivity {
         sendView.setLayoutParams(params);
         titleBar.getRightLayout().addView(sendView);
 
-        // Set the title bar left layout click listener to back to previous activity.
+        // Set the title bar left layout click listener to back to previous activity_invite_information.
         titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

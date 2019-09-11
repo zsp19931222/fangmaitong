@@ -152,7 +152,7 @@ public final class ApiClientMgr implements HuaweiApiClient.ConnectionCallbacks, 
                 onConnectEnd(HMSAgent.AgentResultCode.APICLIENT_TIMEOUT);
                 return true;
             } else if (msg != null && msg.what == APICLIENT_STARTACTIVITY_TIMEOUT_HANDLE_MSG && hasConnCallbacks) {
-                HMSAgentLog.d("start activity time out");
+                HMSAgentLog.d("start activity_invite_information time out");
                 onConnectEnd(HMSAgent.AgentResultCode.APICLIENT_TIMEOUT);
                 return true;
             } else if (msg != null && msg.what == UPDATE_OVER_ACTIVITY_CHECK_TIMEOUT_HANDLE_MSG && hasConnCallbacks) {
@@ -405,7 +405,7 @@ public final class ApiClientMgr implements HuaweiApiClient.ConnectionCallbacks, 
      */
     @Override
     public void onActivityResume(Activity activity) {
-        // 通知hmssdk activity onResume了
+        // 通知hmssdk activity_invite_information onResume了
         if (apiClient != null) {
             HMSAgentLog.d("tell hmssdk: onResume");
             apiClient.onResume(activity);
@@ -434,7 +434,7 @@ public final class ApiClientMgr implements HuaweiApiClient.ConnectionCallbacks, 
      */
     @Override
     public void onActivityPause(Activity activity) {
-        // 通知hmssdk，activity onPause了
+        // 通知hmssdk，activity_invite_information onPause了
         if (apiClient != null) {
             apiClient.onPause(activity);
         }
@@ -543,7 +543,7 @@ public final class ApiClientMgr implements HuaweiApiClient.ConnectionCallbacks, 
                 }
             } else {
                 // 当前没有界面处理不了错误
-                HMSAgentLog.d("no activity");
+                HMSAgentLog.d("no activity_invite_information");
                 onConnectEnd(HMSAgent.AgentResultCode.NO_ACTIVITY_FOR_USE);
                 return;
             }

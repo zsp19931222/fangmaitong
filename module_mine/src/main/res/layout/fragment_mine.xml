@@ -1,48 +1,452 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:binding="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="viewModel"
-            type="me.goldze.mvvmhabit.base.BaseViewModel" />
+            type="com.techangkeji.model_mine.ui.viewModel.MineViewModel" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_f6"
+        android:background="@color/white"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/d44">
-
-            <ImageView
-                android:layout_width="@dimen/d18"
-                android:layout_height="@dimen/d18"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/d16"
-                android:src="@mipmap/setting" />
-        </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/d98"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="@dimen/d60"
-                android:layout_marginStart="@dimen/d16"
-                android:layout_marginTop="@dimen/d5"
-                android:layout_height="@dimen/d60"
-                />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d44">
+
+                <ImageView
+                    android:layout_width="@dimen/d18"
+                    android:layout_height="@dimen/d18"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/d16"
+                    android:src="@mipmap/setting" />
+            </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/d14"
+                binding:onClickCommand="@{viewModel.personCommand}">
 
+                <ImageView
+                    android:layout_width="@dimen/d60"
+                    android:layout_height="@dimen/d60"
+                    android:layout_marginStart="@dimen/d16"
+                    android:layout_marginTop="@dimen/d5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/d5"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="王女士"
+                            android:textColor="@color/color_gray_666666"
+                            android:textSize="@dimen/font16" />
+
+                        <ImageView
+                            android:layout_width="@dimen/d14"
+                            android:layout_height="@dimen/d14"
+                            android:layout_marginStart="@dimen/d5"
+                            android:src="@mipmap/woman_icon" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/d8"
+                        android:text="账号：5022332"
+                        android:textColor="@color/color_gray_666666"
+                        android:textSize="@dimen/font12" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/d8"
+                        android:text="总代"
+                        android:textColor="@color/color_gray_666666"
+                        android:textSize="@dimen/font12" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/d5"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="未认证"
+                            android:textColor="@color/color_gray_666666"
+                            android:textSize="@dimen/font12" />
+
+                        <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                            android:layout_width="@dimen/d60"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/d10"
+                            android:gravity="center"
+                            android:text="实名认证"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font10"
+                            binding:onClickCommand="@{viewModel.autonymAuthCommand}"
+                            binding:rv_backgroundColor="@color/color_FF8C00"
+                            binding:rv_radius="@dimen/d10" />
+
+                        <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                            android:layout_width="@dimen/d60"
+                            android:layout_height="@dimen/d20"
+                            android:layout_marginStart="@dimen/d10"
+                            android:gravity="center"
+                            android:text="资质认证"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font10"
+                            binding:onClickCommand="@{viewModel.qualificationAuthCommand}"
+                            binding:rv_backgroundColor="@color/color_FF8C00"
+                            binding:rv_radius="@dimen/d10" />
+                        <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                            android:layout_width="@dimen/d60"
+                            android:layout_height="@dimen/d20"
+                            android:layout_marginStart="@dimen/d10"
+                            android:gravity="center"
+                            android:text="经纪人认证"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font10"
+                            binding:onClickCommand="@{viewModel.brokerCommand}"
+                            binding:rv_backgroundColor="@color/color_FF8C00"
+                            binding:rv_radius="@dimen/d10" />
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d5"
+                android:background="@color/color_f6" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/d15"
+                android:paddingBottom="@dimen/d15">
+
+                <ImageView
+                    android:layout_width="@dimen/d18"
+                    android:layout_height="@dimen/d18"
+                    android:layout_marginStart="@dimen/d16"
+                    android:src="@mipmap/wddt" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d43"
+                    android:text="我的动态"
+                    android:textColor="@color/color_gray_666666"
+                    android:textSize="@dimen/font14" />
+
+                <ImageView
+                    android:layout_width="@dimen/d17"
+                    android:layout_height="@dimen/d24"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/d16"
+                    android:src="@drawable/more_1x" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d1"
+                android:background="@color/color_f6" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/d15"
+                android:paddingBottom="@dimen/d15">
+
+                <ImageView
+                    android:layout_width="@dimen/d18"
+                    android:layout_height="@dimen/d18"
+                    android:layout_marginStart="@dimen/d16"
+                    android:src="@mipmap/wdgcxx" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d43"
+                    android:text="我的广场信息"
+                    android:textColor="@color/color_gray_666666"
+                    android:textSize="@dimen/font14" />
+
+                <ImageView
+                    android:layout_width="@dimen/d17"
+                    android:layout_height="@dimen/d24"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/d16"
+                    android:src="@drawable/more_1x" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d1"
+                android:background="@color/color_f6" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/d15"
+                binding:onClickCommand="@{viewModel.informationCommentCommand}"
+                android:paddingBottom="@dimen/d15">
+
+                <ImageView
+                    android:layout_width="@dimen/d18"
+                    android:layout_height="@dimen/d18"
+                    android:layout_marginStart="@dimen/d16"
+                    android:src="@mipmap/wdpl" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d43"
+                    android:text="我的资讯评论"
+                    android:textColor="@color/color_gray_666666"
+                    android:textSize="@dimen/font14" />
+
+                <ImageView
+                    android:layout_width="@dimen/d17"
+                    android:layout_height="@dimen/d24"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/d16"
+                    android:src="@drawable/more_1x" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d1"
+                android:background="@color/color_f6" />
+
+            <RelativeLayout
+                binding:onClickCommand="@{viewModel.inviteInformationCommentCommand}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/d15"
+                android:paddingBottom="@dimen/d15">
+
+                <ImageView
+                    android:layout_width="@dimen/d18"
+                    android:layout_height="@dimen/d18"
+                    android:layout_marginStart="@dimen/d16"
+                    android:src="@mipmap/zp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d43"
+                    android:text="招聘/求职"
+                    android:textColor="@color/color_gray_666666"
+                    android:textSize="@dimen/font14" />
+
+                <ImageView
+                    android:layout_width="@dimen/d17"
+                    android:layout_height="@dimen/d24"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/d16"
+                    android:src="@drawable/more_1x" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d1"
+                android:background="@color/color_f6" />
+
+            <RelativeLayout
+                binding:onClickCommand="@{viewModel.houseResourceCommand}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/d15"
+                android:paddingBottom="@dimen/d15">
+
+                <ImageView
+                    android:layout_width="@dimen/d18"
+                    android:layout_height="@dimen/d18"
+                    android:layout_marginStart="@dimen/d16"
+                    android:src="@mipmap/fy" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d43"
+                    android:text="我的房源"
+                    android:textColor="@color/color_gray_666666"
+                    android:textSize="@dimen/font14" />
+
+                <ImageView
+                    android:layout_width="@dimen/d17"
+                    android:layout_height="@dimen/d24"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/d16"
+                    android:src="@drawable/more_1x" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d1"
+                android:background="@color/color_f6" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/d15"
+                android:paddingBottom="@dimen/d15">
+
+                <ImageView
+                    android:layout_width="@dimen/d18"
+                    android:layout_height="@dimen/d18"
+                    android:layout_marginStart="@dimen/d16"
+                    android:src="@mipmap/sc" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d43"
+                    android:text="我的收藏"
+                    android:textColor="@color/color_gray_666666"
+                    android:textSize="@dimen/font14" />
+
+                <ImageView
+                    android:layout_width="@dimen/d17"
+                    android:layout_height="@dimen/d24"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/d16"
+                    android:src="@drawable/more_1x" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d5"
+                android:background="@color/color_f6" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/d15"
+                android:paddingBottom="@dimen/d15">
+
+                <ImageView
+                    android:layout_width="@dimen/d18"
+                    android:layout_height="@dimen/d18"
+                    android:layout_marginStart="@dimen/d16"
+                    android:src="@mipmap/fd" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d43"
+                    android:text="房贷计算器"
+                    android:textColor="@color/color_gray_666666"
+                    android:textSize="@dimen/font14" />
+
+                <ImageView
+                    android:layout_width="@dimen/d17"
+                    android:layout_height="@dimen/d24"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/d16"
+                    android:src="@drawable/more_1x" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d1"
+                android:background="@color/color_f6" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/d15"
+                android:paddingBottom="@dimen/d15">
+
+                <ImageView
+                    android:layout_width="@dimen/d18"
+                    android:layout_height="@dimen/d18"
+                    android:layout_marginStart="@dimen/d16"
+                    android:src="@mipmap/fk" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d43"
+                    android:text="APP反馈"
+                    android:textColor="@color/color_gray_666666"
+                    android:textSize="@dimen/font14" />
+
+                <ImageView
+                    android:layout_width="@dimen/d17"
+                    android:layout_height="@dimen/d24"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/d16"
+                    android:src="@drawable/more_1x" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d1"
+                android:background="@color/color_f6" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/d15"
+                android:paddingBottom="@dimen/d15">
+
+                <ImageView
+                    android:layout_width="@dimen/d18"
+                    android:layout_height="@dimen/d18"
+                    android:layout_marginStart="@dimen/d16"
+                    android:src="@mipmap/jb" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d43"
+                    android:text="我的举报（房源）"
+                    android:textColor="@color/color_gray_666666"
+                    android:textSize="@dimen/font14" />
+
+                <ImageView
+                    android:layout_width="@dimen/d17"
+                    android:layout_height="@dimen/d24"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/d16"
+                    android:src="@drawable/more_1x" />
+            </RelativeLayout>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 </layout>

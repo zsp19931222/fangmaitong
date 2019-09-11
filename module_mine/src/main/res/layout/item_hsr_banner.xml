@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/d16"
+    android:layout_marginTop="@dimen/d16"
+    android:layout_marginEnd="@dimen/d16"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d150">
+
+        <ImageView
+            android:id="@+id/iv_ihb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:id="@+id/rl_ihb_delete"
+            android:layout_width="@dimen/d50"
+            android:layout_height="@dimen/d50"
+            android:layout_alignParentEnd="true">
+
+            <ImageView
+                android:layout_width="@dimen/d16"
+                android:layout_height="@dimen/d16"
+                android:layout_alignParentEnd="true"
+                android:background="@color/color_dark_333333" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/et_ihb_describe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d13"
+        android:background="@null"
+        android:hint="请输入图片描述,描述将会出现在轮播图中"
+        android:textColor="@color/color_gray_999999"
+        android:textColorHint="@color/color_gray_999999"
+        android:textSize="@dimen/font12" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d1"
+        android:layout_marginTop="@dimen/d5"
+        android:background="@color/color_f6" />
+
+</LinearLayout>

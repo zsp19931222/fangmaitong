@@ -60,4 +60,11 @@ public class ARouterPath {
         /*用户详情*/
         public static final String HRDetailActivity = Public + "/HRFragment";
     }
+    /**
+     * 公共页面
+     */
+    public static class Mine {
+        private static final String Mine = "/Mine";
+        public static final String MinePage = Mine + "/HRFragment";
+    }
 }

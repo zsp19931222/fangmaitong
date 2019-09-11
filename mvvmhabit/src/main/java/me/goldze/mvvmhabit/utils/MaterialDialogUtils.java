@@ -93,7 +93,7 @@ public class MaterialDialogUtils {
                     public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
                         if (event.getAction() == KeyEvent.ACTION_DOWN) {//如果是按下，则响应，否则，一次按下会响应两次
                             if (keyCode == KeyEvent.KEYCODE_BACK) {
-                                //activity.onBackPressed();
+                                //activity_invite_information.onBackPressed();
 
                             }
                         }

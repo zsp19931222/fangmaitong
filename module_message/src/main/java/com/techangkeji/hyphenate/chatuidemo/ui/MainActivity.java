@@ -94,7 +94,7 @@ public class MainActivity extends BaseActivity {
 		    PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 		    if (!pm.isIgnoringBatteryOptimizations(packageName)) {
 				try {
-					//some device doesn't has activity to handle this intent
+					//some device doesn't has activity_invite_information to handle this intent
 					//so add try catch
 					Intent intent = new Intent();
 					intent.setAction(android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
@@ -105,7 +105,7 @@ public class MainActivity extends BaseActivity {
 			}
 		}
 
-		//make sure activity will not in background if user is logged into another device or removed
+		//make sure activity_invite_information will not in background if user is logged into another device or removed
 		if (getIntent() != null &&
 				(getIntent().getBooleanExtra(Constant.ACCOUNT_REMOVED, false) ||
 						getIntent().getBooleanExtra(Constant.ACCOUNT_KICKED_BY_CHANGE_PASSWORD, false) ||
@@ -449,7 +449,7 @@ public class MainActivity extends BaseActivity {
 			updateUnreadAddressLable();
 		}
 
-		// unregister this event listener when this activity enters the
+		// unregister this event listener when this activity_invite_information enters the
 		// background
 		DemoHelper sdkHelper = DemoHelper.getInstance();
 		sdkHelper.pushActivity(this);

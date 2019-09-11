@@ -11,7 +11,7 @@ import com.techangkeji.hyphenate.chatuidemo.runtimepermissions.PermissionsManage
 import com.techangkeji.model_message.R;
 
 /**
- * chat activity，EaseChatFragment was used {@link #EaseChatFragment}
+ * chat activity_invite_information，EaseChatFragment was used {@link #EaseChatFragment}
  *
  */
 public class ChatActivity extends BaseActivity{
@@ -42,7 +42,7 @@ public class ChatActivity extends BaseActivity{
     
     @Override
     protected void onNewIntent(Intent intent) {
-    	// make sure only one chat activity is opened
+    	// make sure only one chat activity_invite_information is opened
         String username = intent.getStringExtra("userId");
         if (toChatUsername.equals(username))
             super.onNewIntent(intent);

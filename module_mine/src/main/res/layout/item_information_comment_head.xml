@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d5"
+        android:background="@color/color_f6" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/d16">
+
+
+        <TextView
+            android:id="@+id/tv_iic_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="碧桂园最新楼盘"
+            android:textColor="@color/color_dark_333333"
+            android:textSize="@dimen/font16" />
+
+        <TextView
+            android:id="@+id/tv_iic_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/d2"
+            android:text="2019-08-08"
+            android:textColor="@color/color_dark_333333"
+            android:textSize="@dimen/font16" />
+    </RelativeLayout>
+</LinearLayout>

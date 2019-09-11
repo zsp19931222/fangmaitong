@@ -1181,7 +1181,7 @@ public class LiveActivity extends BaseActivity implements EMConferenceListener {
                                 if (!LiveActivity.this.isFinishing()) {
                                     dialog.show();
                                 } else {
-                                    EMLog.i(TAG, "activity is finishing when dialog want to show.");
+                                    EMLog.i(TAG, "activity_invite_information is finishing when dialog want to show.");
                                 }
                             }
                         });

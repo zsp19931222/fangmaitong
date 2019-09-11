@@ -247,7 +247,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
             switch (resultCode) {
                 case GroupDetailsActivity.RESULT_CODE_SEND_GROUP_NOTIFICATION:
                     // Start the ding-type msg send ui.
-                    EMLog.i(TAG, "Intent to the ding-msg send activity.");
+                    EMLog.i(TAG, "Intent to the ding-msg send activity_invite_information.");
                     Intent intent = new Intent(getActivity(), EaseDingMsgSendActivity.class);
                     intent.putExtra(EaseConstant.EXTRA_USER_ID, toChatUsername);
                     startActivityForResult(intent, REQUEST_CODE_DING_MSG);

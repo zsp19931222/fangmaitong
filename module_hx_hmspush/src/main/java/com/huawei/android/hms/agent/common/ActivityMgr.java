@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * Activity Management Class
- * 此类注册了activity的生命周期监听，用来获取最新的activity给后续逻辑处理使用 | This class registers the life cycle monitoring of the activity to obtain the latest activity for subsequent logical processing using
+ * 此类注册了activity的生命周期监听，用来获取最新的activity给后续逻辑处理使用 | This class registers the life cycle monitoring of the activity_invite_information to obtain the latest activity_invite_information for subsequent logical processing using
  */
 public final class ActivityMgr implements Application.ActivityLifecycleCallbacks {
 
@@ -26,22 +26,22 @@ public final class ActivityMgr implements Application.ActivityLifecycleCallbacks
     private Application application;
 
     /**
-     * 最新的activity列表，如果没有则为空列表 | Latest list of activity, if no, empty list
+     * 最新的activity列表，如果没有则为空列表 | Latest list of activity_invite_information, if no, empty list
      */
     private List<Activity> curActivities = new ArrayList<Activity>();
 
     /**
-     * activity onResume Event Monitoring
+     * activity_invite_information onResume Event Monitoring
      */
     private List<IActivityResumeCallback> resumeCallbacks = new ArrayList<IActivityResumeCallback>();
 
     /**
-     * activity onPause Event Monitoring
+     * activity_invite_information onPause Event Monitoring
      */
     private List<IActivityPauseCallback> pauseCallbacks = new ArrayList<IActivityPauseCallback>();
 
     /**
-     * activity onDestroyed Event Monitoring
+     * activity_invite_information onDestroyed Event Monitoring
      */
     private List<IActivityDestroyedCallback> destroyedCallbacks = new ArrayList<IActivityDestroyedCallback>();
 
@@ -84,7 +84,7 @@ public final class ActivityMgr implements Application.ActivityLifecycleCallbacks
 
     /**
      * 注册activity onResume事件回调 | Registering an Activity Onresume event Callback
-     * @param callback activity onResume事件回调 | Activity Onresume Event Callback
+     * @param callback activity_invite_information onResume事件回调 | Activity Onresume Event Callback
      */
     public void registerActivitResumeEvent(IActivityResumeCallback callback) {
         HMSAgentLog.d("registerOnResume:" + StrUtils.objDesc(callback));
@@ -93,7 +93,7 @@ public final class ActivityMgr implements Application.ActivityLifecycleCallbacks
 
     /**
      * 反注册activity onResume事件回调 | unregistration Activity Onresume Event Callback
-     * @param callback 已经注册的 activity onResume事件回调 | Registered Activity Onresume Event callback
+     * @param callback 已经注册的 activity_invite_information onResume事件回调 | Registered Activity Onresume Event callback
      */
     public void unRegisterActivitResumeEvent(IActivityResumeCallback callback) {
         HMSAgentLog.d("unRegisterOnResume:" + StrUtils.objDesc(callback));
@@ -102,7 +102,7 @@ public final class ActivityMgr implements Application.ActivityLifecycleCallbacks
 
     /**
      * 注册activity onPause 事件回调 | Registering an Activity OnPause event Callback
-     * @param callback activity onPause 事件回调 | Activity OnPause Event Callback
+     * @param callback activity_invite_information onPause 事件回调 | Activity OnPause Event Callback
      */
     public void registerActivitPauseEvent(IActivityPauseCallback callback) {
         HMSAgentLog.d("registerOnPause:" + StrUtils.objDesc(callback));
@@ -110,8 +110,8 @@ public final class ActivityMgr implements Application.ActivityLifecycleCallbacks
     }
 
     /**
-     * 反注册activity onPause事件回调 | unregistration activity OnPause Event Callback
-     * @param callback 已经注册的 activity onPause事件回调 | Registered Activity OnPause Event callback
+     * 反注册activity onPause事件回调 | unregistration activity_invite_information OnPause Event Callback
+     * @param callback 已经注册的 activity_invite_information onPause事件回调 | Registered Activity OnPause Event callback
      */
     public void unRegisterActivitPauseEvent(IActivityPauseCallback callback) {
         HMSAgentLog.d("unRegisterOnPause:" + StrUtils.objDesc(callback));
@@ -120,7 +120,7 @@ public final class ActivityMgr implements Application.ActivityLifecycleCallbacks
 
     /**
      * 注册activity onDestroyed 事件回调 | Registering an Activity ondestroyed event Callback
-     * @param callback activity onDestroyed 事件回调 | Activity Ondestroyed Event Callback
+     * @param callback activity_invite_information onDestroyed 事件回调 | Activity Ondestroyed Event Callback
      */
     public void registerActivitDestroyedEvent(IActivityDestroyedCallback callback) {
         HMSAgentLog.d("registerOnDestroyed:" + StrUtils.objDesc(callback));
@@ -129,7 +129,7 @@ public final class ActivityMgr implements Application.ActivityLifecycleCallbacks
 
     /**
      * 反注册activity onDestroyed 事件回调 | unregistration Activity ondestroyed Event Callback
-     * @param callback 已经注册的 activity onDestroyed事件回调 | Registered Activity ondestroyed Event callback
+     * @param callback 已经注册的 activity_invite_information onDestroyed事件回调 | Registered Activity ondestroyed Event callback
      */
     public void unRegisterActivitDestroyedEvent(IActivityDestroyedCallback callback) {
         HMSAgentLog.d("unRegisterOnDestroyed:" + StrUtils.objDesc(callback));
@@ -137,7 +137,7 @@ public final class ActivityMgr implements Application.ActivityLifecycleCallbacks
     }
 
     /**
-     * 清空 activity onResume事件回调 | Clear Activity Onresume Event callback
+     * 清空 activity_invite_information onResume事件回调 | Clear Activity Onresume Event callback
      */
     public void clearActivitResumeCallbacks() {
         HMSAgentLog.d("clearOnResumeCallback");
@@ -145,7 +145,7 @@ public final class ActivityMgr implements Application.ActivityLifecycleCallbacks
     }
 
     /**
-     * 清空 activity onPause 事件回调 | Clear Activity OnPause Event callback
+     * 清空 activity_invite_information onPause 事件回调 | Clear Activity OnPause Event callback
      */
     public void clearActivitPauseCallbacks() {
         HMSAgentLog.d("clearOnPauseCallback");
@@ -153,15 +153,15 @@ public final class ActivityMgr implements Application.ActivityLifecycleCallbacks
     }
 
     /**
-     * 获取最新的activity | Get the latest activity
-     * @return 最新的activity | Latest activity
+     * 获取最新的activity | Get the latest activity_invite_information
+     * @return 最新的activity | Latest activity_invite_information
      */
     public Activity getLastActivity() {
         return getLastActivityInner();
     }
 
     /**
-     * activity onCreate 监听回调 | Activity OnCreate Listener Callback
+     * activity_invite_information onCreate 监听回调 | Activity OnCreate Listener Callback
      * @param activity 发生onCreate事件的activity | Activity that occurs OnCreate events
      * @param savedInstanceState 缓存状态数据 | Cached state data
      */
@@ -172,7 +172,7 @@ public final class ActivityMgr implements Application.ActivityLifecycleCallbacks
     }
 
     /**
-     * activity onStart 监听回调 | Activity OnStart Listener Callback
+     * activity_invite_information onStart 监听回调 | Activity OnStart Listener Callback
      * @param activity 发生onStart事件的activity | Activity that occurs OnStart events
      */
     @Override
@@ -182,7 +182,7 @@ public final class ActivityMgr implements Application.ActivityLifecycleCallbacks
     }
 
     /**
-     * activity onResume 监听回调 | Activity Onresume Listener Callback
+     * activity_invite_information onResume 监听回调 | Activity Onresume Listener Callback
      * @param activity 发生onResume事件的activity | Activity that occurs Onresume events
      */
     @Override
@@ -197,7 +197,7 @@ public final class ActivityMgr implements Application.ActivityLifecycleCallbacks
     }
 
     /**
-     * activity onPause 监听回调 | Activity OnPause Listener Callback
+     * activity_invite_information onPause 监听回调 | Activity OnPause Listener Callback
      * @param activity 发生onPause事件的activity | Activity that occurs OnPause events
      */
     @Override
@@ -210,7 +210,7 @@ public final class ActivityMgr implements Application.ActivityLifecycleCallbacks
     }
 
     /**
-     * activity onStop 监听回调 | Activity OnStop Listener Callback
+     * activity_invite_information onStop 监听回调 | Activity OnStop Listener Callback
      * @param activity 发生onStop事件的activity | Activity that occurs OnStop events
      */
     @Override
@@ -219,7 +219,7 @@ public final class ActivityMgr implements Application.ActivityLifecycleCallbacks
     }
 
     /**
-     * activity onSaveInstanceState 监听回调 | Activity Onsaveinstancestate Listener Callback
+     * activity_invite_information onSaveInstanceState 监听回调 | Activity Onsaveinstancestate Listener Callback
      * @param activity 发生 onSaveInstanceState 事件的activity | Activity that occurs onsaveinstancestate events
      */
     @Override
@@ -227,7 +227,7 @@ public final class ActivityMgr implements Application.ActivityLifecycleCallbacks
     }
 
     /**
-     * activity onDestroyed 监听回调 | Activity Ondestroyed Listener Callback
+     * activity_invite_information onDestroyed 监听回调 | Activity Ondestroyed Listener Callback
      * @param activity 发生 onDestroyed 事件的activity | Activity that occurs ondestroyed events
      */
     @Override
@@ -235,7 +235,7 @@ public final class ActivityMgr implements Application.ActivityLifecycleCallbacks
         HMSAgentLog.d("onDestroyed:" + StrUtils.objDesc(activity));
         removeActivity(activity);
 
-        // activity onDestroyed 事件回调 | Activity Ondestroyed Event Callback
+        // activity_invite_information onDestroyed 事件回调 | Activity Ondestroyed Event Callback
         List<IActivityDestroyedCallback> tmdCallbacks = new ArrayList<IActivityDestroyedCallback>(destroyedCallbacks);
         for (IActivityDestroyedCallback callback : tmdCallbacks) {
             callback.onActivityDestroyed(activity, getLastActivityInner());
@@ -253,8 +253,8 @@ public final class ActivityMgr implements Application.ActivityLifecycleCallbacks
     }
 
     /**
-     * 设置最新的activity | Set up the latest activity
-     * @param curActivity 最新的activity | Latest activity
+     * 设置最新的activity | Set up the latest activity_invite_information
+     * @param curActivity 最新的activity | Latest activity_invite_information
      */
     private void setCurActivity(Activity curActivity) {
         synchronized (LOCK_LASTACTIVITIES) {
@@ -269,8 +269,8 @@ public final class ActivityMgr implements Application.ActivityLifecycleCallbacks
     }
 
     /**
-     * 获取最新的activity，如果没有则返回null | Gets the latest activity and returns null if not
-     * @return 最新的activity | Latest activity
+     * 获取最新的activity，如果没有则返回null | Gets the latest activity_invite_information and returns null if not
+     * @return 最新的activity | Latest activity_invite_information
      */
     private Activity getLastActivityInner(){
         synchronized (LOCK_LASTACTIVITIES) {

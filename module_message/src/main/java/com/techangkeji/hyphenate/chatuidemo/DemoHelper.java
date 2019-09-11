@@ -444,9 +444,9 @@ public class DemoHelper {
             
             @Override
             public Intent getLaunchIntent(EMMessage message) {
-            	// you can set what activity you want display when user click the notification
+            	// you can set what activity_invite_information you want display when user click the notification
                 Intent intent = new Intent(appContext, ChatActivity.class);
-                // open calling activity if there is call
+                // open calling activity_invite_information if there is call
                 if(isVideoCalling){
                     intent = new Intent(appContext, VideoCallActivity.class);
                 }else if(isVoiceCalling){
@@ -1308,7 +1308,7 @@ public class DemoHelper {
 	
 	 /**
      * Global listener
-     * If this event already handled by an activity, you don't need handle it again
+     * If this event already handled by an activity_invite_information, you don't need handle it again
      * activityList.size() <= 0 means all activities already in background or not in Activity Stack
      */
     protected void registerMessageListener() {

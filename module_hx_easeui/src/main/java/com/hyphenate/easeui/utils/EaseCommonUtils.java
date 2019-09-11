@@ -131,7 +131,7 @@ public class EaseCommonUtils {
     }
 	
 	/**
-	 * get top activity
+	 * get top activity_invite_information
 	 * @param context
 	 * @return
 	 */

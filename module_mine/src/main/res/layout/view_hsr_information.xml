@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/d16"
+    android:layout_marginEnd="@dimen/d16"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="楼盘名"
+        android:textColor="@color/color_dark_333333"
+        android:textSize="@dimen/font14" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d13"
+        android:background="@null"
+        android:hint="请输入图片描述,描述将会出现在轮播图中"
+        android:textColor="@color/color_gray_999999"
+        android:textColorHint="@color/color_gray_999999"
+        android:textSize="@dimen/font12" />
+
+    <View
+        style="@style/ViewLineStyle"
+        android:layout_marginTop="@dimen/d5" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d20"
+        android:text="均价"
+        android:textColor="@color/color_dark_333333"
+        android:textSize="@dimen/font14" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d13"
+                android:background="@null"
+                android:hint="请输入楼均价"
+                android:textColor="@color/color_gray_999999"
+                android:textColorHint="@color/color_gray_999999"
+                android:textSize="@dimen/font12" />
+
+            <View
+                style="@style/ViewLineStyle"
+                android:layout_marginTop="@dimen/d5" />
+        </LinearLayout>
+
+        <CheckBox
+            android:layout_width="@dimen/d22"
+            android:layout_height="@dimen/d22"
+            android:checked="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/d10"
+            android:text="元/㎡"
+            android:textColor="@color/color_dark_333333"
+            android:textSize="@dimen/font12" />
+
+        <CheckBox
+            android:layout_width="@dimen/d22"
+            android:layout_height="@dimen/d22"
+            android:layout_marginStart="@dimen/d24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/d10"
+            android:text="元/套"
+            android:textColor="@color/color_dark_333333"
+            android:textSize="@dimen/font12" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d30"
+        android:text="开发商名"
+        android:textColor="@color/color_dark_333333"
+        android:textSize="@dimen/font16" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d20"
+        android:background="@null"
+        android:drawableEnd="@mipmap/dinwei"
+        android:drawablePadding="@dimen/d5"
+        android:text="上海市普陀区xx街道"
+        android:textColor="@color/color_dark_333333"
+        android:textSize="@dimen/font12" />
+
+    <View
+        style="@style/ViewLineStyle"
+        android:layout_marginTop="@dimen/d5" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d30"
+        android:text="地址"
+        android:textColor="@color/color_dark_333333"
+        android:textSize="@dimen/font16" />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d13"
+        android:background="@null"
+        android:hint="请输入开发商名"
+        android:textColor="@color/color_gray_999999"
+        android:textColorHint="@color/color_gray_999999"
+        android:textSize="@dimen/font12" />
+
+    <View
+        style="@style/ViewLineStyle"
+        android:layout_marginTop="@dimen/d5" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d30"
+        android:text="经纪人须知"
+        android:textColor="@color/color_dark_333333"
+        android:textSize="@dimen/font16" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d18"
+        android:text="佣金规则"
+        android:textColor="@color/color_dark_333333"
+        android:textSize="@dimen/font16" />
+
+    <me.goldze.mvvmhabit.view.shape.RadiusRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d150"
+        android:layout_marginTop="@dimen/d10"
+        android:padding="@dimen/d10"
+        binding:rv_backgroundColor="@color/color_EFF2F4"
+        binding:rv_radius="@dimen/d5">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="请输入佣金规则"
+            android:textColor="@color/color_gray_999999"
+            android:textColorHint="@color/color_gray_999999"
+            android:textSize="@dimen/font12" />
+    </me.goldze.mvvmhabit.view.shape.RadiusRelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d18"
+        android:text="带看规则"
+        android:textColor="@color/color_dark_333333"
+        android:textSize="@dimen/font16" />
+
+    <me.goldze.mvvmhabit.view.shape.RadiusRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d150"
+        android:layout_marginTop="@dimen/d10"
+        android:layout_marginBottom="@dimen/d16"
+        android:padding="@dimen/d10"
+        binding:rv_backgroundColor="@color/color_EFF2F4"
+        binding:rv_radius="@dimen/d5">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="请输入带看规则"
+            android:textColor="@color/color_gray_999999"
+            android:textColorHint="@color/color_gray_999999"
+            android:textSize="@dimen/font12" />
+    </me.goldze.mvvmhabit.view.shape.RadiusRelativeLayout>
+
+
+</LinearLayout>

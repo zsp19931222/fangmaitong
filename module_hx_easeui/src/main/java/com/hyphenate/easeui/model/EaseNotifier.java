@@ -233,7 +233,7 @@ public class EaseNotifier {
      * 2.Use the app name as default title
      * 3.This notification would be sent immediately
      * 4.Can be cancelled by user
-     * 5.Would launch the default activity when be clicked
+     * 5.Would launch the default activity_invite_information when be clicked
      *
      * @return
      */

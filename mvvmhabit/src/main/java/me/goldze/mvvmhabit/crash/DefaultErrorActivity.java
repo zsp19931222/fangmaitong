@@ -57,7 +57,7 @@ public final class DefaultErrorActivity extends AppCompatActivity {
         //Close/restart button logic:
         //If a class if set, use restart.
         //Else, use close and just finish the app.
-        //It is recommended that you follow this logic if implementing a custom error activity.
+        //It is recommended that you follow this logic if implementing a custom error activity_invite_information.
         Button restartButton = (Button) findViewById(R.id.customactivityoncrash_error_activity_restart_button);
 
         final CaocConfig config = CustomActivityOnCrash.getConfigFromIntent(getIntent());

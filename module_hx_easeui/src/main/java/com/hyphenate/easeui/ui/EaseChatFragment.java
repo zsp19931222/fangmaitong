@@ -611,11 +611,11 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     @Override
     public void onPause() {
         super.onPause();
-        // unregister this event listener when this activity enters the
+        // unregister this event listener when this activity_invite_information enters the
         // background
         EMClient.getInstance().chatManager().removeMessageListener(this);
 
-        // remove activity from foreground activity list
+        // remove activity_invite_information from foreground activity_invite_information list
         EaseUI.getInstance().popActivity(getActivity());
 
         // Remove all padding actions in handler
@@ -1147,7 +1147,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
 
         @Override
         public void onGroupDestroyed(final String groupId, String groupName) {
-        	// prompt group is dismissed and finish this activity
+        	// prompt group is dismissed and finish this activity_invite_information
             getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                     if (toChatUsername.equals(groupId)) {

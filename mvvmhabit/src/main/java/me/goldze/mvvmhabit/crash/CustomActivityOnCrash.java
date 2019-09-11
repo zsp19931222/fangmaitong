@@ -52,7 +52,7 @@ public final class CustomActivityOnCrash {
 
     private final static String TAG = "CustomActivityOnCrash";
 
-    //Extras passed to the error activity
+    //Extras passed to the error activity_invite_information
     private static final String EXTRA_CONFIG = "cat.ereza.customactivityoncrash.EXTRA_CONFIG";
     private static final String EXTRA_STACK_TRACE = "cat.ereza.customactivityoncrash.EXTRA_STACK_TRACE";
     private static final String EXTRA_ACTIVITY_LOG = "cat.ereza.customactivityoncrash.EXTRA_ACTIVITY_LOG";
@@ -79,7 +79,7 @@ public final class CustomActivityOnCrash {
 
 
     /**
-     * Installs CustomActivityOnCrash on the application using the default error activity.
+     * Installs CustomActivityOnCrash on the application using the default error activity_invite_information.
      *
      * @param context Context to use for obtaining the ApplicationContext. Must not be null.
      */
@@ -109,7 +109,7 @@ public final class CustomActivityOnCrash {
                                 Log.e(TAG, "App has crashed, executing CustomActivityOnCrash's UncaughtExceptionHandler", throwable);
 
                                 if (hasCrashedInTheLastSeconds(application)) {
-                                    Log.e(TAG, "App already crashed recently, not starting custom error activity because we could enter a restart loop. Are you sure that your app does not crash directly on init?", throwable);
+                                    Log.e(TAG, "App already crashed recently, not starting custom error activity_invite_information because we could enter a restart loop. Are you sure that your app does not crash directly on init?", throwable);
                                     if (oldHandler != null) {
                                         oldHandler.uncaughtException(thread, throwable);
                                         return;
@@ -124,7 +124,7 @@ public final class CustomActivityOnCrash {
                                     }
 
                                     if (isStackTraceLikelyConflictive(throwable, errorActivityClass)) {
-                                        Log.e(TAG, "Your application class or your error activity have crashed, the custom activity will not be launched!");
+                                        Log.e(TAG, "Your application class or your error activity_invite_information have crashed, the custom activity_invite_information will not be launched!");
                                         if (oldHandler != null) {
                                             oldHandler.uncaughtException(thread, throwable);
                                             return;
@@ -178,7 +178,7 @@ public final class CustomActivityOnCrash {
                                 }
                                 final Activity lastActivity = lastActivityCreated.get();
                                 if (lastActivity != null) {
-                                    //We finish the activity, this solves a bug which causes infinite recursion.
+                                    //We finish the activity_invite_information, this solves a bug which causes infinite recursion.
                                     //See: https://github.com/ACRA/acra/issues/42
                                     lastActivity.finish();
                                     lastActivityCreated.clear();
@@ -279,10 +279,10 @@ public final class CustomActivityOnCrash {
     }
 
     /**
-     * Given an Intent, returns the activity log extra from it.
+     * Given an Intent, returns the activity_invite_information log extra from it.
      *
      * @param intent The Intent. Must not be null.
-     * @return The activity log, or null if not provided.
+     * @return The activity_invite_information log, or null if not provided.
      */
     @Nullable
     public static String getActivityLogFromIntent(@NonNull Intent intent) {
@@ -317,7 +317,7 @@ public final class CustomActivityOnCrash {
         }
         errorDetails += "Current date: " + dateFormat.format(currentDate) + " \n";
         //Added a space between line feeds to fix #18.
-        //Ideally, we should not use this method at all... It is only formatted this way because of coupling with the default error activity.
+        //Ideally, we should not use this method at all... It is only formatted this way because of coupling with the default error activity_invite_information.
         //We should move it to a method that returns a bean, and let anyone format it as they wish.
         errorDetails += "Device: " + getDeviceModelName() + " \n \n";
         errorDetails += "Stack trace:  \n";
@@ -337,9 +337,9 @@ public final class CustomActivityOnCrash {
      * The flags NEW_TASK and CLEAR_TASK are set if the Intent does not have them, to ensure
      * the app stack is fully cleared.
      * If an event listener is provided, the restart app event is invoked.
-     * Must only be used from your error activity.
+     * Must only be used from your error activity_invite_information.
      *
-     * @param activity The current error activity. Must not be null.
+     * @param activity The current error activity_invite_information. Must not be null.
      * @param intent   The Intent. Must not be null.
      * @param config   The config object as obtained by calling getConfigFromIntent.
      */
@@ -347,8 +347,8 @@ public final class CustomActivityOnCrash {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
         if (intent.getComponent() != null) {
             //If the class name has been set, we force it to simulate a Launcher launch.
-            //If we don't do this, if you restart from the error activity, then press home,
-            //and then launch the activity from the launcher, the main activity appears twice on the backstack.
+            //If we don't do this, if you restart from the error activity_invite_information, then press home,
+            //and then launch the activity_invite_information from the launcher, the main activity_invite_information appears twice on the backstack.
             //This will most likely not have any detrimental effect because if you set the Intent component,
             //if will always be launched regardless of the actions specified here.
             intent.setAction(Intent.ACTION_MAIN);
@@ -370,9 +370,9 @@ public final class CustomActivityOnCrash {
     /**
      * Closes the app.
      * If an event listener is provided, the close app event is invoked.
-     * Must only be used from your error activity.
+     * Must only be used from your error activity_invite_information.
      *
-     * @param activity The current error activity. Must not be null.
+     * @param activity The current error activity_invite_information. Must not be null.
      * @param config   The config object as obtained by calling getConfigFromIntent.
      */
     public static void closeApplication(@NonNull Activity activity, @NonNull CaocConfig config) {
@@ -411,11 +411,11 @@ public final class CustomActivityOnCrash {
     /**
      * INTERNAL method that checks if the stack trace that just crashed is conflictive. This is true in the following scenarios:
      * - The application has crashed while initializing (handleBindApplication is in the stack)
-     * - The error activity has crashed (activityClass is in the stack)
+     * - The error activity_invite_information has crashed (activityClass is in the stack)
      *
      * @param throwable     The throwable from which the stack trace will be checked
-     * @param activityClass The activity class to launch when the app crashes
-     * @return true if this stack trace is conflictive and the activity must not be launched, false otherwise
+     * @param activityClass The activity_invite_information class to launch when the app crashes
+     * @return true if this stack trace is conflictive and the activity_invite_information must not be launched, false otherwise
      */
     private static boolean isStackTraceLikelyConflictive(@NonNull Throwable throwable, @NonNull Class<? extends Activity> activityClass) {
         do {
@@ -513,13 +513,13 @@ public final class CustomActivityOnCrash {
     }
 
     /**
-     * INTERNAL method used to guess which activity must be called from the error activity to restart the app.
+     * INTERNAL method used to guess which activity_invite_information must be called from the error activity_invite_information to restart the app.
      * It will first get activities from the AndroidManifest with intent filter <action android:name="cat.ereza.customactivityoncrash.RESTART" />,
      * if it cannot find them, then it will get the default launcher.
      * If there is no default launcher, this returns null.
      *
      * @param context A valid context. Must not be null.
-     * @return The guessed restart activity class, or null if no suitable one is found
+     * @return The guessed restart activity_invite_information class, or null if no suitable one is found
      */
     @Nullable
     private static Class<? extends Activity> guessRestartActivityClass(@NonNull Context context) {
@@ -528,7 +528,7 @@ public final class CustomActivityOnCrash {
         //If action is defined, use that
         resolvedActivityClass = getRestartActivityClassWithIntentFilter(context);
 
-        //Else, get the default launcher activity
+        //Else, get the default launcher activity_invite_information
         if (resolvedActivityClass == null) {
             resolvedActivityClass = getLauncherActivity(context);
         }
@@ -537,11 +537,11 @@ public final class CustomActivityOnCrash {
     }
 
     /**
-     * INTERNAL method used to get the first activity with an intent-filter <action android:name="cat.ereza.customactivityoncrash.RESTART" />,
-     * If there is no activity with that intent filter, this returns null.
+     * INTERNAL method used to get the first activity_invite_information with an intent-filter <action android:name="cat.ereza.customactivityoncrash.RESTART" />,
+     * If there is no activity_invite_information with that intent filter, this returns null.
      *
      * @param context A valid context. Must not be null.
-     * @return A valid activity class, or null if no suitable one is found
+     * @return A valid activity_invite_information class, or null if no suitable one is found
      */
     @SuppressWarnings("unchecked")
     @Nullable
@@ -556,7 +556,7 @@ public final class CustomActivityOnCrash {
                 return (Class<? extends Activity>) Class.forName(resolveInfo.activityInfo.name);
             } catch (ClassNotFoundException e) {
                 //Should not happen, print it to the log!
-                Log.e(TAG, "Failed when resolving the restart activity class via intent filter, stack trace follows!", e);
+                Log.e(TAG, "Failed when resolving the restart activity_invite_information class via intent filter, stack trace follows!", e);
             }
         }
 
@@ -564,11 +564,11 @@ public final class CustomActivityOnCrash {
     }
 
     /**
-     * INTERNAL method used to get the default launcher activity for the app.
-     * If there is no launchable activity, this returns null.
+     * INTERNAL method used to get the default launcher activity_invite_information for the app.
+     * If there is no launchable activity_invite_information, this returns null.
      *
      * @param context A valid context. Must not be null.
-     * @return A valid activity class, or null if no suitable one is found
+     * @return A valid activity_invite_information class, or null if no suitable one is found
      */
     @SuppressWarnings("unchecked")
     @Nullable
@@ -579,7 +579,7 @@ public final class CustomActivityOnCrash {
                 return (Class<? extends Activity>) Class.forName(intent.getComponent().getClassName());
             } catch (ClassNotFoundException e) {
                 //Should not happen, print it to the log!
-                Log.e(TAG, "Failed when resolving the restart activity class via getLaunchIntentForPackage, stack trace follows!", e);
+                Log.e(TAG, "Failed when resolving the restart activity_invite_information class via getLaunchIntentForPackage, stack trace follows!", e);
             }
         }
 
@@ -587,12 +587,12 @@ public final class CustomActivityOnCrash {
     }
 
     /**
-     * INTERNAL method used to guess which error activity must be called when the app crashes.
+     * INTERNAL method used to guess which error activity_invite_information must be called when the app crashes.
      * It will first get activities from the AndroidManifest with intent filter <action android:name="cat.ereza.customactivityoncrash.ERROR" />,
-     * if it cannot find them, then it will use the default error activity.
+     * if it cannot find them, then it will use the default error activity_invite_information.
      *
      * @param context A valid context. Must not be null.
-     * @return The guessed error activity class, or the default error activity if not found
+     * @return The guessed error activity_invite_information class, or the default error activity_invite_information if not found
      */
     @NonNull
     private static Class<? extends Activity> guessErrorActivityClass(@NonNull Context context) {
@@ -601,7 +601,7 @@ public final class CustomActivityOnCrash {
         //If action is defined, use that
         resolvedActivityClass = getErrorActivityClassWithIntentFilter(context);
 
-        //Else, get the default error activity
+        //Else, get the default error activity_invite_information
         if (resolvedActivityClass == null) {
             resolvedActivityClass = DefaultErrorActivity.class;
         }
@@ -610,11 +610,11 @@ public final class CustomActivityOnCrash {
     }
 
     /**
-     * INTERNAL method used to get the first activity with an intent-filter <action android:name="cat.ereza.customactivityoncrash.ERROR" />,
-     * If there is no activity with that intent filter, this returns null.
+     * INTERNAL method used to get the first activity_invite_information with an intent-filter <action android:name="cat.ereza.customactivityoncrash.ERROR" />,
+     * If there is no activity_invite_information with that intent filter, this returns null.
      *
      * @param context A valid context. Must not be null.
-     * @return A valid activity class, or null if no suitable one is found
+     * @return A valid activity_invite_information class, or null if no suitable one is found
      */
     @SuppressWarnings("unchecked")
     @Nullable
@@ -629,7 +629,7 @@ public final class CustomActivityOnCrash {
                 return (Class<? extends Activity>) Class.forName(resolveInfo.activityInfo.name);
             } catch (ClassNotFoundException e) {
                 //Should not happen, print it to the log!
-                Log.e(TAG, "Failed when resolving the error activity class via intent filter, stack trace follows!", e);
+                Log.e(TAG, "Failed when resolving the error activity_invite_information class via intent filter, stack trace follows!", e);
             }
         }
 

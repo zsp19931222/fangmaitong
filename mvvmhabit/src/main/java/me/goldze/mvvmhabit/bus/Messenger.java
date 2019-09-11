@@ -39,7 +39,7 @@ public class Messenger {
     }
 
     /**
-     * @param recipient the receiver,if register in activity the recipient always set "this",
+     * @param recipient the receiver,if register in activity_invite_information the recipient always set "this",
      *                  and "WeakMessenger.getDefault().unregister(this)" in onDestroy,if in ViewModel,
      *                  you can also register with Activity context and also in onDestroy to unregister.
      * @param action    do something on message received
@@ -49,7 +49,7 @@ public class Messenger {
     }
 
     /**
-     * @param recipient                 the receiver,if register in activity the recipient always set "this",
+     * @param recipient                 the receiver,if register in activity_invite_information the recipient always set "this",
      *                                  and "WeakMessenger.getDefault().unregister(this)" in onDestroy,if in ViewModel,
      *                                  you can also register with Activity context and also in onDestroy to unregister.
      * @param receiveDerivedMessagesToo whether Derived class of recipient can receive the message
@@ -60,7 +60,7 @@ public class Messenger {
     }
 
     /**
-     * @param recipient the receiver,if register in activity the recipient always set "this",
+     * @param recipient the receiver,if register in activity_invite_information the recipient always set "this",
      *                  and "WeakMessenger.getDefault().unregister(this)" in onDestroy,if in ViewModel,
      *                  you can also register with Activity context and also in onDestroy to unregister.
      * @param token     register with a unique token,when a messenger send a msg with same token,it
@@ -73,7 +73,7 @@ public class Messenger {
     }
 
     /**
-     * @param recipient                 the receiver,if register in activity the recipient always set "this",
+     * @param recipient                 the receiver,if register in activity_invite_information the recipient always set "this",
      *                                  and "WeakMessenger.getDefault().unregister(this)" in onDestroy,if in ViewModel,
      *                                  you can also register with Activity context and also in onDestroy to unregister.
      * @param token                     register with a unique token,when a messenger send a msg with same token,it
@@ -221,8 +221,8 @@ public class Messenger {
     /**
      * send to recipient directly with has not any message
      *
-     * @param target WeakMessenger.getDefault().register(this, ..) in a activity,if target set this
-     *               activity
+     * @param target WeakMessenger.getDefault().register(this, ..) in a activity_invite_information,if target set this
+     *               activity_invite_information
      *               it will receive the message
      */
     public void sendNoMsgToTarget(Object target) {
@@ -236,7 +236,7 @@ public class Messenger {
      * @param token  send with a unique token,when a receiver has register with same token,it will
      *               receive this msg
      * @param target send to recipient directly with has not any message,
-     *               WeakMessenger.getDefault().register(this, ..) in a activity,if target set this activity
+     *               WeakMessenger.getDefault().register(this, ..) in a activity_invite_information,if target set this activity_invite_information
      *               it will receive the message
      */
     public void sendNoMsgToTargetWithToken(Object token, Object target) {
@@ -270,7 +270,7 @@ public class Messenger {
      *
      * @param message any object can to be a message
      * @param target  send to recipient directly with has not any message,
-     *                WeakMessenger.getDefault().register(this, ..) in a activity,if target set this activity
+     *                WeakMessenger.getDefault().register(this, ..) in a activity_invite_information,if target set this activity_invite_information
      *                it will receive the message
      * @param <T>     message data type
      * @param <R>     target

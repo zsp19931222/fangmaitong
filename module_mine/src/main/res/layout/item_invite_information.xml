@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingStart="@dimen/d16"
+    android:paddingEnd="@dimen/d16">
+
+    <TextView
+        android:id="@+id/tv_iii_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d10"
+        android:text="某某公司，招聘经纪人"
+        android:textColor="@color/color_dark_333333"
+        android:textSize="@dimen/font14" />
+
+    <TextView
+        android:id="@+id/tv_iii_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/d10"
+        android:text="通过审核"
+        android:textColor="@color/color_FF8C00"
+        android:textSize="@dimen/font14" />
+
+    <TextView
+        android:id="@+id/tv_iii_area"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_iii_title"
+        android:layout_marginTop="@dimen/d14"
+        android:text="地区：上海 普陀"
+        android:textColor="@color/color_gray_999999"
+        android:textSize="@dimen/font12" />
+
+    <TextView
+        android:id="@+id/tv_iii_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_iii_area"
+        android:layout_marginTop="@dimen/d14"
+        android:text="开盘时间：2019-09-09"
+        android:textColor="@color/color_gray_999999"
+        android:textSize="@dimen/font12" />
+
+    <TextView
+        android:id="@+id/tv_iii_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_iii_time"
+        android:layout_marginTop="@dimen/d14"
+        android:text=" 均价：5000/m"
+        android:textColor="@color/color_gray_999999"
+        android:textSize="@dimen/font12" />
+
+    <me.goldze.mvvmhabit.view.shape.RadiusTextView
+        android:id="@+id/tv_iii_compile"
+        android:layout_width="@dimen/d60"
+        android:layout_height="@dimen/d25"
+        android:layout_below="@id/tv_iii_price"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:text="编辑"
+        android:textColor="@color/color_FF8C00"
+        android:textSize="@dimen/font12"
+        app:rv_radius="@dimen/d13"
+        app:rv_strokeColor="@color/color_FF8C00"
+        app:rv_strokeWidth="@dimen/d1" />
+
+    <me.goldze.mvvmhabit.view.shape.RadiusTextView
+        android:id="@+id/tv_iii_delete"
+        android:layout_width="@dimen/d60"
+        android:layout_height="@dimen/d25"
+        android:layout_below="@id/tv_iii_price"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/d73"
+        android:gravity="center"
+        android:text="删除"
+        android:textColor="@color/color_gray_999999"
+        android:textSize="@dimen/font12"
+        app:rv_radius="@dimen/d13"
+        app:rv_strokeColor="@color/color_gray_999999"
+        app:rv_strokeWidth="@dimen/d1" />
+</RelativeLayout>

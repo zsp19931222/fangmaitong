@@ -42,7 +42,7 @@ public class EaseDingAckUserListActivity extends EaseBaseActivity {
         titleBar = (EaseTitleBar) findViewById(R.id.title_bar);
         titleBar.setTitle(getString(R.string.title_ack_read_list));
 
-        // Set the title bar left layout click listener to back to previous activity.
+        // Set the title bar left layout click listener to back to previous activity_invite_information.
         titleBar.setLeftLayoutClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

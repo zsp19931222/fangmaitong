@@ -398,7 +398,7 @@ public abstract class ImageWorker {
      * scrolling smooth.
      * <p>
      * If work is paused, be sure setPauseWork(false) is called again
-     * before your fragment or activity is destroyed (for example during
+     * before your fragment or activity_invite_information is destroyed (for example during
      * {@link android.app.Activity#onPause()}), or there is a risk the
      * background thread will never finish.
      */
