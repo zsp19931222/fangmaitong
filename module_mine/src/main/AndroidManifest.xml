@@ -15,6 +15,7 @@
         <activity android:name=".ui.activity.InviteReleaseActivity" />
         <activity android:name=".ui.activity.HouseResourceActivity" />
         <activity android:name=".ui.activity.HouseResourceReleaseActivity" />
+        <activity android:name=".ui.activity.AddSizeActivity" />
     </application>
 
 </manifest>

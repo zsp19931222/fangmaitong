@@ -9,6 +9,7 @@ import androidx.databinding.ObservableList;
 
 import com.techangkeji.model_mine.ui.adapter.HouseResourceReleaseAdapter;
 import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseBannerBean;
+import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseSizeBean;
 
 import me.goldze.mvvmhabit.base.BaseViewModel;
 
@@ -19,6 +20,7 @@ import me.goldze.mvvmhabit.base.BaseViewModel;
  */
 public class HouseResourceReleaseViewModel extends BaseViewModel {
     public ObservableList<HouseResourceReleaseBannerBean> bannerPathList=new ObservableArrayList<>();
+    public ObservableList<HouseResourceReleaseSizeBean> sizeList=new ObservableArrayList<>();
     public ObservableList<String> labelList=new ObservableArrayList<>();
     public ObservableField<HouseResourceReleaseAdapter> adapterObservableField=new ObservableField<>();
     public HouseResourceReleaseViewModel(@NonNull Application application) {

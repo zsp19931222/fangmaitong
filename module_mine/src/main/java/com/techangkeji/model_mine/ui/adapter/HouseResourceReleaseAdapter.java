@@ -19,8 +19,12 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.util.MultiTypeDelegate;
 import com.goldze.base.utils.PermissionsUtils;
 import com.techangkeji.model_mine.R;
+import com.techangkeji.model_mine.ui.activity.AddSizeActivity;
 import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseBean;
+import com.techangkeji.model_mine.ui.popup.ArchitectTypePopupwindow;
+import com.techangkeji.model_mine.ui.popup.DecorationStatePopupwindow;
 import com.techangkeji.model_mine.ui.popup.HRSDLabelPopupwindow;
+import com.techangkeji.model_mine.ui.popup.PropertyTypePopupwindow;
 import com.techangkeji.model_mine.ui.popup.TimePickerPopupwindow;
 import com.techangkeji.model_mine.ui.viewModel.HouseResourceReleaseViewModel;
 
@@ -195,15 +199,50 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
         }
         //添加开盘时间
         iv_vhd_open_time.setOnClickListener(view -> {
-            TimePickerPopupwindow timePickerPopupwindow=new TimePickerPopupwindow(context);
+            TimePickerPopupwindow timePickerPopupwindow = new TimePickerPopupwindow(context);
             timePickerPopupwindow.setOnSelectTimeListener(time -> tv_vhd_open_time.setText(time));
             timePickerPopupwindow.showPopupWindow();
         });
         //添加交房时间
         iv_vhd_delivery_time.setOnClickListener(view -> {
-            TimePickerPopupwindow timePickerPopupwindow=new TimePickerPopupwindow(context);
+            TimePickerPopupwindow timePickerPopupwindow = new TimePickerPopupwindow(context);
             timePickerPopupwindow.setOnSelectTimeListener(time -> tv_vhd_delivery_time.setText(time));
             timePickerPopupwindow.showPopupWindow();
         });
+        //住宅选择
+        tv_vhd_property_type.setOnClickListener(view -> {
+            PropertyTypePopupwindow propertyTypePopupwindow = new PropertyTypePopupwindow(context, tv_vhd_property_type.getText().toString());
+            propertyTypePopupwindow.setSelectListener(s -> tv_vhd_property_type.setText(s));
+            propertyTypePopupwindow.showPopupWindow(tv_vhd_property_type);
+        });
+        //建筑类别
+        tv_vhd_architecture_type.setOnClickListener(view -> {
+            ArchitectTypePopupwindow architectTypePopupwindow = new ArchitectTypePopupwindow(context, tv_vhd_architecture_type.getText().toString());
+            architectTypePopupwindow.setSelectListener(s -> tv_vhd_architecture_type.setText(s));
+            architectTypePopupwindow.showPopupWindow(tv_vhd_architecture_type);
+        });
+        //装修状态
+        tv_vhd_decoration_state.setOnClickListener(view -> {
+            DecorationStatePopupwindow decorationStatePopupwindow = new DecorationStatePopupwindow(context, tv_vhd_decoration_state.getText().toString());
+            decorationStatePopupwindow.setSelectListener(s -> tv_vhd_decoration_state.setText(s));
+            decorationStatePopupwindow.showPopupWindow(tv_vhd_decoration_state);
+        });
+    }
+
+    private TextView tv_vhs_add;
+    private RecyclerView rv_vhs;
+    private HouseResourceReleaseSizeAdapter houseResourceReleaseSizeAdapter;
+
+    private void initSize(BaseViewHolder helper) {
+        tv_vhs_add = helper.getView(R.id.tv_vhs_add);
+        rv_vhs = helper.getView(R.id.rv_vhs);
+        tv_vhs_add.setOnClickListener(view -> viewModel.startActivity(AddSizeActivity.class));
+        if (IsNullUtil.getInstance().isEmpty(houseResourceReleaseSizeAdapter)) {
+            houseResourceReleaseSizeAdapter = new HouseResourceReleaseSizeAdapter(R.layout.item_hsr_size, viewModel.sizeList, viewModel);
+            rv_vhs.setLayoutManager(new LinearLayoutManager(context));
+            rv_vhs.setAdapter(houseResourceReleaseSizeAdapter);
+        } else {
+            houseResourceReleaseSizeAdapter.notifyDataSetChanged();
+        }
     }
 }
