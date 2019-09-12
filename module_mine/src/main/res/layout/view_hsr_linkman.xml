@@ -28,11 +28,11 @@
         <me.goldze.mvvmhabit.view.shape.RadiusTextView
             android:layout_width="@dimen/d170"
             android:layout_height="@dimen/d30"
-            android:layout_alignParentBottom="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="@dimen/d16"
             android:layout_marginTop="@dimen/d24"
             android:layout_marginEnd="@dimen/d16"
+            android:id="@+id/rv_vhl_add"
             android:layout_marginBottom="@dimen/d5"
             android:gravity="center"
             android:text="+ 添加好友为联系人"

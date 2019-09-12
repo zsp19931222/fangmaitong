@@ -102,6 +102,8 @@ ext {
             "photoview"                            : "com.bm.photoview:library:1.4.1",
             //消息角标
             "ShortcutBadger"                            : "me.leolin:ShortcutBadger:1.1.22@aar",
+            //时间选择器
+            "WheelPicker"                          : "com.github.duanhong169:picker-view:1.0.0",
     ]
 }
 

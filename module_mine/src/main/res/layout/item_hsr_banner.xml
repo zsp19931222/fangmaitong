@@ -11,9 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/d150">
 
-        <ImageView
+        <me.goldze.mvvmhabit.view.shape.RadiusImageView
             android:id="@+id/iv_ihb"
             android:layout_width="match_parent"
+            android:scaleType="fitXY"
             android:layout_height="match_parent" />
 
         <RelativeLayout

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:minWidth="@dimen/d60">
+
+    <me.goldze.mvvmhabit.view.shape.RadiusTextView
+        android:id="@+id/tv_ih"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minWidth="@dimen/d60"
+        android:paddingStart="@dimen/d10"
+        android:paddingTop="@dimen/d5"
+        android:paddingEnd="@dimen/d10"
+        android:paddingBottom="@dimen/d5"
+        android:textColor="@color/color_FF8C00"
+        android:textSize="@dimen/font14"
+        app:rv_backgroundColor="@color/color_FFF8EF"
+        app:rv_radius="@dimen/d15" />
+
+    <ImageView
+        android:id="@+id/iv_ih"
+        android:visibility="gone"
+        android:layout_width="@dimen/d14"
+        android:layout_height="@dimen/d14"
+        android:layout_toEndOf="@id/tv_ih"
+        android:background="@color/color_dark_333333" />
+</RelativeLayout>
