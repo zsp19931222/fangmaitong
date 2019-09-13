@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.techangkeji.model_mine.ui.viewModel.SettingViewModel" />
+            type="com.techangkeji.model_mine.ui.viewModel.AboutViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -31,11 +31,26 @@
             android:src="@mipmap/launcher_logo_icon" />
 
         <TextView
+            binding:onClickCommand="@{viewModel.agreementCommand}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/d60"
             android:drawableRight="@drawable/more_1x"
-            android:text="清除缓存（500mb）"
+            android:text="隐私协议"
+            android:textColor="@color/color_dark_333333"
+            android:textSize="@dimen/font14" />
+
+        <View
+            style="@style/ViewLineStyle"
+            android:layout_marginTop="@dimen/d14" />
+
+        <TextView
+            binding:onClickCommand="@{viewModel.agreementCommand}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/d30"
+            android:drawableRight="@drawable/more_1x"
+            android:text="服务协议"
             android:textColor="@color/color_dark_333333"
             android:textSize="@dimen/font14" />
 
@@ -48,52 +63,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/d30"
             android:drawableRight="@drawable/more_1x"
-            android:text="修改手机号码"
-            android:textColor="@color/color_dark_333333"
-            android:textSize="@dimen/font14"
-            binding:onClickCommand="@{viewModel.changePhoneCommand}" />
-
-        <View
-            style="@style/ViewLineStyle"
-            android:layout_marginTop="@dimen/d14" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d30"
-            android:drawableRight="@drawable/more_1x"
-            android:text="修改密码"
-            android:textColor="@color/color_dark_333333"
-            android:textSize="@dimen/font14"
-            binding:onClickCommand="@{viewModel.changePasswordCommand}" />
-
-        <View
-            style="@style/ViewLineStyle"
-            android:layout_marginTop="@dimen/d14" />
-
-        <TextView
-            binding:onClickCommand="@{viewModel.otherBindingCommand}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d30"
-            android:drawableRight="@drawable/more_1x"
-            android:text="第三方账号绑定"
+            android:text="检查更新"
             android:textColor="@color/color_dark_333333"
             android:textSize="@dimen/font14" />
-
-        <View
-            style="@style/ViewLineStyle"
-            android:layout_marginTop="@dimen/d14" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d30"
-            android:drawableRight="@drawable/more_1x"
-            android:text="关于"
-            android:textColor="@color/color_dark_333333"
-            android:textSize="@dimen/font14"
-            binding:onClickCommand="@{viewModel.aboutCommand}" />
 
         <View
             style="@style/ViewLineStyle"

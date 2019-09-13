@@ -17,6 +17,7 @@ import com.techangkeji.model_mine.databinding.ActivityHouseResourceReleaseBindin
 import com.techangkeji.model_mine.ui.adapter.HouseResourceReleaseAdapter;
 import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseBannerBean;
 import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseBean;
+import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseSizeBean;
 import com.techangkeji.model_mine.ui.post_bean.HouseResourceReleaseBannerPostBean;
 import com.techangkeji.model_mine.ui.viewModel.HouseResourceReleaseViewModel;
 import com.yzq.zxinglibrary.common.Constant;
@@ -27,6 +28,7 @@ import java.util.List;
 import me.goldze.mvvmhabit.base.BaseActivity;
 import me.goldze.mvvmhabit.bus.RxBus;
 import me.goldze.mvvmhabit.bus.RxSubscriptions;
+import me.goldze.mvvmhabit.utils.IsNullUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
 
 import static com.goldze.base.constant.RxBusMessageEventConstants.OPEN_GALLERY;
@@ -49,6 +51,14 @@ public class HouseResourceReleaseActivity extends BaseActivity<ActivityHouseReso
     @Override
     public int initVariableId() {
         return BR.viewModel;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!IsNullUtil.getInstance().isEmpty(viewModel.adapterObservableField.get())) {
+            viewModel.adapterObservableField.get().notifyDataSetChanged();
+        }
     }
 
     @Override

@@ -68,6 +68,7 @@
         <CheckBox
             android:id="@+id/cb_vhf_square"
             android:layout_width="@dimen/d22"
+            android:button="@drawable/cb_bg"
             android:layout_height="@dimen/d22"
             android:checked="true" />
 
@@ -82,6 +83,7 @@
         <CheckBox
             android:id="@+id/cb_vhf_suit"
             android:layout_width="@dimen/d22"
+            android:button="@drawable/cb_bg"
             android:layout_height="@dimen/d22"
             android:layout_marginStart="@dimen/d24" />
 

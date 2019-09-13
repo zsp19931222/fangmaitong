@@ -6,12 +6,15 @@ import androidx.annotation.NonNull;
 
 import com.techangkeji.model_mine.ui.activity.AutonymAuthActivity;
 import com.techangkeji.model_mine.ui.activity.BokerAuthActivity;
+import com.techangkeji.model_mine.ui.activity.CollectActivity;
+import com.techangkeji.model_mine.ui.activity.FeedBackActivity;
 import com.techangkeji.model_mine.ui.activity.HouseResourceActivity;
 import com.techangkeji.model_mine.ui.activity.InformationCommentActivity;
 import com.techangkeji.model_mine.ui.activity.InviteInformationActivity;
 import com.techangkeji.model_mine.ui.activity.InviteReleaseActivity;
 import com.techangkeji.model_mine.ui.activity.PersonActivity;
 import com.techangkeji.model_mine.ui.activity.QualificationAuthActivity;
+import com.techangkeji.model_mine.ui.activity.SettingActivity;
 
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
@@ -35,5 +38,11 @@ public class MineViewModel extends BaseViewModel {
     public BindingCommand inviteInformationCommentCommand = new BindingCommand(() -> startActivity(InviteInformationActivity.class));
     //房源
     public BindingCommand houseResourceCommand = new BindingCommand(() -> startActivity(HouseResourceActivity.class));
+    //收藏
+    public BindingCommand collectCommand = new BindingCommand(() -> startActivity(CollectActivity.class));
+    //设置
+    public BindingCommand settingCommand = new BindingCommand(() -> startActivity(SettingActivity.class));
+    //反馈
+    public BindingCommand feedBackCommand = new BindingCommand(() -> startActivity(FeedBackActivity.class));
 
 }

@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.techangkeji.model_mine.ui.viewModel.HouseResourceViewModel" />
+            type="me.goldze.mvvmhabit.base.BaseViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,10 +14,10 @@
         android:background="@color/color_white"
         android:orientation="vertical">
 
-        <com.goldze.base.view.TitleVIew
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/d44" />
+      <com.goldze.base.view.TitleVIew
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/d44"
+          android:id="@+id/title"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -170,23 +170,7 @@
             android:id="@+id/rv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"/>
 
-        <View style="@style/ViewLineStyle" />
-
-        <me.goldze.mvvmhabit.view.shape.RadiusTextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/d50"
-            android:layout_marginStart="@dimen/d16"
-            android:layout_marginTop="@dimen/d5"
-            android:layout_marginEnd="@dimen/d16"
-            android:layout_marginBottom="@dimen/d5"
-            android:gravity="center"
-            android:text="发布房源"
-            android:textColor="@color/white"
-            android:textSize="@dimen/font16"
-            binding:onClickCommand="@{viewModel.houseResourceReleaseCommand}"
-            binding:rv_backgroundColor="@color/color_FF8C00"
-            binding:rv_radius="@dimen/d25" />
     </LinearLayout>
 </layout>

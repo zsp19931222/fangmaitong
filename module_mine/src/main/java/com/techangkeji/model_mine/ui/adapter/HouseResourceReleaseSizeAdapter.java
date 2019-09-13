@@ -10,6 +10,7 @@ import com.goldze.base.utils.glide.GlideLoadUtils;
 import com.techangkeji.model_mine.R;
 import com.techangkeji.model_mine.ui.activity.AddSizeActivity;
 import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseSizeBean;
+import com.techangkeji.model_mine.ui.data.HouseResourceReleaseSizeData;
 import com.techangkeji.model_mine.ui.viewModel.HouseResourceReleaseViewModel;
 
 import java.util.List;
@@ -30,12 +31,12 @@ public class HouseResourceReleaseSizeAdapter extends BaseQuickAdapter<HouseResou
         helper.setText(R.id.tv_hs_size, item.getSize());
         GlideLoadUtils.getInstance().glideLoad(helper.itemView.getContext(), item.getImagePath(), helper.getView(R.id.iv_hs), 0);
         helper.getView(R.id.tv_hs_delete).setOnClickListener(view -> {
-            viewModel.sizeList.remove(item);
+            HouseResourceReleaseSizeData.getInstance().getList().remove(item);
             notifyDataSetChanged();
         });
         helper.getView(R.id.tv_hs_compile).setOnClickListener(view -> {
             Bundle bundle = new Bundle();
-            bundle.putSerializable("HouseResourceReleaseSizeBean", item);
+            bundle.putInt("position", helper.getAdapterPosition());
             viewModel.startActivity(AddSizeActivity.class, bundle);
         });
     }

@@ -1,31 +1,26 @@
 package com.techangkeji.model_mine.ui.bean;
 
+import com.techangkeji.model_mine.ui.m_enum.HouseTypePriceEnum;
+import com.techangkeji.model_mine.ui.m_enum.HouseTypeSizeEnum;
+
 import java.io.Serializable;
 
 public class HouseResourceReleaseSizeBean implements Serializable {
-    private int imagePath;
+    private String imagePath;
     private String roomNum;
     private String hallNum;
     private String cookNum;
     private String toiletNum;
     private String size;
     private String price;
+    private HouseTypePriceEnum houseTypePriceEnum;
+    private HouseTypeSizeEnum houseTypeSizeEnum;
 
-    public HouseResourceReleaseSizeBean(int imagePath, String roomNum, String hallNum, String cookNum, String toiletNum, String size, String price) {
-        this.imagePath = imagePath;
-        this.roomNum = roomNum;
-        this.hallNum = hallNum;
-        this.cookNum = cookNum;
-        this.toiletNum = toiletNum;
-        this.size = size;
-        this.price = price;
-    }
-
-    public int getImagePath() {
+    public String getImagePath() {
         return imagePath;
     }
 
-    public void setImagePath(int imagePath) {
+    public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
     }
 
@@ -75,5 +70,21 @@ public class HouseResourceReleaseSizeBean implements Serializable {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public HouseTypePriceEnum getHouseTypePriceEnum() {
+        return houseTypePriceEnum;
+    }
+
+    public void setHouseTypePriceEnum(HouseTypePriceEnum houseTypePriceEnum) {
+        this.houseTypePriceEnum = houseTypePriceEnum;
+    }
+
+    public HouseTypeSizeEnum getHouseTypeSizeEnum() {
+        return houseTypeSizeEnum;
+    }
+
+    public void setHouseTypeSizeEnum(HouseTypeSizeEnum houseTypeSizeEnum) {
+        this.houseTypeSizeEnum = houseTypeSizeEnum;
     }
 }

@@ -16,6 +16,13 @@
         <activity android:name=".ui.activity.HouseResourceActivity" />
         <activity android:name=".ui.activity.HouseResourceReleaseActivity" />
         <activity android:name=".ui.activity.AddSizeActivity" />
+        <activity android:name=".ui.activity.CollectActivity" />
+        <activity android:name=".ui.activity.ChangePhoneActivity" />
+        <activity android:name=".ui.activity.ChangePasswordActivity" />
+        <activity android:name=".ui.activity.AboutActivity" />
+        <activity android:name=".ui.activity.AgreementActivity" />
+        <activity android:name=".ui.activity.OtherBindingAccountActivity" />
+        <activity android:name=".ui.activity.FeedBackActivity" />
     </application>
 
 </manifest>

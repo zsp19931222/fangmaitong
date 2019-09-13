@@ -21,6 +21,7 @@ import com.goldze.base.utils.PermissionsUtils;
 import com.techangkeji.model_mine.R;
 import com.techangkeji.model_mine.ui.activity.AddSizeActivity;
 import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseBean;
+import com.techangkeji.model_mine.ui.data.HouseResourceReleaseSizeData;
 import com.techangkeji.model_mine.ui.popup.ArchitectTypePopupwindow;
 import com.techangkeji.model_mine.ui.popup.DecorationStatePopupwindow;
 import com.techangkeji.model_mine.ui.popup.HRSDLabelPopupwindow;
@@ -69,6 +70,7 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
                 initDetail(helper);
                 break;
             case HouseResourceReleaseBean.Size:
+                initSize(helper);
                 break;
             case HouseResourceReleaseBean.Information:
                 initInformation(helper);
@@ -188,7 +190,9 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
         et_vhd_property_fee = helper.getView(R.id.et_vhd_property_fee);
         //添加标签
         if (IsNullUtil.getInstance().isEmpty(hsrdAdapter)) {
-            viewModel.labelList.add("+");
+            if (!viewModel.labelList.contains("+")){
+                viewModel.labelList.add("+");
+            }
             HSRDAdapter hsrdAdapter = new HSRDAdapter(R.layout.item_hsrd, viewModel.labelList, viewModel);
             LinearLayoutManager gridLayoutManager = new LinearLayoutManager(context);
             gridLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -238,7 +242,7 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
         rv_vhs = helper.getView(R.id.rv_vhs);
         tv_vhs_add.setOnClickListener(view -> viewModel.startActivity(AddSizeActivity.class));
         if (IsNullUtil.getInstance().isEmpty(houseResourceReleaseSizeAdapter)) {
-            houseResourceReleaseSizeAdapter = new HouseResourceReleaseSizeAdapter(R.layout.item_hsr_size, viewModel.sizeList, viewModel);
+            houseResourceReleaseSizeAdapter = new HouseResourceReleaseSizeAdapter(R.layout.item_hsr_size, HouseResourceReleaseSizeData.getInstance().getList(), viewModel);
             rv_vhs.setLayoutManager(new LinearLayoutManager(context));
             rv_vhs.setAdapter(houseResourceReleaseSizeAdapter);
         } else {

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:binding="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="me.goldze.mvvmhabit.base.BaseViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_f6"
+        android:orientation="vertical">
+
+        <com.goldze.base.view.TitleVIew
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d44" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <View style="@style/ViewLineStyle" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d50">
+
+            <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d40"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/d16"
+                android:layout_marginEnd="@dimen/d16"
+                android:layout_marginBottom="@dimen/d5"
+                android:gravity="center"
+                android:text="提交新反馈"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font16"
+                binding:rv_backgroundColor="@color/color_FF8C00"
+                binding:rv_radius="@dimen/d25" />
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

@@ -30,7 +30,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/d16"
-                    android:src="@mipmap/setting" />
+                    android:src="@mipmap/setting"
+                    binding:onClickCommand="@{viewModel.settingCommand}" />
             </RelativeLayout>
 
             <LinearLayout
@@ -124,6 +125,7 @@
                             binding:onClickCommand="@{viewModel.qualificationAuthCommand}"
                             binding:rv_backgroundColor="@color/color_FF8C00"
                             binding:rv_radius="@dimen/d10" />
+
                         <me.goldze.mvvmhabit.view.shape.RadiusTextView
                             android:layout_width="@dimen/d60"
                             android:layout_height="@dimen/d20"
@@ -217,8 +219,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingTop="@dimen/d15"
-                binding:onClickCommand="@{viewModel.informationCommentCommand}"
-                android:paddingBottom="@dimen/d15">
+                android:paddingBottom="@dimen/d15"
+                binding:onClickCommand="@{viewModel.informationCommentCommand}">
 
                 <ImageView
                     android:layout_width="@dimen/d18"
@@ -248,12 +250,12 @@
                 android:background="@color/color_f6" />
 
             <RelativeLayout
-                binding:onClickCommand="@{viewModel.inviteInformationCommentCommand}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingTop="@dimen/d15"
-                android:paddingBottom="@dimen/d15">
+                android:paddingBottom="@dimen/d15"
+                binding:onClickCommand="@{viewModel.inviteInformationCommentCommand}">
 
                 <ImageView
                     android:layout_width="@dimen/d18"
@@ -283,12 +285,12 @@
                 android:background="@color/color_f6" />
 
             <RelativeLayout
-                binding:onClickCommand="@{viewModel.houseResourceCommand}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingTop="@dimen/d15"
-                android:paddingBottom="@dimen/d15">
+                android:paddingBottom="@dimen/d15"
+                binding:onClickCommand="@{viewModel.houseResourceCommand}">
 
                 <ImageView
                     android:layout_width="@dimen/d18"
@@ -322,7 +324,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingTop="@dimen/d15"
-                android:paddingBottom="@dimen/d15">
+                android:paddingBottom="@dimen/d15"
+                binding:onClickCommand="@{viewModel.collectCommand}">
 
                 <ImageView
                     android:layout_width="@dimen/d18"
@@ -386,6 +389,7 @@
                 android:background="@color/color_f6" />
 
             <RelativeLayout
+                binding:onClickCommand="@{viewModel.feedBackCommand}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"

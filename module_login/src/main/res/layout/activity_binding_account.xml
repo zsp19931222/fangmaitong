@@ -32,7 +32,7 @@
                 android:layout_width="@dimen/d167"
                 android:layout_height="@dimen/d59"
                 android:layout_marginTop="@dimen/d53"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/launcher_logo_icon" />
 
             <LinearLayout
                 android:layout_width="match_parent"

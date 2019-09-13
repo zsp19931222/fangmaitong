@@ -6,19 +6,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.techangkeji.model_mine.BR;
 import com.techangkeji.model_mine.R;
-import com.techangkeji.model_mine.databinding.ActivityHouseResourceBinding;
-import com.techangkeji.model_mine.ui.adapter.HouseResourceAdapter;
-import com.techangkeji.model_mine.ui.viewModel.HouseResourceViewModel;
+import com.techangkeji.model_mine.databinding.ActivityCollectBinding;
+import com.techangkeji.model_mine.ui.adapter.CollectAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import me.goldze.mvvmhabit.base.BaseActivity;
+import me.goldze.mvvmhabit.base.BaseViewModel;
 
-public class HouseResourceActivity extends BaseActivity<ActivityHouseResourceBinding, HouseResourceViewModel> {
+public class CollectActivity extends BaseActivity<ActivityCollectBinding, BaseViewModel> {
     @Override
     public int initContentView(Bundle savedInstanceState) {
-        return R.layout.activity_house_resource;
+        return R.layout.activity_collect;
     }
 
     @Override
@@ -28,13 +28,13 @@ public class HouseResourceActivity extends BaseActivity<ActivityHouseResourceBin
 
     @Override
     public void initData() {
-        binding.title.setTitle("我的房源");
+        binding.title.setTitle("我的收藏");
         List<String> strings = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 20; i++) {
             strings.add("");
         }
-        HouseResourceAdapter inviteInformationAdapter = new HouseResourceAdapter(R.layout.item_my_home_resource, strings);
+        CollectAdapter collectAdapter = new CollectAdapter(R.layout.item_collect, strings);
         binding.rv.setLayoutManager(new LinearLayoutManager(this));
-        binding.rv.setAdapter(inviteInformationAdapter);
+        binding.rv.setAdapter(collectAdapter);
     }
 }

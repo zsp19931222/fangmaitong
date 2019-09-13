@@ -5,12 +5,13 @@
 
         <variable
             name="viewModel"
-            type="com.techangkeji.model_mine.ui.viewModel.HouseResourceReleaseViewModel" />
+            type="me.goldze.mvvmhabit.base.BaseViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <com.goldze.base.view.TitleVIew
@@ -47,10 +48,83 @@
                 android:textSize="@dimen/font10" />
 
             <me.goldze.mvvmhabit.view.shape.RadiusImageView
+                android:id="@+id/iv_as"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 binding:rv_corner_radius="@dimen/d10" />
         </me.goldze.mvvmhabit.view.shape.RadiusRelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/d15"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/d16"
+            android:paddingEnd="@dimen/d16">
+
+            <me.goldze.mvvmhabit.view.shape.RadiusEditText
+                android:id="@+id/et1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/d30"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="请输入"
+                android:inputType="number"
+                android:textColor="@color/color_gray_999999"
+                android:textColorHint="@color/color_gray_999999"
+                android:textSize="@dimen/font10"
+                binding:rv_strokeColor="@color/color_DCDCDC"
+                binding:rv_strokeWidth="@dimen/d1" />
+
+            <me.goldze.mvvmhabit.view.shape.RadiusEditText
+                android:id="@+id/et2"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/d30"
+                android:layout_marginStart="@dimen/d34"
+
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="请输入"
+                android:inputType="number"
+                android:textColor="@color/color_gray_999999"
+                android:textColorHint="@color/color_gray_999999"
+                android:textSize="@dimen/font10"
+                binding:rv_strokeColor="@color/color_DCDCDC"
+                binding:rv_strokeWidth="@dimen/d1" />
+
+            <me.goldze.mvvmhabit.view.shape.RadiusEditText
+                android:id="@+id/et3"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/d30"
+                android:layout_marginStart="@dimen/d34"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="请输入"
+
+                android:inputType="number"
+                android:textColor="@color/color_gray_999999"
+                android:textColorHint="@color/color_gray_999999"
+                android:textSize="@dimen/font10"
+                binding:rv_strokeColor="@color/color_DCDCDC"
+
+                binding:rv_strokeWidth="@dimen/d1" />
+
+            <me.goldze.mvvmhabit.view.shape.RadiusEditText
+                android:id="@+id/et4"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/d30"
+                android:layout_marginStart="@dimen/d34"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="请输入"
+                android:inputType="number"
+
+                android:textColor="@color/color_gray_999999"
+                android:textColorHint="@color/color_gray_999999"
+                android:textSize="@dimen/font10"
+                binding:rv_strokeColor="@color/color_DCDCDC"
+                binding:rv_strokeWidth="@dimen/d1" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,11 +135,14 @@
             android:paddingEnd="@dimen/d16">
 
             <me.goldze.mvvmhabit.view.shape.RadiusEditText
+                android:id="@+id/et_size"
                 android:layout_width="@dimen/d145"
                 android:layout_height="@dimen/d25"
                 android:layout_marginStart="@dimen/d10"
                 android:gravity="center_vertical"
                 android:hint="请输入"
+                android:inputType="number"
+
                 android:paddingStart="@dimen/d16"
                 android:textColor="@color/color_dark_333333"
                 android:textColorHint="@color/color_gray_999999"
@@ -74,6 +151,8 @@
                 binding:rv_radius="@dimen/d5" />
 
             <CheckBox
+                android:id="@+id/cb_size1"
+                android:button="@drawable/cb_bg"
                 android:layout_width="@dimen/d22"
                 android:layout_height="@dimen/d22"
                 android:checked="true" />
@@ -87,7 +166,9 @@
                 android:textSize="@dimen/font12" />
 
             <CheckBox
+                android:id="@+id/cb_size2"
                 android:layout_width="@dimen/d22"
+                android:button="@drawable/cb_bg"
                 android:layout_height="@dimen/d22"
                 android:layout_marginStart="@dimen/d38" />
 
@@ -109,12 +190,13 @@
             android:paddingEnd="@dimen/d16">
 
             <me.goldze.mvvmhabit.view.shape.RadiusEditText
-                android:id="@+id/et_vhd_plot_ratio"
+                android:id="@+id/et_as_price"
                 android:layout_width="@dimen/d145"
                 android:layout_height="@dimen/d25"
                 android:layout_marginStart="@dimen/d10"
                 android:gravity="center_vertical"
                 android:hint="请输入"
+                android:inputType="number"
                 android:paddingStart="@dimen/d16"
                 android:textColor="@color/color_dark_333333"
                 android:textColorHint="@color/color_gray_999999"
@@ -123,8 +205,11 @@
                 binding:rv_radius="@dimen/d5" />
 
             <CheckBox
+                android:id="@+id/cb_price1"
                 android:layout_width="@dimen/d22"
+                android:button="@drawable/cb_bg"
                 android:layout_height="@dimen/d22"
+
                 android:checked="true" />
 
             <TextView
@@ -136,7 +221,9 @@
                 android:textSize="@dimen/font12" />
 
             <CheckBox
+                android:id="@+id/cb_price2"
                 android:layout_width="@dimen/d22"
+                android:button="@drawable/cb_bg"
                 android:layout_height="@dimen/d22"
                 android:layout_marginStart="@dimen/d20" />
 
@@ -149,8 +236,10 @@
                 android:textSize="@dimen/font12" />
 
             <CheckBox
+                android:id="@+id/cb_price3"
                 android:layout_width="@dimen/d22"
                 android:layout_height="@dimen/d22"
+                android:button="@drawable/cb_bg"
                 android:layout_marginStart="@dimen/d20" />
 
             <TextView
@@ -173,6 +262,7 @@
                 android:orientation="horizontal">
 
                 <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                    android:id="@+id/tv_cancel"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/d40"
                     android:layout_marginStart="@dimen/d16"
@@ -188,6 +278,7 @@
                     binding:rv_radius="@dimen/d25" />
 
                 <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                    android:id="@+id/tv_confirm"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/d40"
                     android:layout_marginStart="@dimen/d16"
