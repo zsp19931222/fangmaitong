@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/d55"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="@dimen/d35"
+        android:layout_height="@dimen/d35"
+        android:layout_marginStart="@dimen/font16" />
+
+    <TextView
+        android:id="@+id/tv_hrda_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="王兵"
+        android:textColor="@color/color_dark_333333"
+        android:textSize="@dimen/font15" />
+
+    <TextView
+        android:id="@+id/tv_hrda_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/d6"
+        android:text="13******908"
+        android:textColor="@color/color_gray_666666"
+        android:textSize="@dimen/font12" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:id="@+id/iv_hrda_pc"
+        android:layout_width="@dimen/d28"
+        android:layout_height="@dimen/d28"
+        android:src="@mipmap/phone_call_icon" />
+
+    <ImageView
+        android:id="@+id/iv_hrda_sm"
+        android:layout_width="@dimen/d28"
+        android:layout_height="@dimen/d28"
+        android:layout_marginStart="@dimen/d10"
+        android:layout_marginEnd="@dimen/d16"
+        android:src="@mipmap/send_message_icon" />
+</LinearLayout>

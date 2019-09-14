@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_panel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/layout_null"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/layout_input_panel"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="8dip"
+            android:paddingRight="8dip">
+
+            <RelativeLayout
+                android:id="@+id/layout_edit"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="34dip"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:hint="评论"
+                    android:paddingLeft="4dp"
+                    android:textColor="@color/color_55b2f5"
+                    android:textCursorDrawable="@null"
+                    android:textSize="15sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="6dp"
+                    android:background="@color/color_55b2f5" />
+            </RelativeLayout>
+
+
+            <ImageView
+                android:id="@+id/img_switch"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="8dp"
+                android:visibility="gone"
+                app:srcCompat="@drawable/input_smile_drawable" />
+
+
+            <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                android:id="@+id/tv_comment"
+                android:layout_width="@dimen/d75"
+                android:layout_height="@dimen/d30"
+                android:background="@drawable/shape_send_bg"
+                android:gravity="center"
+                android:text="发送"
+                android:textColor="@color/color_FF8C00"
+                app:rv_backgroundColor="@color/color_F9DAA1"
+                app:rv_radius="@dimen/d15" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_red" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_emoji_panel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/color_FF8C00"
+            android:paddingTop="12dp" />
+
+        <com.kcrason.highperformancefriendscircle.widgets.HorizontalEmojiIndicators
+            android:id="@+id/emoji_indicators"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_BDC2C0" />
+
+
+    </LinearLayout>
+</LinearLayout>

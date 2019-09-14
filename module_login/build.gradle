@@ -9,5 +9,7 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':module_message')
+    if (!isBuildModule.toBoolean()) {
+        implementation project(path: ':module_message')
+    }
 }

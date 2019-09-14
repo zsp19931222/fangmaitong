@@ -64,5 +64,7 @@ dependencies {
         implementation project(':module_mine')
         //公共模块
         implementation project(':module_public')
+        //朋友圈模块
+        implementation project(':module_friend_circle')
     }
 }

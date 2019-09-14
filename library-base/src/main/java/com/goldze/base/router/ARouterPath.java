@@ -61,10 +61,26 @@ public class ARouterPath {
         public static final String HRDetailActivity = Public + "/HRFragment";
     }
     /**
-     * 公共页面
+     * 我的页面
      */
     public static class Mine {
         private static final String Mine = "/Mine";
         public static final String MinePage = Mine + "/HRFragment";
+    }
+    /**
+     * 朋友圈
+     */
+    public static class FriendCircle {
+        private static final String FriendCircle = "/FriendCircle";
+        public static final String FriendCircleActivity = FriendCircle + "/FriendCircleActivity";
+        public static final String MyStateActivity = FriendCircle + "/MyStateActivity";
+    }
+    /**
+     * 资讯
+     */
+    public static class Information {
+        private static final String Information = "/Information";
+        public static final String InviteDetailActivity = Information + "/InviteDetailActivity";
+        public static final String MyStateActivity = Information + "/MyStateActivity";
     }
 }

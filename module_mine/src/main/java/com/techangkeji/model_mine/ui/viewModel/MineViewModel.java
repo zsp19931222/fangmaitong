@@ -4,6 +4,8 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.goldze.base.router.ARouterPath;
 import com.techangkeji.model_mine.ui.activity.AutonymAuthActivity;
 import com.techangkeji.model_mine.ui.activity.BokerAuthActivity;
 import com.techangkeji.model_mine.ui.activity.CollectActivity;
@@ -44,5 +46,9 @@ public class MineViewModel extends BaseViewModel {
     public BindingCommand settingCommand = new BindingCommand(() -> startActivity(SettingActivity.class));
     //反馈
     public BindingCommand feedBackCommand = new BindingCommand(() -> startActivity(FeedBackActivity.class));
+    //我的动态
+    public BindingCommand myStateCommand = new BindingCommand(() -> ARouter.getInstance().build(ARouterPath.FriendCircle.MyStateActivity).navigation());
+    //我的广场信息
+    public BindingCommand myInformationCommand = new BindingCommand(() -> ARouter.getInstance().build(ARouterPath.FriendCircle.MyStateActivity).navigation());
 
 }

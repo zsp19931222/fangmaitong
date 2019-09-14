@@ -2,6 +2,7 @@
 <manifest package="com.techangkeji.model_information">
 
     <application>
+        <activity name="com.techangkeji.module_information.ui.activity.InviteDetailActivity" />
     </application>
 
 </manifest>

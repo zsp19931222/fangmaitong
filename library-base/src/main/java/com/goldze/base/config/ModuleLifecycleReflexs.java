@@ -18,8 +18,8 @@ public class ModuleLifecycleReflexs {
     private static final String WorkInit = "com.goldze.work.WorkModuleInit";
     //消息业务模块
     private static final String MsgInit = "com.techangkeji.model_message.MessageModuleInit";
-    //用户业务模块
-    private static final String UserInit = "com.goldze.user.UserModuleInit";
+    //朋友圈业务模块
+    private static final String FriendCircleInit = "com.techangkeji.module_friend_circle.FriendCircleModuleInit";
 
-    public static String[] initModuleNames = {BaseInit, MainInit,SignInit, HomeInit, WorkInit, MsgInit,UserInit};
+    public static String[] initModuleNames = {BaseInit, MainInit,SignInit, HomeInit, WorkInit, MsgInit,FriendCircleInit};
 }

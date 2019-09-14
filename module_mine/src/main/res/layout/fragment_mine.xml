@@ -150,6 +150,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                binding:onClickCommand="@{viewModel.myStateCommand}"
                 android:paddingTop="@dimen/d15"
                 android:paddingBottom="@dimen/d15">
 
@@ -185,6 +186,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingTop="@dimen/d15"
+                binding:onClickCommand="@{viewModel.myInformationCommand}"
                 android:paddingBottom="@dimen/d15">
 
                 <ImageView
