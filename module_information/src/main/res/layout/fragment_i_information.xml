@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="me.goldze.mvvmhabit.base.BaseViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d90"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/fczx"
+                android:drawablePadding="@dimen/d5"
+                android:gravity="center"
+                android:text="房产资讯"
+                android:textColor="@color/color_dark_333333" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/xfbl"
+                android:drawablePadding="@dimen/d5"
+                android:gravity="center"
+                android:text="新房爆料"
+                android:textColor="@color/color_dark_333333" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/fczs"
+                android:drawablePadding="@dimen/d5"
+                android:gravity="center"
+                android:text="房产知识"
+                android:textColor="@color/color_dark_333333" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/hwhq"
+                android:drawablePadding="@dimen/d5"
+                android:gravity="center"
+                android:text="海外行情"
+                android:textColor="@color/color_dark_333333" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d35"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="排序"
+                android:textColor="@color/color_dark_333333"
+                android:textSize="@dimen/font12" />
+
+            <View
+                android:layout_width="@dimen/d1"
+                android:layout_height="@dimen/d25"
+                android:background="@color/color_bfbfbf" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="标签"
+                android:textColor="@color/color_dark_333333"
+                android:textSize="@dimen/font12" />
+        </LinearLayout>
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/srl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </LinearLayout>
+</layout>

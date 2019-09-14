@@ -91,7 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/d16"
-                    android:text="某某公司，招聘经纪人"
+                    android:text="求职标题"
                     android:textColor="@color/color_dark_333333"
                     android:textSize="@dimen/font15" />
 
@@ -102,129 +102,9 @@
                     android:layout_marginEnd="@dimen/d16"
                     android:background="@color/color_f6"
                     android:gravity="center"
-                    android:text="基础信息"
+                    android:text="求职基础信息"
                     android:textColor="@color/color_dark_333333"
                     android:textSize="@dimen/font12" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/d30"
-                    android:layout_marginStart="@dimen/d16"
-                    android:layout_marginTop="@dimen/d1"
-                    android:layout_marginEnd="@dimen/d16"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@color/color_f6"
-                        android:gravity="center"
-                        android:text="职位名称"
-                        android:textColor="@color/color_dark_333333"
-                        android:textSize="@dimen/font12" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/d1"
-                        android:layout_weight="2"
-                        android:background="@color/color_f6"
-                        android:gravity="center"
-                        android:text="代理"
-                        android:textColor="@color/color_dark_333333"
-                        android:textSize="@dimen/font12" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/d30"
-                    android:layout_marginStart="@dimen/d16"
-                    android:layout_marginTop="@dimen/d1"
-                    android:layout_marginEnd="@dimen/d16"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@color/color_f6"
-                        android:gravity="center"
-                        android:text="薪资范围"
-                        android:textColor="@color/color_dark_333333"
-                        android:textSize="@dimen/font12" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/d1"
-                        android:layout_weight="2"
-                        android:background="@color/color_f6"
-                        android:gravity="center"
-                        android:text="面议"
-                        android:textColor="@color/color_dark_333333"
-                        android:textSize="@dimen/font12" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/d30"
-                    android:layout_marginStart="@dimen/d16"
-                    android:layout_marginTop="@dimen/d1"
-                    android:layout_marginEnd="@dimen/d16"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@color/color_f6"
-                        android:gravity="center"
-                        android:text="福利待遇"
-                        android:textColor="@color/color_dark_333333"
-                        android:textSize="@dimen/font12" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/d1"
-                        android:layout_weight="2"
-                        android:background="@color/color_f6"
-                        android:gravity="center"
-                        android:text="代理"
-                        android:textColor="@color/color_dark_333333"
-                        android:textSize="@dimen/font12" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/d30"
-                    android:layout_marginStart="@dimen/d16"
-                    android:layout_marginTop="@dimen/d1"
-                    android:layout_marginEnd="@dimen/d16"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@color/color_f6"
-                        android:gravity="center"
-                        android:text="学历要求"
-                        android:textColor="@color/color_dark_333333"
-                        android:textSize="@dimen/font12" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/d1"
-                        android:layout_weight="2"
-                        android:background="@color/color_f6"
-                        android:gravity="center"
-                        android:text="代理"
-                        android:textColor="@color/color_dark_333333"
-                        android:textSize="@dimen/font12" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -281,7 +161,7 @@
                         android:layout_weight="2"
                         android:background="@color/color_f6"
                         android:gravity="center"
-                        android:text="代理"
+                        android:text="面议"
                         android:textColor="@color/color_dark_333333"
                         android:textSize="@dimen/font12" />
                 </LinearLayout>
@@ -324,7 +204,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/d16"
-                    android:text="公司简介"
+                    android:text="个人简介"
                     android:textColor="@color/color_dark_333333"
                     android:textSize="@dimen/font15" />
 
@@ -345,7 +225,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/d16"
-                    android:text="应聘联系"
+                    android:text="招聘联系"
                     android:textColor="@color/color_dark_333333"
                     android:textSize="@dimen/font15" />
 

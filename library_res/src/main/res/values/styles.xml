@@ -99,5 +99,7 @@
         <item name="tabBackground">@color/white</item>
         <item name="tabIndicatorColor">@color/color_FF8C00</item>
         <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabPaddingStart">-1dp</item>
+        <item name="tabPaddingEnd">-1dp</item>
     </style>
 </resources>

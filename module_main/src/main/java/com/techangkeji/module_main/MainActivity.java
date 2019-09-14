@@ -141,7 +141,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewMode
             fragmentTransaction = fragmentManager.beginTransaction();
             hideFragment(fragmentTransaction);
             if (information == null) {
-                information = (Fragment) ARouter.getInstance().build(ARouterPath.Home.HomeFragment).navigation();
+                information = (Fragment) ARouter.getInstance().build(ARouterPath.Information.InformationMainFragment).navigation();
                 fragmentTransaction.add(R.id.main_vp, information);
             } else {
                 fragmentTransaction.show(information);

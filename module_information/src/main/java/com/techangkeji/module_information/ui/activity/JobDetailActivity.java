@@ -4,25 +4,19 @@ import android.os.Bundle;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
-import com.goldze.base.router.ARouterPath;
+import com.goldze.base.utils.SimulationData;
 import com.techangkeji.model_information.BR;
 import com.techangkeji.model_information.R;
-import com.techangkeji.model_information.databinding.ActivityInviteDetailBinding;
+import com.techangkeji.model_information.databinding.ActivityJobDetailBinding;
 import com.techangkeji.module_information.ui.adapter.InviteDetailAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import me.goldze.mvvmhabit.base.BaseActivity;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 
-@Route(path = ARouterPath.Information.InviteDetailActivity)
-public class InviteDetailActivity extends BaseActivity<ActivityInviteDetailBinding, BaseViewModel> {
-
+public class JobDetailActivity extends BaseActivity<ActivityJobDetailBinding, BaseViewModel> {
     @Override
     public int initContentView(Bundle savedInstanceState) {
-        return R.layout.activity_invite_detail;
+        return R.layout.activity_job_detail;
     }
 
     @Override
@@ -32,12 +26,8 @@ public class InviteDetailActivity extends BaseActivity<ActivityInviteDetailBindi
 
     @Override
     public void initData() {
-        binding.title.setTitle("招聘详情");
-        List<String> strings = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            strings.add("");
-        }
-        InviteDetailAdapter inviteDetailAdapter = new InviteDetailAdapter(R.layout.item_linkman, strings);
+        binding.title.setTitle("求职详情");
+        InviteDetailAdapter inviteDetailAdapter = new InviteDetailAdapter(R.layout.item_linkman, SimulationData.simulation());
         binding.rv.setLayoutManager(new LinearLayoutManager(this));
         binding.rv.setAdapter(inviteDetailAdapter);
     }
