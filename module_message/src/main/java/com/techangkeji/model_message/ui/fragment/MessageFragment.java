@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.goldze.base.base.BaseTabAdapter;
 import com.goldze.base.router.ARouterPath;
 import com.google.android.material.tabs.TabLayout;
@@ -61,14 +62,12 @@ public class MessageFragment extends BaseLazyFragment<FragmentMessageBinding, Me
         settingFragment = new SettingsFragment();
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(conversationListFragment);
-        fragments.add(contactListFragment);
-        fragments.add(settingFragment);
+        fragments.add((Fragment) ARouter.getInstance().build(ARouterPath.FriendCircle.FriendCircleFragment).navigation());
+        fragments.add((Fragment) ARouter.getInstance().build(ARouterPath.FriendCircle.FriendCircleFragment).navigation());
         //给ViewPager设置适配器
         binding.vpFm.setAdapter(new BaseTabAdapter(getFragmentManager(), fragments, titles));
         //将TabLayout和ViewPager关联起来。
         binding.tlFm.setupWithViewPager(binding.vpFm);
-        //设置可以滑动
-        binding.tlFm.setTabMode(TabLayout.MODE_SCROLLABLE);
         //滑动监听
         binding.tlFm.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

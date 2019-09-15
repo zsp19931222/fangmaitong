@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ import io.reactivex.observers.DefaultObserver;
 import me.goldze.mvvmhabit.base.AppManager;
 import me.goldze.mvvmhabit.base.BaseActivity;
 import me.goldze.mvvmhabit.base.BaseViewModel;
+import me.goldze.mvvmhabit.bus.RxBus;
 import me.goldze.mvvmhabit.utils.ToastUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
 
@@ -219,28 +221,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewMode
         }
     }
 
-    /**
-     * description:用户双击退出
-     * author: Andy
-     * date: 2019/8/19 0019 11:43
-     */
-    //记录用户首次点击返回键的时间
-    private long firstTime = 0;
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-            long secondTime = System.currentTimeMillis();
-            if (secondTime - firstTime > 2000) {
-                ToastUtil.normalToast(this, "再按一次退出程序");
-                firstTime = secondTime;
-                return true;
-            } else {
-                AppManager.getAppManager().AppExit();
-            }
-        }
-        return super.onKeyDown(keyCode, event);
-    }
 
 
     @Override
@@ -367,4 +347,47 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewMode
     EMClientListener clientListener = success -> {
         Toast.makeText(MainActivity.this, "onUpgradeFrom 2.x to 3.x " + (success ? "success" : "fail"), Toast.LENGTH_LONG).show();
     };
+    /**
+     * description:用户双击退出
+     * author: Andy
+     * date: 2019/8/19 0019 11:43
+     */
+    //记录用户首次点击返回键的时间
+    private long firstTime = 0;
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        ZLog.d(event.getKeyCode());
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            ZLog.d(isSoftShowing());
+            if (isSoftShowing()) {
+                RxBus.getDefault().post("onBackPressed");
+            } else {
+                if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+                    long secondTime = System.currentTimeMillis();
+                    if (secondTime - firstTime > 2000) {
+                        ToastUtil.normalToast(this, "再按一次退出程序");
+                        firstTime = secondTime;
+                        return true;
+                    } else {
+                        AppManager.getAppManager().AppExit();
+                    }
+                }
+            }
+            return true;
+        }
+        return super.dispatchKeyEvent(event);
+    }
+
+    //软键盘是否显示
+    private boolean isSoftShowing() {
+        //获取当前屏幕内容的高度
+        int screenHeight = getWindow().getDecorView().getHeight();
+        //获取View可见区域的bottom
+        Rect rect = new Rect();
+        //DecorView即为activity的顶级view
+        getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
+        //考虑到虚拟导航栏的情况（虚拟导航栏情况下：screenHeight = rect.bottom + 虚拟导航栏高度）
+        //选取screenHeight*2/3进行判断
+        return screenHeight * 2 / 3 > rect.bottom;
+    }
 }

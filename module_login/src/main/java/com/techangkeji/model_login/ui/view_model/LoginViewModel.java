@@ -53,7 +53,9 @@ public class LoginViewModel extends BaseViewModel {
      * author: Andy
      * date: 2019/9/9 0009 17:12
      */
-    public BindingCommand intent2MainActivity = new BindingCommand(() -> ARouter.getInstance().build(ARouterPath.Main.PAGER_MAIN).navigation()
+    public BindingCommand intent2MainActivity = new BindingCommand(() ->
+//            ARouter.getInstance().build(ARouterPath.Main.PAGER_MAIN).navigation()
+            registerHX()
     );
 
 

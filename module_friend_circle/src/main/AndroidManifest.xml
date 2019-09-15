@@ -5,6 +5,7 @@
     <application>
         <activity android:name="com.kcrason.highperformancefriendscircle.FCMainActivity" />
         <activity android:name=".ui.activity.MyStateActivity" />
+        <activity android:name=".ui.activity.PersonCircleStateActivity" />
     </application>
 
 </manifest>

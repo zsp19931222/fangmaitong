@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:binding="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.techangkeji.module_friend_circle.ui.viewModel.FriendStateViewModel" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/srl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+            <ch.ielse.view.imagewatcher.ImageWatcher
+                android:id="@+id/image_watcher"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <com.kcrason.highperformancefriendscircle.widgets.EmojiPanelView
+            android:id="@+id/emoji_panel_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:gravity="bottom" />
+
+        <ImageView
+            android:layout_width="@dimen/d40"
+            android:layout_height="@dimen/d40"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="@dimen/d10"
+            android:src="@mipmap/fbdt"
+            binding:onClickCommand="@{viewModel.releaseCircle}" />
+    </FrameLayout>
+</layout>

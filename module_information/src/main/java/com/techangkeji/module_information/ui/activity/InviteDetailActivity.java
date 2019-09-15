@@ -10,15 +10,15 @@ import com.techangkeji.model_information.BR;
 import com.techangkeji.model_information.R;
 import com.techangkeji.model_information.databinding.ActivityInviteDetailBinding;
 import com.techangkeji.module_information.ui.adapter.InviteDetailAdapter;
+import com.techangkeji.module_information.ui.view_model.InviteDetailViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import me.goldze.mvvmhabit.base.BaseActivity;
-import me.goldze.mvvmhabit.base.BaseViewModel;
 
 @Route(path = ARouterPath.Information.InviteDetailActivity)
-public class InviteDetailActivity extends BaseActivity<ActivityInviteDetailBinding, BaseViewModel> {
+public class InviteDetailActivity extends BaseActivity<ActivityInviteDetailBinding, InviteDetailViewModel> {
 
     @Override
     public int initContentView(Bundle savedInstanceState) {

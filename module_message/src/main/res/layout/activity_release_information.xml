@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:binding="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="me.goldze.mvvmhabit.base.BaseViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d44">
+
+            <com.goldze.base.view.TitleVIew
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                android:layout_width="@dimen/d55"
+                android:layout_height="@dimen/d25"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/d16"
+                android:gravity="center"
+                android:text="发表"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font12"
+                binding:rv_backgroundColor="@color/color_FF8C00"
+                binding:rv_radius="@dimen/d3" />
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/et_ari"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d16"
+            android:background="@null"
+            android:hint="这一刻的想法..."
+            android:textColor="@color/color_dark_333333"
+            android:textColorHint="@color/color_gray_666666"
+            android:textSize="@dimen/font12" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d16"
+            android:text="发布广场信息（所有人可见）"
+            android:textColor="@color/color_gray_666666"
+            android:textSize="@dimen/font12" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/color_f6"/>
+    </LinearLayout>
+</layout>

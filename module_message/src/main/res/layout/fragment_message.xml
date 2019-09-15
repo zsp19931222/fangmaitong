@@ -19,7 +19,8 @@
 
             <RelativeLayout
                 android:layout_width="@dimen/d44"
-                android:layout_height="@dimen/d44">
+                android:layout_height="@dimen/d44"
+                binding:onClickCommand="@{viewModel.bookCommand}">
 
                 <ImageView
                     android:id="@+id/iv_fm_group"
@@ -52,6 +53,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/d40"
+                android:visibility="gone"
                 android:src="@mipmap/search" />
 
             <TextView
@@ -61,9 +63,11 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/d16"
                 android:text="+"
+                android:visibility="gone"
                 android:textColor="@color/color_dark_333333"
                 android:textSize="@dimen/font25" />
         </RelativeLayout>
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_fm"
             android:layout_width="match_parent"

@@ -9,5 +9,4 @@ android {
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'ch.ielse:imagewatcher:1.0.3'
 }

@@ -31,4 +31,5 @@ dependencies {
     api project(':library_res')
     api project(':module_hx_easeui')
     api project(':module_hx_hmspush')
+    api 'ch.ielse:imagewatcher:1.0.3'
 }

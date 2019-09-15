@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="viewModel"
-            type="me.goldze.mvvmhabit.base.BaseViewModel" />
+            type="com.techangkeji.module_information.ui.view_model.InviteDetailViewModel" />
     </data>
 
     <LinearLayout
@@ -40,7 +40,8 @@
                     android:paddingStart="@dimen/d16"
                     android:paddingTop="@dimen/d10"
                     android:paddingEnd="@dimen/d16"
-                    android:paddingBottom="@dimen/d10">
+                    android:paddingBottom="@dimen/d10"
+                    binding:onClickCommand="@{viewModel.circleCommand}">
 
                     <ImageView
                         android:layout_width="@dimen/d70"
@@ -80,8 +81,8 @@
                             android:text="资质认证"
                             android:textColor="@color/white"
                             android:textSize="@dimen/font10"
-                            app:rv_backgroundColor="@color/color_FF8C00"
-                            app:rv_radius="@dimen/d3" />
+                            binding:rv_backgroundColor="@color/color_FF8C00"
+                            binding:rv_radius="@dimen/d3" />
                     </LinearLayout>
                 </LinearLayout>
 

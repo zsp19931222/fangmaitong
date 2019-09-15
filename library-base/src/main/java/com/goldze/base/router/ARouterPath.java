@@ -42,6 +42,7 @@ public class ARouterPath {
         /*用户详情*/
         public static final String MessageFragment = Message + "/MesssageFragment";
         public static final String MapActivity = Message + "/MapActivity";
+        public static final String ReleaseInformationActivity = Message + "/ReleaseInformationActivity";
     }
 
     /**
@@ -74,6 +75,8 @@ public class ARouterPath {
         private static final String FriendCircle = "/FriendCircle";
         public static final String FriendCircleActivity = FriendCircle + "/FriendCircleActivity";
         public static final String MyStateActivity = FriendCircle + "/MyStateActivity";
+        public static final String PersonCircleStateActivity = FriendCircle + "/PersonCircleStateActivity";
+        public static final String FriendCircleFragment = FriendCircle + "/FriendCircleFragment";
     }
     /**
      * 资讯
