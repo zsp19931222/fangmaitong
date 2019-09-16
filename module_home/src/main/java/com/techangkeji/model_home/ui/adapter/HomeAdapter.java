@@ -6,15 +6,19 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.util.MultiTypeDelegate;
+import com.goldze.base.constant.RxBusMessageEventConstants;
+import com.goldze.base.router.ARouterPath;
 import com.techangkeji.model_home.R;
 import com.techangkeji.model_home.ui.bean.HomeAdapterBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import me.goldze.mvvmhabit.bus.RxBus;
 import me.goldze.mvvmhabit.view.MyVerticalDecoration;
 
 /**
@@ -73,6 +77,9 @@ public class HomeAdapter extends BaseQuickAdapter<HomeAdapterBean, BaseViewHolde
         recyclerView.setLayoutManager(new LinearLayoutManager(helper.itemView.getContext()));
         recyclerView.addItemDecoration(new MyVerticalDecoration(helper.itemView.getContext(), ContextCompat.getColor(helper.itemView.getContext(), R.color.color_f6), 1, 0, 0, true));
         recyclerView.setAdapter(HomeResourceRecommendAdapter);
+        helper.getView(R.id.tv_lh_more).setOnClickListener(v -> {
+            RxBus.getDefault().post(RxBusMessageEventConstants.XF);
+        });
     }
 
     private void initFriendRecommend(BaseViewHolder helper) {
@@ -84,6 +91,9 @@ public class HomeAdapter extends BaseQuickAdapter<HomeAdapterBean, BaseViewHolde
         FriendRecommendAdapter friendRecommendAdapter = new FriendRecommendAdapter(R.layout.item_friend_recommend, strings);
         recyclerView.setLayoutManager(new GridLayoutManager(helper.itemView.getContext(), 3));
         recyclerView.setAdapter(friendRecommendAdapter);
+        helper.getView(R.id.tv_lh_more).setOnClickListener(v -> {
+            ARouter.getInstance().build(ARouterPath.Message.AddContactActivity).navigation();
+        });
     }
 
     private void initRecruitment(BaseViewHolder helper) {
@@ -96,6 +106,9 @@ public class HomeAdapter extends BaseQuickAdapter<HomeAdapterBean, BaseViewHolde
         recyclerView.setLayoutManager(new LinearLayoutManager(helper.itemView.getContext()));
         recyclerView.addItemDecoration(new MyVerticalDecoration(helper.itemView.getContext(), ContextCompat.getColor(helper.itemView.getContext(), R.color.color_f6), 1, 0, 0, true));
         recyclerView.setAdapter(recruitmentAdapter);
+        helper.getView(R.id.tv_lh_more).setOnClickListener(v -> {
+            RxBus.getDefault().post(RxBusMessageEventConstants.ZPXX);
+        });
     }
 
     private void initNewInformation(BaseViewHolder helper) {
@@ -108,5 +121,8 @@ public class HomeAdapter extends BaseQuickAdapter<HomeAdapterBean, BaseViewHolde
         recyclerView.setLayoutManager(new LinearLayoutManager(helper.itemView.getContext()));
         recyclerView.addItemDecoration(new MyVerticalDecoration(helper.itemView.getContext(), ContextCompat.getColor(helper.itemView.getContext(), R.color.color_f6), 1, 0, 0, true));
         recyclerView.setAdapter(informationAdapter);
+        helper.getView(R.id.tv_lh_more).setOnClickListener(v -> {
+            RxBus.getDefault().post(RxBusMessageEventConstants.ZXZX);
+        });
     }
 }

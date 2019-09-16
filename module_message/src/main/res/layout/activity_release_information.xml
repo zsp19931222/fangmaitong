@@ -50,6 +50,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"
+            android:paddingStart="@dimen/d11"
+            android:paddingEnd="@dimen/d16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

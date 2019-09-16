@@ -46,7 +46,7 @@ public class TipsConstants {
     public final static String CANCEL = "取消";
 
     //验证码相关
-    public static final String SEND_AUTH_CODE = "发送验证码";
+    public static final String SEND_AUTH_CODE = "获取验证码";
 
     //第三方登录绑定相关
     public static final String OTHER_BIND_FAIL_QQ = "QQ绑定失败";

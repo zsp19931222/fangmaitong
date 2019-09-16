@@ -7,9 +7,11 @@ import android.widget.TextView;
 import com.techangkeji.model_mine.R;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import me.goldze.mvvmhabit.utils.IsNullUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
 import razerdp.basepopup.BasePopupWindow;
 import top.defaults.view.DateTimePickerView;
@@ -21,6 +23,7 @@ import top.defaults.view.DateTimePickerView;
  */
 public class TimePickerPopupwindow extends BasePopupWindow {
     private String dateString;
+    private Date date;
 
     public TimePickerPopupwindow(Context context) {
         super(context);
@@ -34,12 +37,18 @@ public class TimePickerPopupwindow extends BasePopupWindow {
             int year = date.get(Calendar.YEAR);
             int month = date.get(Calendar.MONTH);
             int dayOfMonth = date.get(Calendar.DAY_OF_MONTH);
+            this.date=date.getTime();
             dateString = String.format(Locale.getDefault(), "%d-%02d-%02d", year, month + 1, dayOfMonth);
             ZLog.d(dateString);
         });
         tv_cancel.setOnClickListener(view -> dismiss());
         tv_confirm.setOnClickListener(view -> {
-            onSelectTimeListener.time(dateString);
+            if (!IsNullUtil.getInstance().isEmpty(onSelectTimeListener)){
+                onSelectTimeListener.time(dateString);
+            }
+            if (!IsNullUtil.getInstance().isEmpty(onSelectDateListener)){
+                onSelectDateListener.date(date);
+            }
             dismiss();
         });
     }
@@ -59,4 +68,13 @@ public class TimePickerPopupwindow extends BasePopupWindow {
 
     public OnSelectTimeListener onSelectTimeListener;
 
+
+    public interface OnSelectDateListener{
+        void date(Date date);
+    }
+    public OnSelectDateListener onSelectDateListener;
+
+    public void setOnSelectDateListener(OnSelectDateListener onSelectDateListener) {
+        this.onSelectDateListener = onSelectDateListener;
+    }
 }

@@ -15,9 +15,25 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/title"
-            layout="@layout/title" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d44">
+
+            <com.goldze.base.view.TitleVIew
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d44" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/d16"
+                android:text="完成"
+                android:textColor="@color/color_dark_333333"
+                android:textSize="@dimen/font16" />
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

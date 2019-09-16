@@ -4,20 +4,16 @@ import android.os.Bundle;
 
 import com.techangkeji.model_home.BR;
 import com.techangkeji.model_home.R;
-import com.techangkeji.model_home.databinding.ActivityHousePledgeBinding;
+import com.techangkeji.model_home.databinding.ActivityHouseMortgagePledgeBinding;
+import com.techangkeji.model_home.databinding.ActivityMortgagePledgeBinding;
 
 import me.goldze.mvvmhabit.base.BaseActivity;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 
-/**
- * description:房贷抵押贷款
- * author:created by Andy on 2019/9/16 0016 18:10
- * email:zsp872126510@gmail.com
- */
-public class HousePledgeActivity extends BaseActivity<ActivityHousePledgeBinding, BaseViewModel> {
+public class HouseMortgagePledgeActivity extends BaseActivity<ActivityHouseMortgagePledgeBinding, BaseViewModel> {
     @Override
     public int initContentView(Bundle savedInstanceState) {
-        return R.layout.activity_house_pledge;
+        return R.layout.activity_house_mortgage_pledge;
     }
 
     @Override
@@ -27,6 +23,6 @@ public class HousePledgeActivity extends BaseActivity<ActivityHousePledgeBinding
 
     @Override
     public void initData() {
-    binding.title.setTitle("房产抵押贷款");
+        binding.title.setTitle("住房按揭贷");
     }
 }

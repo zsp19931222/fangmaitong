@@ -2,6 +2,8 @@ package me.goldze.mvvmhabit.http.net;
 
 import android.annotation.SuppressLint;
 
+import com.blankj.utilcode.util.SPUtils;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -17,15 +19,22 @@ import okhttp3.ResponseBody;
  * author: Andy
  * date: 2019/9/9 0009 16:13
  */
-public class LoggingInterceptor implements Interceptor {
+public class MyLoggingInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         //这个chain里面包含了request和response，所以你要什么都可以从这里拿
         Request request = chain.request();
-
         //从request中获取原有的HttpUrl实例oldHttpUrl
         HttpUrl oldHttpUrl = request.url();
-        Request.Builder builder = request.newBuilder();
+        String token;
+        try {
+            token = SPUtils.getInstance().getString("token");
+//            token = SqLiteHelper.getInstance().rawQuery("select * from authentication").get(0).get("token");
+        } catch (Exception e) {
+            token = "";
+        }
+        ZLog.d("token", token);
+        Request.Builder builder = request.newBuilder().addHeader("token", token);
         //从request中获取headers，通过给定的键url_name
         List<String> headerValues = request.headers("url_name");
         if (headerValues != null && headerValues.size() > 0) {

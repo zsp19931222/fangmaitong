@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/iv_iri"
+    android:layout_width="match_parent"
+    android:layout_marginStart="@dimen/d5"
+    android:layout_height="@dimen/d85"
+    android:orientation="vertical" />

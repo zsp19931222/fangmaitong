@@ -12,6 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <com.goldze.base.view.TitleVIew
@@ -33,15 +34,16 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/white"
                     android:orientation="horizontal"
                     android:padding="@dimen/d16">
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        binding:onClickCommand="@{viewModel.housePledgeCommand}"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        binding:onClickCommand="@{viewModel.housePledgeCommand}">
 
                         <ImageView
                             android:layout_width="@dimen/d52"
@@ -101,10 +103,13 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
+
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/d14"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        binding:onClickCommand="@{viewModel.mortgagePledgeCommand}">
 
                         <ImageView
                             android:layout_width="@dimen/d52"
@@ -172,9 +177,12 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
+
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        binding:onClickCommand="@{viewModel.houseMortgagePledgeCommand}">
 
                         <ImageView
                             android:layout_width="@dimen/d52"
@@ -235,9 +243,12 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+
                         android:layout_marginStart="@dimen/d14"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        binding:onClickCommand="@{viewModel.auctionCommand}">
 
                         <ImageView
                             android:layout_width="@dimen/d52"
@@ -306,8 +317,11 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        binding:onClickCommand="@{viewModel.creditCommand}">
 
                         <ImageView
                             android:layout_width="@dimen/d52"

@@ -34,11 +34,14 @@ public class IdeaApi {
     private IdeaApi() {
         File cacheFile = new File(BaseApplication.getInstance().getCacheDir(), "cache");
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 100); //100Mb
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
 
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .readTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
-                .addInterceptor(new LoggingInterceptor())
+                .addInterceptor(loggingInterceptor)
+                .addInterceptor(new MyLoggingInterceptor())
                 .addNetworkInterceptor(new HttpCacheInterceptor())
                 .cache(cache)
                 .build();

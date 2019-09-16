@@ -19,4 +19,9 @@ public class ChangeNickNameActivity extends BaseActivity<ActivityChangeNickNameB
     public int initVariableId() {
         return BR.viewModel;
     }
+
+    @Override
+    public void initData() {
+    binding.title.setTitle("修改昵称");
+    }
 }

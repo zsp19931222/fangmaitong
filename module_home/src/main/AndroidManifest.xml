@@ -7,6 +7,10 @@
         <activity android:name=".ui.activity.InformActivity" />
         <activity android:name=".ui.activity.HousingInformationActivity" />
         <activity android:name=".ui.activity.HousePledgeActivity" />
+        <activity android:name=".ui.activity.MortgagePledgeActivity" />
+        <activity android:name=".ui.activity.HouseMortgagePledgeActivity" />
+        <activity android:name=".ui.activity.CreditActivity" />
+        <activity android:name=".ui.activity.AuctionActivity" />
     </application>
 
 </manifest>
