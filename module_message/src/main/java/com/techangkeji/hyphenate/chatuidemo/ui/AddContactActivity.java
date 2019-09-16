@@ -23,11 +23,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.goldze.base.router.ARouterPath;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.widget.EaseAlertDialog;
 import com.techangkeji.hyphenate.chatuidemo.DemoHelper;
 import com.techangkeji.model_message.R;
-
+@Route(path = ARouterPath.Message.AddContactActivity)
 public class AddContactActivity extends BaseActivity{
 	private EditText editText;
 	private RelativeLayout searchedUserLayout;

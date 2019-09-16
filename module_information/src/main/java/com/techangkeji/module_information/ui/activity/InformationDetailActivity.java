@@ -6,6 +6,8 @@ import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.goldze.base.router.ARouterPath;
 import com.goldze.base.utils.SimulationData;
 import com.techangkeji.model_information.BR;
 import com.techangkeji.model_information.R;
@@ -15,6 +17,7 @@ import com.techangkeji.module_information.ui.adapter.InformationDetailAdapter;
 import me.goldze.mvvmhabit.base.BaseActivity;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 
+@Route(path = ARouterPath.Information.InformationDetailActivity)
 public class InformationDetailActivity extends BaseActivity<ActivityInfromationDetailBinding, BaseViewModel> {
     @Override
     public int initContentView(Bundle savedInstanceState) {

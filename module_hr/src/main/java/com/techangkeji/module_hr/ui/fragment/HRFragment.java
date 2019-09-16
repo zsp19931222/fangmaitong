@@ -13,6 +13,7 @@ import com.techangkeji.module_hr.BR;
 import com.techangkeji.module_hr.R;
 import com.techangkeji.module_hr.databinding.FragmentHrBinding;
 import com.techangkeji.module_hr.ui.adapter.HRAdapter;
+import com.techangkeji.module_hr.ui.popup.AreaPopupwindow;
 import com.techangkeji.module_hr.ui.view_model.HRViewModel;
 
 import java.util.ArrayList;

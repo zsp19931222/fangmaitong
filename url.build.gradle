@@ -33,22 +33,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField("String", "WECHAT_APP_ID", "\"wx7bfeb2862235ac4f\"")
             buildConfigField("String", "WECHAT_APP_SECRET", "\"e85b1b987847822193c436356bd036fc\"")
-            buildConfigField("String", "QQ_APP_ID", "\"1107813498\"")
-            buildConfigField("String", "QQ_APP_KEY", "\"OAhKuj8qF3mqWmo0\"")
+            buildConfigField("String", "QQ_APP_ID", "\"1109888984\"")
+            buildConfigField("String", "QQ_APP_KEY", "\"Q8WY8W70Mx3elOj7\"")
             buildConfigField("String", "WEB_APP_KEY", "\"689150989\"")
             buildConfigField("String", "WEB_APP_SECRET", "\"9aa04099decfe1878cd99369b368447d\"")
-            buildConfigField("String", "UMENG_APP_KEY", "\"5d43cf8a4ca357c7450007b8\"")
+            buildConfigField("String", "UMENG_APP_KEY", "\"5d7efc860cafb29e7f000de9\"")
         }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField("String", "WECHAT_APP_ID", "\"wx7bfeb2862235ac4f\"")
             buildConfigField("String", "WECHAT_APP_SECRET", "\"e85b1b987847822193c436356bd036fc\"")
-            buildConfigField("String", "QQ_APP_ID", "\"1107813498\"")
-            buildConfigField("String", "QQ_APP_KEY", "\"OAhKuj8qF3mqWmo0\"")
+            buildConfigField("String", "QQ_APP_ID", "\"1109888984\"")
+            buildConfigField("String", "QQ_APP_KEY", "\"Q8WY8W70Mx3elOj7\"")
             buildConfigField("String", "WEB_APP_KEY", "\"689150989\"")
             buildConfigField("String", "WEB_APP_SECRET", "\"9aa04099decfe1878cd99369b368447d\"")
-            buildConfigField("String", "UMENG_APP_KEY", "\"5d43cf8a4ca357c7450007b8\"")
+            buildConfigField("String", "UMENG_APP_KEY", "\"5d7efc860cafb29e7f000de9\"")
         }
     }
 }

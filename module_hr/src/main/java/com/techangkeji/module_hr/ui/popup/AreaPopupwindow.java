@@ -35,6 +35,7 @@ public class AreaPopupwindow extends BasePopupWindow {
     }
 
     private void init(Context context) {
+        setPopupWindowFullScreen(false);
         setBackgroundColor(Color.parseColor("#00000000"));
         rv_pa_1 = findViewById(R.id.rv_pa_1);
         rv_pa_2 = findViewById(R.id.rv_pa_2);

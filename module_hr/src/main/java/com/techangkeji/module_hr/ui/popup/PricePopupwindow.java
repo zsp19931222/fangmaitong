@@ -45,6 +45,7 @@ public class PricePopupwindow extends BasePopupWindow {
     }
 
     private void init(Context context) {
+        setPopupWindowFullScreen(false);
         setBackgroundColor(Color.parseColor("#00000000"));
         rv = findViewById(R.id.rv_pp);
         v_pa = findViewById(R.id.v_fill);

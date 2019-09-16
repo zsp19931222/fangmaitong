@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/d8"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="特色标签"
+            android:layout_marginTop="@dimen/d8"
+            android:textColor="@color/color_dark_333333"
+            android:textSize="@dimen/font12" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_pf1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_marginTop="@dimen/d8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/d8"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="装修"
+            android:textColor="@color/color_dark_333333"
+            android:textSize="@dimen/font12" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_pf2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_marginTop="@dimen/d8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/d8"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="开盘时间"
+            android:textColor="@color/color_dark_333333"
+            android:textSize="@dimen/font12" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_pf3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4" />
+    </LinearLayout>
+    <include layout="@layout/view_fill"/>
+</LinearLayout>

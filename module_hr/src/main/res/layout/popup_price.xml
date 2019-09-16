@@ -9,12 +9,14 @@
         android:id="@+id/rv_pp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:overScrollMode="never" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/d35"
         android:gravity="center_vertical"
+        android:background="@color/white"
         android:orientation="horizontal"
         android:paddingStart="@dimen/d26"
         android:paddingEnd="@dimen/d26">

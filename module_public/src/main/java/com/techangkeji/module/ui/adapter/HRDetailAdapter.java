@@ -2,6 +2,7 @@ package com.techangkeji.module.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -15,6 +16,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.util.MultiTypeDelegate;
 import com.goldze.base.router.ARouterPath;
 import com.goldze.base.utils.BannerSetting;
+import com.goldze.base.utils.ShareUtil;
 import com.techangkeji.module.R;
 import com.techangkeji.module.ui.activity.CommentActivity;
 import com.techangkeji.module.ui.activity.HouseSizeActivity;
@@ -65,6 +67,9 @@ public class HRDetailAdapter extends BaseQuickAdapter<HRDetailAdapterBean, BaseV
                     images.add("https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=508387608,2848974022&fm=26&gp=0.jpg");
                 }
                 BannerSetting.getInstance().setBanner(context, banner, images);
+                helper.getView(R.id.tv_hrd_inform).setOnClickListener(view -> {
+                    ARouter.getInstance().build(ARouterPath.Home.InformActivity).navigation();
+                });
                 break;
             case HRDetailAdapterBean.Notice:
                 break;

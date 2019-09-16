@@ -3,6 +3,10 @@
     package="com.techangkeji.model_home">
 
     <application>
+        <activity android:name=".ui.InformActivity" />
+        <activity android:name=".ui.activity.InformActivity" />
+        <activity android:name=".ui.activity.HousingInformationActivity" />
+        <activity android:name=".ui.activity.HousePledgeActivity" />
     </application>
 
 </manifest>

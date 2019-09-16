@@ -3,6 +3,7 @@
     package="com.techangkeji.module_launcher">
 
     <application>
-        <activity android:name=".LauncherActivity" />
+        <activity android:name=".LauncherActivity"
+            android:theme="@style/SplashTheme"/>
     </application>
 </manifest>

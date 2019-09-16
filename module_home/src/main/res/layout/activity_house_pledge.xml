@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:binding="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="me.goldze.mvvmhabit.base.BaseViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.goldze.base.view.TitleVIew
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d44" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <View style="@style/ViewLineStyle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/d16">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="定义："
+                        android:textColor="@color/color_dark_333333"
+                        android:textSize="@dimen/font12" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="以房产作为抵押物，通过委托房脉通向银行申请贷款抵押，抵押后仍然可正常使用或出租。"
+                        android:textColor="@color/color_gray_666666"
+                        android:textSize="@dimen/font12" />
+                </LinearLayout>
+
+                <View style="@style/ViewLineStyle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/d16">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="针对人群："
+                        android:textColor="@color/color_dark_333333"
+                        android:textSize="@dimen/font12" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="房产在手，抵押中的房产均可"
+                        android:textColor="@color/color_gray_666666"
+                        android:textSize="@dimen/font12" />
+                </LinearLayout>
+
+                <View style="@style/ViewLineStyle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/d16">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="额度："
+                        android:textColor="@color/color_dark_333333"
+                        android:textSize="@dimen/font12" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="5-5000万"
+                        android:textColor="@color/color_gray_666666"
+                        android:textSize="@dimen/font12" />
+                </LinearLayout>
+
+                <View style="@style/ViewLineStyle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/d16">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="利率："
+                        android:textColor="@color/color_dark_333333"
+                        android:textSize="@dimen/font12" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="0.36%-0.6%"
+                        android:textColor="@color/color_gray_666666"
+                        android:textSize="@dimen/font12" />
+                </LinearLayout>
+
+                <View style="@style/ViewLineStyle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/d16">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="期限："
+                        android:textColor="@color/color_dark_333333"
+                        android:textSize="@dimen/font12" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="1-30年"
+                        android:textColor="@color/color_gray_666666"
+                        android:textSize="@dimen/font12" />
+                </LinearLayout>
+
+                <View style="@style/ViewLineStyle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/d16">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="还款："
+                        android:textColor="@color/color_dark_333333"
+                        android:textSize="@dimen/font12" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="等额本息、先息后本"
+                        android:textColor="@color/color_gray_666666"
+                        android:textSize="@dimen/font12" />
+                </LinearLayout>
+
+                <View style="@style/ViewLineStyle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/d16">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="申请条件："
+                        android:textColor="@color/color_dark_333333"
+                        android:textSize="@dimen/font12" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="1、年龄18-80周岁\n2、普通住宅、别墅、商铺、办公楼、厂房均可操作；"
+                        android:textColor="@color/color_gray_666666"
+                        android:textSize="@dimen/font12" />
+                </LinearLayout>
+
+                <View style="@style/ViewLineStyle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/d16">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="准备资料："
+                        android:textColor="@color/color_dark_333333"
+                        android:textSize="@dimen/font12" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="身份证、房产证"
+                        android:textColor="@color/color_gray_666666"
+                        android:textSize="@dimen/font12" />
+                </LinearLayout>
+
+                <View style="@style/ViewLineStyle5dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d33"
+                    android:gravity="center"
+                    android:text="只需三步，轻松贷款"
+                    android:textColor="@color/color_dark_333333"
+                    android:textSize="@dimen/font12" />
+
+                <ImageView
+                    android:layout_width="@dimen/d38"
+                    android:layout_height="@dimen/d35"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/d37" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d10"
+                    android:gravity="center"
+                    android:text="贷款在线咨询"
+                    android:textColor="@color/color_dark_333333"
+                    android:textSize="@dimen/font15" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d5"
+                    android:gravity="center"
+                    android:text="电话/上门咨询"
+                    android:textColor="@color/color_gray_666666"
+                    android:textSize="@dimen/font12" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d10"
+                    android:gravity="center"
+                    android:text="01"
+                    android:textColor="@color/color_FF8C00"
+                    android:textSize="@dimen/font12" />
+
+                <ImageView
+                    android:layout_width="@dimen/d18"
+                    android:layout_height="@dimen/d10"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/xyb" />
+
+                <ImageView
+                    android:layout_width="@dimen/d38"
+                    android:layout_height="@dimen/d35"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/d10" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d10"
+                    android:gravity="center"
+                    android:text="贷款委托办理"
+                    android:textColor="@color/color_dark_333333"
+                    android:textSize="@dimen/font15" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d5"
+                    android:gravity="center"
+                    android:text="担保银行通过审批"
+                    android:textColor="@color/color_gray_666666"
+                    android:textSize="@dimen/font12" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d10"
+                    android:gravity="center"
+                    android:text="02"
+                    android:textColor="@color/color_FF8C00"
+                    android:textSize="@dimen/font12" />
+
+                <ImageView
+                    android:layout_width="@dimen/d18"
+                    android:layout_height="@dimen/d10"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/xyb" />
+
+                <ImageView
+                    android:layout_width="@dimen/d38"
+                    android:layout_height="@dimen/d35"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/d10" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d10"
+                    android:gravity="center"
+                    android:text="成功放贷"
+                    android:textColor="@color/color_dark_333333"
+                    android:textSize="@dimen/font15" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d5"
+                    android:gravity="center"
+                    android:text="协助贷后管理"
+                    android:textColor="@color/color_gray_666666"
+                    android:textSize="@dimen/font12" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/d10"
+                    android:gravity="center"
+                    android:text="03"
+                    android:textColor="@color/color_FF8C00"
+                    android:textSize="@dimen/font12" />
+
+                <View
+                    style="@style/ViewLineStyle"
+                    android:layout_marginTop="@dimen/d35" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/d45"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="拨打电话  15618515637"
+                        android:textColor="@color/color_dark_333333"
+                        android:textSize="@dimen/font12" />
+
+                    <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                        android:layout_width="@dimen/d60"
+                        android:layout_height="@dimen/d20"
+                        android:layout_marginStart="@dimen/d24"
+                        android:gravity="center"
+                        android:text="在线咨询"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font10"
+                        binding:rv_backgroundColor="@color/color_FF8C00"
+                        binding:rv_radius="@dimen/d15" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>

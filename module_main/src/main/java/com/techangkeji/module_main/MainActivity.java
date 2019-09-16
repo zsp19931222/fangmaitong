@@ -18,6 +18,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.goldze.base.constant.RxBusMessageEventConstants;
 import com.goldze.base.router.ARouterPath;
 import com.hyphenate.EMClientListener;
 import com.hyphenate.EMContactListener;
@@ -40,6 +41,7 @@ import me.goldze.mvvmhabit.base.AppManager;
 import me.goldze.mvvmhabit.base.BaseActivity;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.bus.RxBus;
+import me.goldze.mvvmhabit.bus.RxSubscriptions;
 import me.goldze.mvvmhabit.utils.ToastUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
 
@@ -68,6 +70,17 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewMode
         fragmentManager = getSupportFragmentManager();
         binding.mainTgv.setOnItemClickListener(this);
         initHome();
+        RxSubscriptions.add(RxBus.getDefault().toObservable(String.class).subscribe(s -> {
+            if (RxBusMessageEventConstants.XF.equals(s)) {
+                initHomeResource();
+            } else if (RxBusMessageEventConstants.ZXZX.equals(s)) {
+                initInformation();
+                RxBus.getDefault().post(new RxBusMessageEventConstants.InformationRxMessage(0));
+            }else if (RxBusMessageEventConstants.ZPXX.equals(s)){
+                initInformation();
+                RxBus.getDefault().post(new RxBusMessageEventConstants.InformationRxMessage(1));
+            }
+        }));
     }
 
     @Override
@@ -222,7 +235,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewMode
     }
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -354,6 +366,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewMode
      */
     //记录用户首次点击返回键的时间
     private long firstTime = 0;
+
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         ZLog.d(event.getKeyCode());

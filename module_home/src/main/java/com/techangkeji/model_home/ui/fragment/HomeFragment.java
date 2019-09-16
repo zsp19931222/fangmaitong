@@ -21,6 +21,7 @@ import com.techangkeji.model_home.ui.adapter.GridAdapter;
 import com.techangkeji.model_home.ui.adapter.HomeAdapter;
 import com.techangkeji.model_home.ui.adapter.LabelAdapter;
 import com.techangkeji.model_home.ui.bean.HomeAdapterBean;
+import com.techangkeji.model_home.ui.bean.HomeGridViewBean;
 import com.techangkeji.model_home.ui.utils.BannerSetting;
 import com.techangkeji.model_home.ui.view_midel.HomeViewModel;
 
@@ -44,7 +45,6 @@ public class HomeFragment extends BaseLazyFragment<FragmentHomeBinding, HomeView
     private RecyclerView rv_hh_label, rv_hh_gridview;
     private ConvenientBanner banner;
     private ViewFlipper vf_hh_notice;
-    private TextView tv_hh_notice;
     private List<HomeAdapterBean> homeAdapterBeans = new ArrayList<>();
     private HomeAdapter homeAdapter;
 
@@ -111,7 +111,6 @@ public class HomeFragment extends BaseLazyFragment<FragmentHomeBinding, HomeView
         rv_hh_gridview = header.findViewById(R.id.rv_hh_gridview);
         banner = header.findViewById(R.id.banner);
         vf_hh_notice = header.findViewById(R.id.vf_hh_notice);
-        tv_hh_notice = header.findViewById(R.id.tv_hh_notice);
         initLabel();
         initBanner();
         initGrid();
@@ -128,7 +127,7 @@ public class HomeFragment extends BaseLazyFragment<FragmentHomeBinding, HomeView
         rv_hh_label.setAdapter(labelAdapter);
     }
 
-    private void initBanner(){
+    private void initBanner() {
         List<Object> images = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             images.add("https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=508387608,2848974022&fm=26&gp=0.jpg");
@@ -136,17 +135,31 @@ public class HomeFragment extends BaseLazyFragment<FragmentHomeBinding, HomeView
         BannerSetting.getInstance().setBanner(getContext(), banner, images);
     }
 
-    private void initGrid(){
-        List<String> strings = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            strings.add("");
-        }
-        GridAdapter labelAdapter = new GridAdapter(R.layout.item_grid, strings);
+    private void initGrid() {
+        List<HomeGridViewBean> homeGridViewBeans = new ArrayList<>();
+        homeGridViewBeans.add(new HomeGridViewBean(R.mipmap.xf, "新房"));
+        homeGridViewBeans.add(new HomeGridViewBean(R.mipmap.sydc, "商业地产"));
+        homeGridViewBeans.add(new HomeGridViewBean(R.mipmap.dtzf, "地图找房"));
+        homeGridViewBeans.add(new HomeGridViewBean(R.mipmap.zxzx, "最新资讯"));
+        homeGridViewBeans.add(new HomeGridViewBean(R.mipmap.zpxx, "招聘信息"));
+        homeGridViewBeans.add(new HomeGridViewBean(R.mipmap.xsrm, "新手入门"));
+        homeGridViewBeans.add(new HomeGridViewBean(R.mipmap.rmjw, "人脉交友"));
+        homeGridViewBeans.add(new HomeGridViewBean(R.mipmap.fdzx, "房贷资讯"));
+        GridAdapter labelAdapter = new GridAdapter(R.layout.item_grid, homeGridViewBeans);
         rv_hh_gridview.setLayoutManager(new GridLayoutManager(getContext(), 4));
         rv_hh_gridview.setAdapter(labelAdapter);
     }
 
-    private void initViewFlipper(){
-        vf_hh_notice.startFlipping();
+    private void initViewFlipper() {
+        List<String> strings = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            strings.add("资讯" + i);
+        }
+        for (int i = 0; i < strings.size(); i++) {
+            final View ll_content = View.inflate(getContext(), R.layout.item_flipper, null);
+            TextView tv_content = ll_content.findViewById(R.id.bus_notice_text);
+            tv_content.setText(strings.get(i));
+            vf_hh_notice.addView(ll_content);
+        }
     }
 }

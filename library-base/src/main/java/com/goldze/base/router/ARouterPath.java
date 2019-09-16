@@ -12,7 +12,6 @@ public class ARouterPath {
      */
     public static class Main {
         private static final String MAIN = "/main";
-        /*主业务界面*/
         public static final String PAGER_MAIN = MAIN + "/MainActivity";
     }
 
@@ -21,7 +20,6 @@ public class ARouterPath {
      */
     public static class Login {
         private static final String Login = "/Login";
-        /*登录界面*/
         public static final String LoginActivity = Login + "/LoginActivity";
     }
 
@@ -30,8 +28,9 @@ public class ARouterPath {
      */
     public static class Home {
         private static final String Home = "/Home";
-        /*登录界面*/
         public static final String HomeFragment = Home + "/HomeFragment";
+        public static final String InformActivity = Home + "/InformActivity";
+        public static final String HousingInformationActivity = Home + "/HousingInformationActivity";
     }
 
     /**
@@ -39,10 +38,10 @@ public class ARouterPath {
      */
     public static class Message {
         private static final String Message = "/Message";
-        /*用户详情*/
         public static final String MessageFragment = Message + "/MesssageFragment";
         public static final String MapActivity = Message + "/MapActivity";
         public static final String ReleaseInformationActivity = Message + "/ReleaseInformationActivity";
+        public static final String AddContactActivity = Message + "/AddContactActivity";
     }
 
     /**
@@ -77,6 +76,7 @@ public class ARouterPath {
         public static final String MyStateActivity = FriendCircle + "/MyStateActivity";
         public static final String PersonCircleStateActivity = FriendCircle + "/PersonCircleStateActivity";
         public static final String FriendCircleFragment = FriendCircle + "/FriendCircleFragment";
+        public static final String CardActivity = FriendCircle + "/CardActivity";
     }
     /**
      * 资讯
@@ -85,5 +85,6 @@ public class ARouterPath {
         private static final String Information = "/Information";
         public static final String InviteDetailActivity = Information + "/InviteDetailActivity";
         public static final String InformationMainFragment = Information + "/InformationMainFragment";
+        public static final String InformationDetailActivity = Information + "/InformationDetailActivity";
     }
 }

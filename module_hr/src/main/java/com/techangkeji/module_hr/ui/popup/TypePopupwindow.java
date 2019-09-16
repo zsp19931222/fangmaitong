@@ -36,6 +36,7 @@ public class TypePopupwindow extends BasePopupWindow {
     }
 
     private void init(Context context) {
+        setPopupWindowFullScreen(false);
         setBackgroundColor(Color.parseColor("#00000000"));
         rv = findViewById(R.id.rv_it);
         v_pa = findViewById(R.id.v_fill);
@@ -47,11 +48,8 @@ public class TypePopupwindow extends BasePopupWindow {
     private void initAdapter() {
         List<String> strings = new ArrayList<>();
         strings.add("不限");
-        strings.add("100-200万");
-        strings.add("200-300万");
-        strings.add("300-400万");
-        strings.add("400-500万");
-        strings.add("500万以上");
+        strings.add("住宅");
+        strings.add("别墅");
         adapter = new TypeAdapter(R.layout.item_area, strings);
         rv.setLayoutManager(new LinearLayoutManager(context));
         rv.addItemDecoration(new MyVerticalDecoration(context, ContextCompat.getColor(context, R.color.color_f6), 1, 0, 0, true));

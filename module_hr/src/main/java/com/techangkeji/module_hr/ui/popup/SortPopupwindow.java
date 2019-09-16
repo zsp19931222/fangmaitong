@@ -35,6 +35,7 @@ public class SortPopupwindow extends BasePopupWindow {
     }
 
     private void init(Context context) {
+        setPopupWindowFullScreen(false);
         setBackgroundColor(Color.parseColor("#00000000"));
         rv = findViewById(R.id.rv_it);
         v_pa = findViewById(R.id.v_fill);
@@ -45,9 +46,13 @@ public class SortPopupwindow extends BasePopupWindow {
 
     private void initAdapter() {
         List<String> strings = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            strings.add("");
-        }
+        strings.add("默认排序");
+        strings.add("距离最近");
+        strings.add("人气最高");
+        strings.add("均价从高到低");
+        strings.add("均价从低到高");
+        strings.add("开盘时间从近到远");
+        strings.add("开盘时间从远到近");
         adapter = new SortAdapter(R.layout.item_area, strings);
         rv.setLayoutManager(new LinearLayoutManager(context));
         rv.addItemDecoration(new MyVerticalDecoration(context, ContextCompat.getColor(context, R.color.color_f6), 1, 0, 0, true));

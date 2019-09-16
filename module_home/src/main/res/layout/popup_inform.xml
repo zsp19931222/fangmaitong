@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/d200"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_pi1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d30"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/d15"
+        android:text="虚假楼盘信息"
+        android:textColor="@color/color_dark_333333"
+        android:textSize="@dimen/font12" />
+
+    <View style="@style/ViewLineStyle" />
+
+    <TextView
+        android:id="@+id/tv_pi2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d30"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/d15"
+        android:text="发布人不是此楼盘的总代"
+        android:textColor="@color/color_dark_333333"
+        android:textSize="@dimen/font12" />
+
+    <View style="@style/ViewLineStyle" />
+
+    <TextView
+        android:id="@+id/tv_pi3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d30"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/d15"
+        android:text="此账号可能被盗用了"
+        android:textColor="@color/color_dark_333333"
+        android:textSize="@dimen/font12" />
+
+    <View style="@style/ViewLineStyle" />
+
+    <TextView
+        android:id="@+id/tv_pi4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d30"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/d15"
+        android:text="存在欺诈行为"
+        android:textColor="@color/color_dark_333333"
+        android:textSize="@dimen/font12" />
+
+    <View style="@style/ViewLineStyle" />
+
+    <TextView
+        android:id="@+id/tv_pi5"
+
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d30"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/d15"
+        android:text="发布的信息存在敏感信息"
+        android:textColor="@color/color_dark_333333"
+        android:textSize="@dimen/font12" />
+
+    <View style="@style/ViewLineStyle" />
+
+    <TextView
+        android:id="@+id/tv_pi6"
+
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d30"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/d15"
+        android:text="存在侵权行为"
+        android:textColor="@color/color_dark_333333"
+        android:textSize="@dimen/font12" />
+
+</LinearLayout>

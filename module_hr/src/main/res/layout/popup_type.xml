@@ -5,8 +5,10 @@
     android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
         android:id="@+id/rv_it"
-        android:layout_height="wrap_content" />
-  <include layout="@layout/view_fill"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white" />
+
+    <include layout="@layout/view_fill" />
 </LinearLayout>

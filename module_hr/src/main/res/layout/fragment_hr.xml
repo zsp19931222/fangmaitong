@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout     xmlns:binding="http://schemas.android.com/apk/res-auto"
-    >
+<layout xmlns:binding="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.techangkeji.module_hr.ui.view_model.HRViewModel" />
@@ -15,21 +16,23 @@
 
         <include layout="@layout/view_location" />
 
-        <View style="@style/ViewLineStyle" />
+        <View
+            android:id="@+id/cut_line"
+            style="@style/ViewLineStyle" />
 
         <LinearLayout
+            android:id="@+id/ll_fh_choice"
             android:layout_width="match_parent"
             android:layout_height="@dimen/d35"
-            android:id="@+id/ll_fh_choice"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                binding:onClickCommand="@{viewModel.area}"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                binding:onClickCommand="@{viewModel.area}">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -43,17 +46,17 @@
                 <View
                     android:layout_width="@dimen/d30"
                     android:layout_height="@dimen/d3"
-                    android:visibility="@{viewModel.areaShow}"
-                    android:background="@color/color_FF8C00" />
+                    android:background="@color/color_FF8C00"
+                    android:visibility="@{viewModel.areaShow}" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                binding:onClickCommand="@{viewModel.type}"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                binding:onClickCommand="@{viewModel.type}">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -67,8 +70,8 @@
                 <View
                     android:layout_width="@dimen/d30"
                     android:layout_height="@dimen/d3"
-                    android:visibility="@{viewModel.typeShow}"
-                    android:background="@color/color_FF8C00" />
+                    android:background="@color/color_FF8C00"
+                    android:visibility="@{viewModel.typeShow}" />
             </LinearLayout>
 
             <LinearLayout
@@ -76,8 +79,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                binding:onClickCommand="@{viewModel.price}"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                binding:onClickCommand="@{viewModel.price}">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -91,8 +94,8 @@
                 <View
                     android:layout_width="@dimen/d30"
                     android:layout_height="@dimen/d3"
-                    android:visibility="@{viewModel.priceShow}"
-                    android:background="@color/color_FF8C00" />
+                    android:background="@color/color_FF8C00"
+                    android:visibility="@{viewModel.priceShow}" />
             </LinearLayout>
 
             <LinearLayout
@@ -100,8 +103,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                binding:onClickCommand="@{viewModel.screen}"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                binding:onClickCommand="@{viewModel.screen}">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -115,17 +118,17 @@
                 <View
                     android:layout_width="@dimen/d30"
                     android:layout_height="@dimen/d3"
-                    android:visibility="@{viewModel.screenShow}"
-                    android:background="@color/color_FF8C00" />
+                    android:background="@color/color_FF8C00"
+                    android:visibility="@{viewModel.screenShow}" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                binding:onClickCommand="@{viewModel.sort}"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                binding:onClickCommand="@{viewModel.sort}">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -139,8 +142,8 @@
                 <View
                     android:layout_width="@dimen/d30"
                     android:layout_height="@dimen/d3"
-                    android:visibility="@{viewModel.sortShow}"
-                    android:background="@color/color_FF8C00" />
+                    android:background="@color/color_FF8C00"
+                    android:visibility="@{viewModel.sortShow}" />
             </LinearLayout>
         </LinearLayout>
 

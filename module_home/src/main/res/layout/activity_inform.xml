@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:binding="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="me.goldze.mvvmhabit.base.BaseViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.goldze.base.view.TitleVIew
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d44" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d16"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="举报原因"
+                android:textColor="@color/color_dark_333333"
+                android:textSize="@dimen/font12" />
+
+            <TextView
+                android:id="@+id/tv_ai_popup"
+                android:layout_width="@dimen/d200"
+                android:layout_height="@dimen/d30"
+                android:background="@color/color_f6"
+                android:gravity="center_vertical"
+                android:layout_marginStart="@dimen/d16"
+                android:textColor="@color/color_dark_333333"
+                android:textSize="@dimen/font12"
+                android:drawableRight="@mipmap/xjt"
+                android:paddingStart="@dimen/d16"
+                android:paddingEnd="@dimen/d16" />
+        </LinearLayout>
+
+        <me.goldze.mvvmhabit.view.shape.RadiusRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d150"
+            android:layout_margin="@dimen/d16"
+            android:layout_marginTop="@dimen/d10"
+            android:padding="@dimen/d10"
+            binding:rv_backgroundColor="@color/color_EFF2F4"
+            binding:rv_radius="@dimen/d5">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="请输入说明"
+                android:textColor="@color/color_gray_999999"
+                android:textColorHint="@color/color_gray_999999"
+                android:textSize="@dimen/font12" />
+        </me.goldze.mvvmhabit.view.shape.RadiusRelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_f6">
+
+            <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d40"
+                android:layout_marginStart="@dimen/d16"
+                android:layout_marginTop="@dimen/d30"
+                android:layout_marginEnd="@dimen/d16"
+                android:gravity="center"
+                android:text="举报"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font16"
+                binding:rv_backgroundColor="@color/color_FF8C00"
+                binding:rv_radius="@dimen/d25" />
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

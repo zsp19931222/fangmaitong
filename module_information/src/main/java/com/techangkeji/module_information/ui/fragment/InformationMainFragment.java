@@ -13,6 +13,7 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.goldze.base.base.BaseTabAdapter;
+import com.goldze.base.constant.RxBusMessageEventConstants;
 import com.goldze.base.router.ARouterPath;
 import com.google.android.material.tabs.TabLayout;
 import com.techangkeji.model_information.BR;
@@ -24,6 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.goldze.mvvmhabit.base.BaseFragment;
+import me.goldze.mvvmhabit.bus.RxBus;
+import me.goldze.mvvmhabit.bus.RxSubscriptions;
 
 @Route(path = ARouterPath.Information.InformationMainFragment)
 public class InformationMainFragment extends BaseFragment<FragmentInformationMainBinding, InformationMainViewModel> {
@@ -39,6 +42,9 @@ public class InformationMainFragment extends BaseFragment<FragmentInformationMai
 
     @Override
     public void initData() {
+        RxSubscriptions.add(RxBus.getDefault().toObservable(RxBusMessageEventConstants.InformationRxMessage.class).subscribe(informationRxMessage -> {
+            binding.tablayout.getTabAt(informationRxMessage.getPosition()).select();
+        }));
         List<String> titles = new ArrayList<>();
         titles.add("资讯");
         titles.add("招聘");

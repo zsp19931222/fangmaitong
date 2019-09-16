@@ -16,6 +16,7 @@ public class LauncherActivity extends BaseActivity<ActivityLauncherBinding, Base
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
+        getWindow().setBackgroundDrawable(null);
         return R.layout.activity_launcher;
     }
 
