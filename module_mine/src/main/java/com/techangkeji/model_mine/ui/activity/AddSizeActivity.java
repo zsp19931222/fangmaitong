@@ -25,6 +25,7 @@ import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.bus.RxBus;
 import me.goldze.mvvmhabit.bus.RxSubscriptions;
 import me.goldze.mvvmhabit.utils.ToastUtil;
+import me.goldze.mvvmhabit.utils.ZLog;
 
 import static com.goldze.base.constant.RxBusMessageEventConstants.OPEN_GALLERY;
 import static com.goldze.base.constant.TipsConstants.GET_PERMISSIONS_FAILED;
@@ -241,6 +242,7 @@ public class AddSizeActivity extends BaseActivity<ActivityAddSizeBinding, BaseVi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        ZLog.d("onActivityResult","onActivityResult");
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case PictureConfig.CHOOSE_REQUEST:

@@ -25,6 +25,8 @@ import com.techangkeji.model_message.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.goldze.mvvmhabit.utils.ZLog;
+
 public class MultiDeviceActivity extends BaseActivity {
 
     private static final int REQUEST_CODE_USERNAME_PASSWORD = 0;
@@ -104,6 +106,7 @@ public class MultiDeviceActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        ZLog.d("onActivityResult","onActivityResult");
         if (resultCode == RESULT_CANCELED) {
             finish();
             return;

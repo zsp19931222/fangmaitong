@@ -50,6 +50,8 @@ import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Map;
 
+import me.goldze.mvvmhabit.utils.ZLog;
+
 public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHelper{
 
 	// constant start from 11 to avoid conflict with constant in base class
@@ -155,6 +157,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        ZLog.d("onActivityResult","onActivityResult");
         if (requestCode == REQUEST_CODE_CONTEXT_MENU) {
             switch (resultCode) {
             case ContextMenuActivity.RESULT_CODE_COPY: // copy

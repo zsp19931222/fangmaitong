@@ -42,6 +42,8 @@ import com.techangkeji.model_message.R;
 
 import java.util.List;
 
+import me.goldze.mvvmhabit.utils.ZLog;
+
 public class GroupsActivity extends BaseActivity {
 	public static final String TAG = "GroupsActivity";
 	private ListView groupListView;
@@ -166,6 +168,7 @@ public class GroupsActivity extends BaseActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+		ZLog.d("onActivityResult","onActivityResult");
 	}
 
 	@Override

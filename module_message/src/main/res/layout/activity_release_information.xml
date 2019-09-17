@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="me.goldze.mvvmhabit.base.BaseViewModel" />
+            type="com.techangkeji.model_message.ui.view_model.ReleaseInformationViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -31,6 +31,7 @@
                 android:layout_marginEnd="@dimen/d16"
                 android:gravity="center"
                 android:text="发表"
+                binding:onClickCommand="@{viewModel.releaseCommand}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font12"
                 binding:rv_backgroundColor="@color/color_FF8C00"

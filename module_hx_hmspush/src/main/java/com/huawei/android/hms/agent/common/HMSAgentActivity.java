@@ -7,6 +7,8 @@ import android.os.Bundle;
 import com.huawei.android.hms.agent.HMSAgent;
 import com.huawei.hms.api.HuaweiApiAvailability;
 
+import me.goldze.mvvmhabit.utils.ZLog;
+
 /**
  * 代理Activity，用于弹出解决问题的引导
  */
@@ -45,7 +47,8 @@ public class HMSAgentActivity extends BaseAgentActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);ZLog.d("onActivityResult","onActivityResult");
+        ZLog.d("onActivityResult");
 
         if(requestCode == REQUEST_HMS_RESOLVE_ERROR) {
             if(resultCode == Activity.RESULT_OK) {

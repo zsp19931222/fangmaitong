@@ -41,6 +41,8 @@ import com.techangkeji.model_message.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.goldze.mvvmhabit.utils.ZLog;
+
 public class ImageGridFragment extends Fragment implements OnItemClickListener {
 
 	private static final String TAG = "ImageGridFragment";
@@ -327,6 +329,7 @@ public class ImageGridFragment extends Fragment implements OnItemClickListener {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+		ZLog.d("onActivityResult","onActivityResult");
 		if(resultCode== Activity.RESULT_OK)
 		{
 			if(requestCode==100)

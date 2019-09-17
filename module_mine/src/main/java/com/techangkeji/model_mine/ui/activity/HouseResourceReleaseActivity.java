@@ -178,7 +178,7 @@ public class HouseResourceReleaseActivity extends BaseActivity<ActivityHouseReso
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);ZLog.d("onActivityResult","onActivityResult");
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case PictureConfig.CHOOSE_REQUEST:

@@ -8,6 +8,8 @@ import com.techangkeji.model_mine.databinding.ActivityChangeNickNameBinding;
 
 import me.goldze.mvvmhabit.base.BaseActivity;
 import me.goldze.mvvmhabit.base.BaseViewModel;
+import me.goldze.mvvmhabit.bus.RxBus;
+import me.goldze.mvvmhabit.utils.ZLog;
 
 public class ChangeNickNameActivity extends BaseActivity<ActivityChangeNickNameBinding, BaseViewModel> {
     @Override
@@ -22,6 +24,27 @@ public class ChangeNickNameActivity extends BaseActivity<ActivityChangeNickNameB
 
     @Override
     public void initData() {
-    binding.title.setTitle("修改昵称");
+        binding.title.setTitle("修改昵称");
+        binding.confirm.setOnClickListener(view -> {
+            ZLog.d(binding.et.getText());
+            RxBus.getDefault().post(new ChangeNameBean(binding.et.getText().toString()));
+            finish();
+        });
+    }
+
+    public class ChangeNameBean{
+        private String name;
+
+        public ChangeNameBean(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 }

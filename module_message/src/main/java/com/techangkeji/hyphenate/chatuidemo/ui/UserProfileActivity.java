@@ -31,6 +31,8 @@ import com.techangkeji.model_message.R;
 
 import java.io.ByteArrayOutputStream;
 
+import me.goldze.mvvmhabit.utils.ZLog;
+
 public class UserProfileActivity extends BaseActivity implements OnClickListener {
 	
 	private static final int REQUESTCODE_PICK = 1;
@@ -221,6 +223,7 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
 			break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
+		ZLog.d("onActivityResult","onActivityResult");
 	}
 
 	public void startPhotoZoom(Uri uri) {

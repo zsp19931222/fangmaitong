@@ -1,5 +1,6 @@
 package com.techangkeji.model_mine.ui.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -20,7 +21,6 @@ import me.goldze.mvvmhabit.bus.RxSubscriptions;
 import me.goldze.mvvmhabit.utils.ZLog;
 
 import static com.goldze.base.constant.RxBusMessageEventConstants.OPEN_GALLERY;
-import static com.luck.picture.lib.config.PictureConfig.CHOOSE_REQUEST;
 
 public class PersonActivity extends BaseActivity<ActivityPersonBinding, PersonViewModel> {
     @Override
@@ -37,14 +37,16 @@ public class PersonActivity extends BaseActivity<ActivityPersonBinding, PersonVi
     public void initData() {
         binding.title.setTitle("个人资料");
         viewModel.context.set(this);
+        GlideLoadUtils.getInstance().glideLoad(this, viewModel.headUrl.get(), binding.ivAp, 0, 19);
         RxSubscriptions.add(RxBus.getDefault().toObservable(Object.class).subscribe(obj -> {
             if (obj instanceof String) {//权限获取
                 String s = (String) obj;
-                switch (s) {
-                    case OPEN_GALLERY:
-                        openGallery();
-                        break;
+                if (OPEN_GALLERY.equals(s)) {
+                    openGallery();
                 }
+            } else if (obj instanceof ChangeNickNameActivity.ChangeNameBean) {
+                ChangeNickNameActivity.ChangeNameBean changeNameBean = (ChangeNickNameActivity.ChangeNameBean) obj;
+                viewModel.nickName.set(changeNameBean.getName());
             }
         }));
     }
@@ -55,12 +57,10 @@ public class PersonActivity extends BaseActivity<ActivityPersonBinding, PersonVi
      * date: 2019/9/12 0012 9:46
      */
     private void openGallery() {
-        PictureSelector.create(this)
+        PictureSelector.create(PersonActivity.this)
                 .openGallery(PictureMimeType.ofImage())//全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
-                .maxSelectNum(1)// 最大图片选择数量 int
-                .minSelectNum(1)// 最小选择数量
                 .imageSpanCount(4)// 每行显示个数 int
-                .selectionMode(PictureConfig.MULTIPLE)// 多选 or 单选 PictureConfig.MULTIPLE or PictureConfig.SINGLE
+                .selectionMode(PictureConfig.SINGLE)// 多选 or 单选 PictureConfig.MULTIPLE or PictureConfig.SINGLE
                 .previewImage(true)// 是否可预览图片 true or false
                 .isCamera(true)// 是否显示拍照按钮 true or false
                 .isZoomAnim(true)// 图片列表点击 缩放效果 默认true
@@ -76,13 +76,13 @@ public class PersonActivity extends BaseActivity<ActivityPersonBinding, PersonVi
                 .minimumCompressSize(100)// 小于100kb的图片不压缩
                 .synOrAsy(true)//同步true或异步false 压缩 默认同步
                 .scaleEnabled(true)// 裁剪是否可放大缩小图片 true or false
-                .forResult(CHOOSE_REQUEST);//结果回调onActivityResult code
+                .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        ZLog.d("onActivityResult", "onActivityResult");
         super.onActivityResult(requestCode, resultCode, data);
-        ZLog.d("onActivityResult");
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case PictureConfig.CHOOSE_REQUEST:
@@ -93,7 +93,8 @@ public class PersonActivity extends BaseActivity<ActivityPersonBinding, PersonVi
                     // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true  注意：音视频除外
                     // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
                     for (int i = 0; i < PictureSelector.obtainMultipleResult(data).size(); i++) {
-                        GlideLoadUtils.getInstance().glideLoad(this,PictureSelector.obtainMultipleResult(data).get(i).getCutPath() , binding.ivAp, 0,19);
+                        viewModel.headUrl.set(PictureSelector.obtainMultipleResult(data).get(i).getCutPath());
+                        GlideLoadUtils.getInstance().glideLoad(this, PictureSelector.obtainMultipleResult(data).get(i).getCutPath(), binding.ivAp, 0, 19);
                     }
                     break;
             }

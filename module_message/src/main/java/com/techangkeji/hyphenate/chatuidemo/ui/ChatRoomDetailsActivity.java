@@ -52,6 +52,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import me.goldze.mvvmhabit.utils.ZLog;
+
 public class ChatRoomDetailsActivity extends BaseActivity implements OnClickListener {
 	private static final String TAG = "ChatRoomDetailsActivity";
 	private static final int REQUEST_CODE_EXIT = 1;
@@ -204,6 +206,7 @@ public class ChatRoomDetailsActivity extends BaseActivity implements OnClickList
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+		ZLog.d("onActivityResult","onActivityResult");
 		String st1 = getResources().getString(R.string.being_added);
 		String st2 = getResources().getString(R.string.is_quit_the_chat_room);
 		String st3 = getResources().getString(R.string.chatting_is_dissolution);

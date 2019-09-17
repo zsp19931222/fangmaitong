@@ -59,9 +59,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            binding:onClickCommand="@{viewModel.changeNameCommand}"
             android:paddingTop="@dimen/d15"
-            android:paddingBottom="@dimen/d15">
+            android:paddingBottom="@dimen/d15"
+            binding:onClickCommand="@{viewModel.changeNameCommand}">
 
 
             <TextView
@@ -79,7 +79,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/d44"
-                android:text="张大帅"
+                android:text="@={viewModel.nickName}"
                 android:textColor="@color/color_dark_333333"
                 android:textSize="@dimen/font14" />
 
@@ -116,7 +116,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/d44"
-                android:text="@{viewModel.sexField}"
+                android:text="@={viewModel.sexStrField}"
                 android:textColor="@color/color_dark_333333"
                 android:textSize="@dimen/font14" />
 
@@ -134,8 +134,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingTop="@dimen/d15"
-            binding:onClickCommand="@{viewModel.changeAgeCommand}"
-            android:paddingBottom="@dimen/d15">
+            android:paddingBottom="@dimen/d15"
+            binding:onClickCommand="@{viewModel.changeAgeCommand}">
 
 
             <TextView
@@ -145,8 +145,7 @@
                 android:layout_marginStart="@dimen/d16"
                 android:text="年龄"
                 android:textColor="@color/color_gray_666666"
-                android:textSize="@dimen/font14"
-                 />
+                android:textSize="@dimen/font14" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -154,7 +153,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/d44"
-                android:text="@{viewModel.ageField}"
+                android:text="@={viewModel.ageField}"
                 android:textColor="@color/color_dark_333333"
                 android:textSize="@dimen/font14" />
 
@@ -207,6 +206,7 @@
                 android:gravity="center"
                 android:text="保存"
                 android:textColor="@color/white"
+                binding:onClickCommand="@{viewModel.saveCommand}"
                 android:textSize="@dimen/font16"
                 binding:rv_backgroundColor="@color/color_FF8C00"
                 binding:rv_radius="@dimen/d25" />

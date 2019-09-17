@@ -7,12 +7,15 @@ import com.blankj.utilcode.util.SPUtils;
 import java.io.IOException;
 import java.util.List;
 
+import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.ZLog;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+
+import static me.goldze.mvvmhabit.http.net.ApiService.LOGIN_BASE_URL;
 
 /**
  * description: 网络拦截器动态改变baseURL等
@@ -29,12 +32,12 @@ public class MyLoggingInterceptor implements Interceptor {
         String token;
         try {
             token = SPUtils.getInstance().getString("token");
-//            token = SqLiteHelper.getInstance().rawQuery("select * from authentication").get(0).get("token");
         } catch (Exception e) {
+            ZLog.d(e.toString());
             token = "";
         }
         ZLog.d("token", token);
-        Request.Builder builder = request.newBuilder().addHeader("token", token);
+        Request.Builder builder = request.newBuilder().addHeader("Authorization", token).addHeader("contentType","application/json");
         //从request中获取headers，通过给定的键url_name
         List<String> headerValues = request.headers("url_name");
         if (headerValues != null && headerValues.size() > 0) {
@@ -44,6 +47,29 @@ public class MyLoggingInterceptor implements Interceptor {
             String headerValue = headerValues.get(0);
             HttpUrl newBaseUrl;
             switch (headerValue) {//动态替换基地址
+                case "imageUpload":
+                    newBaseUrl = HttpUrl.parse(LOGIN_BASE_URL);
+                    break;
+                case "login":
+                    newBaseUrl = HttpUrl.parse(LOGIN_BASE_URL);
+                    break;
+                case "user_info":
+                    newBaseUrl = HttpUrl.parse(LOGIN_BASE_URL);
+                    break;
+                case "home":
+                    newBaseUrl = HttpUrl.parse(LOGIN_BASE_URL);
+                case "message":
+                    newBaseUrl = HttpUrl.parse(LOGIN_BASE_URL);
+                    break;
+                case "search":
+                    newBaseUrl = HttpUrl.parse(LOGIN_BASE_URL);
+                    break;
+                case "push":
+                    newBaseUrl = HttpUrl.parse(LOGIN_BASE_URL);
+                    break;
+                case "micro_application":
+                    newBaseUrl = HttpUrl.parse(LOGIN_BASE_URL);
+                    break;
                 default:
                     newBaseUrl = oldHttpUrl;
                     break;

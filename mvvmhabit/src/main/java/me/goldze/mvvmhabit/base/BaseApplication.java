@@ -5,13 +5,15 @@ import android.app.Application;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 
+import org.litepal.LitePalApplication;
+
 import me.goldze.mvvmhabit.utils.Utils;
 
 /**
  * Created by goldze on 2017/6/15.
  */
 
-public class BaseApplication extends Application {
+public class BaseApplication extends LitePalApplication {
     private static Application sInstance;
 
     @Override
@@ -30,7 +32,7 @@ public class BaseApplication extends Application {
         //初始化工具类
         Utils.init(application);
         //注册监听每个activity的生命周期,便于堆栈式管理
-        application.registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+        application.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
 
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {

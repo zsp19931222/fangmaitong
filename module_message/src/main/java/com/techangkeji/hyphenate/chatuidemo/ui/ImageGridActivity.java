@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import me.goldze.mvvmhabit.utils.ZLog;
+
 public class ImageGridActivity extends FragmentActivity {
 
 	private static final String TAG = "ImageGridActivity";
@@ -24,7 +26,8 @@ public class ImageGridActivity extends FragmentActivity {
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);	
+		super.onActivityResult(requestCode, resultCode, data);
+        ZLog.d("onActivityResult","onActivityResult");
 	}	
 	
 }

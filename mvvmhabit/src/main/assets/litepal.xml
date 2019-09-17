@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="litepal_faimaitong"></dbname>
+
+    <version value="1"></version>
+
+    <list>
+        <mapping class="me.goldze.mvvmhabit.http.net.entity.login.RegisterEntity"></mapping>
+    </list>
+</litepal>

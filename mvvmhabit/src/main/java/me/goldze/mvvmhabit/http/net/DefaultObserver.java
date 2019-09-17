@@ -90,14 +90,8 @@ public abstract class DefaultObserver<T extends BaseEntity> implements Observer<
     public void onNext(T response) {
         ZLog.e(response);
         dismissProgress();
-        boolean isSuccess;
-        boolean refreshToken;
-        boolean reLogin;
-        boolean disabled;
-
         //是否获取数据成功
-        isSuccess = response.getCode().equals(SUCCESS);
-        if (isSuccess) {
+        if (response.getCode()==SUCCESS) {
             onSuccess(response);
         } else {
             onFail(response);
@@ -142,7 +136,7 @@ public abstract class DefaultObserver<T extends BaseEntity> implements Observer<
      * @param response 服务器返回的数据
      */
     public void onFail(T response) {
-        ToastUtil.errorToast(BaseApplication.getInstance().getBaseContext(), response.getMessage(), false);
+        ToastUtil.errorToast(BaseApplication.getInstance().getBaseContext(), response.getMsg(), false);
     }
 
     /**

@@ -107,7 +107,7 @@
                 android:text="登录"
                 android:textSize="@dimen/font16"
                 binding:onClickCommand="@{viewModel.intent2MainActivity}"
-                binding:rv_backgroundColor="@color/color_gray_999999"
+                binding:rv_backgroundColor="@color/color_FF8C00"
                 binding:rv_radius="@dimen/d20"
                 binding:rv_textColor="@color/white" />
 
@@ -124,7 +124,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/d68">
+                >
 
                 <TextView
                     android:layout_width="wrap_content"

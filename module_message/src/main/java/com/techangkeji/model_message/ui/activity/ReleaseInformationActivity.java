@@ -18,6 +18,7 @@ import com.techangkeji.model_message.R;
 import com.techangkeji.model_message.databinding.ActivityReleaseInformationBinding;
 import com.techangkeji.model_message.ui.adapter.ReleaseInformationAdapter;
 import com.techangkeji.model_message.ui.bean.ReleaseInformationBean;
+import com.techangkeji.model_message.ui.view_model.ReleaseInformationViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,7 @@ import static com.luck.picture.lib.config.PictureConfig.CHOOSE_REQUEST;
  * date: 2019/9/16  21:48
  */
 @Route(path = ARouterPath.Message.ReleaseInformationActivity)
-public class ReleaseInformationActivity extends BaseActivity<ActivityReleaseInformationBinding, BaseViewModel> {
+public class ReleaseInformationActivity extends BaseActivity<ActivityReleaseInformationBinding, ReleaseInformationViewModel> {
     private List<ReleaseInformationBean> imageList = new ArrayList<>();
     private ReleaseInformationAdapter informationAdapter;
 
@@ -79,7 +80,7 @@ public class ReleaseInformationActivity extends BaseActivity<ActivityReleaseInfo
      * date: 2019/9/12 0012 9:46
      */
     private void openGallery() {
-        PictureSelector.create(this)
+        PictureSelector.create(ReleaseInformationActivity.this)
                 .openGallery(PictureMimeType.ofImage())//全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
                 .maxSelectNum(9)// 最大图片选择数量 int
                 .minSelectNum(1)// 最小选择数量
@@ -102,32 +103,27 @@ public class ReleaseInformationActivity extends BaseActivity<ActivityReleaseInfo
                 .scaleEnabled(true)// 裁剪是否可放大缩小图片 true or false
                 .forResult(CHOOSE_REQUEST);//结果回调onActivityResult code
     }
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        ZLog.d("onActivityResult");
-//        if (resultCode == RESULT_OK) {
-//            switch (requestCode) {
-//                case PictureConfig.CHOOSE_REQUEST:
-//                    // 图片、视频、音频选择结果回调
-//                    // 例如 LocalMedia 里面返回三种path
-//                    // 1.media.getPath(); 为原图path
-//                    // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true  注意：音视频除外
-//                    // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true  注意：音视频除外
-//                    // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
-//                    for (int i = 0; i < PictureSelector.obtainMultipleResult(data).size(); i++) {
-//                        ZLog.d(PictureSelector.obtainMultipleResult(data).get(i).getCompressPath());
-//                        imageList.add(0, new ReleaseInformationBean(false, PictureSelector.obtainMultipleResult(data).get(i).getCompressPath()));
-//                    }
-//                    informationAdapter.notifyDataSetChanged();
-//                    break;
-//            }
-//        }
-//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ZLog.d("onActivityResult");
+        ZLog.d("onActivityResult", "onActivityResult");
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case PictureConfig.CHOOSE_REQUEST:
+                    // 图片、视频、音频选择结果回调
+                    // 例如 LocalMedia 里面返回三种path
+                    // 1.media.getPath(); 为原图path
+                    // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true  注意：音视频除外
+                    // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true  注意：音视频除外
+                    // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
+                    for (int i = 0; i < PictureSelector.obtainMultipleResult(data).size(); i++) {
+                        ZLog.d(PictureSelector.obtainMultipleResult(data).get(i).getCompressPath());
+                        imageList.add(0, new ReleaseInformationBean(false, PictureSelector.obtainMultipleResult(data).get(i).getCompressPath()));
+                    }
+                    informationAdapter.notifyDataSetChanged();
+                    break;
+            }
+        }
     }
 }

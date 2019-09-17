@@ -32,6 +32,8 @@ import com.hyphenate.easeui.widget.EaseAlertDialog;
 import com.hyphenate.exceptions.HyphenateException;
 import com.techangkeji.model_message.R;
 
+import me.goldze.mvvmhabit.utils.ZLog;
+
 public class NewGroupActivity extends BaseActivity {
 	private EditText groupNameEditText;
 	private ProgressDialog progressDialog;
@@ -79,6 +81,7 @@ public class NewGroupActivity extends BaseActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+		ZLog.d("onActivityResult","onActivityResult");
 		String st1 = getResources().getString(R.string.Is_to_create_a_group_chat);
 		final String st2 = getResources().getString(R.string.Failed_to_create_groups);
 		if (resultCode == RESULT_OK) {

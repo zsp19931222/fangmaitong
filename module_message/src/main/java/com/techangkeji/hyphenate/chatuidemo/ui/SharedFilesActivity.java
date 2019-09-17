@@ -40,6 +40,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import me.goldze.mvvmhabit.utils.ZLog;
+
 public class SharedFilesActivity extends BaseActivity {
 
     private static final int REQUEST_CODE_SELECT_FILE = 1;
@@ -296,6 +298,7 @@ public class SharedFilesActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        ZLog.d("onActivityResult","onActivityResult");
         if(resultCode == RESULT_OK){
             if(requestCode == REQUEST_CODE_SELECT_FILE){
                 if (data != null) {

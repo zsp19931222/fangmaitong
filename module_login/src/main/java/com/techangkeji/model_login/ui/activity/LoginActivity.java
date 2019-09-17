@@ -26,6 +26,7 @@ import com.techangkeji.model_login.ui.view_model.LoginViewModel;
 import com.techangkeji.model_message.MessageModuleInit;
 
 import me.goldze.mvvmhabit.base.BaseActivity;
+import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.ZLog;
 
 /**
@@ -45,4 +46,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         return BR.viewModel;
     }
 
+    @Override
+    public void initData() {
+        viewModel.context.set(this);
+    }
 }

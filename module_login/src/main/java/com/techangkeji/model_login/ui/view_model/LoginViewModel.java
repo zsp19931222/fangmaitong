@@ -1,6 +1,7 @@
 package com.techangkeji.model_login.ui.view_model;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
@@ -21,11 +22,20 @@ import com.techangkeji.hyphenate.chatuidemo.db.DemoDBManager;
 import com.techangkeji.model_login.R;
 import com.techangkeji.model_login.ui.activity.LoginActivity;
 import com.techangkeji.model_login.ui.activity.RegisterActivity;
+import com.techangkeji.model_login.ui.popupwindow.PerfectionUserInfoPopup;
+import com.techangkeji.model_login.ui.util.LoginUtil;
 import com.techangkeji.model_message.MessageModuleInit;
 
 import me.goldze.mvvmhabit.base.BaseApplication;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
+import me.goldze.mvvmhabit.http.net.DefaultObserver;
+import me.goldze.mvvmhabit.http.net.IdeaApi;
+import me.goldze.mvvmhabit.http.net.body.LoginBody;
+import me.goldze.mvvmhabit.http.net.body.RegisterBody;
+import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
+import me.goldze.mvvmhabit.http.net.entity.login.RegisterEntity;
+import me.goldze.mvvmhabit.utils.RxUtils;
 import me.goldze.mvvmhabit.utils.ZLog;
 
 /**
@@ -34,8 +44,9 @@ import me.goldze.mvvmhabit.utils.ZLog;
  * email:zsp872126510@gmail.com
  */
 public class LoginViewModel extends BaseViewModel {
-    public ObservableField<String> phoneNum = new ObservableField<>("1993");
-    public ObservableField<String> pwNum = new ObservableField<>("123");
+    public ObservableField<String> phoneNum = new ObservableField<>("13983251013");
+    public ObservableField<String> pwNum = new ObservableField<>("123456");
+    public ObservableField<Context> context = new ObservableField<>();
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
@@ -53,115 +64,29 @@ public class LoginViewModel extends BaseViewModel {
      * author: Andy
      * date: 2019/9/9 0009 17:12
      */
-    public BindingCommand intent2MainActivity = new BindingCommand(() ->
-//            ARouter.getInstance().build(ARouterPath.Main.PAGER_MAIN).navigation()
-            registerHX()
+    public BindingCommand intent2MainActivity = new BindingCommand(this::login
     );
 
-
-    /**
-     * description: 注册环信
-     * author: Andy
-     * date: 2019/9/10 0010 15:56
-     */
-    private void registerHX() {
-        String username = phoneNum.get();
-        String pwd = pwNum.get();
-        if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(pwd)) {
-            new Thread(() -> {
-                try {
-                    // call method in SDK
-                    EMClient.getInstance().createAccount(username, pwd);
-                    // save current user
-                    DemoHelper.getInstance().setCurrentUserName(username);
-                    ZLog.d("注册成功");
-                    loginHX(username, pwd);
-                } catch (final HyphenateException e) {
-                    int errorCode = e.getErrorCode();
-                    ZLog.d(errorCode);
-                    if (errorCode == EMError.USER_ALREADY_EXIST) {//已经注册
-                        logoutHX(username, pwd);
+    private void login() {
+        LoginBody registerBody = new LoginBody(pwNum.get(), phoneNum.get(),1);
+        IdeaApi.getApiService()
+                .login(registerBody)
+                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                .compose(RxUtils.schedulersTransformer())
+                .doOnSubscribe(disposable1 -> showDialog())
+                .subscribe(new DefaultObserver<SuccessEntity<RegisterEntity>>(this) {
+                    @Override
+                    public void onSuccess(SuccessEntity<RegisterEntity> response) {
+                        showDialog("正在登录请稍后");
+                        LoginUtil.getInstance().saveUserInfo(response);
+                        LoginUtil.getInstance().registerHX(phoneNum.get(), pwNum.get());
                     }
-                }
-            }).start();
-
-        }
+                });
     }
 
-    /**
-     * description: 登录环信
-     * author: Andy
-     * date: 2019/9/10 0010 16:09
-     */
-    public void loginHX(String currentUsername, String currentPassword) {
-        if (!EaseCommonUtils.isNetWorkConnected(BaseApplication.getInstance().getBaseContext())) {
-            Toast.makeText(BaseApplication.getInstance().getBaseContext(), com.techangkeji.model_message.R.string.network_isnot_available, Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (TextUtils.isEmpty(currentUsername)) {
-            Toast.makeText(BaseApplication.getInstance().getBaseContext(), com.techangkeji.model_message.R.string.User_name_cannot_be_empty, Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (TextUtils.isEmpty(currentPassword)) {
-            Toast.makeText(BaseApplication.getInstance().getBaseContext(), com.techangkeji.model_message.R.string.Password_cannot_be_empty, Toast.LENGTH_SHORT).show();
-            return;
-        }
-        DemoDBManager.getInstance().closeDB();
-        DemoHelper.getInstance().setCurrentUserName(currentUsername);
-        ZLog.d("EMClient.getInstance().login");
-        EMClient.getInstance().login(currentUsername, currentPassword, new EMCallBack() {
-
-            @Override
-            public void onSuccess() {
-                ZLog.d("login: onSuccess");
-                EMClient.getInstance().groupManager().loadAllGroups();
-                EMClient.getInstance().chatManager().loadAllConversations();
-
-                boolean updatenick = EMClient.getInstance().pushManager().updatePushNickname(
-                        MessageModuleInit.currentUserNick.trim());
-                if (!updatenick) {
-                    Log.e("LoginActivity", "update current user nick fail");
-                }
-                DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
-                ARouter.getInstance().build(ARouterPath.Main.PAGER_MAIN).navigation();
-            }
-
-            @Override
-            public void onProgress(int progress, String status) {
-                ZLog.d("login: onProgress");
-            }
-
-            @Override
-            public void onError(final int code, final String message) {
-                ZLog.d("login: onError: " + code);
-                logoutHX(currentUsername, currentPassword);
-            }
-        });
-    }
-
-    /**
-     * description:注销环信
-     * author: Andy
-     * date: 2019/9/10 0010 17:23
-     */
-    private void logoutHX(String currentUsername, String currentPassword) {
-        DemoHelper.getInstance().logout(true, new EMCallBack() {
-
-            @Override
-            public void onSuccess() {
-                loginHX(currentUsername, currentPassword);
-            }
-
-            @Override
-            public void onProgress(int progress, String status) {
-
-            }
-
-            @Override
-            public void onError(int code, String message) {
-                ZLog.d(message);
-            }
-        });
+    @Override
+    public void onPause() {
+        super.onPause();
+        dismissDialog();
     }
 }

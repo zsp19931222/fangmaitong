@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.goldze.mvvmhabit.base.BaseActivity;
+import me.goldze.mvvmhabit.utils.ZLog;
 
 @Route(path = ARouterPath.Public.HRDetailActivity)
 public class HRDetailActivity extends BaseActivity<ActivityHrDetailBinding, HRDetailViewModel> {
@@ -57,7 +58,8 @@ public class HRDetailActivity extends BaseActivity<ActivityHrDetailBinding, HRDe
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);ZLog.d("onActivityResult","onActivityResult");
+        ZLog.d("onActivityResult");
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 }

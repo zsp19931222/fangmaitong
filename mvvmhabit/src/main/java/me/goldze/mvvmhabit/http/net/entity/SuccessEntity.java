@@ -11,13 +11,13 @@ public class SuccessEntity<T> extends BaseEntity {
      * content : null
      */
 
-    private T content;
+    private T data;
 
     public T getContent() {
-        return content;
+        return data;
     }
 
-    public void setContent(T content) {
-        this.content = content;
+    public void setContent(T data) {
+        this.data = data;
     }
 }

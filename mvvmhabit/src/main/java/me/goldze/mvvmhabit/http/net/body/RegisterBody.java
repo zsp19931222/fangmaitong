@@ -49,9 +49,11 @@ public class RegisterBody {
     private String imPassword; // 环信密码
     private String imNickname; // 环信昵称
 
+    //注册时用
     public RegisterBody(String password, String phone, int identity) {
         this.password = password;
         this.phone = phone;
         this.identity = identity;
     }
+
 }

@@ -40,7 +40,7 @@ public class IdeaApi {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .readTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS)
-                .addInterceptor(loggingInterceptor)
+//                .addInterceptor(loggingInterceptor)
                 .addInterceptor(new MyLoggingInterceptor())
                 .addNetworkInterceptor(new HttpCacheInterceptor())
                 .cache(cache)

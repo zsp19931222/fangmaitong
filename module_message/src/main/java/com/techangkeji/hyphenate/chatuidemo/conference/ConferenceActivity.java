@@ -65,6 +65,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 import me.goldze.mvvmhabit.base.BaseApplication;
+import me.goldze.mvvmhabit.utils.ZLog;
 
 /**
  * Created by lzan13 on 2017/8/15.
@@ -635,6 +636,7 @@ public class ConferenceActivity extends BaseActivity implements EMConferenceList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        ZLog.d("onActivityResult","onActivityResult");
         EMLog.i(TAG, "onActivityResult: " + requestCode + ", result code: " + resultCode);
         if (requestCode == REQUEST_CODE_OVERLAY_PERMISSION && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             // Result of window permission request, resultCode = RESULT_CANCELED

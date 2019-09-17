@@ -11,7 +11,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_f6"
+        android:background="@color/white"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -25,6 +25,7 @@
                 android:layout_height="@dimen/d44" />
 
             <TextView
+                android:id="@+id/confirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -41,14 +42,18 @@
             android:orientation="horizontal"
             android:paddingStart="@dimen/d16"
             android:paddingTop="@dimen/d18"
+            android:background="@color/color_f6"
             android:paddingEnd="@dimen/d16"
             android:paddingBottom="@dimen/d18">
 
             <EditText
+                android:id="@+id/et"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:hint="输入您的昵称"
                 android:background="@null"
+                android:textColorHint="@color/color_gray_666666"
                 android:textColor="@color/color_gray_666666"
                 android:textSize="@dimen/font14" />
 
