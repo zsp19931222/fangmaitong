@@ -1,20 +1,16 @@
 package com.techangkeji.model_message.ui.adapter;
 
-import android.Manifest;
-
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.goldze.base.utils.PermissionsUtils;
 import com.goldze.base.utils.glide.GlideLoadUtils;
 import com.techangkeji.model_message.R;
 import com.techangkeji.model_message.ui.bean.ReleaseInformationBean;
 
 import java.util.List;
 
-import static com.goldze.base.constant.RxBusMessageEventConstants.OPEN_GALLERY;
+import me.goldze.mvvmhabit.bus.RxBus;
 
 /**
  * description:发布信息
@@ -31,9 +27,13 @@ public class ReleaseInformationAdapter extends BaseQuickAdapter<ReleaseInformati
         GlideLoadUtils.getInstance().glideLoad(helper.itemView.getContext(),item.getImage(),helper.getView(R.id.iv_iri),0);
         helper.itemView.setOnClickListener(v -> {
             if (item.isCanAdd()){
-                PermissionsUtils.getInstance().getPermissionsWithFragmentActivity((FragmentActivity) helper.itemView.getContext(),OPEN_GALLERY, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                RxBus.getDefault().post(new ReleaseInformationAdapterRxBen());
             }
         });
+
+    }
+
+    public class ReleaseInformationAdapterRxBen{
 
     }
 }

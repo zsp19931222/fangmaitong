@@ -41,10 +41,12 @@
                 android:paddingBottom="@dimen/d14"
                 binding:onClickCommand="@{viewModel.personCommand}">
 
-                <ImageView
+                <me.goldze.mvvmhabit.view.shape.RadiusImageView
                     android:layout_width="@dimen/d60"
                     android:layout_height="@dimen/d60"
                     android:layout_marginStart="@dimen/d16"
+                    binding:url="@{viewModel.url}"
+                    binding:rv_is_circle="true"
                     android:layout_marginTop="@dimen/d5" />
 
                 <LinearLayout
@@ -62,7 +64,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="王女士"
+                            android:text="@{viewModel.name}"
                             android:textColor="@color/color_gray_666666"
                             android:textSize="@dimen/font16" />
 

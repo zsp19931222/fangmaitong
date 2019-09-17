@@ -16,6 +16,7 @@ import com.techangkeji.module_friend_circle.BR;
 import com.techangkeji.module_friend_circle.R;
 import com.techangkeji.module_friend_circle.databinding.ActivityMyStateBinding;
 import com.techangkeji.module_friend_circle.ui.adapter.MyStateAdapter;
+import com.techangkeji.module_friend_circle.ui.viewModel.MyStateViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +24,9 @@ import java.util.List;
 import ch.ielse.view.imagewatcher.ImageWatcher;
 import me.goldze.mvvmhabit.base.BaseActivity;
 import me.goldze.mvvmhabit.base.BaseViewModel;
+
 @Route(path = ARouterPath.FriendCircle.MyStateActivity)
-public class MyStateActivity extends BaseActivity<ActivityMyStateBinding, BaseViewModel> implements  ImageWatcher.OnPictureLongPressListener, ImageWatcher.Loader{
+public class MyStateActivity extends BaseActivity<ActivityMyStateBinding, MyStateViewModel> implements ImageWatcher.OnPictureLongPressListener, ImageWatcher.Loader {
     private MyStateAdapter myStateAdapter;
 
     @Override
@@ -42,10 +44,10 @@ public class MyStateActivity extends BaseActivity<ActivityMyStateBinding, BaseVi
         binding.title.setTitle("我的动态");
         binding.emojiPanelView.initEmojiPanel(DataCenter.emojiDataSources);
 
-        myStateAdapter = new MyStateAdapter(R.layout.item_my_state, DataCenter.makeFriendCircleBeans(this),binding.imageWatcher,binding.emojiPanelView);
+        myStateAdapter = new MyStateAdapter(R.layout.item_my_state, viewModel.friendCircleBeans, binding.imageWatcher, binding.emojiPanelView);
         binding.rv.setLayoutManager(new LinearLayoutManager(this));
         binding.rv.setAdapter(myStateAdapter);
-
+        viewModel.myMovingList(this,myStateAdapter);
     }
 
     @Override
@@ -57,6 +59,7 @@ public class MyStateActivity extends BaseActivity<ActivityMyStateBinding, BaseVi
     public void onPictureLongPress(ImageView v, String url, int pos) {
 
     }
+
     @Override
     public void onBackPressed() {
         if (!binding.imageWatcher.handleBackPressed()) {

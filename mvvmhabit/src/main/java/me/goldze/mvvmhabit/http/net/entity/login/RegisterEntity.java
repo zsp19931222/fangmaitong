@@ -61,76 +61,84 @@ public class RegisterEntity extends LitePalSupport {
      * type : 0
      */
 
-    private Object imNickname;
-    private Object remark;
-    private Object imUsername;
-    private int squareNum;
-    private int movingNum;
-    private Object qqProvince;
-    private Object wxappOpenId;
-    private String createTime;
-    private Object qqAvatarUrl;
-    private int brokerAuthenticate;
-    private Object wechatNickname;
-    private Object headUrl;
-    private String password;
-    private int recruitmentNum;
-    private Object wechatLanguage;
-    private int qualificationAuthenticate;
-    private Object qqNickname;
-    private Object realName;
-    private String phone;
-    private Object oldPassword;
-    private Object wechatAvatarUrl;
-    private Object wechatProvince;
-    private int jobhuntingNum;
-    private int identity;
-    private int realNameAuthenticate;
-    private Object wechatCountry;
-    private int sex;
-    private int del;
-    private Object qqOpenId;
-    private Object wechatCity;
-    private Object qqCity;
-    private String name;
-    private Object imPassword;
-    private int state;
-    private Object mail;
-    private int age;
-    private int buildNum;
-    private int cumulativeLoginTime;
-    private int id;
-    private Object lastLogin;
-    private int enable;
-    private Object wechatOpenId;
-    private Object qqLanguage;
-    private int freeze;
-    private int collectNum;
-    private Object qqCountry;
+    private String imNickname ; // 环信昵称
+    private String remark ; // 备注
+    private String imUsername ; // 环信id
+    private int squareNum = -1 ; // 广场发布数
+    private int movingNum = -1 ; // 动态发布数
+    private String qqProvince ; // QQ省
+    private String wxappOpenId ; // 微信小程序openid
+    private String createTime ; // 创建时间
+    private String qqAvatarUrl ; // QQ头像url
+    private int brokerAuthenticate = -1 ; // 经纪人认证 0-未认证 1-认证已通过 2-认证未通过
+    private String wechatNickname ; // 微信昵称
+    private String headUrl ; // 房脉通头像url
+    private String password ; // 密码
+    private int recruitmentNum = -1 ; // 招聘发布数
+    private String wechatLanguage ; // 微信语言
+    private int qualificationAuthenticate = -1 ; // 资质认证 0-未认证 1-认证已通过 2-认证未通过
+    private String qqNickname ; // QQ昵称
+    private String realName ; // 真实姓名
+    private String phone ; // 手机号
+    private String oldPassword ; // 旧密码
+    private String wechatAvatarUrl ; // 微信头像url
+    private String wechatProvince ; // 微信省
+    private int jobhuntingNum = -1 ; // 求职发布数
+    private int identity = -1 ; // 身份 1-总代 2-渠道代理 3-联合代理 4-经纪人
+    private int realNameAuthenticate = -1 ; // 实名认证 0-未认证 1-认证已通过 2-认证未通过
+    private String wechatCountry ; // 微信国家
+    private int sex = -1 ; // 1-男、2-女、0-未知
+    private int del = -1 ; // 删除标志
+    private String qqOpenId ; // QQopenid
+    private String wechatCity ; // 微信城市
+    private String qqCity ; // QQ城市
+    private String name ; // 房脉通昵称
+    private String imPassword ; // 环信密码
+    private int state = -1 ; // 状态 1-禁言 0-不禁言
+    private String mail ; // 邮箱
+    private int age = -1 ; // 年龄
+    private int buildNum = -1 ; // 楼盘发布数
+    private long cumulativeLoginTime = -1 ; // 累计登录时间
+    private long id = -1 ; // 编号
+    private String lastLogin ; // 上次登录时间
+    private int enable = -1 ; // 注销帐号 0-未注销 1-已注销
+    private String wechatOpenId ; // 微信openid
+    private String qqLanguage ; // QQ语言
+    private int freeze = -1 ; // 冻结帐号 0-未冻结 1-已冻结
+    private int collectNum = -1 ; // 收藏数
+    private String qqCountry ; // QQ国家
+    private int type;//1-手机 2-邮箱 3-微信 4-QQ
     private JwtTokenBean jwtToken;
-    private int type;
 
-    public Object getImNickname() {
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getImNickname() {
         return imNickname;
     }
 
-    public void setImNickname(Object imNickname) {
+    public void setImNickname(String imNickname) {
         this.imNickname = imNickname;
     }
 
-    public Object getRemark() {
+    public String getRemark() {
         return remark;
     }
 
-    public void setRemark(Object remark) {
+    public void setRemark(String remark) {
         this.remark = remark;
     }
 
-    public Object getImUsername() {
+    public String getImUsername() {
         return imUsername;
     }
 
-    public void setImUsername(Object imUsername) {
+    public void setImUsername(String imUsername) {
         this.imUsername = imUsername;
     }
 
@@ -150,19 +158,19 @@ public class RegisterEntity extends LitePalSupport {
         this.movingNum = movingNum;
     }
 
-    public Object getQqProvince() {
+    public String getQqProvince() {
         return qqProvince;
     }
 
-    public void setQqProvince(Object qqProvince) {
+    public void setQqProvince(String qqProvince) {
         this.qqProvince = qqProvince;
     }
 
-    public Object getWxappOpenId() {
+    public String getWxappOpenId() {
         return wxappOpenId;
     }
 
-    public void setWxappOpenId(Object wxappOpenId) {
+    public void setWxappOpenId(String wxappOpenId) {
         this.wxappOpenId = wxappOpenId;
     }
 
@@ -174,11 +182,11 @@ public class RegisterEntity extends LitePalSupport {
         this.createTime = createTime;
     }
 
-    public Object getQqAvatarUrl() {
+    public String getQqAvatarUrl() {
         return qqAvatarUrl;
     }
 
-    public void setQqAvatarUrl(Object qqAvatarUrl) {
+    public void setQqAvatarUrl(String qqAvatarUrl) {
         this.qqAvatarUrl = qqAvatarUrl;
     }
 
@@ -190,19 +198,19 @@ public class RegisterEntity extends LitePalSupport {
         this.brokerAuthenticate = brokerAuthenticate;
     }
 
-    public Object getWechatNickname() {
+    public String getWechatNickname() {
         return wechatNickname;
     }
 
-    public void setWechatNickname(Object wechatNickname) {
+    public void setWechatNickname(String wechatNickname) {
         this.wechatNickname = wechatNickname;
     }
 
-    public Object getHeadUrl() {
+    public String getHeadUrl() {
         return headUrl;
     }
 
-    public void setHeadUrl(Object headUrl) {
+    public void setHeadUrl(String headUrl) {
         this.headUrl = headUrl;
     }
 
@@ -222,11 +230,11 @@ public class RegisterEntity extends LitePalSupport {
         this.recruitmentNum = recruitmentNum;
     }
 
-    public Object getWechatLanguage() {
+    public String getWechatLanguage() {
         return wechatLanguage;
     }
 
-    public void setWechatLanguage(Object wechatLanguage) {
+    public void setWechatLanguage(String wechatLanguage) {
         this.wechatLanguage = wechatLanguage;
     }
 
@@ -238,19 +246,19 @@ public class RegisterEntity extends LitePalSupport {
         this.qualificationAuthenticate = qualificationAuthenticate;
     }
 
-    public Object getQqNickname() {
+    public String getQqNickname() {
         return qqNickname;
     }
 
-    public void setQqNickname(Object qqNickname) {
+    public void setQqNickname(String qqNickname) {
         this.qqNickname = qqNickname;
     }
 
-    public Object getRealName() {
+    public String getRealName() {
         return realName;
     }
 
-    public void setRealName(Object realName) {
+    public void setRealName(String realName) {
         this.realName = realName;
     }
 
@@ -262,27 +270,27 @@ public class RegisterEntity extends LitePalSupport {
         this.phone = phone;
     }
 
-    public Object getOldPassword() {
+    public String getOldPassword() {
         return oldPassword;
     }
 
-    public void setOldPassword(Object oldPassword) {
+    public void setOldPassword(String oldPassword) {
         this.oldPassword = oldPassword;
     }
 
-    public Object getWechatAvatarUrl() {
+    public String getWechatAvatarUrl() {
         return wechatAvatarUrl;
     }
 
-    public void setWechatAvatarUrl(Object wechatAvatarUrl) {
+    public void setWechatAvatarUrl(String wechatAvatarUrl) {
         this.wechatAvatarUrl = wechatAvatarUrl;
     }
 
-    public Object getWechatProvince() {
+    public String getWechatProvince() {
         return wechatProvince;
     }
 
-    public void setWechatProvince(Object wechatProvince) {
+    public void setWechatProvince(String wechatProvince) {
         this.wechatProvince = wechatProvince;
     }
 
@@ -310,11 +318,11 @@ public class RegisterEntity extends LitePalSupport {
         this.realNameAuthenticate = realNameAuthenticate;
     }
 
-    public Object getWechatCountry() {
+    public String getWechatCountry() {
         return wechatCountry;
     }
 
-    public void setWechatCountry(Object wechatCountry) {
+    public void setWechatCountry(String wechatCountry) {
         this.wechatCountry = wechatCountry;
     }
 
@@ -334,27 +342,27 @@ public class RegisterEntity extends LitePalSupport {
         this.del = del;
     }
 
-    public Object getQqOpenId() {
+    public String getQqOpenId() {
         return qqOpenId;
     }
 
-    public void setQqOpenId(Object qqOpenId) {
+    public void setQqOpenId(String qqOpenId) {
         this.qqOpenId = qqOpenId;
     }
 
-    public Object getWechatCity() {
+    public String getWechatCity() {
         return wechatCity;
     }
 
-    public void setWechatCity(Object wechatCity) {
+    public void setWechatCity(String wechatCity) {
         this.wechatCity = wechatCity;
     }
 
-    public Object getQqCity() {
+    public String getQqCity() {
         return qqCity;
     }
 
-    public void setQqCity(Object qqCity) {
+    public void setQqCity(String qqCity) {
         this.qqCity = qqCity;
     }
 
@@ -366,11 +374,11 @@ public class RegisterEntity extends LitePalSupport {
         this.name = name;
     }
 
-    public Object getImPassword() {
+    public String getImPassword() {
         return imPassword;
     }
 
-    public void setImPassword(Object imPassword) {
+    public void setImPassword(String imPassword) {
         this.imPassword = imPassword;
     }
 
@@ -382,11 +390,11 @@ public class RegisterEntity extends LitePalSupport {
         this.state = state;
     }
 
-    public Object getMail() {
+    public String getMail() {
         return mail;
     }
 
-    public void setMail(Object mail) {
+    public void setMail(String mail) {
         this.mail = mail;
     }
 
@@ -406,27 +414,27 @@ public class RegisterEntity extends LitePalSupport {
         this.buildNum = buildNum;
     }
 
-    public int getCumulativeLoginTime() {
+    public long getCumulativeLoginTime() {
         return cumulativeLoginTime;
     }
 
-    public void setCumulativeLoginTime(int cumulativeLoginTime) {
+    public void setCumulativeLoginTime(long cumulativeLoginTime) {
         this.cumulativeLoginTime = cumulativeLoginTime;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public Object getLastLogin() {
+    public String getLastLogin() {
         return lastLogin;
     }
 
-    public void setLastLogin(Object lastLogin) {
+    public void setLastLogin(String lastLogin) {
         this.lastLogin = lastLogin;
     }
 
@@ -438,19 +446,19 @@ public class RegisterEntity extends LitePalSupport {
         this.enable = enable;
     }
 
-    public Object getWechatOpenId() {
+    public String getWechatOpenId() {
         return wechatOpenId;
     }
 
-    public void setWechatOpenId(Object wechatOpenId) {
+    public void setWechatOpenId(String wechatOpenId) {
         this.wechatOpenId = wechatOpenId;
     }
 
-    public Object getQqLanguage() {
+    public String getQqLanguage() {
         return qqLanguage;
     }
 
-    public void setQqLanguage(Object qqLanguage) {
+    public void setQqLanguage(String qqLanguage) {
         this.qqLanguage = qqLanguage;
     }
 
@@ -470,11 +478,11 @@ public class RegisterEntity extends LitePalSupport {
         this.collectNum = collectNum;
     }
 
-    public Object getQqCountry() {
+    public String getQqCountry() {
         return qqCountry;
     }
 
-    public void setQqCountry(Object qqCountry) {
+    public void setQqCountry(String qqCountry) {
         this.qqCountry = qqCountry;
     }
 
@@ -484,14 +492,6 @@ public class RegisterEntity extends LitePalSupport {
 
     public void setJwtToken(JwtTokenBean jwtToken) {
         this.jwtToken = jwtToken;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
     }
 
     public static class JwtTokenBean {

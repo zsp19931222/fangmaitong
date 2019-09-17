@@ -59,8 +59,8 @@ public class SettingViewModel extends BaseViewModel {
                     @Override
                     public void onSuccess(SuccessEntity<RegisterEntity> response) {
                         LocalDataHelper.getInstance().deleteData();
+                        AppManager.getAppManager().finishAllActivity();
                         ARouter.getInstance().build(ARouterPath.Login.LoginActivity).navigation();
-//                        AppManager.getAppManager().finishAllActivity();
                     }
                 });
     });

@@ -45,6 +45,7 @@
             android:layout_margin="@dimen/d16"
             android:background="@null"
             android:hint="这一刻的想法..."
+            android:text="@={viewModel.content}"
             android:textColor="@color/color_dark_333333"
             android:textColorHint="@color/color_gray_666666"
             android:textSize="@dimen/font12" />

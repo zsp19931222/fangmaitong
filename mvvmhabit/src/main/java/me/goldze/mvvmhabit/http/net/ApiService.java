@@ -8,6 +8,7 @@ import io.reactivex.Observable;
 import me.goldze.mvvmhabit.http.net.body.CheckAuthCodeBody;
 import me.goldze.mvvmhabit.http.net.body.LoginBody;
 import me.goldze.mvvmhabit.http.net.body.LogoutBody;
+import me.goldze.mvvmhabit.http.net.body.MyMovingListBody;
 import me.goldze.mvvmhabit.http.net.body.RegisterBody;
 import me.goldze.mvvmhabit.http.net.body.ReleaseMovingBody;
 import me.goldze.mvvmhabit.http.net.body.SendCodeBody;
@@ -15,6 +16,7 @@ import me.goldze.mvvmhabit.http.net.body.UntiedThirdBody;
 import me.goldze.mvvmhabit.http.net.body.UpdateBody;
 import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
+import me.goldze.mvvmhabit.http.net.entity.friend_circle.MyStateEntity;
 import me.goldze.mvvmhabit.http.net.entity.login.RegisterEntity;
 import me.goldze.mvvmhabit.http.net.entity.login.SendCodeEntity;
 import okhttp3.MultipartBody;
@@ -69,7 +71,7 @@ public interface ApiService<T extends BaseEntity> {
     @Multipart
     @POST(API + "auth/uploadpic")
     @Headers({"url_name:login"})
-    Observable<SuccessEntity> uploadpic(@Part List<MultipartBody.Part> partList);
+    Observable<SuccessEntity<String>> uploadpic(@Part List<MultipartBody.Part> partList);
 
     //退出登录
     @PUT(API + "auth/loginOut/{time}")
@@ -103,7 +105,7 @@ public interface ApiService<T extends BaseEntity> {
     //获取自己动态列表
     @POST(API + "auth/moving/list")
     @Headers({"url_name:login"})
-    Observable<SuccessEntity> myMovingList(@Body() UntiedThirdBody untiedThirdBody);
+    Observable<MyStateEntity> myMovingList(@Body() MyMovingListBody myMovingListBody);
 
 
     //获取朋友圈动态列表

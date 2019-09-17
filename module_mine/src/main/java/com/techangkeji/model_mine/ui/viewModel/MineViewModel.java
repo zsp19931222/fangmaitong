@@ -1,8 +1,10 @@
 package com.techangkeji.model_mine.ui.viewModel;
 
 import android.app.Application;
+import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.ObservableField;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.goldze.base.router.ARouterPath;
@@ -20,10 +22,25 @@ import com.techangkeji.model_mine.ui.activity.SettingActivity;
 
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
+import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
+import me.goldze.mvvmhabit.utils.IsNullUtil;
 
 public class MineViewModel extends BaseViewModel {
+    public ObservableField<String> name = new ObservableField<>("");
+    public ObservableField<String> url=new ObservableField<>("");
+    public ObservableField<Integer> realNameAuthenticateShow=new ObservableField<>(View.GONE);//实名认证
+
     public MineViewModel(@NonNull Application application) {
         super(application);
+        try {
+            if (!IsNullUtil.getInstance().isEmpty(LocalDataHelper.getInstance().getUserInfo().getName())) {
+                name.set(LocalDataHelper.getInstance().getUserInfo().getName());
+            }
+            if (!IsNullUtil.getInstance().isEmpty(LocalDataHelper.getInstance().getUserInfo().getHeadUrl())){
+                url.set(LocalDataHelper.getInstance().getUserInfo().getHeadUrl());
+            }
+        } catch (Exception e) {
+        }
     }
 
     //个人资料

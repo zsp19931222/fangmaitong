@@ -10,6 +10,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.goldze.base.utils.DateUtil;
 import com.kcrason.highperformancefriendscircle.adapters.NineImageAdapter;
 import com.kcrason.highperformancefriendscircle.beans.FriendCircleBean;
 import com.kcrason.highperformancefriendscircle.beans.OtherInfoBean;
@@ -22,6 +23,7 @@ import java.util.List;
 
 import ch.ielse.view.imagewatcher.ImageWatcher;
 import me.goldze.mvvmhabit.utils.ToastUtil;
+import me.goldze.mvvmhabit.utils.ZLog;
 
 public class MyStateAdapter extends BaseQuickAdapter<FriendCircleBean, BaseViewHolder> {
     private ImageWatcher mImageWatcher;
@@ -29,12 +31,12 @@ public class MyStateAdapter extends BaseQuickAdapter<FriendCircleBean, BaseViewH
     private DrawableTransitionOptions mDrawableTransitionOptions;
     private EmojiPanelView emojiPanelView;
 
-    public MyStateAdapter(int layoutResId, @Nullable List<FriendCircleBean> data, ImageWatcher mImageWatcher,EmojiPanelView emojiPanelView) {
+    public MyStateAdapter(int layoutResId, @Nullable List<FriendCircleBean> data, ImageWatcher mImageWatcher, EmojiPanelView emojiPanelView) {
         super(layoutResId, data);
         this.mImageWatcher = mImageWatcher;
         this.mRequestOptions = new RequestOptions().centerCrop();
         this.mDrawableTransitionOptions = DrawableTransitionOptions.withCrossFade();
-        this.emojiPanelView=emojiPanelView;
+        this.emojiPanelView = emojiPanelView;
 
     }
 
@@ -45,7 +47,7 @@ public class MyStateAdapter extends BaseQuickAdapter<FriendCircleBean, BaseViewH
         setImage(helper, item);
         setComment(helper, item);
         setPraiseNum(helper, item);
-        setPraise(helper,item);
+        setPraise(helper, item);
 
     }
 
@@ -88,21 +90,24 @@ public class MyStateAdapter extends BaseQuickAdapter<FriendCircleBean, BaseViewH
     //设置时间
     private void setTime(BaseViewHolder helper, FriendCircleBean friendCircleBean) {
         TextView txtPublishTime = helper.getView(R.id.txt_publish_time);
+        TextView date = helper.getView(R.id.img_avatar);
         OtherInfoBean otherInfoBean = friendCircleBean.getOtherInfoBean();
 
         if (otherInfoBean != null) {
-            txtPublishTime.setText(otherInfoBean.getTime());
+            txtPublishTime.setText(DateUtil.getInstance().getData(otherInfoBean.getTime()));
+            date.setText(DateUtil.getInstance().getMonth(otherInfoBean.getTime()) + "月" + DateUtil.getInstance().getDay(otherInfoBean.getTime()) + "日");
         }
     }
 
     //设置九宫格图片
     private void setImage(BaseViewHolder helper, FriendCircleBean friendCircleBean) {
-        NineGridView nineGridView = helper.getView(R.id.nine_grid_view);
-        nineGridView.setOnImageClickListener((position1, view) ->
-                mImageWatcher.show((ImageView) view, nineGridView.getImageViews(),
-                        friendCircleBean.getImageUrls()));
-        nineGridView.setAdapter(new NineImageAdapter(mContext, mRequestOptions,
-                mDrawableTransitionOptions, friendCircleBean.getImageUrls()));
+//        nineGridView.setOnImageClickListener((position1, view) ->
+//                mImageWatcher.show((ImageView) view, nineGridView.getImageViews(),
+//                        friendCircleBean.getImageUrls()));
+            NineGridView nineGridView = helper.getView(R.id.nine_grid_view);
+            nineGridView.setAdapter(new NineImageAdapter(mContext, mRequestOptions,
+                    mDrawableTransitionOptions, friendCircleBean.getImageUrls()));
+
     }
 
     //设置评论
@@ -112,6 +117,7 @@ public class MyStateAdapter extends BaseQuickAdapter<FriendCircleBean, BaseViewH
             verticalCommentWidget.setVisibility(View.VISIBLE);
             verticalCommentWidget.addComments(friendCircleBean.getCommentBeans(), false);
         } else {
+            ZLog.d("---------->");
             verticalCommentWidget.setVisibility(View.GONE);
         }
     }
@@ -131,7 +137,7 @@ public class MyStateAdapter extends BaseQuickAdapter<FriendCircleBean, BaseViewH
     //点击点赞
     private void setPraise(BaseViewHolder helper, FriendCircleBean friendCircleBean) {
         ImageView iv_praise = helper.getView(R.id.iv_praise);
-        ImageView img_click_praise_or_comment=helper.getView(R.id.img_click_praise_or_comment);
+        ImageView img_click_praise_or_comment = helper.getView(R.id.img_click_praise_or_comment);
         iv_praise.setOnClickListener(v -> {
             ToastUtil.normalToast(helper.itemView.getContext(), "点赞成功");
         });
