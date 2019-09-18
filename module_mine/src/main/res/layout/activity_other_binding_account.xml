@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="me.goldze.mvvmhabit.base.BaseViewModel" />
+            type="com.techangkeji.model_mine.ui.viewModel.OtherBindingAccountViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -33,6 +33,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_marginTop="@dimen/d60"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -57,12 +58,13 @@
 
         <View
             style="@style/ViewLineStyle"
+            android:visibility="gone"
             android:layout_marginTop="@dimen/d14" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d28"
+            android:layout_marginTop="@dimen/d60"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -78,7 +80,8 @@
                 android:drawableRight="@drawable/more_1x"
                 android:gravity="right"
                 android:drawablePadding="@dimen/d25"
-                android:text="绑定"
+                android:text="@={viewModel.weChat}"
+                binding:onClickCommand="@{viewModel.weChatCommand}"
                 android:textColor="@color/color_dark_333333"
                 android:textSize="@dimen/font14" />
         </LinearLayout>
@@ -106,7 +109,8 @@
                 android:drawableRight="@drawable/more_1x"
                 android:gravity="right"
                 android:drawablePadding="@dimen/d25"
-                android:text="解绑"
+                android:text="@={viewModel.qq}"
+                binding:onClickCommand="@{viewModel.qqCommand}"
                 android:textColor="@color/color_dark_333333"
                 android:textSize="@dimen/font14" />
         </LinearLayout>

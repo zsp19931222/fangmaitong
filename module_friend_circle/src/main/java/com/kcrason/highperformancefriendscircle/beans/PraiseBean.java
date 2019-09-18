@@ -10,7 +10,7 @@ import android.text.TextUtils;
  */
 public class PraiseBean {
     private String praiseUserName;
-    private String praiseUserId;
+    private int praiseUserId;
 
     public String getPraiseUserName() {
         return praiseUserName;
@@ -20,11 +20,11 @@ public class PraiseBean {
         this.praiseUserName = praiseUserName;
     }
 
-    public String getPraiseUserId() {
+    public int getPraiseUserId() {
         return praiseUserId;
     }
 
-    public void setPraiseUserId(String praiseUserId) {
+    public void setPraiseUserId(int praiseUserId) {
         this.praiseUserId = praiseUserId;
     }
 }

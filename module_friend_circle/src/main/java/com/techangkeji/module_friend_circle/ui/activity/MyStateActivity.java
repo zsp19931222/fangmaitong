@@ -24,6 +24,11 @@ import java.util.List;
 import ch.ielse.view.imagewatcher.ImageWatcher;
 import me.goldze.mvvmhabit.base.BaseActivity;
 import me.goldze.mvvmhabit.base.BaseViewModel;
+import me.goldze.mvvmhabit.bus.RxBus;
+import me.goldze.mvvmhabit.bus.RxSubscriptions;
+import me.goldze.mvvmhabit.http.net.body.CommentBody;
+import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
+import me.goldze.mvvmhabit.utils.ZLog;
 
 @Route(path = ARouterPath.FriendCircle.MyStateActivity)
 public class MyStateActivity extends BaseActivity<ActivityMyStateBinding, MyStateViewModel> implements ImageWatcher.OnPictureLongPressListener, ImageWatcher.Loader {
@@ -48,6 +53,15 @@ public class MyStateActivity extends BaseActivity<ActivityMyStateBinding, MyStat
         binding.rv.setLayoutManager(new LinearLayoutManager(this));
         binding.rv.setAdapter(myStateAdapter);
         viewModel.myMovingList(this,myStateAdapter);
+
+        RxSubscriptions.add(RxBus.getDefault().toObservable(CommentBody.class).subscribe(commentBody -> {
+            ZLog.d(commentBody);
+            viewModel.comment(commentBody);
+        }));
+        RxSubscriptions.add(RxBus.getDefault().toObservable(String.class).subscribe(s -> {
+            CommentBody commentBody=new CommentBody("1234",2,6,  1,"梦佳姐",false);
+            viewModel.comment(commentBody);
+        }));
     }
 
     @Override

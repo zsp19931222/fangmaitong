@@ -34,6 +34,7 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import java.util.Map;
 
+import me.goldze.mvvmhabit.base.AppManager;
 import me.goldze.mvvmhabit.base.BaseApplication;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;

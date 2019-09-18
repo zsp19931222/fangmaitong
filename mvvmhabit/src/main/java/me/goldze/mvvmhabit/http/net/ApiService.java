@@ -9,6 +9,7 @@ import me.goldze.mvvmhabit.http.net.body.AuthQualificationBody;
 import me.goldze.mvvmhabit.http.net.body.AuthRealNameBody;
 import me.goldze.mvvmhabit.http.net.body.BindingThirdBody;
 import me.goldze.mvvmhabit.http.net.body.CheckAuthCodeBody;
+import me.goldze.mvvmhabit.http.net.body.CommentBody;
 import me.goldze.mvvmhabit.http.net.body.LoginBody;
 import me.goldze.mvvmhabit.http.net.body.MyMovingListBody;
 import me.goldze.mvvmhabit.http.net.body.RegisterBody;
@@ -17,6 +18,7 @@ import me.goldze.mvvmhabit.http.net.body.SendCodeBody;
 import me.goldze.mvvmhabit.http.net.body.UntiedThirdBody;
 import me.goldze.mvvmhabit.http.net.body.UpdateBody;
 import me.goldze.mvvmhabit.http.net.body.UpdatePasswordBody;
+import me.goldze.mvvmhabit.http.net.body.VoteBody;
 import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.MyStateEntity;
@@ -44,10 +46,10 @@ public interface ApiService<T extends BaseEntity> {
     String LOGIN_BASE_URL = "http://39.98.33.32:10006/";
     String API = "/api/v2/";
 
-    //注册
-    @POST(API + "register")
-    @Headers({"url_name:login"})
-    Observable<SuccessEntity<RegisterEntity>> register(@Body() RegisterBody registerBody);
+//    //注册
+//    @POST(API + "register")
+//    @Headers({"url_name:login"})
+//    Observable<SuccessEntity<RegisterEntity>> register(@Body() RegisterBody registerBody);
 
     //登录
     @POST(API + "login")
@@ -83,7 +85,7 @@ public interface ApiService<T extends BaseEntity> {
     //解绑
     @PUT(API + "auth/untiedThird/{type}")
     @Headers({"url_name:login"})
-    Observable<SuccessEntity> untiedThird(@Path("type") String time, @Body() UntiedThirdBody untiedThirdBody);
+    Observable<SuccessEntity> untiedThird(@Path("type") int type);
 
 
     //发布动态
@@ -149,5 +151,20 @@ public interface ApiService<T extends BaseEntity> {
     @POST(API + "auth/bindingThird")
     @Headers({"url_name:login"})
     Observable<SuccessEntity<RegisterEntity>> bindingThird(@Body() BindingThirdBody authBrokerBody);
+
+    //点赞
+    @POST(API + "auth/vote")
+    @Headers({"url_name:login"})
+    Observable<SuccessEntity> vote(@Body() VoteBody voteBody);
+
+    //取消点赞
+    @DELETE(API + "auth/vote/{entityId}")
+    @Headers({"url_name:login"})
+    Observable<SuccessEntity> unVote(@Path("entityId") long entityId);
+
+    //评论
+    @POST(API + "auth/comment")
+    @Headers({"url_name:login"})
+    Observable<SuccessEntity> comment(@Body() CommentBody commentBody);
 
 }

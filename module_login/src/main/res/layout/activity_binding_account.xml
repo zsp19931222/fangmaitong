@@ -65,7 +65,50 @@
             <View
                 style="@style/ViewLineStyle"
                 android:layout_marginTop="@dimen/d6" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d27"
+                android:gravity="bottom"
+                android:orientation="horizontal">
 
+                <ImageView
+                    android:layout_width="@dimen/d18"
+                    android:layout_height="@dimen/d18"
+                    android:layout_marginStart="@dimen/d10"
+                    android:src="@mipmap/auth_code_icon" />
+
+                <EditText
+                    android:id="@+id/et_l_vc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d10"
+                    android:layout_marginEnd="@dimen/d10"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入验证码"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:text="@={viewModel.authCodeNumField}"
+                    android:textColor="@color/color_dark_333333"
+                    android:textColorHint="@color/color_BDC2C0"
+                    android:textSize="@dimen/font12" />
+
+                <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                    android:layout_width="@dimen/d80"
+                    android:layout_height="@dimen/d20"
+                    android:gravity="center"
+                    android:text="@{viewModel.authCodeField}"
+                    android:textSize="@dimen/font10"
+                    binding:onClickCommand="@{viewModel.sendCodeCommand}"
+                    binding:rv_backgroundColor="@color/color_FFDDB4"
+                    binding:rv_radius="@dimen/d10"
+                    binding:rv_textColor="@color/color_FF8C00" />
+            </LinearLayout>
+
+            <View
+                style="@style/ViewLineStyle"
+                android:layout_marginTop="@dimen/d6" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

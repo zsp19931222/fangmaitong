@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.techangkeji.module_friend_circle.R;
 
+import me.goldze.mvvmhabit.bus.RxBus;
+
 /**
  * @author KCrason
  * @date 2018/4/28
@@ -41,5 +43,6 @@ public class TextClickSpan extends ClickableSpan {
     @Override
     public void onClick(View widget) {
         Toast.makeText(mContext, "You Click " + mUserName, Toast.LENGTH_SHORT).show();
+        RxBus.getDefault().post(mUserName);
     }
 }

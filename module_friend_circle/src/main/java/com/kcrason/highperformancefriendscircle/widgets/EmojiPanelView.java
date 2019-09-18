@@ -46,6 +46,9 @@ import io.reactivex.Single;
 import io.reactivex.SingleOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import me.goldze.mvvmhabit.bus.RxBus;
+import me.goldze.mvvmhabit.http.net.body.CommentBody;
+import me.goldze.mvvmhabit.utils.IsNullUtil;
 import me.goldze.mvvmhabit.utils.ToastUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
 
@@ -75,6 +78,7 @@ public class EmojiPanelView extends LinearLayout implements OnKeyBoardStateListe
 
     private boolean isKeyBoardShow;
     private boolean isInitComplete;
+    private CommentBody commentBody;
 
     public EmojiPanelView(Context context) {
         super(context);
@@ -157,7 +161,12 @@ public class EmojiPanelView extends LinearLayout implements OnKeyBoardStateListe
         addOnSoftKeyBoardVisibleListener((Activity) getContext(), this);
         addView(itemView);
         tv_comment.setOnClickListener(v -> {
-            ToastUtil.normalToast(itemView.getContext(), "评论成功");
+            if (IsNullUtil.getInstance().isEmpty(commentBody) || IsNullUtil.getInstance().isEmpty(mEditText.getText())) {
+                ToastUtil.normalToast(itemView.getContext(), "评论失败");
+            } else {
+                commentBody.setContent(mEditText.getText().toString());
+                RxBus.getDefault().post(commentBody);
+            }
             mEditText.setText("");
             dismiss();
         });
@@ -241,9 +250,10 @@ public class EmojiPanelView extends LinearLayout implements OnKeyBoardStateListe
         return mEmojiDataSources == null ? 0 : mEmojiDataSources.size();
     }
 
-    public void showEmojiPanel() {
+    public void showEmojiPanel(CommentBody commentBody) {
         ZLog.d(isInitComplete);
         ZLog.d(mLayoutPanel);
+        this.commentBody = commentBody;
         if (isInitComplete) {
             if (mLayoutPanel != null) {
                 mLayoutPanel.setVisibility(VISIBLE);

@@ -26,6 +26,7 @@ import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.http.net.DefaultObserver;
 import me.goldze.mvvmhabit.http.net.IdeaApi;
 import me.goldze.mvvmhabit.http.net.body.CheckAuthCodeBody;
+import me.goldze.mvvmhabit.http.net.body.LoginBody;
 import me.goldze.mvvmhabit.http.net.body.RegisterBody;
 import me.goldze.mvvmhabit.http.net.body.SendCodeBody;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
@@ -117,9 +118,9 @@ public class RegisterViewModel extends BaseViewModel {
      */
 
     private void register() {
-        RegisterBody registerBody = new RegisterBody(cpwField.get(), phoneField.get(), identity.get());
+        LoginBody registerBody = new LoginBody(cpwField.get(), phoneField.get(), 1);
         IdeaApi.getApiService()
-                .register(registerBody)
+                .login(registerBody)
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                 .compose(RxUtils.schedulersTransformer())
                 .doOnSubscribe(disposable1 -> showDialog())

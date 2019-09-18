@@ -18,6 +18,7 @@ import com.techangkeji.model_message.MessageModuleInit;
 
 import org.litepal.LitePal;
 
+import me.goldze.mvvmhabit.base.AppManager;
 import me.goldze.mvvmhabit.base.BaseApplication;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.login.RegisterEntity;
@@ -103,9 +104,11 @@ public class LoginUtil {
                     ZLog.d("update current user nick fail");
                 }
                 DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
-                ARouter.getInstance().build(ARouterPath.Main.PAGER_MAIN).navigation();
                 //存储登录时间
                 SPUtils.getInstance().put("loginTime", System.currentTimeMillis());
+                AppManager.getAppManager().finishAllActivity();
+                ARouter.getInstance().build(ARouterPath.Main.PAGER_MAIN).navigation();
+
             }
 
             @Override

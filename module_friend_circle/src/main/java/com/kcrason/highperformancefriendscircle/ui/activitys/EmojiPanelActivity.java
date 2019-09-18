@@ -19,6 +19,6 @@ public class EmojiPanelActivity extends AppCompatActivity {
         setContentView(R.layout.activity_emoji_panel);
         EmojiPanelView emojiPanelView = findViewById(R.id.emoji_panel_view);
         emojiPanelView.initEmojiPanel(DataCenter.emojiDataSources);
-        findViewById(R.id.show).setOnClickListener(v -> emojiPanelView.showEmojiPanel());
+        findViewById(R.id.show).setOnClickListener(v -> emojiPanelView.showEmojiPanel(null));
     }
 }

@@ -23,6 +23,8 @@ import com.techangkeji.module_friend_circle.ui.viewModel.MyStateViewModel;
 import java.util.List;
 
 import ch.ielse.view.imagewatcher.ImageWatcher;
+import me.goldze.mvvmhabit.http.net.body.CommentBody;
+import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.ToastUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
 
@@ -144,8 +146,13 @@ public class MyStateAdapter extends BaseQuickAdapter<FriendCircleBean, BaseViewH
         ImageView img_click_praise_or_comment = helper.getView(R.id.img_click_praise_or_comment);
         iv_praise.setOnClickListener(v -> {
             ToastUtil.normalToast(helper.itemView.getContext(), "点赞成功");
+            viewModel.vote(friendCircleBean.getId(),2);
+            viewModel.unVote(friendCircleBean.getId());
         });
-        img_click_praise_or_comment.setOnClickListener(v -> emojiPanelView.showEmojiPanel());
+        img_click_praise_or_comment.setOnClickListener(v -> {
+            CommentBody commentBody=new CommentBody("",2,friendCircleBean.getId(), LocalDataHelper.getInstance().getUserInfo().getId(),LocalDataHelper.getInstance().getUserInfo().getName());
+            emojiPanelView.showEmojiPanel(commentBody);
+        });
     }
 
     /**

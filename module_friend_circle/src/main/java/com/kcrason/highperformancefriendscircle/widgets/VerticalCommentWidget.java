@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import com.techangkeji.module_friend_circle.R;
 import com.kcrason.highperformancefriendscircle.beans.CommentBean;
 import com.kcrason.highperformancefriendscircle.enums.TranslationState;
 import com.kcrason.highperformancefriendscircle.interfaces.OnItemClickPopupMenuListener;
@@ -20,6 +19,7 @@ import com.kcrason.highperformancefriendscircle.others.SimpleWeakObjectPool;
 import com.kcrason.highperformancefriendscircle.span.TextMovementMethod;
 import com.kcrason.highperformancefriendscircle.utils.TimerUtils;
 import com.kcrason.highperformancefriendscircle.utils.Utils;
+import com.techangkeji.module_friend_circle.R;
 
 import java.util.List;
 

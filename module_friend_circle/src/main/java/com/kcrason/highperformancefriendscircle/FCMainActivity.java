@@ -124,7 +124,7 @@ public class FCMainActivity extends AppCompatActivity implements SwipeRefreshLay
     @Override
     public void onCommentClick(int position) {
 //        Toast.makeText(this, "you click comment", Toast.LENGTH_SHORT).show();
-        mEmojiPanelView.showEmojiPanel();
+        mEmojiPanelView.showEmojiPanel(null);
     }
 
     @Override
