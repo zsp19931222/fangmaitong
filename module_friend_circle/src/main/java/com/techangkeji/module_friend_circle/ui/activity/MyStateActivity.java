@@ -44,7 +44,7 @@ public class MyStateActivity extends BaseActivity<ActivityMyStateBinding, MyStat
         binding.title.setTitle("我的动态");
         binding.emojiPanelView.initEmojiPanel(DataCenter.emojiDataSources);
 
-        myStateAdapter = new MyStateAdapter(R.layout.item_my_state, viewModel.friendCircleBeans, binding.imageWatcher, binding.emojiPanelView);
+        myStateAdapter = new MyStateAdapter(R.layout.item_my_state, viewModel.friendCircleBeans, binding.imageWatcher, binding.emojiPanelView,viewModel);
         binding.rv.setLayoutManager(new LinearLayoutManager(this));
         binding.rv.setAdapter(myStateAdapter);
         viewModel.myMovingList(this,myStateAdapter);

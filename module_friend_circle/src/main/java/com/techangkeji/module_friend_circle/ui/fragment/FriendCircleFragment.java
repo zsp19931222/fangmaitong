@@ -31,7 +31,7 @@ public class FriendCircleFragment extends BaseLazyFragment<FragmentFriendStateBi
     @Override
     public void fetchData() {
         binding.emojiPanelView.initEmojiPanel(DataCenter.emojiDataSources);
-        MyStateAdapter myStateAdapter = new MyStateAdapter(R.layout.item_my_state, DataCenter.makeFriendCircleBeans(getContext()), binding.imageWatcher, binding.emojiPanelView);
+        MyStateAdapter myStateAdapter = new MyStateAdapter(R.layout.item_my_state, DataCenter.makeFriendCircleBeans(getContext()), binding.imageWatcher, binding.emojiPanelView,null);
         binding.rv.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rv.setAdapter(myStateAdapter);
         RxSubscriptions.add(RxBus.getDefault().toObservable(String.class).subscribe(s -> {

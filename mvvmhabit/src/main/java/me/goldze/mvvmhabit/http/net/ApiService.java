@@ -2,18 +2,21 @@ package me.goldze.mvvmhabit.http.net;
 
 
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.Observable;
+import me.goldze.mvvmhabit.http.net.body.AuthBrokerBody;
+import me.goldze.mvvmhabit.http.net.body.AuthQualificationBody;
+import me.goldze.mvvmhabit.http.net.body.AuthRealNameBody;
+import me.goldze.mvvmhabit.http.net.body.BindingThirdBody;
 import me.goldze.mvvmhabit.http.net.body.CheckAuthCodeBody;
 import me.goldze.mvvmhabit.http.net.body.LoginBody;
-import me.goldze.mvvmhabit.http.net.body.LogoutBody;
 import me.goldze.mvvmhabit.http.net.body.MyMovingListBody;
 import me.goldze.mvvmhabit.http.net.body.RegisterBody;
 import me.goldze.mvvmhabit.http.net.body.ReleaseMovingBody;
 import me.goldze.mvvmhabit.http.net.body.SendCodeBody;
 import me.goldze.mvvmhabit.http.net.body.UntiedThirdBody;
 import me.goldze.mvvmhabit.http.net.body.UpdateBody;
+import me.goldze.mvvmhabit.http.net.body.UpdatePasswordBody;
 import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.MyStateEntity;
@@ -29,7 +32,6 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
-import retrofit2.http.QueryMap;
 
 /**
  * description:
@@ -55,7 +57,7 @@ public interface ApiService<T extends BaseEntity> {
     //获取验证码
     @POST(API + "sendCode")
     @Headers({"url_name:login"})
-    Observable<SuccessEntity<SendCodeEntity>> sendCode(@Body() SendCodeBody sendCodeBody);
+    Observable<SuccessEntity> sendCode(@Body() SendCodeBody sendCodeBody);
 
     //验证验证码
     @POST(API + "checkCode")
@@ -93,7 +95,7 @@ public interface ApiService<T extends BaseEntity> {
     //删除动态
     @DELETE(API + "auth/moving/{id}")
     @Headers({"url_name:login"})
-    Observable<SuccessEntity> delMoving(@Path("id") String id, @Body() UntiedThirdBody untiedThirdBody);
+    Observable<SuccessEntity> delMoving(@Path("id") int id);
 
 
     //获取某个动态详情
@@ -109,9 +111,43 @@ public interface ApiService<T extends BaseEntity> {
 
 
     //获取朋友圈动态列表
-    @GET(API + "auth/moving/firend/list/{page}/{max} ")
+    @GET(API + "auth/moving/firend/list/{page}/{max}")
     @Headers({"url_name:login"})
     Observable<SuccessEntity> friendMovingList(@Path("page") String page, @Path("max") String max, @Body() UntiedThirdBody untiedThirdBody);
 
+    //修改密码
+    @PUT(API + "auth/updatePassword")
+    @Headers({"url_name:login"})
+    Observable<SuccessEntity> updatePassword(@Body() UpdatePasswordBody updatePasswordBody);
+
+    //修改密码
+    @PUT(API + "forgetPassword")
+    @Headers({"url_name:login"})
+    Observable<SuccessEntity> forgetPassword(@Body() UpdatePasswordBody updatePasswordBody);
+
+    //修改手机号
+    @PUT(API + "auth/updatePhone")
+    @Headers({"url_name:login"})
+    Observable<SuccessEntity> updatePhone(@Body() UpdatePasswordBody updatePasswordBody);
+
+    //实名认证
+    @POST(API + "auth/authenticate/realName")
+    @Headers({"url_name:login"})
+    Observable<SuccessEntity> realName(@Body() AuthRealNameBody authRealName);
+
+    //资质认证
+    @POST(API + "auth/authenticate/qualification")
+    @Headers({"url_name:login"})
+    Observable<SuccessEntity> qualification(@Body() AuthQualificationBody authRealName);
+
+    //经纪人认证
+    @POST(API + "auth/authenticate/broker")
+    @Headers({"url_name:login"})
+    Observable<SuccessEntity> broker(@Body() AuthBrokerBody authBrokerBody);
+
+    //账号绑定
+    @POST(API + "auth/bindingThird")
+    @Headers({"url_name:login"})
+    Observable<SuccessEntity<RegisterEntity>> bindingThird(@Body() BindingThirdBody authBrokerBody);
 
 }

@@ -126,11 +126,10 @@ public class RegisterViewModel extends BaseViewModel {
                 .subscribe(new DefaultObserver<SuccessEntity<RegisterEntity>>(this) {
                     @Override
                     public void onSuccess(SuccessEntity<RegisterEntity> response) {
-                        LoginUtil.getInstance().saveUserInfo(response);
                         PerfectionUserInfoPopup perfectionUserInfoPopup = new PerfectionUserInfoPopup(context.get());
                         perfectionUserInfoPopup.setOnConfirmListener(() -> {
                             showDialog("正在登录请稍后");
-                            LoginUtil.getInstance().registerHX(phoneField.get(), cpwField.get());
+                            LoginUtil.getInstance().saveUserInfo(response);
                         });
                         perfectionUserInfoPopup.showPopupWindow();
                     }
@@ -166,10 +165,10 @@ public class RegisterViewModel extends BaseViewModel {
                         .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                         .compose(RxUtils.schedulersTransformer())
                         .doOnSubscribe(disposable1 -> showDialog())
-                        .subscribe(new DefaultObserver<SuccessEntity<SendCodeEntity>>(this) {
+                        .subscribe(new DefaultObserver<SuccessEntity>(this) {
 
                             @Override
-                            public void onSuccess(SuccessEntity<SendCodeEntity> entity) {
+                            public void onSuccess(SuccessEntity entity) {
                                 sendAuthCodeCountDown();
                             }
                         });

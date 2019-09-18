@@ -5,19 +5,19 @@
 
         <variable
             name="viewModel"
-            type="me.goldze.mvvmhabit.base.BaseViewModel" />
+            type="com.techangkeji.model_mine.ui.viewModel.AutonymAuthViewModel" />
     </data>
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_white"
         android:orientation="vertical">
 
-        <include
+        <com.goldze.base.view.TitleVIew
             android:id="@+id/title"
-            layout="@layout/title" />
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d44" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -36,6 +36,7 @@
             android:layout_marginEnd="@dimen/d16"
             android:background="@null"
             android:hint="请输入真实姓名"
+            android:text="@={viewModel.name}"
             android:textColor="@color/color_gray_999999"
             android:textColorHint="@color/color_gray_999999"
             android:textSize="@dimen/font12" />
@@ -65,6 +66,7 @@
             android:layout_marginEnd="@dimen/d16"
             android:background="@null"
             android:hint="请输入身份证号"
+            android:text="@={viewModel.idNum}"
             android:textColor="@color/color_gray_999999"
             android:textColorHint="@color/color_gray_999999"
             android:textSize="@dimen/font12" />
@@ -112,6 +114,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/d16"
                 android:layout_weight="1"
+                binding:onClickCommand="@{viewModel.frontCommand}"
                 android:background="@mipmap/scsfz">
 
                 <TextView
@@ -123,6 +126,12 @@
                     android:text="点击上传身份证正面照"
                     android:textColor="@color/color_gray_999999"
                     android:textSize="@dimen/font10" />
+
+                <me.goldze.mvvmhabit.view.shape.RadiusImageView
+                    android:layout_width="match_parent"
+                    binding:rv_corner_radius="@dimen/d10"
+                    android:layout_height="match_parent"
+                    binding:url="@{viewModel.frontUrl}" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -131,6 +140,7 @@
                 android:layout_marginStart="@dimen/d16"
                 android:layout_marginEnd="@dimen/d16"
                 android:layout_weight="1"
+                binding:onClickCommand="@{viewModel.reverseCommand}"
                 android:background="@mipmap/scsfz">
 
                 <TextView
@@ -142,6 +152,12 @@
                     android:text="点击上传身份证反面照"
                     android:textColor="@color/color_gray_999999"
                     android:textSize="@dimen/font10" />
+
+                <me.goldze.mvvmhabit.view.shape.RadiusImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    binding:rv_corner_radius="@dimen/d10"
+                    binding:url="@{viewModel.reverseUrl}" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -160,6 +176,7 @@
                 android:text="提交审核"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font16"
+                binding:onClickCommand="@{viewModel.submitCommand}"
                 binding:rv_backgroundColor="@color/color_FF8C00"
                 binding:rv_radius="@dimen/d25" />
         </RelativeLayout>

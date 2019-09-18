@@ -8,6 +8,8 @@ import com.techangkeji.model_login.databinding.ActivityBindingAccountBinding;
 import com.techangkeji.model_login.ui.view_model.BindingAccountViewModel;
 
 import me.goldze.mvvmhabit.base.BaseActivity;
+import me.goldze.mvvmhabit.http.net.entity.login.RegisterEntity;
+import me.goldze.mvvmhabit.utils.ZLog;
 
 /**
  * description:
@@ -23,5 +25,17 @@ public class BindingAccountActivity extends BaseActivity<ActivityBindingAccountB
     @Override
     public int initVariableId() {
         return BR.viewModel;
+    }
+
+    @Override
+    public void initData() {
+        try {
+            viewModel.id.set(getIntent().getExtras().getLong("id"));
+            viewModel.type.set(getIntent().getExtras().getInt("type"));
+            ZLog.d(viewModel.id.get());
+            ZLog.d(viewModel.type.get());
+        } catch (Exception e) {
+            ZLog.d(e);
+        }
     }
 }

@@ -22,6 +22,7 @@ import me.goldze.mvvmhabit.base.BaseApplication;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.login.RegisterEntity;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
+import me.goldze.mvvmhabit.utils.IsNullUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
 
 /**
@@ -44,7 +45,7 @@ public class LoginUtil {
      * author: Andy
      * date: 2019/9/10 0010 15:56
      */
-    public void registerHX(String username, String pwd) {
+    private void registerHX(String username, String pwd) {
         if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(pwd)) {
             new Thread(() -> {
                 try {
@@ -99,7 +100,7 @@ public class LoginUtil {
                 boolean updatenick = EMClient.getInstance().pushManager().updatePushNickname(
                         MessageModuleInit.currentUserNick.trim());
                 if (!updatenick) {
-                    Log.e("LoginActivity", "update current user nick fail");
+                    ZLog.d("update current user nick fail");
                 }
                 DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
                 ARouter.getInstance().build(ARouterPath.Main.PAGER_MAIN).navigation();
@@ -201,9 +202,12 @@ public class LoginUtil {
         dataBean.setWechatOpenId(response.getContent().getWechatOpenId());
         dataBean.setWechatProvince(response.getContent().getWechatProvince());
         dataBean.setWxappOpenId(response.getContent().getWxappOpenId());
-        SPUtils.getInstance().put("token",response.getContent().getJwtToken().getToken());
+        if (!IsNullUtil.getInstance().isEmpty(response.getContent().getJwtToken())){
+            SPUtils.getInstance().put("token", response.getContent().getJwtToken().getToken());
+        }
         dataBean.save();
         ZLog.d(LocalDataHelper.getInstance().getUserInfo());
-
+        // FIXME: 2019/9/18 0018 这里要用后台返回的用户名和密码来注册环信，现目前没有先写死
+        registerHX("1", "2");
     }
 }

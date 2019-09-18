@@ -11,22 +11,23 @@ android {
         release {
             v1SigningEnabled true
             v2SigningEnabled true
-//            storeFile file('F:\\WorkSpace\\app_key\\安卓数字证书.keystore')
-//            storePassword 'yhkjydszxy'
-//            keyAlias = 'mykey'
-//            keyPassword 'yhkjydszxy'
+            storeFile file('F:\\fangmaitong\\fangmaitong.jks')
+            storePassword 'fmt123456'
+            keyAlias = 'key0'
+            keyPassword 'fmt123456'
         }
         debug {
             v1SigningEnabled true
             v2SigningEnabled true
-//            storeFile file('F:\\WorkSpace\\app_key\\安卓数字证书.keystore')
-//            storePassword 'yhkjydszxy'
-//            keyAlias = 'mykey'
-//            keyPassword 'yhkjydszxy'
+            storeFile file('F:\\fangmaitong\\fangmaitong.jks')
+            storePassword 'fmt123456'
+            keyAlias = 'key0'
+            keyPassword 'fmt123456'
         }
     }
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false  //开启混淆编译
             zipAlignEnabled false  //Zipalign优化
             shrinkResources false // 移除无用的resource文件
@@ -40,6 +41,7 @@ android {
             buildConfigField("String", "UMENG_APP_KEY", "\"5d7efc860cafb29e7f000de9\"")
         }
         debug {
+            signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField("String", "WECHAT_APP_ID", "\"wx7bfeb2862235ac4f\"")

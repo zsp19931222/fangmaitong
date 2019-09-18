@@ -81,4 +81,9 @@ public class TipsConstants {
     //分享
     public static final String SHARE_FAIL="分享失败";
     public static final String SHARE_CANCLE="取消分享";
+
+
+    public static final String PARAMETER_ERROR="请完善相关信息";
+
+
 }

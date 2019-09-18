@@ -20,14 +20,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import me.goldze.mvvmhabit.base.BaseApplication;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.http.net.DefaultObserver;
 import me.goldze.mvvmhabit.http.net.IdeaApi;
 import me.goldze.mvvmhabit.http.net.body.MyMovingListBody;
+import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.MyStateEntity;
 import me.goldze.mvvmhabit.utils.IsNullUtil;
 import me.goldze.mvvmhabit.utils.RxUtils;
+import me.goldze.mvvmhabit.utils.ToastUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
 
 /**
@@ -59,6 +62,7 @@ public class MyStateViewModel extends BaseViewModel {
                     public void onSuccess(MyStateEntity response) {
                         for (MyStateEntity.DataBean datum : response.getData()) {
                             FriendCircleBean friendCircleBean = new FriendCircleBean();
+                            friendCircleBean.setId(datum.getId());//设置id
                             friendCircleBean.setCommentBeans(null);//设置评论
                             ZLog.d(IsNullUtil.getInstance().isEmpty(datum.getImgsUrl()));
                             if (!IsNullUtil.getInstance().isEmpty(datum.getImgsUrl())) {
@@ -86,6 +90,28 @@ public class MyStateViewModel extends BaseViewModel {
                         }
                         myStateAdapter.notifyDataSetChanged();
                     }
+                });
+    }
+
+    /**
+     * description:删除我的动态
+     * author: Andy
+     * date: 2019/9/18 0018 9:08
+     */
+    public void delMoving(int id,int position,MyStateAdapter myStateAdapter) {
+        IdeaApi.getApiService()
+                .delMoving(id)
+                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                .compose(RxUtils.schedulersTransformer())
+                .doOnSubscribe(disposable -> showDialog())
+                .subscribe(new DefaultObserver<SuccessEntity>(this) {
+                    @Override
+                    public void onSuccess(SuccessEntity response) {
+                        ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), response.getMsg());
+                        friendCircleBeans.remove(position);
+                        myStateAdapter.notifyDataSetChanged();
+                    }
+
                 });
     }
 }

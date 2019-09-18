@@ -43,7 +43,7 @@ public class CardActivity extends BaseActivity<ActivityCardBinding, BaseViewMode
         binding.title.setTitle("好友动态");
         binding.emojiPanelView.initEmojiPanel(DataCenter.emojiDataSources);
 
-        MyStateAdapter myStateAdapter = new MyStateAdapter(R.layout.item_my_state, DataCenter.makeFriendCircleBeans(this), binding.imageWatcher, binding.emojiPanelView);
+        MyStateAdapter myStateAdapter = new MyStateAdapter(R.layout.item_my_state, DataCenter.makeFriendCircleBeans(this), binding.imageWatcher, binding.emojiPanelView,null);
         binding.rv.setLayoutManager(new LinearLayoutManager(this));
         binding.rv.setAdapter(myStateAdapter);
     }

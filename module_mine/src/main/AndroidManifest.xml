@@ -8,7 +8,7 @@
         <activity android:name=".ui.activity.ChangeNickNameActivity" />
         <activity android:name=".ui.activity.AutonymAuthActivity" />
         <activity android:name=".ui.activity.QualificationAuthActivity" />
-        <activity android:name=".ui.activity.BokerAuthActivity" />
+        <activity android:name=".ui.activity.BrokerAuthActivity" />
         <activity android:name=".ui.activity.InformationCommentActivity" />
         <activity android:name=".ui.activity.InformationDetailActivity" />
         <activity android:name=".ui.activity.InviteInformationActivity" />

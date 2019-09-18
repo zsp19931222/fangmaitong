@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="me.goldze.mvvmhabit.base.BaseViewModel" />
+            type="com.techangkeji.model_mine.ui.viewModel.BrokerAuthViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,9 +14,10 @@
         android:background="@color/color_white"
         android:orientation="vertical">
 
-        <include
+        <com.goldze.base.view.TitleVIew
             android:id="@+id/title"
-            layout="@layout/title" />
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d44" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -43,6 +44,7 @@
                     android:layout_marginTop="@dimen/d20"
                     android:background="@null"
                     android:hint="请输入公司/店铺名称"
+                    android:text="@={viewModel.company}"
                     android:textColor="@color/color_gray_999999"
                     android:textColorHint="@color/color_gray_999999"
                     android:textSize="@dimen/font12" />
@@ -66,6 +68,7 @@
                     android:layout_height="@dimen/d150"
                     android:layout_marginTop="@dimen/d20"
                     binding:rv_radius="@dimen/d10"
+                    binding:onClickCommand="@{viewModel.nameplateUrlCommand}"
                     binding:rv_strokeColor="@color/color_f6"
                     binding:rv_strokeWidth="@dimen/d1">
 
@@ -78,6 +81,13 @@
                         android:text="请上传名牌，要求文字图片清晰，要求文字清晰"
                         android:textColor="@color/color_gray_666666"
                         android:textSize="@dimen/font10" />
+
+                    <me.goldze.mvvmhabit.view.shape.RadiusImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/iv_nameplate"
+                        binding:rv_corner_radius="@dimen/d10"
+                        binding:url="@{viewModel.nameplateUrl}" />
                 </me.goldze.mvvmhabit.view.shape.RadiusRelativeLayout>
 
                 <TextView
@@ -93,6 +103,7 @@
                     android:layout_height="@dimen/d150"
                     android:layout_marginTop="@dimen/d20"
                     binding:rv_radius="@dimen/d10"
+                    binding:onClickCommand="@{viewModel.badgeUrlCommand}"
                     binding:rv_strokeColor="@color/color_f6"
                     binding:rv_strokeWidth="@dimen/d1">
 
@@ -105,6 +116,13 @@
                         android:text="请上传胸牌，要求文字图片清晰，要求文字清晰"
                         android:textColor="@color/color_gray_666666"
                         android:textSize="@dimen/font10" />
+
+                    <me.goldze.mvvmhabit.view.shape.RadiusImageView
+                        android:layout_width="match_parent"
+                        binding:rv_corner_radius="@dimen/d10"
+                        android:layout_height="match_parent"
+                        android:id="@+id/iv_badge"
+                        binding:url="@{viewModel.badgeUrl}" />
                 </me.goldze.mvvmhabit.view.shape.RadiusRelativeLayout>
 
                 <TextView
@@ -121,6 +139,7 @@
                     android:layout_marginTop="@dimen/d20"
                     android:background="@null"
                     android:hint="请输入联系地址"
+                    android:text="@={viewModel.address}"
                     android:textColor="@color/color_gray_999999"
                     android:textColorHint="@color/color_gray_999999"
                     android:textSize="@dimen/font12" />
@@ -131,11 +150,24 @@
                     android:layout_marginTop="@dimen/d5"
                     android:background="@color/color_f6" />
 
+                <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/d40"
+                    android:layout_margin="@dimen/d16"
+                    android:gravity="center"
+                    android:text="提交审核"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font16"
+                    binding:onClickCommand="@{viewModel.submitCommand}"
+                    binding:rv_backgroundColor="@color/color_FF8C00"
+                    binding:rv_radius="@dimen/d25" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/d50"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"

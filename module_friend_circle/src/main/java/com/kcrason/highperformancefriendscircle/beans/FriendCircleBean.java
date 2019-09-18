@@ -11,6 +11,8 @@ public class FriendCircleBean {
 
     private int viewType;
 
+    private int id;
+
     private String content;
 
     private List<CommentBean> commentBeans;
@@ -148,5 +150,11 @@ public class FriendCircleBean {
 
     private SpannableStringBuilder praiseSpan;
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 }

@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="me.goldze.mvvmhabit.base.BaseViewModel" />
+            type="com.techangkeji.model_mine.ui.viewModel.QualificationAuthViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,9 +14,10 @@
         android:background="@color/color_white"
         android:orientation="vertical">
 
-        <include
+        <com.goldze.base.view.TitleVIew
             android:id="@+id/title"
-            layout="@layout/title" />
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d44" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -43,6 +44,7 @@
                     android:layout_marginTop="@dimen/d20"
                     android:background="@null"
                     android:hint="请输入公司名称"
+                    android:text="@={viewModel.company}"
                     android:textColor="@color/color_gray_999999"
                     android:textColorHint="@color/color_gray_999999"
                     android:textSize="@dimen/font12" />
@@ -65,6 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/d150"
                     android:layout_marginTop="@dimen/d20"
+                    binding:onClickCommand="@{viewModel.companyCommand}"
                     binding:rv_radius="@dimen/d10"
                     binding:rv_strokeColor="@color/color_f6"
                     binding:rv_strokeWidth="@dimen/d1">
@@ -78,6 +81,12 @@
                         android:text="请上传公司营业执照附件，要求文字清晰"
                         android:textColor="@color/color_gray_666666"
                         android:textSize="@dimen/font10" />
+
+                    <me.goldze.mvvmhabit.view.shape.RadiusImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        binding:rv_corner_radius="@dimen/d10"
+                        binding:url="@{viewModel.companyUrl}" />
                 </me.goldze.mvvmhabit.view.shape.RadiusRelativeLayout>
 
                 <TextView
@@ -94,6 +103,7 @@
                     android:layout_marginTop="@dimen/d20"
                     android:background="@null"
                     android:hint="请输入联系人姓名"
+                    android:text="@={viewModel.linkman}"
                     android:textColor="@color/color_gray_999999"
                     android:textColorHint="@color/color_gray_999999"
                     android:textSize="@dimen/font12" />
@@ -118,6 +128,7 @@
                     android:layout_marginTop="@dimen/d20"
                     android:background="@null"
                     android:hint="请输入联系人身份证号"
+                    android:text="@={viewModel.linkmanPhone}"
                     android:textColor="@color/color_gray_999999"
                     android:textColorHint="@color/color_gray_999999"
                     android:textSize="@dimen/font12" />
@@ -132,7 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/d30"
-                    android:text="公司名称"
+                    android:text="联系人身份证号"
                     android:textColor="@color/color_dark_333333"
                     android:textSize="@dimen/font16" />
 
@@ -141,7 +152,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/d20"
                     android:background="@null"
-                    android:hint="请输入真实姓名"
+                    android:hint="请输入联系人身份证号"
+                    android:text="@={viewModel.linkmanIDNum}"
                     android:textColor="@color/color_gray_999999"
                     android:textColorHint="@color/color_gray_999999"
                     android:textSize="@dimen/font12" />
@@ -162,7 +174,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/d16"
                         android:text="上传身份证照片"
                         android:textColor="@color/color_dark_333333"
                         android:textSize="@dimen/font16" />
@@ -185,9 +196,9 @@
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/d16"
                         android:layout_weight="1"
-                        android:background="@mipmap/scsfz">
+                        android:background="@mipmap/scsfz"
+                        binding:onClickCommand="@{viewModel.frontCommand}">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -198,6 +209,12 @@
                             android:text="点击上传身份证正面照"
                             android:textColor="@color/color_gray_999999"
                             android:textSize="@dimen/font10" />
+
+                        <me.goldze.mvvmhabit.view.shape.RadiusImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            binding:rv_corner_radius="@dimen/d10"
+                            binding:url="@{viewModel.forntUrl}" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -206,7 +223,8 @@
                         android:layout_marginStart="@dimen/d16"
                         android:layout_marginEnd="@dimen/d16"
                         android:layout_weight="1"
-                        android:background="@mipmap/scsfz">
+                        android:background="@mipmap/scsfz"
+                        binding:onClickCommand="@{viewModel.reverseCommand}">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -217,6 +235,12 @@
                             android:text="点击上传身份证反面照"
                             android:textColor="@color/color_gray_999999"
                             android:textSize="@dimen/font10" />
+
+                        <me.goldze.mvvmhabit.view.shape.RadiusImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            binding:rv_corner_radius="@dimen/d10"
+                            binding:url="@{viewModel.reverseUrl}" />
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -228,6 +252,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/d50"
                         android:layout_alignParentBottom="true"
+                        android:layout_centerInParent="true"
                         android:layout_marginStart="@dimen/d16"
                         android:layout_marginTop="@dimen/d50"
                         android:layout_marginEnd="@dimen/d16"
@@ -236,6 +261,7 @@
                         android:text="提交审核"
                         android:textColor="@color/white"
                         android:textSize="@dimen/font16"
+                        binding:onClickCommand="@{viewModel.submitCommand}"
                         binding:rv_backgroundColor="@color/color_FF8C00"
                         binding:rv_radius="@dimen/d25" />
                 </RelativeLayout>

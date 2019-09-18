@@ -98,6 +98,16 @@
                 style="@style/ViewLineStyle"
                 android:layout_marginTop="@dimen/d6" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/d10"
+                android:gravity="end"
+                android:text="忘记密码"
+                binding:onClickCommand="@{viewModel.forgetPWCommand}"
+                android:textColor="@color/color_gray_666666"
+                android:textSize="@dimen/font12" />
+
             <me.goldze.mvvmhabit.view.shape.RadiusTextView
                 android:id="@+id/rtv_l_login"
                 android:layout_width="match_parent"
@@ -123,8 +133,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -147,13 +156,15 @@
                     <ImageView
                         android:layout_width="@dimen/d40"
                         android:layout_height="@dimen/d40"
-                        android:src="@mipmap/weixing_icon" />
+                        android:src="@mipmap/weixing_icon"
+                        binding:onClickCommand="@{viewModel.WeChatCommand}" />
 
                     <ImageView
                         android:layout_width="@dimen/d40"
                         android:layout_height="@dimen/d40"
                         android:layout_marginStart="@dimen/d40"
-                        android:src="@mipmap/qq_icon" />
+                        android:src="@mipmap/qq_icon"
+                        binding:onClickCommand="@{viewModel.qqCommand}" />
                 </LinearLayout>
 
                 <LinearLayout

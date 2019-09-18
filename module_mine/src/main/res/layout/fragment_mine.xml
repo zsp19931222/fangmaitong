@@ -45,13 +45,14 @@
                     android:layout_width="@dimen/d60"
                     android:layout_height="@dimen/d60"
                     android:layout_marginStart="@dimen/d16"
-                    binding:url="@{viewModel.url}"
+                    android:layout_marginTop="@dimen/d5"
                     binding:rv_is_circle="true"
-                    android:layout_marginTop="@dimen/d5" />
+                    binding:url="@{viewModel.url}" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d10"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -79,7 +80,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/d8"
-                        android:text="账号：5022332"
+                        android:text="@={viewModel.account}"
                         android:textColor="@color/color_gray_666666"
                         android:textSize="@dimen/font12" />
 
@@ -87,7 +88,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/d8"
-                        android:text="总代"
+                        android:text="@={viewModel.identity}"
                         android:textColor="@color/color_gray_666666"
                         android:textSize="@dimen/font12" />
 
@@ -112,6 +113,7 @@
                             android:text="实名认证"
                             android:textColor="@color/white"
                             android:textSize="@dimen/font10"
+                            android:visibility="@{viewModel.realNameAuthenticateShow}"
                             binding:onClickCommand="@{viewModel.autonymAuthCommand}"
                             binding:rv_backgroundColor="@color/color_FF8C00"
                             binding:rv_radius="@dimen/d10" />
@@ -124,6 +126,8 @@
                             android:text="资质认证"
                             android:textColor="@color/white"
                             android:textSize="@dimen/font10"
+
+                            android:visibility="@{viewModel.qualificationAuthenticateShow}"
                             binding:onClickCommand="@{viewModel.qualificationAuthCommand}"
                             binding:rv_backgroundColor="@color/color_FF8C00"
                             binding:rv_radius="@dimen/d10" />
@@ -136,6 +140,7 @@
                             android:text="经纪人认证"
                             android:textColor="@color/white"
                             android:textSize="@dimen/font10"
+                            android:visibility="@{viewModel.brokerAuthenticateShow}"
                             binding:onClickCommand="@{viewModel.brokerCommand}"
                             binding:rv_backgroundColor="@color/color_FF8C00"
                             binding:rv_radius="@dimen/d10" />
@@ -152,9 +157,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                binding:onClickCommand="@{viewModel.myStateCommand}"
                 android:paddingTop="@dimen/d15"
-                android:paddingBottom="@dimen/d15">
+                android:paddingBottom="@dimen/d15"
+                binding:onClickCommand="@{viewModel.myStateCommand}">
 
                 <ImageView
                     android:layout_width="@dimen/d18"
@@ -188,8 +193,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingTop="@dimen/d15"
-                binding:onClickCommand="@{viewModel.myInformationCommand}"
-                android:paddingBottom="@dimen/d15">
+                android:paddingBottom="@dimen/d15"
+                binding:onClickCommand="@{viewModel.myInformationCommand}">
 
                 <ImageView
                     android:layout_width="@dimen/d18"
@@ -393,12 +398,12 @@
                 android:background="@color/color_f6" />
 
             <RelativeLayout
-                binding:onClickCommand="@{viewModel.feedBackCommand}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingTop="@dimen/d15"
-                android:paddingBottom="@dimen/d15">
+                android:paddingBottom="@dimen/d15"
+                binding:onClickCommand="@{viewModel.feedBackCommand}">
 
                 <ImageView
                     android:layout_width="@dimen/d18"

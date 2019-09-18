@@ -35,21 +35,21 @@ public class OtherLoginUtil {
             ZLog.e("昵称: " + map.get("name"));
             ZLog.e("头像: " + map.get("iconurl"));
             ZLog.e("性别: " + map.get("gender"));
-            RxBus.getDefault().post(new OtherLoginBean(share_media, LOGIN_SUCCESS, map.get("openid"), map.get("name"), map.get("iconurl"), map.get("gender")));
+            RxBus.getDefault().post(new OtherLoginBean(share_media, LOGIN_SUCCESS, map.get("openid"), map.get("name"), map.get("iconurl"), map.get("gender"), map.get("city"), map.get("province")));
             ZLog.d(share_media);
             ZLog.d(map);
         }
 
         @Override
         public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
-            RxBus.getDefault().post(new OtherLoginBean(share_media, LOGIN_FAIL, "", "", "", ""));
+            RxBus.getDefault().post(new OtherLoginBean(share_media, LOGIN_FAIL, "", "", "", "", "", ""));
             ZLog.d(throwable.toString());
         }
 
         @Override
         public void onCancel(SHARE_MEDIA share_media, int i) {
             ZLog.d(i);
-            RxBus.getDefault().post(new OtherLoginBean(share_media, LOGIN_CANCEL, "", "", "", ""));
+            RxBus.getDefault().post(new OtherLoginBean(share_media, LOGIN_CANCEL, "", "", "", "", "", ""));
         }
     };
 
@@ -108,14 +108,36 @@ public class OtherLoginUtil {
         private String name;
         private String iconurl;
         private String gender;
+        private String city;
+        private String province;
 
-        public OtherLoginBean(SHARE_MEDIA type, String code, String openid, String name, String iconurl, String gender) {
+
+        public OtherLoginBean(SHARE_MEDIA type, String code, String openid, String name, String iconurl, String gender, String city, String province) {
             this.type = type;
             this.code = code;
             this.openid = openid;
             this.name = name;
             this.iconurl = iconurl;
             this.gender = gender;
+            this.city = city;
+            this.province = province;
+        }
+
+        public String getCity() {
+            return city;
+        }
+
+        public void setCity(String city) {
+            this.city = city;
+        }
+
+
+        public String getProvince() {
+            return province;
+        }
+
+        public void setProvince(String province) {
+            this.province = province;
         }
 
         public SHARE_MEDIA getType() {

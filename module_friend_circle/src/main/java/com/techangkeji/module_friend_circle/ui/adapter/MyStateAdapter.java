@@ -18,6 +18,7 @@ import com.kcrason.highperformancefriendscircle.widgets.EmojiPanelView;
 import com.kcrason.highperformancefriendscircle.widgets.NineGridView;
 import com.kcrason.highperformancefriendscircle.widgets.VerticalCommentWidget;
 import com.techangkeji.module_friend_circle.R;
+import com.techangkeji.module_friend_circle.ui.viewModel.MyStateViewModel;
 
 import java.util.List;
 
@@ -30,13 +31,15 @@ public class MyStateAdapter extends BaseQuickAdapter<FriendCircleBean, BaseViewH
     private RequestOptions mRequestOptions;
     private DrawableTransitionOptions mDrawableTransitionOptions;
     private EmojiPanelView emojiPanelView;
+    private MyStateViewModel viewModel;
 
-    public MyStateAdapter(int layoutResId, @Nullable List<FriendCircleBean> data, ImageWatcher mImageWatcher, EmojiPanelView emojiPanelView) {
+    public MyStateAdapter(int layoutResId, @Nullable List<FriendCircleBean> data, ImageWatcher mImageWatcher, EmojiPanelView emojiPanelView, MyStateViewModel viewModel) {
         super(layoutResId, data);
         this.mImageWatcher = mImageWatcher;
         this.mRequestOptions = new RequestOptions().centerCrop();
         this.mDrawableTransitionOptions = DrawableTransitionOptions.withCrossFade();
         this.emojiPanelView = emojiPanelView;
+        this.viewModel = viewModel;
 
     }
 
@@ -48,6 +51,7 @@ public class MyStateAdapter extends BaseQuickAdapter<FriendCircleBean, BaseViewH
         setComment(helper, item);
         setPraiseNum(helper, item);
         setPraise(helper, item);
+        delete(helper,item);
 
     }
 
@@ -104,9 +108,9 @@ public class MyStateAdapter extends BaseQuickAdapter<FriendCircleBean, BaseViewH
 //        nineGridView.setOnImageClickListener((position1, view) ->
 //                mImageWatcher.show((ImageView) view, nineGridView.getImageViews(),
 //                        friendCircleBean.getImageUrls()));
-            NineGridView nineGridView = helper.getView(R.id.nine_grid_view);
-            nineGridView.setAdapter(new NineImageAdapter(mContext, mRequestOptions,
-                    mDrawableTransitionOptions, friendCircleBean.getImageUrls()));
+        NineGridView nineGridView = helper.getView(R.id.nine_grid_view);
+        nineGridView.setAdapter(new NineImageAdapter(mContext, mRequestOptions,
+                mDrawableTransitionOptions, friendCircleBean.getImageUrls()));
 
     }
 
@@ -142,5 +146,17 @@ public class MyStateAdapter extends BaseQuickAdapter<FriendCircleBean, BaseViewH
             ToastUtil.normalToast(helper.itemView.getContext(), "点赞成功");
         });
         img_click_praise_or_comment.setOnClickListener(v -> emojiPanelView.showEmojiPanel());
+    }
+
+    /**
+     * description: 点击删除
+     * author: Andy
+     * date: 2019/9/18 0018 9:12
+     */
+    private void delete(BaseViewHolder helper, FriendCircleBean friendCircleBean) {
+        TextView txt_source = helper.getView(R.id.txt_source);
+        txt_source.setOnClickListener(view -> {
+            viewModel.delMoving(friendCircleBean.getId(),helper.getAdapterPosition(),this);
+        });
     }
 }
