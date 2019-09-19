@@ -23,6 +23,9 @@ public class CommentBean {
 
     private TranslationState translationState = TranslationState.START;
 
+    private int entityType;
+    private long entityId;
+
     public void setTranslationState(TranslationState translationState) {
         this.translationState = translationState;
     }
@@ -79,6 +82,21 @@ public class CommentBean {
         this.commentContent = commentContent;
     }
 
+    public int getEntityType() {
+        return entityType;
+    }
+
+    public void setEntityType(int entityType) {
+        this.entityType = entityType;
+    }
+
+    public long getEntityId() {
+        return entityId;
+    }
+
+    public void setEntityId(long entityId) {
+        this.entityId = entityId;
+    }
 
     /**
      * 富文本内容
@@ -91,9 +109,9 @@ public class CommentBean {
 
     public void build(Context context) {
         if (commentType == Constants.CommentType.COMMENT_TYPE_SINGLE) {
-            commentContentSpan = SpanUtils.makeSingleCommentSpan(context, childUserName, commentContent);
+            commentContentSpan = SpanUtils.makeSingleCommentSpan(context, childUserName,childUserId ,commentContent,entityType,entityId);
         } else {
-            commentContentSpan = SpanUtils.makeReplyCommentSpan(context, parentUserName, childUserName, commentContent);
+            commentContentSpan = SpanUtils.makeReplyCommentSpan(context, parentUserName, childUserName, parentUserId,childUserId,commentContent,entityType,entityId);
         }
     }
 }

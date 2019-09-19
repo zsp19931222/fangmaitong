@@ -11,6 +11,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.goldze.base.utils.DateUtil;
+import com.goldze.base.utils.glide.GlideLoadUtils;
 import com.kcrason.highperformancefriendscircle.adapters.NineImageAdapter;
 import com.kcrason.highperformancefriendscircle.beans.FriendCircleBean;
 import com.kcrason.highperformancefriendscircle.beans.OtherInfoBean;
@@ -24,6 +25,7 @@ import java.util.List;
 
 import ch.ielse.view.imagewatcher.ImageWatcher;
 import me.goldze.mvvmhabit.http.net.body.CommentBody;
+import me.goldze.mvvmhabit.http.net.body.VoteBody;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.ToastUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
@@ -53,7 +55,7 @@ public class MyStateAdapter extends BaseQuickAdapter<FriendCircleBean, BaseViewH
         setComment(helper, item);
         setPraiseNum(helper, item);
         setPraise(helper, item);
-        delete(helper,item);
+        delete(helper, item);
 
     }
 
@@ -144,13 +146,20 @@ public class MyStateAdapter extends BaseQuickAdapter<FriendCircleBean, BaseViewH
     private void setPraise(BaseViewHolder helper, FriendCircleBean friendCircleBean) {
         ImageView iv_praise = helper.getView(R.id.iv_praise);
         ImageView img_click_praise_or_comment = helper.getView(R.id.img_click_praise_or_comment);
+        if (friendCircleBean.isVote()) {
+            GlideLoadUtils.getInstance().glideLoad(helper.itemView.getContext(), R.mipmap.dz1, iv_praise, 0);
+        } else {
+            GlideLoadUtils.getInstance().glideLoad(helper.itemView.getContext(), R.mipmap.dz, iv_praise, 0);
+        }
         iv_praise.setOnClickListener(v -> {
-            ToastUtil.normalToast(helper.itemView.getContext(), "点赞成功");
-            viewModel.vote(friendCircleBean.getId(),2);
-            viewModel.unVote(friendCircleBean.getId());
+            if (friendCircleBean.isVote()) {
+                viewModel.unVote(friendCircleBean.getId());
+            } else {
+                viewModel.vote(friendCircleBean.getId(), VoteBody.STATE);
+            }
         });
         img_click_praise_or_comment.setOnClickListener(v -> {
-            CommentBody commentBody=new CommentBody("",2,friendCircleBean.getId(), LocalDataHelper.getInstance().getUserInfo().getId(),LocalDataHelper.getInstance().getUserInfo().getName());
+            CommentBody commentBody = new CommentBody("", 2, friendCircleBean.getId(), LocalDataHelper.getInstance().getUserInfo().getId(), LocalDataHelper.getInstance().getUserInfo().getName());
             emojiPanelView.showEmojiPanel(commentBody);
         });
     }
@@ -163,7 +172,7 @@ public class MyStateAdapter extends BaseQuickAdapter<FriendCircleBean, BaseViewH
     private void delete(BaseViewHolder helper, FriendCircleBean friendCircleBean) {
         TextView txt_source = helper.getView(R.id.txt_source);
         txt_source.setOnClickListener(view -> {
-            viewModel.delMoving(friendCircleBean.getId(),helper.getAdapterPosition(),this);
+            viewModel.delMoving(friendCircleBean.getId(), helper.getAdapterPosition());
         });
     }
 }

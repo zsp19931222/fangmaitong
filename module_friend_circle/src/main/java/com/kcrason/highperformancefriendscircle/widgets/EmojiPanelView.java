@@ -54,13 +54,13 @@ import me.goldze.mvvmhabit.utils.ZLog;
 
 public class EmojiPanelView extends LinearLayout implements OnKeyBoardStateListener {
 
-    private ViewPager mViewPager;
+//    private ViewPager mViewPager;
 
-    private HorizontalEmojiIndicators mEmojiIndicators;
+//    private HorizontalEmojiIndicators mEmojiIndicators;
 
     private EmojiPanelPagerAdapter mEmojiPanelPagerAdapter;
 
-    private LinearLayout mLayoutEmojiPanel;
+//    private LinearLayout mLayoutEmojiPanel;
 
     private LinearLayout mLayoutPanel;
 
@@ -152,12 +152,12 @@ public class EmojiPanelView extends LinearLayout implements OnKeyBoardStateListe
             }
         });
         mLayoutNull = itemView.findViewById(R.id.layout_null);
-        mLayoutEmojiPanel = itemView.findViewById(R.id.layout_emoji_panel);
+//        mLayoutEmojiPanel = itemView.findViewById(R.id.layout_emoji_panel);
         mLayoutPanel = itemView.findViewById(R.id.layout_panel);
-        mViewPager = itemView.findViewById(R.id.view_pager);
+//        mViewPager = itemView.findViewById(R.id.view_pager);
         tv_comment = itemView.findViewById(R.id.tv_comment);
-        mViewPager.setOverScrollMode(OVER_SCROLL_NEVER);
-        mEmojiIndicators = itemView.findViewById(R.id.emoji_indicators);
+//        mViewPager.setOverScrollMode(OVER_SCROLL_NEVER);
+//        mEmojiIndicators = itemView.findViewById(R.id.emoji_indicators);
         addOnSoftKeyBoardVisibleListener((Activity) getContext(), this);
         addView(itemView);
         tv_comment.setOnClickListener(v -> {
@@ -194,11 +194,11 @@ public class EmojiPanelView extends LinearLayout implements OnKeyBoardStateListe
     }
 
     private void changeEmojiPanelParams(int keyboardHeight) {
-        if (mLayoutEmojiPanel != null) {
-            LayoutParams params = (LayoutParams) mLayoutEmojiPanel.getLayoutParams();
-            params.height = keyboardHeight;
-            mLayoutEmojiPanel.setLayoutParams(params);
-        }
+//        if (mLayoutEmojiPanel != null) {
+//            LayoutParams params = (LayoutParams) mLayoutEmojiPanel.getLayoutParams();
+//            params.height = keyboardHeight;
+//            mLayoutEmojiPanel.setLayoutParams(params);
+//        }
     }
 
     boolean isVisiableForLast = false;
@@ -240,8 +240,8 @@ public class EmojiPanelView extends LinearLayout implements OnKeyBoardStateListe
                 .subscribeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe((emojiPanelBeans, throwable) -> {
                     mEmojiPanelPagerAdapter = new EmojiPanelPagerAdapter(emojiPanelBeans);
-                    mViewPager.setAdapter(mEmojiPanelPagerAdapter);
-                    mEmojiIndicators.setViewPager(mViewPager).setEmojiPanelView(this).setEmojiPanelBeans(emojiPanelBeans).build();
+//                    mViewPager.setAdapter(mEmojiPanelPagerAdapter);
+//                    mEmojiIndicators.setViewPager(mViewPager).setEmojiPanelView(this).setEmojiPanelBeans(emojiPanelBeans).build();
                     isInitComplete = true;
                 });
     }

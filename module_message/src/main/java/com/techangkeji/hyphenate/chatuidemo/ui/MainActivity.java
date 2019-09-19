@@ -37,6 +37,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.goldze.base.router.ARouterPath;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMClientListener;
 import com.hyphenate.EMContactListener;
@@ -56,6 +58,10 @@ import com.techangkeji.hyphenate.chatuidemo.runtimepermissions.PermissionsResult
 import com.techangkeji.model_message.R;
 
 import java.util.List;
+
+import me.goldze.mvvmhabit.base.AppManager;
+import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
+import me.goldze.mvvmhabit.utils.OtherDeviceLoginUtil;
 
 @SuppressLint("NewApi")
 public class MainActivity extends BaseActivity {
@@ -523,19 +529,13 @@ public class MainActivity extends BaseActivity {
 				    exceptionBuilder = new android.app.AlertDialog.Builder(MainActivity.this);
 				    exceptionBuilder.setTitle(st);
 				    exceptionBuilder.setMessage(getExceptionMessageId(exceptionType));
-				    exceptionBuilder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
+				    exceptionBuilder.setPositiveButton(R.string.ok, (dialog, which) -> {
 						dialog.dismiss();
 						exceptionBuilder = null;
 						isExceptionDialogShow = false;
 						finish();
-						Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-						startActivity(intent);
-					}
-				});
+						OtherDeviceLoginUtil.getInstance().otherDeviceLogin();
+					});
 				exceptionBuilder.setCancelable(false);
 				exceptionBuilder.create().show();
 				isConflict = true;

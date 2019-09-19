@@ -9,6 +9,8 @@ import java.util.List;
 
 public class FriendCircleBean {
 
+    private boolean isVote;
+
     private int viewType;
 
     private int id;
@@ -57,6 +59,14 @@ public class FriendCircleBean {
 
     public TranslationState getTranslationState() {
         return translationState;
+    }
+
+    public boolean isVote() {
+        return isVote;
+    }
+
+    public void setVote(boolean vote) {
+        isVote = vote;
     }
 
     public boolean isShowComment() {

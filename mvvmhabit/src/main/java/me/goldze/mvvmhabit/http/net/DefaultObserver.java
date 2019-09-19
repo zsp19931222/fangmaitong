@@ -1,5 +1,6 @@
 package me.goldze.mvvmhabit.http.net;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 import com.google.gson.JsonParseException;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -14,9 +15,12 @@ import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import me.goldze.mvvmhabit.base.AppManager;
 import me.goldze.mvvmhabit.base.BaseApplication;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
+import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
+import me.goldze.mvvmhabit.utils.OtherDeviceLoginUtil;
 import me.goldze.mvvmhabit.utils.ToastUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
 import me.goldze.mvvmhabit.utils.constant.TipsConstants;
@@ -27,6 +31,7 @@ import static me.goldze.mvvmhabit.http.net.DefaultObserver.ExceptionReason.CONNE
 import static me.goldze.mvvmhabit.http.net.DefaultObserver.ExceptionReason.CONNECT_TIMEOUT;
 import static me.goldze.mvvmhabit.http.net.DefaultObserver.ExceptionReason.PARSE_ERROR;
 import static me.goldze.mvvmhabit.http.net.DefaultObserver.ExceptionReason.UNKNOWN_ERROR;
+import static me.goldze.mvvmhabit.http.net.RequestCodeUtil.OTEHT_DEVICE_LOGIN;
 import static me.goldze.mvvmhabit.http.net.RequestCodeUtil.SUCCESS;
 
 
@@ -93,7 +98,9 @@ public abstract class DefaultObserver<T extends BaseEntity> implements Observer<
         //是否获取数据成功
         if (response.getCode()==SUCCESS) {
             onSuccess(response);
-        } else {
+        } else if(response.getCode()==OTEHT_DEVICE_LOGIN){//其他设备登录
+            OtherDeviceLoginUtil.getInstance().otherDeviceLogin();
+        }else {
             onFail(response);
         }
     }

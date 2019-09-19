@@ -16,7 +16,8 @@
     <LinearLayout
         android:id="@+id/layout_input_panel"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/d10"
         android:background="@color/white"
         android:orientation="vertical">
 
@@ -26,23 +27,22 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="8dip"
-            android:paddingRight="8dip">
+          >
 
             <RelativeLayout
                 android:id="@+id/layout_edit"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <EditText
                     android:id="@+id/edit_text"
                     android:layout_width="match_parent"
-                    android:layout_height="34dip"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:background="@null"
                     android:hint="评论"
@@ -54,8 +54,8 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/d5"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="6dp"
                     android:background="@color/color_55b2f5" />
             </RelativeLayout>
 
@@ -81,32 +81,28 @@
                 app:rv_radius="@dimen/d15" />
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/color_red" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/layout_emoji_panel"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical">
+    <!--<LinearLayout-->
+        <!--android:id="@+id/layout_emoji_panel"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:orientation="vertical">-->
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/color_FF8C00"
-            android:paddingTop="12dp" />
+        <!--<androidx.viewpager.widget.ViewPager-->
+            <!--android:id="@+id/view_pager"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@color/color_FF8C00"-->
+            <!--android:paddingTop="12dp" />-->
 
-        <com.kcrason.highperformancefriendscircle.widgets.HorizontalEmojiIndicators
-            android:id="@+id/emoji_indicators"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/color_BDC2C0" />
+        <!--<com.kcrason.highperformancefriendscircle.widgets.HorizontalEmojiIndicators-->
+            <!--android:id="@+id/emoji_indicators"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/color_BDC2C0" />-->
 
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
 </LinearLayout>

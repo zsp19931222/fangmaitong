@@ -73,7 +73,7 @@ public class TextLinkifyUtils {
                     spannableStringBuilder.setSpan(
                             new VerticalImageSpan(getEmojiDrawable(context, emojiName, textView)), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 } else {
-                    spannableStringBuilder.setSpan(new TextClickSpan(context, spanStr), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    spannableStringBuilder.setSpan(new TextClickSpan(context, spanStr,0,0,0), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
                 //spannableReplace(spannableStringBuilder, start, end, spanStr);
             }

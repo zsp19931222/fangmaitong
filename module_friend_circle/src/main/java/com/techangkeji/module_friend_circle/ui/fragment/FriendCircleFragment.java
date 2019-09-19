@@ -39,8 +39,8 @@ public class FriendCircleFragment extends BaseLazyFragment<FragmentFriendStateBi
                 binding.emojiPanelView.dismiss();
             }
         }));
+        viewModel.friendMovingList();
     }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -67,4 +67,9 @@ public class FriendCircleFragment extends BaseLazyFragment<FragmentFriendStateBi
 
     }
 
+    @Override
+    public void initData() {
+    viewModel.context.set(getActivity());
+    viewModel.smartRefreshLayoutObservableField.set(binding.srl);
+    }
 }

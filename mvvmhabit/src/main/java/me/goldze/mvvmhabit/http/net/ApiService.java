@@ -21,7 +21,9 @@ import me.goldze.mvvmhabit.http.net.body.UpdatePasswordBody;
 import me.goldze.mvvmhabit.http.net.body.VoteBody;
 import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
+import me.goldze.mvvmhabit.http.net.entity.friend_circle.CommentBean;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.MyStateEntity;
+import me.goldze.mvvmhabit.http.net.entity.friend_circle.VoteEntity;
 import me.goldze.mvvmhabit.http.net.entity.login.RegisterEntity;
 import me.goldze.mvvmhabit.http.net.entity.login.SendCodeEntity;
 import okhttp3.MultipartBody;
@@ -113,9 +115,9 @@ public interface ApiService<T extends BaseEntity> {
 
 
     //获取朋友圈动态列表
-    @GET(API + "auth/moving/firend/list/{page}/{max}")
+    @GET(API + "auth/moving/moving/firend/list/{page}/{max}")
     @Headers({"url_name:login"})
-    Observable<SuccessEntity> friendMovingList(@Path("page") String page, @Path("max") String max, @Body() UntiedThirdBody untiedThirdBody);
+    Observable<SuccessEntity> friendMovingList(@Path("page") int page, @Path("max") long max);
 
     //修改密码
     @PUT(API + "auth/updatePassword")
@@ -165,6 +167,6 @@ public interface ApiService<T extends BaseEntity> {
     //评论
     @POST(API + "auth/comment")
     @Headers({"url_name:login"})
-    Observable<SuccessEntity> comment(@Body() CommentBody commentBody);
+    Observable<SuccessEntity<CommentBean>> comment(@Body() CommentBody commentBody);
 
 }

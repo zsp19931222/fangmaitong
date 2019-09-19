@@ -8,4 +8,5 @@ package me.goldze.mvvmhabit.http.net;
 
 public class RequestCodeUtil {
     public static final int SUCCESS = 200;
+    public static final int OTEHT_DEVICE_LOGIN = 401;//其他设备登录
 }

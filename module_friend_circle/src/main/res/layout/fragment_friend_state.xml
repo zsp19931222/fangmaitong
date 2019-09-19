@@ -45,7 +45,8 @@
             android:layout_width="@dimen/d40"
             android:layout_height="@dimen/d40"
             android:layout_gravity="bottom|right"
-            android:layout_margin="@dimen/d10"
+            android:layout_marginBottom="@dimen/d70"
+            android:layout_marginEnd="@dimen/d10"
             android:src="@mipmap/fbdt"
             binding:onClickCommand="@{viewModel.releaseCircle}" />
     </FrameLayout>
