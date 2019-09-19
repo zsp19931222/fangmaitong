@@ -1,64 +1,15 @@
-package me.goldze.mvvmhabit.http.net.entity.login;
+package me.goldze.mvvmhabit.litepal;
+
+import org.litepal.crud.LitePalSupport;
+
+import me.goldze.mvvmhabit.http.net.entity.login.RegisterEntity;
 
 /**
  * description:
- * author:created by Andy on 2019/9/17 0017 10:52
+ * author:created by Andy on 2019/9/19 21:07
  * email:zsp872126510@gmail.com
  */
-public class RegisterEntity {
-
-
-    /**
-     * imNickname : null
-     * remark : null
-     * imUsername : null
-     * squareNum : 0
-     * movingNum : 0
-     * qqProvince : null
-     * wxappOpenId : null
-     * createTime : 2019-09-17 14:54:27
-     * qqAvatarUrl : null
-     * brokerAuthenticate : 0
-     * wechatNickname : null
-     * headUrl : null
-     * password : 123456
-     * recruitmentNum : 0
-     * wechatLanguage : null
-     * qualificationAuthenticate : 0
-     * qqNickname : null
-     * realName : null
-     * phone : 13983251013
-     * oldPassword : null
-     * wechatAvatarUrl : null
-     * wechatProvince : null
-     * jobhuntingNum : 0
-     * identity : 4
-     * realNameAuthenticate : 0
-     * wechatCountry : null
-     * sex : 1
-     * del : 0
-     * qqOpenId : null
-     * wechatCity : null
-     * qqCity : null
-     * name : 测试
-     * imPassword : null
-     * state : 0
-     * mail : null
-     * age : 3
-     * buildNum : 0
-     * cumulativeLoginTime : 26030
-     * id : 35
-     * lastLogin : null
-     * enable : 0
-     * wechatOpenId : null
-     * qqLanguage : null
-     * freeze : 0
-     * collectNum : 0
-     * qqCountry : null
-     * jwtToken : {"token":"bearer;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIzNSIsImlzcyI6ImZhbmdtYWl0b25nIiwiYXVkIjoiNDg1NWJjNjQ0MThjMTdjYWFjMGViMTZlNmY3MmMxOTNkM2RiNjQ0NiIsImV4cCI6MTU3MTMwMTAwOSwibmJmIjoxNTY4NzA5MDA5fQ.sTbqyNfiwNzig715tW6ByxOhpENsezrGPfkjdkOmCDk","expireTime":1571301009765}
-     * type : 0
-     */
-
+public class UserInfoLitePal extends LitePalSupport {
     private String imNickname ; // 环信昵称
     private String remark ; // 备注
     private String imUsername ; // 环信id
@@ -97,7 +48,7 @@ public class RegisterEntity {
     private int age = -1 ; // 年龄
     private int buildNum = -1 ; // 楼盘发布数
     private long cumulativeLoginTime = -1 ; // 累计登录时间
-    private long id = -1 ; // 编号
+    private long userId = -1 ; // 编号
     private String lastLogin ; // 上次登录时间
     private int enable = -1 ; // 注销帐号 0-未注销 1-已注销
     private String wechatOpenId ; // 微信openid
@@ -106,15 +57,7 @@ public class RegisterEntity {
     private int collectNum = -1 ; // 收藏数
     private String qqCountry ; // QQ国家
     private int type;//1-手机 2-邮箱 3-微信 4-QQ
-    private JwtTokenBean jwtToken;
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
+    private RegisterEntity.JwtTokenBean jwtToken;
 
     public String getImNickname() {
         return imNickname;
@@ -420,12 +363,12 @@ public class RegisterEntity {
         this.cumulativeLoginTime = cumulativeLoginTime;
     }
 
-    public long getId() {
-        return id;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public String getLastLogin() {
@@ -484,37 +427,19 @@ public class RegisterEntity {
         this.qqCountry = qqCountry;
     }
 
-    public JwtTokenBean getJwtToken() {
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public RegisterEntity.JwtTokenBean getJwtToken() {
         return jwtToken;
     }
 
-    public void setJwtToken(JwtTokenBean jwtToken) {
+    public void setJwtToken(RegisterEntity.JwtTokenBean jwtToken) {
         this.jwtToken = jwtToken;
-    }
-
-    public static class JwtTokenBean {
-        /**
-         * token : bearer;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIzNSIsImlzcyI6ImZhbmdtYWl0b25nIiwiYXVkIjoiNDg1NWJjNjQ0MThjMTdjYWFjMGViMTZlNmY3MmMxOTNkM2RiNjQ0NiIsImV4cCI6MTU3MTMwMTAwOSwibmJmIjoxNTY4NzA5MDA5fQ.sTbqyNfiwNzig715tW6ByxOhpENsezrGPfkjdkOmCDk
-         * expireTime : 1571301009765
-         */
-
-        private String token;
-        private long expireTime;
-
-        public String getToken() {
-            return token;
-        }
-
-        public void setToken(String token) {
-            this.token = token;
-        }
-
-        public long getExpireTime() {
-            return expireTime;
-        }
-
-        public void setExpireTime(long expireTime) {
-            this.expireTime = expireTime;
-        }
     }
 }

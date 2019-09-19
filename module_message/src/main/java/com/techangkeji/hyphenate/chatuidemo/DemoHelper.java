@@ -83,6 +83,13 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import me.goldze.mvvmhabit.http.net.DefaultObserver;
+import me.goldze.mvvmhabit.http.net.IdeaApi;
+import me.goldze.mvvmhabit.http.net.body.AddFriendBody;
+import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
+import me.goldze.mvvmhabit.utils.RxUtils;
+import me.goldze.mvvmhabit.utils.ZLog;
+
 public class DemoHelper {
     /**
      * data sync listener
@@ -981,6 +988,15 @@ public class DemoHelper {
 
         @Override
         public void onFriendRequestAccepted(String username) {
+            AddFriendBody addFriendBody=new AddFriendBody(username);
+            IdeaApi.getApiService()
+                    .addFriend(addFriendBody)
+                    .compose(RxUtils.schedulersTransformer())
+                    .subscribe(new DefaultObserver<SuccessEntity>() {
+                        @Override
+                        public void onSuccess(SuccessEntity response) {
+                        }
+                    });
             List<InviteMessage> msgs = inviteMessgeDao.getMessagesList();
             for (InviteMessage inviteMessage : msgs) {
                 if (inviteMessage.getFrom().equals(username)) {
@@ -1001,6 +1017,15 @@ public class DemoHelper {
         public void onFriendRequestDeclined(String username) {
             // your request was refused
             showToast(username + " refused to be your friend");
+            AddFriendBody addFriendBody=new AddFriendBody(username);
+            IdeaApi.getApiService()
+                    .addFriend(addFriendBody)
+                    .compose(RxUtils.schedulersTransformer())
+                    .subscribe(new DefaultObserver<SuccessEntity>() {
+                        @Override
+                        public void onSuccess(SuccessEntity response) {
+                        }
+                    });
         }
     }
 

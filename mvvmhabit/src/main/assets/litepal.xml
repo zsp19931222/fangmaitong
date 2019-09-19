@@ -5,6 +5,6 @@
     <version value="1"></version>
 
     <list>
-        <mapping class="me.goldze.mvvmhabit.http.net.entity.login.RegisterEntity"></mapping>
+        <mapping class="me.goldze.mvvmhabit.litepal.UserInfoLitePal"></mapping>
     </list>
 </litepal>

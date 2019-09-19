@@ -60,8 +60,15 @@ import com.techangkeji.model_message.R;
 import java.util.List;
 
 import me.goldze.mvvmhabit.base.AppManager;
+import me.goldze.mvvmhabit.http.net.DefaultObserver;
+import me.goldze.mvvmhabit.http.net.IdeaApi;
+import me.goldze.mvvmhabit.http.net.body.AddFriendBody;
+import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
+import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.OtherDeviceLoginUtil;
+import me.goldze.mvvmhabit.utils.RxUtils;
+import me.goldze.mvvmhabit.utils.ZLog;
 
 @SuppressLint("NewApi")
 public class MainActivity extends BaseActivity {
@@ -328,8 +335,10 @@ public class MainActivity extends BaseActivity {
     }
 
 	public class MyContactListener implements EMContactListener {
+		//增加了联系人时回调此方法
         @Override
         public void onContactAdded(String username) {}
+		//被删除时回调此方法
         @Override
         public void onContactDeleted(final String username) {
             runOnUiThread(new Runnable() {
@@ -345,10 +354,14 @@ public class MainActivity extends BaseActivity {
             });
 	        updateUnreadAddressLable();
         }
+		//收到好友邀请
         @Override
         public void onContactInvited(String username, String reason) {}
+        //好友请求被同意
         @Override
-        public void onFriendRequestAccepted(String username) {}
+        public void onFriendRequestAccepted(String username) {
+		}
+        //好友请求被拒绝
         @Override
         public void onFriendRequestDeclined(String username) {}
 	}

@@ -20,6 +20,7 @@ import me.goldze.mvvmhabit.http.net.IdeaApi;
 import me.goldze.mvvmhabit.http.net.body.BindingThirdBody;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.login.RegisterEntity;
+import me.goldze.mvvmhabit.litepal.UserInfoLitePal;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.IsNullUtil;
 import me.goldze.mvvmhabit.utils.RxUtils;
@@ -158,8 +159,8 @@ public class OtherBindingAccountViewModel extends BaseViewModel {
      * date: 2019/9/17 0017 12:23
      */
     public void saveUserInfo(SuccessEntity<RegisterEntity> response) {
-        LitePal.deleteAll(RegisterEntity.class);
-        RegisterEntity dataBean = new RegisterEntity();
+       LocalDataHelper.getInstance().deleteData();
+        UserInfoLitePal dataBean = new UserInfoLitePal();
         dataBean.setAge(response.getContent().getAge());
         dataBean.setBrokerAuthenticate(response.getContent().getBrokerAuthenticate());
         dataBean.setBuildNum(response.getContent().getBuildNum());
@@ -170,7 +171,7 @@ public class OtherBindingAccountViewModel extends BaseViewModel {
         dataBean.setEnable(response.getContent().getEnable());
         dataBean.setFreeze(response.getContent().getFreeze());
         dataBean.setHeadUrl(response.getContent().getHeadUrl());
-        dataBean.setId(response.getContent().getId());
+        dataBean.setUserId(response.getContent().getId());
         dataBean.setIdentity(response.getContent().getIdentity());
         dataBean.setImNickname(response.getContent().getImNickname());
         dataBean.setImPassword(response.getContent().getImPassword());

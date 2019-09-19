@@ -42,6 +42,10 @@ import me.goldze.mvvmhabit.base.BaseActivity;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.bus.RxBus;
 import me.goldze.mvvmhabit.bus.RxSubscriptions;
+import me.goldze.mvvmhabit.http.net.IdeaApi;
+import me.goldze.mvvmhabit.http.net.body.AddFriendBody;
+import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
+import me.goldze.mvvmhabit.utils.RxUtils;
 import me.goldze.mvvmhabit.utils.ToastUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
 
@@ -317,6 +321,16 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewMode
 
         @Override
         public void onFriendRequestAccepted(String username) {
+//            AddFriendBody addFriendBody=new AddFriendBody(username);
+//            IdeaApi.getApiService()
+//                    .addFriend(addFriendBody)
+//                    .compose(RxUtils.schedulersTransformer())
+//                    .subscribe(new me.goldze.mvvmhabit.http.net.DefaultObserver<SuccessEntity>() {
+//                        @Override
+//                        public void onSuccess(SuccessEntity response) {
+//                            ZLog.d("添加成功");
+//                        }
+//                    });
         }
 
         @Override

@@ -22,6 +22,7 @@ import me.goldze.mvvmhabit.base.AppManager;
 import me.goldze.mvvmhabit.base.BaseApplication;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.login.RegisterEntity;
+import me.goldze.mvvmhabit.litepal.UserInfoLitePal;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.IsNullUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
@@ -155,8 +156,8 @@ public class LoginUtil {
      * date: 2019/9/17 0017 12:23
      */
     public void saveUserInfo(SuccessEntity<RegisterEntity> response) {
-        LitePal.deleteAll(RegisterEntity.class);
-        RegisterEntity dataBean = new RegisterEntity();
+       LocalDataHelper.getInstance().deleteData();
+        UserInfoLitePal dataBean = new UserInfoLitePal();
         dataBean.setAge(response.getContent().getAge());
         dataBean.setBrokerAuthenticate(response.getContent().getBrokerAuthenticate());
         dataBean.setBuildNum(response.getContent().getBuildNum());
@@ -167,7 +168,7 @@ public class LoginUtil {
         dataBean.setEnable(response.getContent().getEnable());
         dataBean.setFreeze(response.getContent().getFreeze());
         dataBean.setHeadUrl(response.getContent().getHeadUrl());
-        dataBean.setId(response.getContent().getId());
+        dataBean.setUserId(response.getContent().getId());
         dataBean.setIdentity(response.getContent().getIdentity());
         dataBean.setImNickname(response.getContent().getImNickname());
         dataBean.setImPassword(response.getContent().getImPassword());
@@ -209,8 +210,14 @@ public class LoginUtil {
             SPUtils.getInstance().put("token", response.getContent().getJwtToken().getToken());
         }
         dataBean.save();
+        UserInfoLitePal registerEntity=LocalDataHelper.getInstance().getUserInfo();
+        ZLog.d(registerEntity);
         ZLog.d(LocalDataHelper.getInstance().getUserInfo());
+        //存储登录时间
+        SPUtils.getInstance().put("loginTime", System.currentTimeMillis());
+        AppManager.getAppManager().finishAllActivity();
+        ARouter.getInstance().build(ARouterPath.Main.PAGER_MAIN).navigation();
         // FIXME: 2019/9/18 0018 这里要用后台返回的用户名和密码来注册环信，现目前没有先写死
-        registerHX("1", "2");
+        registerHX(registerEntity.getImUsername(), registerEntity.getImPassword());
     }
 }

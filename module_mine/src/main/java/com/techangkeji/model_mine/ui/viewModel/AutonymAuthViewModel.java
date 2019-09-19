@@ -57,7 +57,7 @@ public class AutonymAuthViewModel extends BaseViewModel {
             ToastUtil.normalToast(context.get(), TipsConstants.PARAMETER_ERROR);
             return;
         }
-        AuthRealNameBody authRealNameBody = new AuthRealNameBody(null, null, reverseUrl.get(), -1, idNum.get(), name.get(), LocalDataHelper.getInstance().getUserInfo().getPhone(), LocalDataHelper.getInstance().getUserInfo().getIdentity(), -1, LocalDataHelper.getInstance().getUserInfo().getId(), LocalDataHelper.getInstance().getUserInfo().getName(), -1, frontUrl.get());
+        AuthRealNameBody authRealNameBody = new AuthRealNameBody(null, null, reverseUrl.get(), -1, idNum.get(), name.get(), LocalDataHelper.getInstance().getUserInfo().getPhone(), LocalDataHelper.getInstance().getUserInfo().getIdentity(), -1, LocalDataHelper.getInstance().getUserInfo().getUserId(), LocalDataHelper.getInstance().getUserInfo().getName(), -1, frontUrl.get());
         IdeaApi.getApiService()
                 .realName(authRealNameBody)
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))

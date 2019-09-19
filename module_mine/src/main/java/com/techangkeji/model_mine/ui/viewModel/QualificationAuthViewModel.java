@@ -67,7 +67,7 @@ public class QualificationAuthViewModel extends BaseViewModel {
             ToastUtil.normalToast(context.get(), TipsConstants.PARAMETER_ERROR);
             return;
         }else {
-            AuthQualificationBody authQualificationBody=new AuthQualificationBody(companyUrl.get(),null,null,reverseUrl.get(),-1,linkmanIDNum.get(),null,linkman.get(),linkmanPhone.get(),company.get(),LocalDataHelper.getInstance().getUserInfo().getIdentity(),-1,LocalDataHelper.getInstance().getUserInfo().getId(),LocalDataHelper.getInstance().getUserInfo().getName(),-1,forntUrl.get());
+            AuthQualificationBody authQualificationBody=new AuthQualificationBody(companyUrl.get(),null,null,reverseUrl.get(),-1,linkmanIDNum.get(),null,linkman.get(),linkmanPhone.get(),company.get(),LocalDataHelper.getInstance().getUserInfo().getIdentity(),-1,LocalDataHelper.getInstance().getUserInfo().getUserId(),LocalDataHelper.getInstance().getUserInfo().getName(),-1,forntUrl.get());
             IdeaApi.getApiService()
                     .qualification(authQualificationBody)
                     .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))

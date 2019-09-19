@@ -4,6 +4,7 @@ package me.goldze.mvvmhabit.http.net;
 import java.util.List;
 
 import io.reactivex.Observable;
+import me.goldze.mvvmhabit.http.net.body.AddFriendBody;
 import me.goldze.mvvmhabit.http.net.body.AuthBrokerBody;
 import me.goldze.mvvmhabit.http.net.body.AuthQualificationBody;
 import me.goldze.mvvmhabit.http.net.body.AuthRealNameBody;
@@ -12,7 +13,6 @@ import me.goldze.mvvmhabit.http.net.body.CheckAuthCodeBody;
 import me.goldze.mvvmhabit.http.net.body.CommentBody;
 import me.goldze.mvvmhabit.http.net.body.LoginBody;
 import me.goldze.mvvmhabit.http.net.body.MyMovingListBody;
-import me.goldze.mvvmhabit.http.net.body.RegisterBody;
 import me.goldze.mvvmhabit.http.net.body.ReleaseMovingBody;
 import me.goldze.mvvmhabit.http.net.body.SendCodeBody;
 import me.goldze.mvvmhabit.http.net.body.UntiedThirdBody;
@@ -23,7 +23,6 @@ import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.CommentBean;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.MyStateEntity;
-import me.goldze.mvvmhabit.http.net.entity.friend_circle.VoteEntity;
 import me.goldze.mvvmhabit.http.net.entity.login.RegisterEntity;
 import me.goldze.mvvmhabit.http.net.entity.login.SendCodeEntity;
 import okhttp3.MultipartBody;
@@ -115,9 +114,9 @@ public interface ApiService<T extends BaseEntity> {
 
 
     //获取朋友圈动态列表
-    @GET(API + "auth/moving/moving/firend/list/{page}/{max}")
+    @GET(API + "auth/moving/friend/list/{page}/{max}")
     @Headers({"url_name:login"})
-    Observable<SuccessEntity> friendMovingList(@Path("page") int page, @Path("max") long max);
+    Observable<MyStateEntity> friendMovingList(@Path("page") int page, @Path("max") long max);
 
     //修改密码
     @PUT(API + "auth/updatePassword")
@@ -168,5 +167,15 @@ public interface ApiService<T extends BaseEntity> {
     @POST(API + "auth/comment")
     @Headers({"url_name:login"})
     Observable<SuccessEntity<CommentBean>> comment(@Body() CommentBody commentBody);
+
+    //添加好友
+    @POST(API + "auth/friendApply/pass")
+    @Headers({"url_name:login"})
+    Observable<SuccessEntity> addFriend(@Body() AddFriendBody commentBody);
+
+    //添加好友被拒绝
+    @POST(API + "auth/friendApply/refuse")
+    @Headers({"url_name:login"})
+    Observable<SuccessEntity> addFriendRefuse(@Body() AddFriendBody commentBody);
 
 }

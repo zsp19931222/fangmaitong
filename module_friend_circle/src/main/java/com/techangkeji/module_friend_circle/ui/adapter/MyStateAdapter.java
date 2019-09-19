@@ -159,7 +159,7 @@ public class MyStateAdapter extends BaseQuickAdapter<FriendCircleBean, BaseViewH
             }
         });
         img_click_praise_or_comment.setOnClickListener(v -> {
-            CommentBody commentBody = new CommentBody("", 2, friendCircleBean.getId(), LocalDataHelper.getInstance().getUserInfo().getId(), LocalDataHelper.getInstance().getUserInfo().getName());
+            CommentBody commentBody = new CommentBody("", 2, friendCircleBean.getId(), LocalDataHelper.getInstance().getUserInfo().getUserId(), LocalDataHelper.getInstance().getUserInfo().getName());
             emojiPanelView.showEmojiPanel(commentBody);
         });
     }

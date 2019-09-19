@@ -436,6 +436,7 @@
         <activity android:name=".ui.activity.MarkerClusterDemo" />
         <activity android:name=".ui.activity.ReleaseInformationActivity" />
         <activity android:name=".ui.activity.BookActivity" />
+        <activity android:name="com.hyphenate.chatuidemo.conference.ConferenceInviteActivity" />
         <!--推送配置项-->
         <meta-data
             android:name="com.vivo.push.api_key"

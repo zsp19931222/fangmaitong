@@ -8,6 +8,8 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.goldze.base.router.ARouterPath;
 import com.kcrason.highperformancefriendscircle.Constants;
 import com.kcrason.highperformancefriendscircle.beans.CommentBean;
 import com.kcrason.highperformancefriendscircle.beans.FriendCircleBean;
@@ -24,6 +26,7 @@ import java.util.List;
 
 import me.goldze.mvvmhabit.base.BaseApplication;
 import me.goldze.mvvmhabit.base.BaseViewModel;
+import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.http.net.DefaultObserver;
 import me.goldze.mvvmhabit.http.net.IdeaApi;
 import me.goldze.mvvmhabit.http.net.body.CommentBody;
@@ -50,12 +53,83 @@ public class MyStateViewModel extends BaseViewModel {
     public ObservableField<Context> context = new ObservableField<>();
     public ObservableField<MyStateAdapter> myStateAdapter = new ObservableField<>();
     public ObservableField<SmartRefreshLayout> smartRefreshLayoutObservableField = new ObservableField<>();
-    private int myID=50;
+    private int myID= (int) LocalDataHelper.getInstance().getUserInfo().getUserId();
 
     public MyStateViewModel(@NonNull Application application) {
         super(application);
     }
+    /**
+     * description: 跳转到发布动态
+     * author: Andy
+     * date: 2019/9/19 0019 15:55
+     */
+    public BindingCommand releaseCircle=new BindingCommand(() -> ARouter.getInstance().build(ARouterPath.Message.ReleaseInformationActivity).navigation());
+    /**
+     * description:获取数据
+     * author: Andy
+     * date: 2019/9/19 0019 15:54
+     */
+    public void friendMovingList() {
+        if (page.get()==1){
+            friendCircleBeans.clear();
+        }
+        IdeaApi.getApiService()
+                .friendMovingList(page.get(),20)
+                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                .compose(RxUtils.schedulersTransformer())
+                .subscribe(new DefaultObserver<MyStateEntity>(smartRefreshLayoutObservableField.get()) {
+                    @Override
+                    public void onSuccess(MyStateEntity response) {
+                        for (MyStateEntity.DataBean datum : response.getData()) {
+                            FriendCircleBean friendCircleBean = new FriendCircleBean();
+                            friendCircleBean.setId(datum.getId());//设置单条动态id
+                            //设置评论
+                            friendCircleBean.setCommentBeans(makeCommentBeans(datum.getCommentList(), context.get()));
 
+                            if (!IsNullUtil.getInstance().isEmpty(datum.getImgsUrl())) {
+                                String[] strs = datum.getImgsUrl().split(",");
+                                List<String> images = new ArrayList<>(Arrays.asList(strs));
+                                friendCircleBean.setImageUrls(images);//设置图片
+                            }
+                            //是否点赞标识
+                            boolean praise = false;
+                            //设置点赞
+                            List<PraiseBean> praiseBeans = new ArrayList<>();
+                            for (MyStateEntity.DataBean.VoteUserBean voteUserBean : datum.getVoteUser()) {
+                                PraiseBean praiseBean = new PraiseBean();
+                                praiseBean.setPraiseUserName(voteUserBean.getName());
+                                praiseBean.setPraiseUserId(voteUserBean.getId());
+                                praiseBeans.add(praiseBean);
+                                if (myID == voteUserBean.getId()) {
+                                    praise = true;
+                                }
+                            }
+                            ZLog.d(LocalDataHelper.getInstance().getUserInfo().getUserId());
+                            friendCircleBean.setPraiseSpan(SpanUtils.makePraiseSpan(context.get(), praiseBeans));
+                            friendCircleBean.setPraiseBeans(praiseBeans);
+
+                            //设置点赞状态
+                            friendCircleBean.setVote(praise);
+
+                            //设置文案
+                            friendCircleBean.setContent(datum.getContent());
+
+//                            UserBean userBean = new UserBean();
+//                            userBean.setUserName(Constants.USER_NAME[(int) (Math.random() * 30)]);
+//                            userBean.setUserAvatarUrl(Constants.IMAGE_URL[(int) (Math.random() * 50)]);
+//                            friendCircleBean.setUserBean(userBean);
+//
+//
+                            OtherInfoBean otherInfoBean = new OtherInfoBean();
+                            otherInfoBean.setTime(datum.getCreateTime());
+                            friendCircleBean.setOtherInfoBean(otherInfoBean);
+                            friendCircleBeans.add(friendCircleBean);
+
+                        }
+                        myStateAdapter.get().notifyDataSetChanged();
+                    }
+                });
+    }
     /**
      * description: 我的动态列表
      * author: Andy
@@ -97,7 +171,7 @@ public class MyStateViewModel extends BaseViewModel {
                                     praise = true;
                                 }
                             }
-                            ZLog.d(LocalDataHelper.getInstance().getUserInfo().getId());
+                            ZLog.d(LocalDataHelper.getInstance().getUserInfo().getUserId());
                             friendCircleBean.setPraiseSpan(SpanUtils.makePraiseSpan(context.get(), praiseBeans));
                             friendCircleBean.setPraiseBeans(praiseBeans);
 

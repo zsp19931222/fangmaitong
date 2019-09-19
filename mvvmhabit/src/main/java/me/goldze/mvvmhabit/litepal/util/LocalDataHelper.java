@@ -4,6 +4,7 @@ package me.goldze.mvvmhabit.litepal.util;
 import org.litepal.LitePal;
 
 import me.goldze.mvvmhabit.http.net.entity.login.RegisterEntity;
+import me.goldze.mvvmhabit.litepal.UserInfoLitePal;
 
 /**
  * description:获取缓存数据
@@ -25,11 +26,11 @@ public class LocalDataHelper {
      * author: Andy
      * date: 2019/9/5 0005 16:44
      */
-    public RegisterEntity getUserInfo() {
-        return LitePal.findFirst(RegisterEntity.class);
+    public UserInfoLitePal getUserInfo() {
+        return LitePal.findFirst(UserInfoLitePal.class);
     }
 
     public void deleteData(){
-        LitePal.deleteAll(RegisterEntity.class);
+        LitePal.deleteAll(UserInfoLitePal.class);
     }
 }

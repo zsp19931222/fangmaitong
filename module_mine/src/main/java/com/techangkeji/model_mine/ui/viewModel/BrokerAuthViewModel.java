@@ -64,7 +64,7 @@ public class BrokerAuthViewModel extends BaseViewModel {
             ToastUtil.normalToast(context.get(), PARAMETER_ERROR);
             return;
         }
-        AuthBrokerBody authBrokerBody = new AuthBrokerBody(null, null, -1, null, LocalDataHelper.getInstance().getUserInfo().getPhone(), company.get(), identity.get(), badgeUrl.get(), -1, LocalDataHelper.getInstance().getUserInfo().getId(), nameplateUrl.get(), address.get(), LocalDataHelper.getInstance().getUserInfo().getName(), -1);
+        AuthBrokerBody authBrokerBody = new AuthBrokerBody(null, null, -1, null, LocalDataHelper.getInstance().getUserInfo().getPhone(), company.get(), identity.get(), badgeUrl.get(), -1, LocalDataHelper.getInstance().getUserInfo().getUserId(), nameplateUrl.get(), address.get(), LocalDataHelper.getInstance().getUserInfo().getName(), -1);
         IdeaApi.getApiService()
                 .broker(authBrokerBody)
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))

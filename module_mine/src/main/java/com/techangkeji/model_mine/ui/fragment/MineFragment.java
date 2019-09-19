@@ -100,8 +100,8 @@ public class MineFragment extends BaseLazyFragment<FragmentMineBinding, MineView
                 }
             }
             //账号
-            if (!IsNullUtil.getInstance().isEmpty(LocalDataHelper.getInstance().getUserInfo().getId())) {
-                viewModel.account.set("账号：" + LocalDataHelper.getInstance().getUserInfo().getId());
+            if (!IsNullUtil.getInstance().isEmpty(LocalDataHelper.getInstance().getUserInfo().getUserId())) {
+                viewModel.account.set("账号：" + LocalDataHelper.getInstance().getUserInfo().getUserId());
             }
         } catch (Exception e) {
             ZLog.d(e.toString());
