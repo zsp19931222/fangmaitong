@@ -5,12 +5,14 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import me.goldze.mvvmhabit.http.net.body.AddFriendBody;
+import me.goldze.mvvmhabit.http.net.body.AppReportBody;
 import me.goldze.mvvmhabit.http.net.body.AuthBrokerBody;
 import me.goldze.mvvmhabit.http.net.body.AuthQualificationBody;
 import me.goldze.mvvmhabit.http.net.body.AuthRealNameBody;
 import me.goldze.mvvmhabit.http.net.body.BindingThirdBody;
 import me.goldze.mvvmhabit.http.net.body.CheckAuthCodeBody;
 import me.goldze.mvvmhabit.http.net.body.CommentBody;
+import me.goldze.mvvmhabit.http.net.body.LocationBody;
 import me.goldze.mvvmhabit.http.net.body.LoginBody;
 import me.goldze.mvvmhabit.http.net.body.MyMovingListBody;
 import me.goldze.mvvmhabit.http.net.body.ReleaseMovingBody;
@@ -19,6 +21,7 @@ import me.goldze.mvvmhabit.http.net.body.UntiedThirdBody;
 import me.goldze.mvvmhabit.http.net.body.UpdateBody;
 import me.goldze.mvvmhabit.http.net.body.UpdatePasswordBody;
 import me.goldze.mvvmhabit.http.net.body.VoteBody;
+import me.goldze.mvvmhabit.http.net.entity.AreaListEntity;
 import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.CommentBean;
@@ -169,13 +172,28 @@ public interface ApiService<T extends BaseEntity> {
     Observable<SuccessEntity<CommentBean>> comment(@Body() CommentBody commentBody);
 
     //添加好友
-    @POST(API + "auth/friendApply/pass")
+    @POST(API + "auth/friend")
     @Headers({"url_name:login"})
     Observable<SuccessEntity> addFriend(@Body() AddFriendBody commentBody);
 
-    //添加好友被拒绝
-    @POST(API + "auth/friendApply/refuse")
+    //新增举报
+    @POST(API + "auth/appReport")
     @Headers({"url_name:login"})
-    Observable<SuccessEntity> addFriendRefuse(@Body() AddFriendBody commentBody);
+    Observable<SuccessEntity> appReport(@Body() AppReportBody appReportBody);
+
+    //查询举报列表
+    @POST(API + "auth/appReport/query")
+    @Headers({"url_name:login"})
+    Observable<SuccessEntity> appReportQuery(@Body() MyMovingListBody myMovingListBody);
+
+    //位置信息
+    @POST(API + "auth/location")
+    @Headers({"url_name:login"})
+    Observable<SuccessEntity> location(@Body() LocationBody myMovingListBody);
+
+    //地区列表
+    @GET(API + "auth/listAllArea")
+    @Headers({"url_name:login"})
+    Observable<AreaListEntity> listAllArea();
 
 }

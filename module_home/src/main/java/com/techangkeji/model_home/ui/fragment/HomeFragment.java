@@ -1,10 +1,12 @@
 package com.techangkeji.model_home.ui.fragment;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.annotation.Nullable;
@@ -13,8 +15,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.baidu.mapapi.model.inner.GeoPoint;
+import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.geocode.GeoCodeResult;
+import com.baidu.mapapi.search.geocode.GeoCoder;
+import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.goldze.base.router.ARouterPath;
+import com.goldze.base.utils.BaiduLocationBean;
+import com.goldze.base.utils.LocationUtil;
 import com.techangkeji.model_home.R;
 import com.techangkeji.model_home.databinding.FragmentHomeBinding;
 import com.techangkeji.model_home.ui.adapter.GridAdapter;
@@ -29,6 +41,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.goldze.mvvmhabit.base.BaseLazyFragment;
+import me.goldze.mvvmhabit.bus.RxBus;
+import me.goldze.mvvmhabit.bus.RxSubscriptions;
 
 import static com.techangkeji.model_home.ui.bean.HomeAdapterBean.FriendRecommend;
 import static com.techangkeji.model_home.ui.bean.HomeAdapterBean.HomeResourceRecommend;
@@ -60,6 +74,16 @@ public class HomeFragment extends BaseLazyFragment<FragmentHomeBinding, HomeView
         initNewInformation();
         homeAdapter.notifyDataSetChanged();
 
+    }
+
+    @Override
+    public void initData() {
+        binding.address.setOnClickListener(v -> ARouter.getInstance().build(ARouterPath.Public.AreaSelectActivity).navigation());
+        LocationUtil.getInstance().startLocation(getActivity());
+        RxSubscriptions.add(RxBus.getDefault().toObservable(BaiduLocationBean.class).subscribe(baiduLocationBean -> {
+            binding.address.setText(baiduLocationBean.getCity()+" "+baiduLocationBean.getDistrict());
+            viewModel.sendLocation(baiduLocationBean);
+        }));
     }
 
     @Override

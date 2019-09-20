@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="me.goldze.mvvmhabit.base.BaseViewModel" />
+            type="com.techangkeji.model_home.ui.view_midel.InformViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -37,14 +37,15 @@
                 android:id="@+id/tv_ai_popup"
                 android:layout_width="@dimen/d200"
                 android:layout_height="@dimen/d30"
-                android:background="@color/color_f6"
-                android:gravity="center_vertical"
                 android:layout_marginStart="@dimen/d16"
-                android:textColor="@color/color_dark_333333"
-                android:textSize="@dimen/font12"
+                android:background="@color/color_f6"
                 android:drawableRight="@mipmap/xjt"
+                android:gravity="center_vertical"
                 android:paddingStart="@dimen/d16"
-                android:paddingEnd="@dimen/d16" />
+                android:paddingEnd="@dimen/d16"
+                android:text="@={viewModel.reason}"
+                android:textColor="@color/color_dark_333333"
+                android:textSize="@dimen/font12" />
         </LinearLayout>
 
         <me.goldze.mvvmhabit.view.shape.RadiusRelativeLayout
@@ -61,6 +62,7 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:hint="请输入说明"
+                android:text="@={viewModel.explain}"
                 android:textColor="@color/color_gray_999999"
                 android:textColorHint="@color/color_gray_999999"
                 android:textSize="@dimen/font12" />
@@ -81,6 +83,7 @@
                 android:text="举报"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font16"
+                binding:onClickCommand="@{viewModel.btnCommand}"
                 binding:rv_backgroundColor="@color/color_FF8C00"
                 binding:rv_radius="@dimen/d25" />
         </RelativeLayout>

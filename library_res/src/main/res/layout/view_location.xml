@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/d3"
             android:text="上海  普陀区"
+            android:id="@+id/address"
             android:textColor="@color/color_dark_333333"
             android:textSize="@dimen/font12" />
 

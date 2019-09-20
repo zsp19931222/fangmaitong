@@ -13,6 +13,7 @@ import com.techangkeji.model_home.BR;
 import com.techangkeji.model_home.R;
 import com.techangkeji.model_home.databinding.ActivityInformBinding;
 import com.techangkeji.model_home.ui.popupwindow.InformPopup;
+import com.techangkeji.model_home.ui.view_midel.InformViewModel;
 
 import me.goldze.mvvmhabit.base.BaseActivity;
 import me.goldze.mvvmhabit.base.BaseViewModel;
@@ -23,7 +24,7 @@ import me.goldze.mvvmhabit.base.BaseViewModel;
  * email:zsp872126510@gmail.com
  */
 @Route(path = ARouterPath.Home.InformActivity)
-public class InformActivity extends BaseActivity<ActivityInformBinding, BaseViewModel> {
+public class InformActivity extends BaseActivity<ActivityInformBinding, InformViewModel> {
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_inform;
@@ -39,8 +40,9 @@ public class InformActivity extends BaseActivity<ActivityInformBinding, BaseView
         binding.title.setTitle("举报");
         binding.tvAiPopup.setOnClickListener(view -> {
             InformPopup informPopup=  new InformPopup(this);
-            informPopup.setOnSelectString(select -> binding.tvAiPopup.setText(select));
+            informPopup.setOnSelectString(select -> viewModel.reason.set(select));
             informPopup.showPopupWindow(view);
         });
     }
+
 }

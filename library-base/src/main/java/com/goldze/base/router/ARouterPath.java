@@ -57,8 +57,8 @@ public class ARouterPath {
      */
     public static class Public {
         private static final String Public = "/Public";
-        /*用户详情*/
         public static final String HRDetailActivity = Public + "/HRFragment";
+        public static final String AreaSelectActivity = Public + "/AreaSelectActivity";
     }
     /**
      * 我的页面

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.techangkeji.module.ui.view_model.AreaSelectViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_f6"
+        android:orientation="vertical">
+
+        <com.goldze.base.view.TitleVIew
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d44" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d16"
+            android:drawableStart="@mipmap/cb_select_icon"
+            android:drawablePadding="@dimen/d8"
+            android:gravity="center_vertical"
+            android:text="当前城市：上海"
+            android:textColor="@color/color_dark_333333"
+            android:textSize="@dimen/font12" />
+
+        <View style="@style/ViewLineStyle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/d39"
+            android:text="如若找不到您所在的区域，表示平台还没有发展该区域业务"
+            android:textColor="@color/color_gray_999999"
+            android:textSize="@dimen/font10" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/d15" />
+    </LinearLayout>
+</layout>
