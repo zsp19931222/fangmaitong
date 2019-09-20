@@ -29,6 +29,7 @@ public class BindingAccountActivity extends BaseActivity<ActivityBindingAccountB
 
     @Override
     public void initData() {
+        viewModel.context.set(this);
         try {
             viewModel.id.set(getIntent().getExtras().getLong("id"));
             viewModel.type.set(getIntent().getExtras().getInt("type"));

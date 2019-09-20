@@ -5,5 +5,7 @@
     <application>
         <activity android:name=".LauncherActivity"
             android:theme="@style/SplashTheme"/>
+        <activity android:name=".LauncherActivity1"
+            android:theme="@style/SplashTheme1"/>
     </application>
 </manifest>

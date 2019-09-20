@@ -6,7 +6,7 @@ package me.goldze.mvvmhabit.http.net.body;
  * email:zsp872126510@gmail.com
  */
 public class UpdateBody {
-    private String url;
+    private String headUrl;
     private String name; // 房脉通昵称
     private int sex = -1; // 1-男、2-女、0-未知
     private int age = -1; // 年龄
@@ -17,19 +17,19 @@ public class UpdateBody {
         this.age = age;
     }
 
-    public UpdateBody(String url, String name, int sex, int age) {
-        this.url = url;
+    public UpdateBody(String headUrl, String name, int sex, int age) {
+        this.headUrl = headUrl;
         this.name = name;
         this.sex = sex;
         this.age = age;
     }
 
     public String getUrl() {
-        return url;
+        return headUrl;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setUrl(String headUrl) {
+        this.headUrl = headUrl;
     }
 
     public String getName() {

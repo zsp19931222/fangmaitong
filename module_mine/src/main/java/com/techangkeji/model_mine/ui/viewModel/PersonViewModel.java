@@ -39,6 +39,7 @@ import me.goldze.mvvmhabit.http.net.body.RegisterBody;
 import me.goldze.mvvmhabit.http.net.body.UpdateBody;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.login.RegisterEntity;
+import me.goldze.mvvmhabit.litepal.UserInfoLitePal;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.IsNullUtil;
 import me.goldze.mvvmhabit.utils.RxUtils;
@@ -253,7 +254,7 @@ public class PersonViewModel extends BaseViewModel {
                         values.put("name", nickName.get());
                         values.put("sex", sexField.get());
                         values.put("age", Integer.valueOf(ageField.get()));
-                        LitePal.updateAll(RegisterEntity.class, values);
+                        LitePal.updateAll(UserInfoLitePal.class, values);
                         ZLog.d(LocalDataHelper.getInstance().getUserInfo());
                         ToastUtil.normalToast(context.get(), response.getMsg());
                     }

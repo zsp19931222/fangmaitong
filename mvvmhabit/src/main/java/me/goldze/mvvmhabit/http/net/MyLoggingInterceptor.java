@@ -29,15 +29,22 @@ public class MyLoggingInterceptor implements Interceptor {
         Request request = chain.request();
         //从request中获取原有的HttpUrl实例oldHttpUrl
         HttpUrl oldHttpUrl = request.url();
-        String token;
+        String token, userId;
         try {
             token = SPUtils.getInstance().getString("token");
         } catch (Exception e) {
             ZLog.d(e.toString());
             token = "";
         }
-        ZLog.d("token", token);
-        Request.Builder builder = request.newBuilder().addHeader("Authorization", token).addHeader("contentType","application/json");
+        try {
+            userId = LocalDataHelper.getInstance().getUserInfo().getUserId() + "";
+        } catch (Exception e) {
+            ZLog.d(e.toString());
+            userId = "";
+        }
+        ZLog.d("token:" + token);
+        ZLog.d("userId:" + userId);
+        Request.Builder builder = request.newBuilder().addHeader("Authorization", token).addHeader("userId", userId).addHeader("contentType", "application/json");
         //从request中获取headers，通过给定的键url_name
         List<String> headerValues = request.headers("url_name");
         if (headerValues != null && headerValues.size() > 0) {

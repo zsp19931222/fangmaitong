@@ -80,6 +80,9 @@ public class FriendCircleFragment extends BaseLazyFragment<FragmentFriendStateBi
     public void onResume() {
         super.onResume();
         binding.emojiPanelView.dismiss();
+        viewModel.page.set(1);
+        viewModel.friendMovingList();
+
     }
 
     @Override

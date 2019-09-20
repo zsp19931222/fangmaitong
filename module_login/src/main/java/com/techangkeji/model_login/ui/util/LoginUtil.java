@@ -1,23 +1,31 @@
 package com.techangkeji.model_login.ui.util;
 
+import android.Manifest;
+import android.annotation.TargetApi;
+import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.SPUtils;
+import com.goldze.base.constant.TipsConstants;
 import com.goldze.base.router.ARouterPath;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.exceptions.HyphenateException;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.techangkeji.hyphenate.chatuidemo.DemoHelper;
 import com.techangkeji.hyphenate.chatuidemo.db.DemoDBManager;
 import com.techangkeji.model_message.MessageModuleInit;
 
 import org.litepal.LitePal;
 
+import io.reactivex.observers.DefaultObserver;
 import me.goldze.mvvmhabit.base.AppManager;
 import me.goldze.mvvmhabit.base.BaseApplication;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
@@ -25,6 +33,7 @@ import me.goldze.mvvmhabit.http.net.entity.login.RegisterEntity;
 import me.goldze.mvvmhabit.litepal.UserInfoLitePal;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.IsNullUtil;
+import me.goldze.mvvmhabit.utils.ToastUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
 
 /**
@@ -155,8 +164,9 @@ public class LoginUtil {
      * author: Andy
      * date: 2019/9/17 0017 12:23
      */
-    public void saveUserInfo(SuccessEntity<RegisterEntity> response) {
-       LocalDataHelper.getInstance().deleteData();
+    private void saveUserInfo(SuccessEntity<RegisterEntity> response) {
+
+        LocalDataHelper.getInstance().deleteData();
         UserInfoLitePal dataBean = new UserInfoLitePal();
         dataBean.setAge(response.getContent().getAge());
         dataBean.setBrokerAuthenticate(response.getContent().getBrokerAuthenticate());
@@ -206,11 +216,11 @@ public class LoginUtil {
         dataBean.setWechatOpenId(response.getContent().getWechatOpenId());
         dataBean.setWechatProvince(response.getContent().getWechatProvince());
         dataBean.setWxappOpenId(response.getContent().getWxappOpenId());
-        if (!IsNullUtil.getInstance().isEmpty(response.getContent().getJwtToken())){
+        if (!IsNullUtil.getInstance().isEmpty(response.getContent().getJwtToken())) {
             SPUtils.getInstance().put("token", response.getContent().getJwtToken().getToken());
         }
         dataBean.save();
-        UserInfoLitePal registerEntity=LocalDataHelper.getInstance().getUserInfo();
+        UserInfoLitePal registerEntity = LocalDataHelper.getInstance().getUserInfo();
         ZLog.d(registerEntity);
         ZLog.d(LocalDataHelper.getInstance().getUserInfo());
         //存储登录时间
@@ -220,4 +230,40 @@ public class LoginUtil {
         // FIXME: 2019/9/18 0018 这里要用后台返回的用户名和密码来注册环信，现目前没有先写死
         registerHX(registerEntity.getImUsername(), registerEntity.getImPassword());
     }
+
+    /**
+     * description: app所需权限
+     * author: Andy
+     * date: 2019/9/20  10:54
+     */
+    @TargetApi(23)
+    public void requestPermissions(Context context,SuccessEntity<RegisterEntity> response) {
+        new RxPermissions((FragmentActivity) context)
+                .request(Manifest.permission.READ_PHONE_STATE,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(new DefaultObserver<Boolean>() {
+                    @Override
+                    public void onNext(Boolean aBoolean) {
+                        if (aBoolean) {
+                            saveUserInfo(response);
+                        } else {
+                            ToastUtil.normalToast(context, TipsConstants.GET_PERMISSIONS_FAILED);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        ToastUtil.normalToast(context, TipsConstants.GET_PERMISSIONS_FAILED);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
 }

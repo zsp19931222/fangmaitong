@@ -1,6 +1,7 @@
 package com.techangkeji.model_login.ui.view_model;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -48,6 +49,8 @@ public class BindingAccountViewModel extends BaseViewModel {
 
     public ObservableField<Long> id = new ObservableField<>();
     public ObservableField<Integer> type = new ObservableField<>();
+
+    public ObservableField<Context> context=new ObservableField<>();
 
     public ObservableField<String> authCodeField = new ObservableField<>("获取验证码");
     public ObservableField<String> authCodeNumField = new ObservableField<>("123456");
@@ -149,7 +152,8 @@ public class BindingAccountViewModel extends BaseViewModel {
                     @Override
                     public void onSuccess(SuccessEntity<RegisterEntity> response) {
                         showDialog("正在登录请稍后");
-                        LoginUtil.getInstance().saveUserInfo(response);
+//                        LoginUtil.getInstance().saveUserInfo(response);
+                        LoginUtil.getInstance().requestPermissions(context.get(),response);
                     }
                 });
     }

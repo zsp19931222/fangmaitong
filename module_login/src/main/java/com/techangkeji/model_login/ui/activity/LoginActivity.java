@@ -7,6 +7,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.goldze.base.constant.TipsConstants;
 import com.goldze.base.router.ARouterPath;
 import com.goldze.base.utils.OtherLoginUtil;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.techangkeji.model_login.BR;
 import com.techangkeji.model_login.R;
 import com.techangkeji.model_login.databinding.ActivityLoginBinding;

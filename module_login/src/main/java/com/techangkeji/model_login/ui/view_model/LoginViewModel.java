@@ -95,7 +95,8 @@ public class LoginViewModel extends BaseViewModel {
                     @Override
                     public void onSuccess(SuccessEntity<RegisterEntity> response) {
                         showDialog("正在登录请稍后");
-                        LoginUtil.getInstance().saveUserInfo(response);
+//                        LoginUtil.getInstance().saveUserInfo(response);
+                        LoginUtil.getInstance().requestPermissions(context.get(),response);
                     }
                 });
     }
@@ -152,7 +153,9 @@ public class LoginViewModel extends BaseViewModel {
                             startActivity(BindingAccountActivity.class, bundle);
                         } else {//已经绑定直接登录
                             showDialog("正在登录请稍后");
-                            LoginUtil.getInstance().saveUserInfo(response);
+//                            LoginUtil.getInstance().saveUserInfo(response);
+                            LoginUtil.getInstance().requestPermissions(context.get(),response);
+
                         }
                     }
                 });

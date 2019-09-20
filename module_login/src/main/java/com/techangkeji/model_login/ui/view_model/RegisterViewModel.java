@@ -130,7 +130,8 @@ public class RegisterViewModel extends BaseViewModel {
                         PerfectionUserInfoPopup perfectionUserInfoPopup = new PerfectionUserInfoPopup(context.get());
                         perfectionUserInfoPopup.setOnConfirmListener(() -> {
                             showDialog("正在登录请稍后");
-                            LoginUtil.getInstance().saveUserInfo(response);
+//                            LoginUtil.getInstance().saveUserInfo(response);
+                            LoginUtil.getInstance().requestPermissions(context.get(),response);
                         });
                         perfectionUserInfoPopup.showPopupWindow();
                     }
