@@ -49,4 +49,14 @@ public class AreaItemBean {
     public void setSelect(boolean select) {
         this.select = select;
     }
+
+    @Override
+    public String toString() {
+        return "AreaItemBean{" +
+                "id=" + id +
+                ", parentId=" + parentId +
+                ", areaName='" + areaName + '\'' +
+                ", select=" + select +
+                '}';
+    }
 }

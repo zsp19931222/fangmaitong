@@ -3,19 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/d16"
-        android:orientation="vertical"
-        android:id="@+id/tv_ah"
-        android:textSize="@dimen/font12"
-        android:textColor="@color/color_gray_666666"
-        android:text="直辖市：" />
-
+<View style="@style/ViewLineStyle"
+    android:background="@color/redColor"/>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_ah"
+        android:id="@+id/rv_ah2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/d12"

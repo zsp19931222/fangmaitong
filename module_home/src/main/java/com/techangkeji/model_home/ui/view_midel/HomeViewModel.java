@@ -3,10 +3,14 @@ package com.techangkeji.model_home.ui.view_midel;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.ObservableField;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.goldze.base.router.ARouterPath;
 import com.goldze.base.utils.BaiduLocationBean;
 
 import me.goldze.mvvmhabit.base.BaseViewModel;
+import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.http.net.DefaultObserver;
 import me.goldze.mvvmhabit.http.net.IdeaApi;
 import me.goldze.mvvmhabit.http.net.body.AuthRealNameBody;
@@ -22,9 +26,16 @@ import me.goldze.mvvmhabit.utils.ToastUtil;
  * email:zsp872126510@gmail.com
  */
 public class HomeViewModel extends BaseViewModel {
+    public ObservableField<String> area = new ObservableField<>("");
+    public ObservableField<String> city = new ObservableField<>("");
+
     public HomeViewModel(@NonNull Application application) {
         super(application);
     }
+
+    public BindingCommand areaCommand = new BindingCommand(() -> {
+        ARouter.getInstance().build(ARouterPath.Public.AreaSelectActivity).withString("city", city.get()).navigation();
+    });
 
     /**
      * description: 发送位置信息给后台

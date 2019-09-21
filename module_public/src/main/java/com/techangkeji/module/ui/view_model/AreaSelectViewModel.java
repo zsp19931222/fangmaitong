@@ -7,9 +7,13 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.techangkeji.module.ui.adapter.AreaListAdapter;
 import com.techangkeji.module.ui.bean.AreaItemBean;
-import com.techangkeji.module.ui.bean.AreaListBean;
+import com.techangkeji.module.ui.bean.AreaLevel0Bean;
+import com.techangkeji.module.ui.bean.AreaLevel1Bean;
+
+import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +22,10 @@ import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.http.net.DefaultObserver;
 import me.goldze.mvvmhabit.http.net.IdeaApi;
 import me.goldze.mvvmhabit.http.net.entity.AreaListEntity;
-import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
+import me.goldze.mvvmhabit.litepal.DistrictLitePal;
+import me.goldze.mvvmhabit.litepal.UserInfoLitePal;
+import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.RxUtils;
-import me.goldze.mvvmhabit.utils.ZLog;
 
 /**
  * description:
@@ -28,8 +33,9 @@ import me.goldze.mvvmhabit.utils.ZLog;
  * email:zsp872126510@gmail.com
  */
 public class AreaSelectViewModel extends BaseViewModel {
-    public ObservableList<AreaListBean> areaListBeans = new ObservableArrayList<>();
-    public ObservableField<AreaListAdapter> adapter=new ObservableField<>();
+    public ObservableList<MultiItemEntity> areaListBeans = new ObservableArrayList<>();
+    public ObservableField<AreaListAdapter> adapter = new ObservableField<>();
+    public ObservableField<String> city=new ObservableField<>("");
 
     public AreaSelectViewModel(@NonNull Application application) {
         super(application);
@@ -44,20 +50,28 @@ public class AreaSelectViewModel extends BaseViewModel {
                 .subscribe(new DefaultObserver<AreaListEntity>(this) {
                     @Override
                     public void onSuccess(AreaListEntity response) {
+                        LitePal.deleteAll(DistrictLitePal.class);
                         for (AreaListEntity.DataBean datum : response.getData()) {
-                            List<AreaItemBean> areaItemBeansLevel1 = new ArrayList<>();
+                            AreaLevel0Bean areaLevel0Bean = new AreaLevel0Bean(datum.getAreaName());
+                            List<AreaItemBean> cityBeanList = new ArrayList<>();
+                            AreaLevel1Bean areaLevel1Bean = null;
                             for (AreaListEntity.DataBean.ChildBeanX childBeanX : datum.getChild()) {
-                                areaItemBeansLevel1.add(new AreaItemBean(childBeanX.getId(), childBeanX.getParentId(), childBeanX.getAreaName(), false));
-                                List<AreaItemBean> areaItemBeansLevel2 = new ArrayList<>();
+                                cityBeanList.add(new AreaItemBean(childBeanX.getId(), childBeanX.getParentId(), childBeanX.getAreaName(), false));
                                 for (AreaListEntity.DataBean.ChildBeanX.ChildBean childBean : childBeanX.getChild()) {
-                                    areaItemBeansLevel2.add(new AreaItemBean(childBean.getId(), childBean.getParentId(), childBean.getAreaName(), false));
-                                    areaListBeans.add(new AreaListBean(areaItemBeansLevel2));
+                                    DistrictLitePal districtLitePal = new DistrictLitePal();
+                                    districtLitePal.setAreaName(childBean.getAreaName());
+                                    districtLitePal.setCityId(childBean.getParentId());
+                                    districtLitePal.setDistrictid(childBean.getId());
+                                    districtLitePal.setCityName(childBeanX.getAreaName());
+                                    districtLitePal.save();
                                 }
+                                areaLevel1Bean = new AreaLevel1Bean(cityBeanList);
                             }
-                            ZLog.d(datum.getAreaName());
-                            areaListBeans.add(new AreaListBean(true, datum.getAreaName(), areaItemBeansLevel1));
+                            areaLevel0Bean.addSubItem(areaLevel1Bean);
+                            areaListBeans.add(areaLevel0Bean);
                         }
                         adapter.get().notifyDataSetChanged();
+                        adapter.get().expandAll();
                     }
                 });
     }

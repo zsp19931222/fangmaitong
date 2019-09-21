@@ -13,11 +13,4 @@
         android:textSize="@dimen/font12"
         android:textColor="@color/color_gray_666666"
         android:text="直辖市：" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_ah"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/d12"
-        android:layout_marginEnd="@dimen/d12" />
 </LinearLayout>

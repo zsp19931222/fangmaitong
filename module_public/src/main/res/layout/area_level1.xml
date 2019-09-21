@@ -4,20 +4,26 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/d16"
-        android:orientation="vertical"
-        android:id="@+id/tv_ah"
-        android:textSize="@dimen/font12"
-        android:textColor="@color/color_gray_666666"
-        android:text="直辖市：" />
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_ah"
+        android:id="@+id/rv_ah1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/d12"
         android:layout_marginEnd="@dimen/d12" />
+
+    <View
+        android:layout_marginTop="@dimen/d10"
+        android:layout_marginStart="@dimen/d16"
+        android:layout_marginEnd="@dimen/d16"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d1"
+        android:background="@color/bgColor" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_ah2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/d12"
+        android:layout_marginEnd="@dimen/d12"
+        android:layout_marginBottom="@dimen/d20" />
 </LinearLayout>

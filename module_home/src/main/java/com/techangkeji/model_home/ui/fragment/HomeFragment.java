@@ -24,6 +24,7 @@ import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.goldze.base.eventbus.SelectRxBusBean;
 import com.goldze.base.router.ARouterPath;
 import com.goldze.base.utils.BaiduLocationBean;
 import com.goldze.base.utils.LocationUtil;
@@ -37,12 +38,16 @@ import com.techangkeji.model_home.ui.bean.HomeGridViewBean;
 import com.techangkeji.model_home.ui.utils.BannerSetting;
 import com.techangkeji.model_home.ui.view_midel.HomeViewModel;
 
+import org.litepal.LitePal;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import me.goldze.mvvmhabit.base.BaseLazyFragment;
 import me.goldze.mvvmhabit.bus.RxBus;
 import me.goldze.mvvmhabit.bus.RxSubscriptions;
+import me.goldze.mvvmhabit.litepal.DistrictLitePal;
+import me.goldze.mvvmhabit.utils.ZLog;
 
 import static com.techangkeji.model_home.ui.bean.HomeAdapterBean.FriendRecommend;
 import static com.techangkeji.model_home.ui.bean.HomeAdapterBean.HomeResourceRecommend;
@@ -78,11 +83,21 @@ public class HomeFragment extends BaseLazyFragment<FragmentHomeBinding, HomeView
 
     @Override
     public void initData() {
-        binding.address.setOnClickListener(v -> ARouter.getInstance().build(ARouterPath.Public.AreaSelectActivity).navigation());
         LocationUtil.getInstance().startLocation(getActivity());
         RxSubscriptions.add(RxBus.getDefault().toObservable(BaiduLocationBean.class).subscribe(baiduLocationBean -> {
-            binding.address.setText(baiduLocationBean.getCity()+" "+baiduLocationBean.getDistrict());
+            viewModel.area.set(baiduLocationBean.getCity() + " " + baiduLocationBean.getDistrict());
+            viewModel.city.set(baiduLocationBean.getCity());
             viewModel.sendLocation(baiduLocationBean);
+        }));
+        RxSubscriptions.add(RxBus.getDefault().toObservable(SelectRxBusBean.class).subscribe(areaItemBean -> {
+            ZLog.d(areaItemBean);
+            List<DistrictLitePal> newsList = LitePal
+                    .where("cityId = ?", areaItemBean.getParentId() + "")
+                    .find(DistrictLitePal.class);
+            if (newsList.size() > 0) {
+                viewModel.city.set(newsList.get(0).getCityName());
+                viewModel.area.set(newsList.get(0).getCityName() + " " + areaItemBean.getAreaName());
+            }
         }));
     }
 

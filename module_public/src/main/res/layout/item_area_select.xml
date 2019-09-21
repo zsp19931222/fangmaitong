@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <me.goldze.mvvmhabit.view.shape.RadiusTextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tv_area"
     android:layout_width="match_parent"
     android:layout_height="@dimen/d30"
     android:layout_marginStart="@dimen/d4"
     android:layout_marginTop="@dimen/d10"
     android:layout_marginEnd="@dimen/d4"
     android:gravity="center"
-    android:orientation="vertical"
-    android:id="@+id/tv_ia"
     android:textSize="@dimen/font14"
-    app:rv_radius="@dimen/d3" />
+    app:rv_backgroundColor="@color/white"
+    app:rv_radius="@dimen/d3"
+    app:rv_strokeColor="@color/bgColor"
+    app:rv_strokeWidth="@dimen/d1"
+    app:rv_textColor="@color/color_dark_333333" />

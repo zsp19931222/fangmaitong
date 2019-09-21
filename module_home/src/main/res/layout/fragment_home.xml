@@ -33,12 +33,13 @@
                     android:src="@mipmap/dinwei" />
 
                 <TextView
-                    android:id="@+id/address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/d3"
                     android:maxWidth="@dimen/d75"
+                    binding:onClickCommand="@{viewModel.areaCommand}"
                     android:maxLines="1"
+                    android:text="@={viewModel.area}"
                     android:ellipsize="end"
                     android:textColor="@color/color_dark_333333"
                     android:textSize="@dimen/font12" />
