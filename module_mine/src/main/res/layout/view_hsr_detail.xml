@@ -100,6 +100,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tv_vhd_offices_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="售楼处地址"

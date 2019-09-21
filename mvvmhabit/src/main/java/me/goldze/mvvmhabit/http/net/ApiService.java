@@ -2,6 +2,7 @@ package me.goldze.mvvmhabit.http.net;
 
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import me.goldze.mvvmhabit.http.net.body.AddFriendBody;
@@ -38,6 +39,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.QueryMap;
 
 /**
  * description:
@@ -46,8 +48,8 @@ import retrofit2.http.Path;
  */
 public interface ApiService<T extends BaseEntity> {
     //20122838  123456 测试账号
-    int DEFAULT_TIMEOUT = 8 * 1000;
-    String LOGIN_BASE_URL = "http://39.98.33.32:10006/";
+    int DEFAULT_TIMEOUT = 20 * 1000;
+    String LOGIN_BASE_URL = "http://39.98.33.32:10002/";
     String API = "/api/v2/";
 
 //    //注册
@@ -195,5 +197,15 @@ public interface ApiService<T extends BaseEntity> {
     @GET(API + "auth/listAllArea")
     @Headers({"url_name:login"})
     Observable<AreaListEntity> listAllArea();
+
+    //房源发布
+    @POST(API + "auth/building/addBuildingInfo")
+    @Headers({"url_name:login"})
+    Observable<SuccessEntity> addBuildingInfo(@QueryMap() Map<String,Object> map);
+
+    //特色标签
+    @GET(API + "auth/label/getFeaturedLabel")
+    @Headers({"url_name:login"})
+    Observable<SuccessEntity> getFeaturedLabel();
 
 }

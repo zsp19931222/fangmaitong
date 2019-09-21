@@ -41,6 +41,7 @@
     <me.goldze.mvvmhabit.view.shape.RadiusTextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/d50"
+        android:id="@+id/tv_vhs_release"
         android:layout_marginStart="@dimen/d16"
         android:layout_marginTop="@dimen/d5"
         android:layout_marginEnd="@dimen/d16"

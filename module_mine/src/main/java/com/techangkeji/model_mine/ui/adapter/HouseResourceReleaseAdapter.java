@@ -5,18 +5,18 @@ import android.content.Context;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.util.MultiTypeDelegate;
+import com.goldze.base.router.ARouterPath;
 import com.goldze.base.utils.PermissionsUtils;
 import com.techangkeji.model_mine.R;
 import com.techangkeji.model_mine.ui.activity.AddSizeActivity;
@@ -24,7 +24,6 @@ import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseBean;
 import com.techangkeji.model_mine.ui.data.HouseResourceReleaseSizeData;
 import com.techangkeji.model_mine.ui.popup.ArchitectTypePopupwindow;
 import com.techangkeji.model_mine.ui.popup.DecorationStatePopupwindow;
-import com.techangkeji.model_mine.ui.popup.HRSDLabelPopupwindow;
 import com.techangkeji.model_mine.ui.popup.PropertyTypePopupwindow;
 import com.techangkeji.model_mine.ui.popup.TimePickerPopupwindow;
 import com.techangkeji.model_mine.ui.viewModel.HouseResourceReleaseViewModel;
@@ -33,6 +32,7 @@ import java.util.List;
 
 import me.goldze.mvvmhabit.utils.IsNullUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
+import me.goldze.mvvmhabit.view.shape.RadiusTextView;
 
 import static com.goldze.base.constant.RxBusMessageEventConstants.OPEN_GALLERY;
 
@@ -125,6 +125,8 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
         et_vhf_look = helper.getView(R.id.et_vhf_look);
         cb_vhf_square = helper.getView(R.id.cb_vhf_square);
         cb_vhf_suit = helper.getView(R.id.cb_vhf_suit);
+        tv_vhf_address.setText(viewModel.address.get());
+        tv_vhf_address.setOnClickListener(v -> ARouter.getInstance().build(ARouterPath.Public.MoreAddressActivity).withInt("addressType", 0).navigation());
         cb_vhf_square.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 cb_vhf_suit.setChecked(false);
@@ -161,6 +163,7 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
     private TextView tv_vhd_property_type;
     private TextView tv_vhd_architecture_type;
     private TextView tv_vhd_decoration_state;
+    private TextView tv_vhd_offices_address;
     private ImageView iv_vhd_open_time;
     private ImageView iv_vhd_delivery_time;
     private EditText et_vhd_households;
@@ -182,15 +185,21 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
         tv_vhd_decoration_state = helper.getView(R.id.tv_vhd_decoration_state);
         iv_vhd_open_time = helper.getView(R.id.iv_vhd_open_time);
         iv_vhd_delivery_time = helper.getView(R.id.iv_vhd_delivery_time);
+        tv_vhd_offices_address = helper.getView(R.id.tv_vhd_offices_address);
         et_vhd_households = helper.getView(R.id.et_vhd_households);
         et_vhd_plot_ratio = helper.getView(R.id.et_vhd_plot_ratio);
         et_vhd_stall_num = helper.getView(R.id.et_vhd_stall_num);
+        et_vhd_age_limit = helper.getView(R.id.et_vhd_age_limit);
         et_vhd_licence = helper.getView(R.id.et_vhd_licence);
         et_vhd_property_company = helper.getView(R.id.et_vhd_property_company);
         et_vhd_property_fee = helper.getView(R.id.et_vhd_property_fee);
+
+        tv_vhd_address.setText(viewModel.officeAddress.get());
+        tv_vhd_address.setOnClickListener(v -> ARouter.getInstance().build(ARouterPath.Public.MoreAddressActivity).withInt("addressType", 1).navigation());
+
         //添加标签
         if (IsNullUtil.getInstance().isEmpty(hsrdAdapter)) {
-            if (!viewModel.labelList.contains("+")){
+            if (!viewModel.labelList.contains("+")) {
                 viewModel.labelList.add("+");
             }
             HSRDAdapter hsrdAdapter = new HSRDAdapter(R.layout.item_hsrd, viewModel.labelList, viewModel);
@@ -235,11 +244,13 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
 
     private TextView tv_vhs_add;
     private RecyclerView rv_vhs;
+    private RadiusTextView tv_vhs_release;
     private HouseResourceReleaseSizeAdapter houseResourceReleaseSizeAdapter;
 
     private void initSize(BaseViewHolder helper) {
         tv_vhs_add = helper.getView(R.id.tv_vhs_add);
         rv_vhs = helper.getView(R.id.rv_vhs);
+        tv_vhs_release = helper.getView(R.id.tv_vhs_release);
         tv_vhs_add.setOnClickListener(view -> viewModel.startActivity(AddSizeActivity.class));
         if (IsNullUtil.getInstance().isEmpty(houseResourceReleaseSizeAdapter)) {
             houseResourceReleaseSizeAdapter = new HouseResourceReleaseSizeAdapter(R.layout.item_hsr_size, HouseResourceReleaseSizeData.getInstance().getList(), viewModel);
@@ -248,5 +259,33 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
         } else {
             houseResourceReleaseSizeAdapter.notifyDataSetChanged();
         }
+        tv_vhs_release.setOnClickListener(v -> {
+            viewModel.averagePrice.set(et_vhf_price.getText().toString());
+            viewModel.buildType.set(tv_vhd_architecture_type.getText().toString());
+            viewModel.carNum.set(et_vhd_stall_num.getText().toString());
+            viewModel.commissionRule.set(et_vhf_commission.getText().toString());
+            viewModel.decorationType.set(tv_vhd_decoration_state.getText().toString());
+            viewModel.developerName.set(et_vhf_dn.getText().toString());
+            viewModel.handTime.set(tv_vhd_delivery_time.getText().toString());
+            viewModel.license.set(et_vhd_licence.getText().toString());
+            viewModel.listingName.set(et_vhf_name.getText().toString());
+            viewModel.lookRule.set(et_vhf_look.getText().toString());
+            viewModel.openTime.set(tv_vhd_open_time.getText().toString());
+            if (cb_vhf_square.isChecked()){
+                viewModel.priceType.set("1");
+            }
+            if (cb_vhf_square.isChecked()){
+                viewModel.priceType.set("2");
+            }
+            viewModel.propertiesType.set(tv_vhd_property_type.getText().toString());
+            viewModel.propertyCompany.set(et_vhd_property_company.getText().toString());
+            viewModel.propertyMoney.set(et_vhd_property_fee.getText().toString());
+            viewModel.propertyYear.set(et_vhd_age_limit.getText().toString());
+            viewModel.resident.set(et_vhd_households.getText().toString());
+            viewModel.volumeRate.set(et_vhd_plot_ratio.getText().toString());
+            viewModel.bannerStringBuilder.get().setLength(0);
+            viewModel.typeImgUrlStringBuilder.get().setLength(0);
+            viewModel.uploadBannerImage(viewModel.bannerPosition.get());
+        });
     }
 }

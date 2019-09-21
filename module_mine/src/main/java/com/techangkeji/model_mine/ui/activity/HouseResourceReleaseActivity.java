@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.blankj.utilcode.util.SPUtils;
+import com.goldze.base.eventbus.LocationRxBusBean;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -63,6 +64,7 @@ public class HouseResourceReleaseActivity extends BaseActivity<ActivityHouseReso
 
     @Override
     public void initData() {
+        viewModel.getFeaturedLabel();
         binding.title.setTitle("发布房源");
         releaseAdapter = new HouseResourceReleaseAdapter(data, this, viewModel);
         viewModel.adapterObservableField.set(releaseAdapter);
@@ -70,7 +72,7 @@ public class HouseResourceReleaseActivity extends BaseActivity<ActivityHouseReso
         binding.rv.setAdapter(releaseAdapter);
         initBanner();
         initInformation();
-        initLinkman();
+//        initLinkman();
         initDetail();
         initSize();
         releaseAdapter.notifyDataSetChanged();
@@ -85,6 +87,16 @@ public class HouseResourceReleaseActivity extends BaseActivity<ActivityHouseReso
             } else if (obj instanceof HouseResourceReleaseBannerPostBean) {//删除banner图片
                 HouseResourceReleaseBannerPostBean postBean = (HouseResourceReleaseBannerPostBean) obj;
                 viewModel.bannerPathList.remove(postBean.getPosition());
+                releaseAdapter.notifyDataSetChanged();
+            } else if (obj instanceof LocationRxBusBean) {
+                LocationRxBusBean locationRxBusBean = (LocationRxBusBean) obj;
+                if (locationRxBusBean.getType() == 0) {
+                    viewModel.address.set(locationRxBusBean.getAddress());
+                    viewModel.lon.set(locationRxBusBean.getLongitude());
+                    viewModel.lat.set(locationRxBusBean.getLatitude());
+                } else {
+                    viewModel.officeAddress.set(locationRxBusBean.getAddress());
+                }
                 releaseAdapter.notifyDataSetChanged();
             }
         }));
@@ -178,7 +190,8 @@ public class HouseResourceReleaseActivity extends BaseActivity<ActivityHouseReso
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);ZLog.d("onActivityResult","onActivityResult");
+        super.onActivityResult(requestCode, resultCode, data);
+        ZLog.d("onActivityResult", "onActivityResult");
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case PictureConfig.CHOOSE_REQUEST:
@@ -192,7 +205,6 @@ public class HouseResourceReleaseActivity extends BaseActivity<ActivityHouseReso
                     for (int i = 0; i < PictureSelector.obtainMultipleResult(data).size(); i++) {
                         viewModel.bannerPathList.add(new HouseResourceReleaseBannerBean(PictureSelector.obtainMultipleResult(data).get(i).getPath(), ""));
                     }
-                    ZLog.d(viewModel.bannerPathList);
                     releaseAdapter.notifyDataSetChanged();
                     break;
             }
