@@ -21,6 +21,7 @@ public class PropertyTypePopupwindow extends BasePopupWindow {
         TextView tv_pt3 = findViewById(R.id.tv_pt3);
         TextView tv_pt4 = findViewById(R.id.tv_pt4);
         TextView tv_pt5 = findViewById(R.id.tv_pt5);
+        TextView tv_pt6 = findViewById(R.id.tv_pt6);
 
 
         View v_pt1 = findViewById(R.id.v_pt1);
@@ -28,6 +29,7 @@ public class PropertyTypePopupwindow extends BasePopupWindow {
         View v_pt3 = findViewById(R.id.v_pt3);
         View v_pt4 = findViewById(R.id.v_pt4);
         View v_pt5 = findViewById(R.id.v_pt5);
+        View v_pt6 = findViewById(R.id.v_pt6);
 
         if (s.equals(tv_pt1.getText().toString())){
             v_pt1.setVisibility(View.VISIBLE);
@@ -49,6 +51,10 @@ public class PropertyTypePopupwindow extends BasePopupWindow {
             v_pt5.setVisibility(View.VISIBLE);
             tv_pt5.setTextColor(ContextCompat.getColor(context,R.color.color_FF8C00));
         }
+        if (s.equals(tv_pt6.getText().toString())){
+            v_pt6.setVisibility(View.VISIBLE);
+            tv_pt6.setTextColor(ContextCompat.getColor(context,R.color.color_FF8C00));
+        }
 
         tv_pt1.setOnClickListener(view -> {
             select(tv_pt1);
@@ -64,6 +70,9 @@ public class PropertyTypePopupwindow extends BasePopupWindow {
         });
         tv_pt5.setOnClickListener(view -> {
             select(tv_pt5);
+        });
+        tv_pt6.setOnClickListener(view -> {
+            select(tv_pt6);
         });
     }
 

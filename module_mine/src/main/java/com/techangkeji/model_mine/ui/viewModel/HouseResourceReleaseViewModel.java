@@ -8,9 +8,12 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
 
+import com.goldze.base.utils.ParameterLogUtil;
 import com.techangkeji.model_mine.ui.adapter.HouseResourceReleaseAdapter;
+import com.techangkeji.model_mine.ui.bean.FeaturedLabelBean;
 import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseBannerBean;
 import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseSizeBean;
+import com.techangkeji.model_mine.ui.bean.SelectFriendBean;
 import com.techangkeji.model_mine.ui.data.HouseResourceReleaseSizeData;
 
 import java.io.File;
@@ -19,11 +22,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import me.goldze.mvvmhabit.base.BaseApplication;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.http.net.DefaultObserver;
 import me.goldze.mvvmhabit.http.net.IdeaApi;
 import me.goldze.mvvmhabit.http.net.body.UpdateBody;
 import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
+import me.goldze.mvvmhabit.http.net.entity.FeaturedLabelEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.IsNullUtil;
@@ -41,8 +46,12 @@ import okhttp3.RequestBody;
  */
 public class HouseResourceReleaseViewModel extends BaseViewModel {
     public ObservableList<HouseResourceReleaseBannerBean> bannerPathList = new ObservableArrayList<>();
+    public ObservableList<FeaturedLabelBean> featuredLabelList = new ObservableArrayList<>();
+    public ObservableList<FeaturedLabelBean> featuredLabelListConfirm = new ObservableArrayList<>();
     public ObservableList<String> labelList = new ObservableArrayList<>();
+    public ObservableList<SelectFriendBean> linkManList = new ObservableArrayList<>();//联系人数据
     public ObservableField<HouseResourceReleaseAdapter> adapterObservableField = new ObservableField<>();
+    public ObservableField<String> houseID = new ObservableField<>("");//房源ID
 
 
     public ObservableField<Integer> bannerPosition = new ObservableField<>(0);
@@ -81,7 +90,6 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
     public ObservableField<String> propertyYear = new ObservableField<>("70");
     public ObservableField<String> resident = new ObservableField<>("36");
     public ObservableField<String> volumeRate = new ObservableField<>("54.2");
-    public ObservableField<String> id = new ObservableField<>("0");
 
 
     public HouseResourceReleaseViewModel(@NonNull Application application) {
@@ -98,9 +106,12 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
                 .getFeaturedLabel()
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                 .compose(RxUtils.schedulersTransformer())
-                .subscribe(new DefaultObserver<SuccessEntity>() {
+                .subscribe(new DefaultObserver<FeaturedLabelEntity>() {
                     @Override
-                    public void onSuccess(SuccessEntity response) {
+                    public void onSuccess(FeaturedLabelEntity response) {
+                        for (FeaturedLabelEntity.DataBean datum : response.getData()) {
+                            featuredLabelList.add(new FeaturedLabelBean(datum.getId(),datum.getLabel_name(),false));
+                        }
                     }
 
                 });
@@ -158,7 +169,7 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
         parameter.put("typeImgUrl", typeImgUrlStringBuilder.get().toString());
         parameter.put("userId", LocalDataHelper.getInstance().getUserInfo().getUserId());
         parameter.put("volumeRate", volumeRate.get());
-        parameter.put("id", id.get());
+        parameter.put("id", houseID.get());
         parameter.put("houseAveragePrice", houseAveragePriceStringBuilder.get());
         parameter.put("housePriceType", housePriceTypeStringBuilder.get());
         for (Map.Entry<String, Object> entry : parameter.entrySet()) {
@@ -172,6 +183,7 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
                 .subscribe(new DefaultObserver<SuccessEntity>(this) {
                     @Override
                     public void onSuccess(SuccessEntity response) {
+                        ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "发布房源成功");
                         finish();
                         HouseResourceReleaseSizeData.getInstance().getList().clear();
                     }
@@ -251,5 +263,32 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
         } else {
             addBuildingInfo();
         }
+    }
+
+
+    /**
+     * description:房源详情查询
+     * author: Andy
+     * date: 2019/9/22  17:52
+     */
+    public void buildingInfo() {
+        Map<String, Object> parameter = new HashMap<>();
+        parameter.put("id", houseID.get());
+        ParameterLogUtil.getInstance().parameterLog(parameter);
+        IdeaApi.getApiService()
+                .addBuildingInfo(parameter)
+                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                .compose(RxUtils.schedulersTransformer())
+                .subscribe(new DefaultObserver() {
+                    @Override
+                    public void onSuccess(BaseEntity response) {
+
+                    }
+
+                    @Override
+                    public void onNext(Object o) {
+
+                    }
+                });
     }
 }

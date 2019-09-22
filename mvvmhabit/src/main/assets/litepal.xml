@@ -6,6 +6,8 @@
 
     <list>
         <mapping class="me.goldze.mvvmhabit.litepal.UserInfoLitePal"></mapping>
+        <mapping class="me.goldze.mvvmhabit.litepal.ProvinceLitePal"></mapping>
+        <mapping class="me.goldze.mvvmhabit.litepal.CityLitePal"></mapping>
         <mapping class="me.goldze.mvvmhabit.litepal.DistrictLitePal"></mapping>
     </list>
 </litepal>

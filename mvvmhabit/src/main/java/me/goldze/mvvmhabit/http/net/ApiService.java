@@ -24,6 +24,8 @@ import me.goldze.mvvmhabit.http.net.body.UpdatePasswordBody;
 import me.goldze.mvvmhabit.http.net.body.VoteBody;
 import me.goldze.mvvmhabit.http.net.entity.AreaListEntity;
 import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
+import me.goldze.mvvmhabit.http.net.entity.BuildingListEntity;
+import me.goldze.mvvmhabit.http.net.entity.FeaturedLabelEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.CommentBean;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.MyStateEntity;
@@ -49,7 +51,9 @@ import retrofit2.http.QueryMap;
 public interface ApiService<T extends BaseEntity> {
     //20122838  123456 测试账号
     int DEFAULT_TIMEOUT = 20 * 1000;
-    String LOGIN_BASE_URL = "http://39.98.33.32:10002/";
+    String LOGIN_BASE_URL = "http://39.98.33.32:10006/";
+    String IMAGE_BASE_URL = "http://39.98.33.32:10006/";
+    String IMAGE_BASE_URL1 = "http://39.98.33.32:10002/";
     String API = "/api/v2/";
 
 //    //注册
@@ -80,7 +84,7 @@ public interface ApiService<T extends BaseEntity> {
     //图片上传
     @Multipart
     @POST(API + "auth/uploadpic")
-    @Headers({"url_name:login"})
+    @Headers({"url_name:imageUpload"})
     Observable<SuccessEntity<String>> uploadpic(@Part List<MultipartBody.Part> partList);
 
     //退出登录
@@ -200,12 +204,27 @@ public interface ApiService<T extends BaseEntity> {
 
     //房源发布
     @POST(API + "auth/building/addBuildingInfo")
-    @Headers({"url_name:login"})
+    @Headers({"url_name:user_info"})
     Observable<SuccessEntity> addBuildingInfo(@QueryMap() Map<String,Object> map);
 
     //特色标签
     @GET(API + "auth/label/getFeaturedLabel")
-    @Headers({"url_name:login"})
-    Observable<SuccessEntity> getFeaturedLabel();
+    @Headers({"url_name:user_info"})
+    Observable<FeaturedLabelEntity> getFeaturedLabel();
+
+    //我的房源列表
+    @POST(API + "auth/building/getBuildingList")
+    @Headers({"url_name:user_info"})
+    Observable<BuildingListEntity> getBuildingList(@QueryMap() Map<String,Object> map);
+
+    //删除房源
+    @POST(API + "auth/building/deleteBuilding/{id}")
+    @Headers({"url_name:user_info"})
+    Observable<SuccessEntity> deleteBuilding(@Path("id") int id);
+
+    //房源详情查询
+    @GET(API + "auth/building/getBuildingInfoById")
+    @Headers({"url_name:user_info"})
+    Observable<SuccessEntity> getBuildingInfoById(@QueryMap() Map<String,Object> map);
 
 }

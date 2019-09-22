@@ -20,6 +20,7 @@ import com.goldze.base.router.ARouterPath;
 import com.goldze.base.utils.PermissionsUtils;
 import com.techangkeji.model_mine.R;
 import com.techangkeji.model_mine.ui.activity.AddSizeActivity;
+import com.techangkeji.model_mine.ui.activity.SelectFriendActivity;
 import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseBean;
 import com.techangkeji.model_mine.ui.data.HouseResourceReleaseSizeData;
 import com.techangkeji.model_mine.ui.popup.ArchitectTypePopupwindow;
@@ -76,6 +77,7 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
                 initInformation(helper);
                 break;
             case HouseResourceReleaseBean.Linkman:
+                initLinkman(helper);
                 break;
         }
     }
@@ -147,8 +149,16 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
     private RecyclerView rv_vhl;
     private TextView rv_vhl_add;
 
-    private void initLinkman() {
+    private void initLinkman(BaseViewHolder helper) {
+        rv_vhl = helper.getView(R.id.rv_vhl);
 
+        rv_vhl_add = helper.getView(R.id.rv_vhl_add);
+        rv_vhl_add.setOnClickListener(v -> {
+            viewModel.startActivity(SelectFriendActivity.class);
+        });
+        LinkManAdapter linkManAdapter = new LinkManAdapter(R.layout.item_linkman, viewModel.linkManList, viewModel);
+        rv_vhl.setLayoutManager(new LinearLayoutManager(context));
+        rv_vhl.setAdapter(linkManAdapter);
     }
 
     /**
@@ -261,23 +271,71 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
         }
         tv_vhs_release.setOnClickListener(v -> {
             viewModel.averagePrice.set(et_vhf_price.getText().toString());
-            viewModel.buildType.set(tv_vhd_architecture_type.getText().toString());
+            String buildType;
+            switch (tv_vhd_architecture_type.getText().toString()) {
+                case "居住建筑":
+                    buildType = "1";
+                    break;
+                case "商业建筑":
+                    buildType = "2";
+                    break;
+                default:
+                    buildType = "";
+                    break;
+            }
+            viewModel.buildType.set(buildType);
             viewModel.carNum.set(et_vhd_stall_num.getText().toString());
             viewModel.commissionRule.set(et_vhf_commission.getText().toString());
-            viewModel.decorationType.set(tv_vhd_decoration_state.getText().toString());
+            String decorationType;
+            switch (tv_vhd_decoration_state.getText().toString()) {
+                case "精装":
+                    decorationType = "1";
+                    break;
+                case "简装":
+                    decorationType = "2";
+                    break;
+                case "毛坯":
+                    decorationType = "3";
+                    break;
+                default:
+                    decorationType = "";
+                    break;
+            }
+            viewModel.decorationType.set(decorationType);
             viewModel.developerName.set(et_vhf_dn.getText().toString());
             viewModel.handTime.set(tv_vhd_delivery_time.getText().toString());
             viewModel.license.set(et_vhd_licence.getText().toString());
             viewModel.listingName.set(et_vhf_name.getText().toString());
             viewModel.lookRule.set(et_vhf_look.getText().toString());
             viewModel.openTime.set(tv_vhd_open_time.getText().toString());
-            if (cb_vhf_square.isChecked()){
+            if (cb_vhf_square.isChecked()) {
                 viewModel.priceType.set("1");
             }
-            if (cb_vhf_square.isChecked()){
+            if (cb_vhf_square.isChecked()) {
                 viewModel.priceType.set("2");
             }
-            viewModel.propertiesType.set(tv_vhd_property_type.getText().toString());
+            String propertiesType = "";
+            switch (tv_vhd_property_type.getText().toString()) {
+                case "住宅":
+                    propertiesType = "3";
+                    break;
+                case "别墅":
+                    propertiesType = "4";
+                    break;
+                case "商办":
+                    propertiesType = "5";
+                    break;
+                case "商铺":
+                    propertiesType = "6";
+                    break;
+                case "写字楼":
+                    propertiesType = "7";
+                    break;
+                case "商住":
+                    propertiesType = "8";
+                    break;
+            }
+            viewModel.propertiesType.set(propertiesType);
             viewModel.propertyCompany.set(et_vhd_property_company.getText().toString());
             viewModel.propertyMoney.set(et_vhd_property_fee.getText().toString());
             viewModel.propertyYear.set(et_vhd_age_limit.getText().toString());

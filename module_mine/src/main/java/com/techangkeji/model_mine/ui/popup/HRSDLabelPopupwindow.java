@@ -3,7 +3,15 @@ package com.techangkeji.model_mine.ui.popup;
 import android.content.Context;
 import android.view.View;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 import com.techangkeji.model_mine.R;
+import com.techangkeji.model_mine.ui.adapter.HRSDLabelAdapter;
+import com.techangkeji.model_mine.ui.bean.FeaturedLabelBean;
 import com.techangkeji.model_mine.ui.viewModel.HouseResourceReleaseViewModel;
 
 import java.util.ArrayList;
@@ -18,120 +26,35 @@ import razerdp.basepopup.BasePopupWindow;
  * email:zsp872126510@gmail.com
  */
 public class HRSDLabelPopupwindow extends BasePopupWindow {
-    private boolean tv_phl_car_lookABoolean = false;
-    private boolean tv_phl_video_lookABoolean = false;
-    private boolean tv_phl_soloABoolean = false;
-    private boolean tv_phl_readyABoolean = false;
-    private boolean tv_phl_brandABoolean = false;
-    private HouseResourceReleaseViewModel viewModel;
-    private List<String> selectList = new ArrayList<>();
 
     public HRSDLabelPopupwindow(Context context, HouseResourceReleaseViewModel viewModel) {
         super(context);
-        this.viewModel = viewModel;
-        RadiusTextView tv_phl_car_look = findViewById(R.id.tv_phl_car_look);
-        RadiusTextView tv_phl_video_look = findViewById(R.id.tv_phl_video_look);
-        RadiusTextView tv_phl_solo = findViewById(R.id.tv_phl_solo);
-        RadiusTextView tv_phl_ready = findViewById(R.id.tv_phl_ready);
-        RadiusTextView tv_phl_brand = findViewById(R.id.tv_phl_brand);
+        RecyclerView recyclerView = findViewById(R.id.rv);
         RadiusTextView tv_phl_delete = findViewById(R.id.tv_phl_delete);
         RadiusTextView tv_phl_select = findViewById(R.id.tv_phl_select);
+        HRSDLabelAdapter hrsdLabelAdapter = new HRSDLabelAdapter(R.layout.item_label_feature, viewModel.featuredLabelList);
+        //设置布局管理器
+        FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(context);
+        //flexDirection 属性决定主轴的方向（即项目的排列方向）。类似 LinearLayout 的 vertical 和 horizontal。
+        flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);//主轴为水平方向，起点在左端。
+        //flexWrap 默认情况下 Flex 跟 LinearLayout 一样，都是不带换行排列的，但是flexWrap属性可以支持换行排列。
+        flexboxLayoutManager.setFlexWrap(FlexWrap.WRAP);//按正常方向换行
+        //justifyContent 属性定义了项目在主轴上的对齐方式。
+        flexboxLayoutManager.setJustifyContent(JustifyContent.FLEX_START);//交叉轴的起点对齐。
+        recyclerView.setLayoutManager(flexboxLayoutManager);
+        recyclerView.setAdapter(hrsdLabelAdapter);
         tv_phl_delete.setOnClickListener(view -> dismiss());
-        for (String s : viewModel.labelList) {
-            if (tv_phl_car_look.getText().equals(s)){
-                tv_phl_car_lookABoolean=true;
-                selectList.add(s);
-            }
-            if (tv_phl_video_look.getText().equals(s)){
-                tv_phl_video_lookABoolean=true;
-                selectList.add(s);
-            }
-            if (tv_phl_solo.getText().equals(s)){
-                tv_phl_soloABoolean=true;
-                selectList.add(s);
-            }
-            if (tv_phl_ready.getText().equals(s)){
-                tv_phl_readyABoolean=true;
-                selectList.add(s);
-            }
-            if (tv_phl_brand.getText().equals(s)){
-                tv_phl_brandABoolean=true;
-                selectList.add(s);
-            }
-            tv_phl_car_look.setSelected(tv_phl_car_lookABoolean);
-            tv_phl_video_look.setSelected(tv_phl_video_lookABoolean);
-            tv_phl_solo.setSelected(tv_phl_soloABoolean);
-            tv_phl_ready.setSelected(tv_phl_readyABoolean);
-            tv_phl_brand.setSelected(tv_phl_brandABoolean);
-        }
-        tv_phl_car_look.setOnClickListener(view -> {
-            if (tv_phl_car_lookABoolean) {
-                tv_phl_car_lookABoolean = false;
-                String s = (String) tv_phl_car_look.getText();
-                selectList.remove(s);
-                tv_phl_car_look.setSelected(tv_phl_car_lookABoolean);
-            } else {
-                tv_phl_car_lookABoolean = true;
-                String s = (String) tv_phl_car_look.getText();
-                selectList.add(s);
-                tv_phl_car_look.setSelected(tv_phl_car_lookABoolean);
-            }
-        });
-        tv_phl_video_look.setOnClickListener(view -> {
-            if (tv_phl_video_lookABoolean) {
-                tv_phl_video_lookABoolean = false;
-                String s = (String) tv_phl_video_look.getText();
-                selectList.remove(s);
-                tv_phl_video_look.setSelected(tv_phl_video_lookABoolean);
-            } else {
-                tv_phl_video_lookABoolean = true;
-                String s = (String) tv_phl_video_look.getText();
-                selectList.add(s);
-                tv_phl_video_look.setSelected(tv_phl_video_lookABoolean);
-            }
-        });
-        tv_phl_solo.setOnClickListener(view -> {
-            if (tv_phl_soloABoolean) {
-                tv_phl_soloABoolean = false;
-                String s = (String) tv_phl_solo.getText();
-                selectList.remove(s);
-                tv_phl_solo.setSelected(tv_phl_soloABoolean);
-            } else {
-                tv_phl_soloABoolean = true;
-                String s = (String) tv_phl_solo.getText();
-                selectList.add(s);
-                tv_phl_solo.setSelected(tv_phl_soloABoolean);
-            }
-        });
-        tv_phl_ready.setOnClickListener(view -> {
-            if (tv_phl_readyABoolean) {
-                tv_phl_readyABoolean = false;
-                String s = (String) tv_phl_ready.getText();
-                selectList.remove(s);
-                tv_phl_ready.setSelected(tv_phl_readyABoolean);
-            } else {
-                tv_phl_readyABoolean = true;
-                String s = (String) tv_phl_ready.getText();
-                selectList.add(s);
-                tv_phl_ready.setSelected(tv_phl_readyABoolean);
-            }
-        });
-        tv_phl_brand.setOnClickListener(view -> {
-            if (tv_phl_brandABoolean) {
-                tv_phl_brandABoolean = false;
-                String s = (String) tv_phl_brand.getText();
-                selectList.remove(s);
-                tv_phl_brand.setSelected(tv_phl_brandABoolean);
-            } else {
-                tv_phl_brandABoolean = true;
-                String s = (String) tv_phl_brand.getText();
-                selectList.add(s);
-                tv_phl_brand.setSelected(tv_phl_brandABoolean);
-            }
-        });
-        tv_phl_select.setOnClickListener(view -> {
+        tv_phl_select.setOnClickListener(v -> {
+            viewModel.featuredLabelListConfirm.clear();
+            viewModel.labelIdsStringBuilder.get().setLength(0);
+            viewModel.featuredLabelListConfirm.addAll(viewModel.featuredLabelList);
             viewModel.labelList.clear();
-            viewModel.labelList.addAll(selectList);
+            for (FeaturedLabelBean featuredLabelBean : viewModel.featuredLabelListConfirm) {
+                if (featuredLabelBean.isSelect()) {
+                    viewModel.labelIdsStringBuilder.get().append(featuredLabelBean.getId()).append(",");
+                    viewModel.labelList.add(featuredLabelBean.getLabel_name());
+                }
+            }
             viewModel.adapterObservableField.get().notifyDataSetChanged();
             dismiss();
         });
@@ -141,12 +64,4 @@ public class HRSDLabelPopupwindow extends BasePopupWindow {
     public View onCreateContentView() {
         return createPopupById(R.layout.popup_hsrd_label);
     }
-
-    /**
-     * description: 是否选中
-     * author: Andy
-     * date: 2019/9/12 0012 11:47
-     */
-
-
 }

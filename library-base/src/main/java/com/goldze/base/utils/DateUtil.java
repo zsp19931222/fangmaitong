@@ -2,8 +2,12 @@ package com.goldze.base.utils;
 
 import android.annotation.SuppressLint;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+
+import me.goldze.mvvmhabit.utils.IsNullUtil;
 
 /**
  * description:日期 时间工具
@@ -119,9 +123,38 @@ public class DateUtil {
      * @param date 需要格式化的日期
      * @return 返回格式化后的时间字符串
      */
-    private String format(Date date) {
+    public String format(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(date);
     }
+
+    /**
+     * description: 时间对比
+     * author: Andy
+     * date: 2019/9/22  17:17
+     */
+    public boolean compare(String nowTime, String openTime) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date startTime = sdf.parse(nowTime);
+            Date endTime = sdf.parse(openTime);
+            if (startTime.getTime() > endTime.getTime()) {
+                return true;// startTime在endTime前
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    //时间戳转字符串(1)
+    public String timeStampChangeString1(String timeStampString, String format) {
+        if (IsNullUtil.getInstance().isEmpty(format)) {
+            format = "yyyy-MM-dd HH:mm:ss";
+        }
+        Long timeStamp = Long.parseLong(timeStampString) * 1000L;
+        return new SimpleDateFormat(format, Locale.CHINA).format(new Date(timeStamp));
+    }
+
 }
 

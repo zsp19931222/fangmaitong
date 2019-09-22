@@ -15,6 +15,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
+import static me.goldze.mvvmhabit.http.net.ApiService.IMAGE_BASE_URL;
+import static me.goldze.mvvmhabit.http.net.ApiService.IMAGE_BASE_URL1;
 import static me.goldze.mvvmhabit.http.net.ApiService.LOGIN_BASE_URL;
 
 /**
@@ -55,13 +57,13 @@ public class MyLoggingInterceptor implements Interceptor {
             HttpUrl newBaseUrl;
             switch (headerValue) {//动态替换基地址
                 case "imageUpload":
-                    newBaseUrl = HttpUrl.parse(LOGIN_BASE_URL);
+                    newBaseUrl = HttpUrl.parse(IMAGE_BASE_URL);
                     break;
                 case "login":
                     newBaseUrl = HttpUrl.parse(LOGIN_BASE_URL);
                     break;
                 case "user_info":
-                    newBaseUrl = HttpUrl.parse(LOGIN_BASE_URL);
+                    newBaseUrl = HttpUrl.parse(IMAGE_BASE_URL1);
                     break;
                 case "home":
                     newBaseUrl = HttpUrl.parse(LOGIN_BASE_URL);

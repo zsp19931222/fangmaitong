@@ -5,7 +5,9 @@ import android.content.Context;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
+import androidx.databinding.ObservableList;
 
 import com.techangkeji.module_hr.ui.popup.AreaPopupwindow;
 import com.techangkeji.module_hr.ui.popup.FilterPopupwindow;
@@ -13,8 +15,11 @@ import com.techangkeji.module_hr.ui.popup.PricePopupwindow;
 import com.techangkeji.module_hr.ui.popup.SortPopupwindow;
 import com.techangkeji.module_hr.ui.popup.TypePopupwindow;
 
+import java.util.ArrayList;
+
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
+import me.goldze.mvvmhabit.http.net.entity.AreaListEntity;
 
 public class HRViewModel extends BaseViewModel {
     public ObservableField<Integer> areaShow = new ObservableField<>(View.VISIBLE);
@@ -24,6 +29,8 @@ public class HRViewModel extends BaseViewModel {
     public ObservableField<Integer> sortShow = new ObservableField<>(View.GONE);
     public ObservableField<Context> context = new ObservableField<>();
     public ObservableField<View> choiceView = new ObservableField<>();
+    public ObservableList<AreaListEntity.DataBean> areaList = new ObservableArrayList<>();
+
 
     public HRViewModel(@NonNull Application application) {
         super(application);
@@ -32,7 +39,7 @@ public class HRViewModel extends BaseViewModel {
     public BindingCommand area = new BindingCommand(() -> {
         initShow();
         areaShow.set(View.VISIBLE);
-        new AreaPopupwindow(context.get()).showPopupWindow(choiceView.get());
+        new AreaPopupwindow(context.get(),areaList).showPopupWindow(choiceView.get());
     });
     public BindingCommand type = new BindingCommand(() -> {
         initShow();

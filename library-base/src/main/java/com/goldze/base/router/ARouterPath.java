@@ -67,6 +67,7 @@ public class ARouterPath {
     public static class Mine {
         private static final String Mine = "/Mine";
         public static final String MinePage = Mine + "/HRFragment";
+        public static final String HouseResourceReleaseActivity = Mine + "/HouseResourceReleaseActivity";
     }
     /**
      * 朋友圈

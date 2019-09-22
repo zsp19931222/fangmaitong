@@ -7,8 +7,10 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.SPUtils;
 import com.goldze.base.eventbus.LocationRxBusBean;
+import com.goldze.base.router.ARouterPath;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -19,6 +21,7 @@ import com.techangkeji.model_mine.ui.adapter.HouseResourceReleaseAdapter;
 import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseBannerBean;
 import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseBean;
 import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseSizeBean;
+import com.techangkeji.model_mine.ui.bean.SelectFriendBean;
 import com.techangkeji.model_mine.ui.post_bean.HouseResourceReleaseBannerPostBean;
 import com.techangkeji.model_mine.ui.viewModel.HouseResourceReleaseViewModel;
 import com.yzq.zxinglibrary.common.Constant;
@@ -40,6 +43,7 @@ import static com.luck.picture.lib.config.PictureConfig.CHOOSE_REQUEST;
  * author:created by Andy on 2019/9/12 0012 09:24
  * email:zsp872126510@gmail.com
  */
+@Route(path = ARouterPath.Mine.HouseResourceReleaseActivity)
 public class HouseResourceReleaseActivity extends BaseActivity<ActivityHouseResourceReleaseBinding, HouseResourceReleaseViewModel> {
     private HouseResourceReleaseAdapter releaseAdapter;
     private List<HouseResourceReleaseBean> data = new ArrayList<>();
@@ -64,6 +68,12 @@ public class HouseResourceReleaseActivity extends BaseActivity<ActivityHouseReso
 
     @Override
     public void initData() {
+        try {//修改房源
+            viewModel.houseID.set(getIntent().getExtras().getInt("id") + "");
+            viewModel.buildingInfo();
+        } catch (Exception e) {//发布房源
+
+        }
         viewModel.getFeaturedLabel();
         binding.title.setTitle("发布房源");
         releaseAdapter = new HouseResourceReleaseAdapter(data, this, viewModel);
@@ -72,7 +82,7 @@ public class HouseResourceReleaseActivity extends BaseActivity<ActivityHouseReso
         binding.rv.setAdapter(releaseAdapter);
         initBanner();
         initInformation();
-//        initLinkman();
+        initLinkman();
         initDetail();
         initSize();
         releaseAdapter.notifyDataSetChanged();
@@ -99,6 +109,11 @@ public class HouseResourceReleaseActivity extends BaseActivity<ActivityHouseReso
                 }
                 releaseAdapter.notifyDataSetChanged();
             }
+        }));
+        RxSubscriptions.add(RxBus.getDefault().toObservable(ArrayList.class).subscribe(arrayList -> {
+            viewModel.linkManList.addAll(arrayList);
+            releaseAdapter.notifyDataSetChanged();
+            ZLog.d(arrayList);
         }));
     }
 

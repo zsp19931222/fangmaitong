@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<me.goldze.mvvmhabit.view.shape.RadiusTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tv_select"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/d25"
+    android:layout_alignParentEnd="true"
+    android:gravity="center"
+    android:paddingStart="@dimen/d10"
+    android:paddingEnd="@dimen/d10"
+    android:text="使用选中标签"
+    android:layout_margin="@dimen/d10"
+    android:textColor="@color/color_FF8C00"
+    android:textSize="@dimen/font12"
+    app:rv_radius="@dimen/d13"
+ />
