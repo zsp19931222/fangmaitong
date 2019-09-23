@@ -1,4 +1,4 @@
-package com.techangkeji.model_mine.ui.bean;
+package com.goldze.base.bean;
 
 /**
  * description:
@@ -12,6 +12,11 @@ public class FeaturedLabelBean {
 
     public FeaturedLabelBean(int id, String label_name, boolean select) {
         this.id = id;
+        this.label_name = label_name;
+        this.select = select;
+    }
+
+    public FeaturedLabelBean(String label_name, boolean select) {
         this.label_name = label_name;
         this.select = select;
     }

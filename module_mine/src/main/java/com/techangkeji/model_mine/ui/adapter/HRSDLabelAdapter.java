@@ -6,8 +6,8 @@ import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.goldze.base.bean.FeaturedLabelBean;
 import com.techangkeji.model_mine.R;
-import com.techangkeji.model_mine.ui.bean.FeaturedLabelBean;
 
 import java.util.List;
 

@@ -26,6 +26,8 @@ import me.goldze.mvvmhabit.http.net.entity.AreaListEntity;
 import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
 import me.goldze.mvvmhabit.http.net.entity.BuildingListEntity;
 import me.goldze.mvvmhabit.http.net.entity.FeaturedLabelEntity;
+import me.goldze.mvvmhabit.http.net.entity.LocationEntity;
+import me.goldze.mvvmhabit.http.net.entity.SelectFriendEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.CommentBean;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.MyStateEntity;
@@ -195,7 +197,7 @@ public interface ApiService<T extends BaseEntity> {
     //位置信息
     @POST(API + "auth/location")
     @Headers({"url_name:login"})
-    Observable<SuccessEntity> location(@Body() LocationBody myMovingListBody);
+    Observable<SuccessEntity<LocationEntity>> location(@Body() LocationBody myMovingListBody);
 
     //地区列表
     @GET(API + "auth/listAllArea")
@@ -212,6 +214,16 @@ public interface ApiService<T extends BaseEntity> {
     @Headers({"url_name:user_info"})
     Observable<FeaturedLabelEntity> getFeaturedLabel();
 
+    //建筑类型标签
+    @GET(API + "auth/label/getTypeLabel")
+    @Headers({"url_name:user_info"})
+    Observable<SuccessEntity> getTypeLabel(@QueryMap() Map<String,Object> map);
+
+    //建筑类型标签
+    @GET(API + "auth/label/getBuildLabel")
+    @Headers({"url_name:user_info"})
+    Observable<FeaturedLabelEntity> getBuildLabel();
+
     //我的房源列表
     @POST(API + "auth/building/getBuildingList")
     @Headers({"url_name:user_info"})
@@ -226,5 +238,10 @@ public interface ApiService<T extends BaseEntity> {
     @GET(API + "auth/building/getBuildingInfoById")
     @Headers({"url_name:user_info"})
     Observable<SuccessEntity> getBuildingInfoById(@QueryMap() Map<String,Object> map);
+
+    //好友列表
+    @GET(API + "auth/friend/getFriendList")
+    @Headers({"url_name:user_info"})
+    Observable<SelectFriendEntity> getFriendList(@QueryMap() Map<String,Object> map);
 
 }

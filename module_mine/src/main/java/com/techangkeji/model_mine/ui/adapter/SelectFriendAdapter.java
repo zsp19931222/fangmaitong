@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.goldze.base.utils.glide.GlideLoadUtils;
 import com.techangkeji.model_mine.R;
 import com.techangkeji.model_mine.ui.bean.SelectFriendBean;
 
@@ -23,22 +24,24 @@ public class SelectFriendAdapter extends BaseQuickAdapter<SelectFriendBean, Base
 
     @Override
     protected void convert(BaseViewHolder helper, SelectFriendBean item) {
-     CheckBox checkBox= helper.getView(R.id.cb_isf);
-     if (item.isSelect()){
-         checkBox.setChecked(true);
-     }else {
-         checkBox.setChecked(false);
-     }
-     helper.itemView.setOnClickListener(v -> {
-         if (item.isSelect()) {
-             checkBox.setChecked(false);
-             item.setSelect(false);
-         } else {
-             checkBox.setChecked(true);
-             item.setSelect(true);
-         }
-         notifyDataSetChanged();
-     });
-     helper.setText(R.id.tv_isf,item.getPhone());
+        CheckBox checkBox = helper.getView(R.id.cb_isf);
+        if (item.isSelect()) {
+            checkBox.setChecked(true);
+        } else {
+            checkBox.setChecked(false);
+        }
+        helper.itemView.setOnClickListener(v -> {
+            if (item.isSelect()) {
+                checkBox.setChecked(false);
+                item.setSelect(false);
+            } else {
+                checkBox.setChecked(true);
+                item.setSelect(true);
+            }
+            notifyDataSetChanged();
+        });
+        helper.setText(R.id.tv_isf_phone, item.getPhone());
+        helper.setText(R.id.tv_isf_name,item.getReal_name());
+        GlideLoadUtils.getInstance().glideLoad(helper.itemView.getContext(), item.getHead_url(), helper.getView(R.id.iv_isf), 0,22);
     }
 }

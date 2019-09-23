@@ -9,6 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.goldze.base.router.ARouterPath;
 import com.goldze.base.utils.DateUtil;
+import com.goldze.base.utils.glide.GlideLoadUtils;
 import com.techangkeji.model_mine.R;
 import com.techangkeji.model_mine.ui.viewModel.HouseResourceViewModel;
 
@@ -31,7 +32,7 @@ public class HouseResourceAdapter extends BaseQuickAdapter<BuildingListEntity.Da
         RadiusTextView tv_ihr_label2 = helper.getView(R.id.tv_ihr_label2);
         RadiusTextView tv_ihr_label3 = helper.getView(R.id.tv_ihr_label3);
         helper.setText(R.id.tv_ihr_name, item.getListing_name());
-        helper.setText(R.id.rv_imhr_price,item.getAverage_price()+"元/m²");
+        helper.setText(R.id.rv_imhr_price, item.getAverage_price() + "元/m²");
 //        helper.setText(R.id.rv_ihr_type,)
         if (item.getLabels().size() == 1) {
             tv_ihr_label1.setText(item.getLabels().get(0));
@@ -56,7 +57,9 @@ public class HouseResourceAdapter extends BaseQuickAdapter<BuildingListEntity.Da
             helper.setText(R.id.tv_ihr_sales_status, "开盘时间：" + item.getOpen_time());
         }
         helper.getView(R.id.tv_iii_delete).setOnClickListener(v -> viewModel.delete(helper.getAdapterPosition()));
-        helper.getView(R.id.tv_iii_compile).setOnClickListener(v -> ARouter.getInstance().build(ARouterPath.Mine.HouseResourceReleaseActivity).withInt("id",item.getId()).navigation());
+        helper.getView(R.id.tv_iii_compile).setOnClickListener(v -> ARouter.getInstance().build(ARouterPath.Mine.HouseResourceReleaseActivity).withInt("id", item.getId()).navigation());
+        GlideLoadUtils.getInstance().glideLoad(helper.itemView.getContext(), item.getUrl(), helper.getView(R.id.iv_ihr), 0);
+        helper.setText(R.id.rv_ihr_type, item.getType());
     }
 
 

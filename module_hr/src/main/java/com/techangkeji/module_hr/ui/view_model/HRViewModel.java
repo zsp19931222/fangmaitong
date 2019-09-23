@@ -56,7 +56,7 @@ public class HRViewModel extends BaseViewModel {
     public BindingCommand screen = new BindingCommand(() -> {
         initShow();
         screenShow.set(View.VISIBLE);
-        new FilterPopupwindow(context.get()).showPopupWindow(choiceView.get());
+        new FilterPopupwindow(context.get(),new ArrayList<>(),new ArrayList<>()).showPopupWindow(choiceView.get());
     });
     public BindingCommand sort = new BindingCommand(() -> {
         initShow();

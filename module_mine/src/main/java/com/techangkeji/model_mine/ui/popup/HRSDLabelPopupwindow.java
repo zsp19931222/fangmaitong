@@ -5,17 +5,14 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.goldze.base.bean.FeaturedLabelBean;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
 import com.techangkeji.model_mine.R;
 import com.techangkeji.model_mine.ui.adapter.HRSDLabelAdapter;
-import com.techangkeji.model_mine.ui.bean.FeaturedLabelBean;
 import com.techangkeji.model_mine.ui.viewModel.HouseResourceReleaseViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import me.goldze.mvvmhabit.view.shape.RadiusTextView;
 import razerdp.basepopup.BasePopupWindow;

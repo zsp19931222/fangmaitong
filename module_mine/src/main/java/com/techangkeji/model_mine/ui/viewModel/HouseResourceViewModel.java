@@ -9,19 +9,16 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
 
+import com.blankj.utilcode.util.SPUtils;
+import com.goldze.base.bean.FeaturedLabelBean;
 import com.goldze.base.utils.ParameterLogUtil;
-import com.techangkeji.model_mine.ui.activity.HouseResourceActivity;
 import com.techangkeji.model_mine.ui.activity.HouseResourceReleaseActivity;
 import com.techangkeji.model_mine.ui.adapter.HouseResourceAdapter;
-import com.techangkeji.module_hr.ui.bean.AreaPopupBean;
 import com.techangkeji.module_hr.ui.popup.AreaPopupwindow;
 import com.techangkeji.module_hr.ui.popup.FilterPopupwindow;
 import com.techangkeji.module_hr.ui.popup.HouseTypePopupwindow;
 import com.techangkeji.module_hr.ui.popup.PricePopupwindow;
 import com.techangkeji.module_hr.ui.popup.SortPopupwindow;
-import com.techangkeji.module_hr.ui.popup.TypePopupwindow;
-
-import org.litepal.LitePal;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,15 +28,11 @@ import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.http.net.DefaultObserver;
 import me.goldze.mvvmhabit.http.net.IdeaApi;
 import me.goldze.mvvmhabit.http.net.entity.AreaListEntity;
-import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
 import me.goldze.mvvmhabit.http.net.entity.BuildingListEntity;
+import me.goldze.mvvmhabit.http.net.entity.FeaturedLabelEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
-import me.goldze.mvvmhabit.litepal.CityLitePal;
-import me.goldze.mvvmhabit.litepal.DistrictLitePal;
-import me.goldze.mvvmhabit.litepal.ProvinceLitePal;
 import me.goldze.mvvmhabit.litepal.util.SaveAreaListUtil;
 import me.goldze.mvvmhabit.utils.RxUtils;
-import me.goldze.mvvmhabit.utils.ZLog;
 
 public class HouseResourceViewModel extends BaseViewModel {
     public ObservableField<Integer> areaShow = new ObservableField<>(View.VISIBLE);
@@ -52,6 +45,8 @@ public class HouseResourceViewModel extends BaseViewModel {
     public ObservableList<AreaListEntity.DataBean> areaList = new ObservableArrayList<>();
     public ObservableList<BuildingListEntity.DataBean> buildingList = new ObservableArrayList<>();
     public ObservableField<HouseResourceAdapter> adapter = new ObservableField<>();
+    public ObservableList<FeaturedLabelBean> featuredLabelList = new ObservableArrayList();
+    public ObservableList<FeaturedLabelBean> buildLabeList = new ObservableArrayList();
 
     public HouseResourceViewModel(@NonNull Application application) {
         super(application);
@@ -60,8 +55,8 @@ public class HouseResourceViewModel extends BaseViewModel {
     //发布房源
     public BindingCommand houseResourceReleaseCommand = new BindingCommand(() -> startActivity(HouseResourceReleaseActivity.class));
 
-    public ObservableField<String> areaCode = new ObservableField<>("9");//区域编号
-    public ObservableField<String> decoration = new ObservableField<>("");//装修
+    public ObservableField<String> areaCode = new ObservableField<>(SPUtils.getInstance().getString("areaId"));//区域编号
+    public ObservableField<String> decoration = new ObservableField<>("");//装修(1-精装，2-简装，3-毛坯)
     public ObservableField<String> endTime = new ObservableField<>("");//结束时间
     public ObservableField<String> hotSort = new ObservableField<>("");//人气排序(1:从高到低)
     public ObservableField<String> isOpening = new ObservableField<>("");//开盘(0:默认排序,1:已开盘)
@@ -76,6 +71,9 @@ public class HouseResourceViewModel extends BaseViewModel {
     public ObservableField<String> specialLabel = new ObservableField<>("");//特色标签
     public ObservableField<String> startTime = new ObservableField<>("");//开始时间
     public ObservableField<String> type = new ObservableField<>("");//1:住房,2:商业地产
+    public ObservableField<String> houseType = new ObservableField<>("");//户型
+    public ObservableField<String> areaMin = new ObservableField<>("");//最小面积
+    public ObservableField<String> areaMax = new ObservableField<>("");//最大面积
 
     /**
      * description:获取房源列表
@@ -101,6 +99,8 @@ public class HouseResourceViewModel extends BaseViewModel {
         parameter.put("specialLabel", specialLabel.get());
         parameter.put("startTime", startTime.get());
         parameter.put("type", type.get());
+        parameter.put("areaMin", areaMin.get());
+        parameter.put("areaMax", areaMax.get());
         ParameterLogUtil.getInstance().parameterLog(parameter);
         IdeaApi.getApiService()
                 .getBuildingList(parameter)
@@ -156,6 +156,50 @@ public class HouseResourceViewModel extends BaseViewModel {
                 });
     }
 
+    /**
+     * description: 特色标签
+     * author: Andy
+     * date: 2019/9/21  23:56
+     */
+    public void getFeaturedLabel() {
+        IdeaApi.getApiService()
+                .getFeaturedLabel()
+                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                .compose(RxUtils.schedulersTransformer())
+                .subscribe(new DefaultObserver<FeaturedLabelEntity>() {
+                    @Override
+                    public void onSuccess(FeaturedLabelEntity response) {
+                        for (FeaturedLabelEntity.DataBean datum : response.getData()) {
+                            featuredLabelList.add(new FeaturedLabelBean(datum.getId(), datum.getLabel_name(), false));
+                        }
+                    }
+
+                });
+    }
+
+    /**
+     * description:
+     * 建筑类型标签
+     * author: Andy
+     * date: 2019/9/21  23:56
+     */
+    public void getBuildingTypeLabel() {
+        IdeaApi.getApiService()
+                .getBuildLabel()
+                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                .compose(RxUtils.schedulersTransformer())
+                .subscribe(new DefaultObserver<FeaturedLabelEntity>() {
+                    @Override
+                    public void onSuccess(FeaturedLabelEntity response) {
+                        for (FeaturedLabelEntity.DataBean datum : response.getData()) {
+                            buildLabeList.add(new FeaturedLabelBean(datum.getId(), datum.getLabel_name(), false));
+                        }
+                    }
+
+                });
+    }
+
+
     public BindingCommand areaCommand = new BindingCommand(() -> {
         initShow();
         areaShow.set(View.VISIBLE);
@@ -176,7 +220,7 @@ public class HouseResourceViewModel extends BaseViewModel {
     public BindingCommand screenCommand = new BindingCommand(() -> {
         initShow();
         screenShow.set(View.VISIBLE);
-        new FilterPopupwindow(context.get()).showPopupWindow(choiceView.get());
+        new FilterPopupwindow(context.get(), featuredLabelList,buildLabeList).showPopupWindow(choiceView.get());
     });
     public BindingCommand sortCommand = new BindingCommand(() -> {
         initShow();

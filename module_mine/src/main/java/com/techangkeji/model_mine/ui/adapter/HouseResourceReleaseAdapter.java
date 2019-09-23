@@ -92,7 +92,7 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
 
     private void initBanner(BaseViewHolder helper) {
         tv_vhb_add = helper.getView(R.id.tv_vhb_add);
-        tv_vhb_add.setOnClickListener(view -> PermissionsUtils.getInstance().getPermissionsWithFragmentActivity((FragmentActivity) context, OPEN_GALLERY, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE));
+        tv_vhb_add.setOnClickListener(view -> viewModel.selectImage(helper.itemView.getContext(),9));
         if (IsNullUtil.getInstance().isEmpty(bannerAdapter)) {
             RecyclerView bannerRecyclerView = helper.getView(R.id.rv_vhb);
             bannerAdapter = new HouseResourceReleaseBannerAdapter(R.layout.item_hsr_banner, viewModel.bannerPathList);

@@ -1,14 +1,12 @@
 package com.techangkeji.model_mine.ui.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.blankj.utilcode.util.SPUtils;
 import com.goldze.base.eventbus.LocationRxBusBean;
 import com.goldze.base.router.ARouterPath;
 import com.luck.picture.lib.PictureSelector;
@@ -20,11 +18,8 @@ import com.techangkeji.model_mine.databinding.ActivityHouseResourceReleaseBindin
 import com.techangkeji.model_mine.ui.adapter.HouseResourceReleaseAdapter;
 import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseBannerBean;
 import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseBean;
-import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseSizeBean;
-import com.techangkeji.model_mine.ui.bean.SelectFriendBean;
 import com.techangkeji.model_mine.ui.post_bean.HouseResourceReleaseBannerPostBean;
 import com.techangkeji.model_mine.ui.viewModel.HouseResourceReleaseViewModel;
-import com.yzq.zxinglibrary.common.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +30,6 @@ import me.goldze.mvvmhabit.bus.RxSubscriptions;
 import me.goldze.mvvmhabit.utils.IsNullUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
 
-import static com.goldze.base.constant.RxBusMessageEventConstants.OPEN_GALLERY;
 import static com.luck.picture.lib.config.PictureConfig.CHOOSE_REQUEST;
 
 /**
@@ -87,14 +81,7 @@ public class HouseResourceReleaseActivity extends BaseActivity<ActivityHouseReso
         initSize();
         releaseAdapter.notifyDataSetChanged();
         RxSubscriptions.add(RxBus.getDefault().toObservable(Object.class).subscribe(obj -> {
-            if (obj instanceof String) {//权限获取
-                String s = (String) obj;
-                switch (s) {
-                    case OPEN_GALLERY:
-                        openGallery();
-                        break;
-                }
-            } else if (obj instanceof HouseResourceReleaseBannerPostBean) {//删除banner图片
+             if (obj instanceof HouseResourceReleaseBannerPostBean) {//删除banner图片
                 HouseResourceReleaseBannerPostBean postBean = (HouseResourceReleaseBannerPostBean) obj;
                 viewModel.bannerPathList.remove(postBean.getPosition());
                 releaseAdapter.notifyDataSetChanged();

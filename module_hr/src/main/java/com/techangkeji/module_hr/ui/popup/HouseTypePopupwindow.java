@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.goldze.base.eventbus.HouseTypeRxBusBean;
 import com.techangkeji.module_hr.R;
 import com.techangkeji.module_hr.ui.adapter.HouseTypeAdapter;
 import com.techangkeji.module_hr.ui.adapter.TypeAdapter;
@@ -56,7 +57,15 @@ public class HouseTypePopupwindow extends BasePopupWindow {
         strings.add("五室及以上");
         adapter = new HouseTypeAdapter(R.layout.item_area, strings);
         adapter.setSelectListener(position -> {
-            RxBus.getDefault().post(strings.get(position));
+            HouseTypeRxBusBean houseTypeBean;
+            if ("不限".equals(strings.get(position))) {
+                houseTypeBean = new HouseTypeRxBusBean("");
+            } else if ("五室及以上".equals(strings.get(position))) {
+                houseTypeBean = new HouseTypeRxBusBean("五室");
+            } else {
+                houseTypeBean = new HouseTypeRxBusBean(strings.get(position));
+            }
+            RxBus.getDefault().post(houseTypeBean);
             dismiss();
         });
         rv.setLayoutManager(new LinearLayoutManager(context));
