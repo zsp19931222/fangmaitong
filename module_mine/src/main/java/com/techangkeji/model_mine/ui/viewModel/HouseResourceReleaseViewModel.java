@@ -4,6 +4,8 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
@@ -17,11 +19,17 @@ import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.techangkeji.model_mine.ui.adapter.HSRDAdapter;
 import com.techangkeji.model_mine.ui.adapter.HouseResourceReleaseAdapter;
+import com.techangkeji.model_mine.ui.adapter.HouseResourceReleaseBannerAdapter;
+import com.techangkeji.model_mine.ui.adapter.HouseResourceReleaseSizeAdapter;
+import com.techangkeji.model_mine.ui.adapter.LinkManAdapter;
 import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseBannerBean;
 import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseSizeBean;
 import com.techangkeji.model_mine.ui.bean.SelectFriendBean;
 import com.techangkeji.model_mine.ui.data.HouseResourceReleaseSizeData;
+import com.techangkeji.model_mine.ui.m_enum.HouseTypePriceEnum;
+import com.techangkeji.model_mine.ui.m_enum.HouseTypeSizeEnum;
 
 import java.io.File;
 import java.util.HashMap;
@@ -53,13 +61,19 @@ import static com.luck.picture.lib.config.PictureConfig.CHOOSE_REQUEST;
  * email:zsp872126510@gmail.com
  */
 public class HouseResourceReleaseViewModel extends BaseViewModel {
+    public ObservableField<HouseResourceReleaseAdapter> adapterObservableField = new ObservableField<>();
+    public ObservableField<HouseResourceReleaseSizeAdapter> houseResourceReleaseSizeAdapter = new ObservableField<>();
+    public ObservableField<HouseResourceReleaseBannerAdapter> bannerAdapter = new ObservableField<>();
+    public ObservableField<com.techangkeji.model_mine.ui.adapter.LinkManAdapter> linkManAdapter = new ObservableField<>();
+    public ObservableField<HSRDAdapter> hsrdAdapter = new ObservableField<>();
+    public ObservableField<TextView> addressTextView = new ObservableField<>();
+    public ObservableField<TextView> officeAddressTextView = new ObservableField<>();
+
     public ObservableList<HouseResourceReleaseBannerBean> bannerPathList = new ObservableArrayList<>();
     public ObservableList<FeaturedLabelBean> featuredLabelList = new ObservableArrayList<>();
     public ObservableList<FeaturedLabelBean> featuredLabelListConfirm = new ObservableArrayList<>();
     public ObservableList<String> labelList = new ObservableArrayList<>();
     public ObservableList<SelectFriendBean> linkManList = new ObservableArrayList<>();//联系人数据
-    public ObservableField<HouseResourceReleaseAdapter> adapterObservableField = new ObservableField<>();
-    public ObservableField<String> houseID = new ObservableField<>("");//房源ID
 
 
     public ObservableField<Integer> bannerPosition = new ObservableField<>(0);
@@ -73,32 +87,39 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
     public ObservableField<StringBuilder> typeStringBuilder = new ObservableField<>(new StringBuilder());
     public ObservableField<StringBuilder> houseAveragePriceStringBuilder = new ObservableField<>(new StringBuilder());
     public ObservableField<StringBuilder> housePriceTypeStringBuilder = new ObservableField<>(new StringBuilder());
+    public ObservableField<StringBuilder> houseAreaTypeStringBuilder = new ObservableField<>(new StringBuilder());
     public ObservableField<StringBuilder> friendIdStringBuilder = new ObservableField<>(new StringBuilder());
 
     public ObservableField<StringBuilder> labelIdsStringBuilder = new ObservableField<>(new StringBuilder());
 
-    public ObservableField<String> address = new ObservableField<>("重庆");
-    public ObservableField<String> officeAddress = new ObservableField<>("重庆市沙坪坝区天星桥");
-    public ObservableField<String> averagePrice = new ObservableField<>("50000");
-    public ObservableField<String> buildType = new ObservableField<>("居住建筑");
-    public ObservableField<String> carNum = new ObservableField<>("300");
-    public ObservableField<String> commissionRule = new ObservableField<>("佣金规则");
-    public ObservableField<String> decorationType = new ObservableField<>("装修状态");
-    public ObservableField<String> developerName = new ObservableField<>("恒大地产");
-    public ObservableField<String> handTime = new ObservableField<>("2018-09-02");
-    public ObservableField<String> lat = new ObservableField<>("39.6114659222");
-    public ObservableField<String> license = new ObservableField<>("ASDKTQNCZ54DW2");
-    public ObservableField<String> listingName = new ObservableField<>("地勘大厦");
-    public ObservableField<String> lon = new ObservableField<>("116.7253479027");
-    public ObservableField<String> lookRule = new ObservableField<>("带看规则");
-    public ObservableField<String> openTime = new ObservableField<>("2018-09-02");
-    public ObservableField<String> priceType = new ObservableField<>("1");
-    public ObservableField<String> propertiesType = new ObservableField<>("住宅");
-    public ObservableField<String> propertyCompany = new ObservableField<>("恒大物业");
-    public ObservableField<String> propertyMoney = new ObservableField<>("32.5");
-    public ObservableField<String> propertyYear = new ObservableField<>("70");
-    public ObservableField<String> resident = new ObservableField<>("36");
-    public ObservableField<String> volumeRate = new ObservableField<>("54.2");
+    public ObservableField<String> houseID = new ObservableField<>("");//房源ID
+    public ObservableField<String> address = new ObservableField<>("");
+    public ObservableField<String> officeAddress = new ObservableField<>("");
+    public ObservableField<String> averagePrice = new ObservableField<>("");
+    public ObservableField<String> buildType = new ObservableField<>("");
+    public ObservableField<String> carNum = new ObservableField<>("");
+    public ObservableField<String> commissionRule = new ObservableField<>("");
+    public ObservableField<String> decorationType = new ObservableField<>("");
+    public ObservableField<String> developerName = new ObservableField<>("");
+    public ObservableField<String> handTime = new ObservableField<>("");
+    //楼盘经纬度
+    public ObservableField<String> lat = new ObservableField<>("");
+    public ObservableField<String> lon = new ObservableField<>("");
+    //售楼处经纬度
+    public ObservableField<String> salesLat = new ObservableField<>("");
+    public ObservableField<String> salesLon = new ObservableField<>("");
+    public ObservableField<String> license = new ObservableField<>("");
+    public ObservableField<String> listingName = new ObservableField<>("");
+    public ObservableField<String> lookRule = new ObservableField<>("");
+    public ObservableField<String> openTime = new ObservableField<>("");
+    public ObservableField<String> priceType = new ObservableField<>("");
+    public ObservableField<String> propertiesType = new ObservableField<>("");
+    public ObservableField<String> propertyCompany = new ObservableField<>("");
+    public ObservableField<String> propertyMoney = new ObservableField<>("");
+    public ObservableField<String> propertyYear = new ObservableField<>("");
+    public ObservableField<String> resident = new ObservableField<>("");
+    public ObservableField<String> volumeRate = new ObservableField<>("");
+    public ObservableField<String> noticeId = new ObservableField<>("");//规则ID修改时候用
 
 
     public HouseResourceReleaseViewModel(@NonNull Application application) {
@@ -137,6 +158,7 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
         houseAveragePriceStringBuilder.get().setLength(0);
         typeStringBuilder.get().setLength(0);
         housePriceTypeStringBuilder.get().setLength(0);
+        houseAreaTypeStringBuilder.get().setLength(0);
 
         for (HouseResourceReleaseSizeBean sizeBean : HouseResourceReleaseSizeData.getInstance().getList()) {
             areaStringBuilder.get().append(sizeBean.getSize()).append(",");
@@ -151,6 +173,14 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
                     break;
                 case ASuitOf:
                     housePriceTypeStringBuilder.get().append("2").append(",");
+                    break;
+            }
+            switch (sizeBean.getHouseTypeSizeEnum()) {
+                case BuildingSurface:
+                    houseAreaTypeStringBuilder.get().append("1").append(",");
+                    break;
+                case Comprising:
+                    houseAreaTypeStringBuilder.get().append("2").append(",");
                     break;
             }
         }
@@ -191,6 +221,10 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
         parameter.put("houseAveragePrice", houseAveragePriceStringBuilder.get());
         parameter.put("housePriceType", housePriceTypeStringBuilder.get());
         parameter.put("friendId", friendIdStringBuilder.get().toString());
+        parameter.put("areaType", houseAreaTypeStringBuilder.get().toString());
+        parameter.put("noticeId", noticeId.get());
+        parameter.put("salesLat", salesLat.get());
+        parameter.put("salesLon", salesLon.get());
         ParameterLogUtil.getInstance().parameterLog(parameter);
         IdeaApi.getApiService()
                 .addBuildingInfo(parameter)
@@ -214,33 +248,46 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
      * date: 2019/9/17  20:20
      */
     public void uploadBannerImage(int p) {
+        ZLog.d(bannerPathList.size());
         if (bannerPathList.size() > 0) {
             bannerPosition.set(p);
-            File file = new File(bannerPathList.get(p).getImagePath());
-            RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);//表单类型
-            MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);//表单类型
-            builder.addFormDataPart("file", file.getName(), body); //添加图片数据，body创建的请求体
-            List<MultipartBody.Part> parts = builder.build().parts();
-            IdeaApi.getApiService()
-                    .uploadpic(parts)
-                    .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
-                    .compose(RxUtils.schedulersTransformer())
-                    .doOnSubscribe(disposable -> showDialog())
-                    .subscribe(new DefaultObserver<SuccessEntity<String>>(this) {
-                        @Override
-                        public void onSuccess(SuccessEntity<String> response) {
-                            bannerStringBuilder.get().append(response.getContent()).append(",");
-                            ZLog.d(bannerStringBuilder.get().toString());
-                            int position = bannerPosition.get();
-                            position++;
-                            if (position < bannerPathList.size()) {//角标小于图片集合上传图片
-                                uploadBannerImage(position);
-                            } else {//图片上传完成
-                                bannerPosition.set(0);
-                                uploadTypeImage(typePosition.get());
+            if (bannerPathList.get(p).getImagePath().startsWith("http")) {
+                bannerStringBuilder.get().append(bannerPathList.get(p).getImagePath()).append(",");
+                int position = bannerPosition.get();
+                position++;
+                if (position < bannerPathList.size()) {//角标小于图片集合上传图片
+                    uploadBannerImage(position);
+                } else {//图片上传完成
+                    bannerPosition.set(0);
+                    uploadTypeImage(typePosition.get());
+                }
+            } else {
+                File file = new File(bannerPathList.get(p).getImagePath());
+                RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);//表单类型
+                MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);//表单类型
+                builder.addFormDataPart("file", file.getName(), body); //添加图片数据，body创建的请求体
+                List<MultipartBody.Part> parts = builder.build().parts();
+                IdeaApi.getApiService()
+                        .uploadpic(parts)
+                        .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                        .compose(RxUtils.schedulersTransformer())
+                        .doOnSubscribe(disposable -> showDialog())
+                        .subscribe(new DefaultObserver<SuccessEntity<String>>(this) {
+                            @Override
+                            public void onSuccess(SuccessEntity<String> response) {
+                                bannerStringBuilder.get().append(response.getContent()).append(",");
+                                ZLog.d(bannerStringBuilder.get().toString());
+                                int position = bannerPosition.get();
+                                position++;
+                                if (position < bannerPathList.size()) {//角标小于图片集合上传图片
+                                    uploadBannerImage(position);
+                                } else {//图片上传完成
+                                    bannerPosition.set(0);
+                                    uploadTypeImage(typePosition.get());
+                                }
                             }
-                        }
-                    });
+                        });
+            }
         } else {
             uploadTypeImage(typePosition.get());
         }
@@ -255,33 +302,46 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
     private void uploadTypeImage(int p) {
         if (HouseResourceReleaseSizeData.getInstance().getList().size() > 0) {
             typePosition.set(p);
-            File file = new File(HouseResourceReleaseSizeData.getInstance().getList().get(p).getImagePath());
-            RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);//表单类型
-            MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);//表单类型
-            builder.addFormDataPart("file", file.getName(), body); //添加图片数据，body创建的请求体
-            List<MultipartBody.Part> parts = builder.build().parts();
-            IdeaApi.getApiService()
-                    .uploadpic(parts)
-                    .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
-                    .compose(RxUtils.schedulersTransformer())
-                    .doOnSubscribe(disposable -> showDialog())
-                    .subscribe(new DefaultObserver<SuccessEntity<String>>(this) {
-                        @Override
-                        public void onSuccess(SuccessEntity<String> response) {
-                            typeImgUrlStringBuilder.get().append(response.getContent()).append(",");
-                            int position = typePosition.get();
-                            position++;
-                            if (position < HouseResourceReleaseSizeData.getInstance().getList().size()) {//角标小于图片集合上传图片
-                                uploadTypeImage(position);
-                            } else {//图片上传完成
-                                typePosition.set(0);
-                                addBuildingInfo();
+            if (HouseResourceReleaseSizeData.getInstance().getList().get(p).getImagePath().startsWith("http")) {
+                typeImgUrlStringBuilder.get().append(HouseResourceReleaseSizeData.getInstance().getList().get(p).getImagePath()).append(",");
+                int position = typePosition.get();
+                position++;
+                if (position < HouseResourceReleaseSizeData.getInstance().getList().size()) {//角标小于图片集合上传图片
+                    uploadTypeImage(position);
+                } else {//图片上传完成
+                    typePosition.set(0);
+                    addBuildingInfo();
+                }
+            } else {
+                File file = new File(HouseResourceReleaseSizeData.getInstance().getList().get(p).getImagePath());
+                RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);//表单类型
+                MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);//表单类型
+                builder.addFormDataPart("file", file.getName(), body); //添加图片数据，body创建的请求体
+                List<MultipartBody.Part> parts = builder.build().parts();
+                IdeaApi.getApiService()
+                        .uploadpic(parts)
+                        .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                        .compose(RxUtils.schedulersTransformer())
+                        .doOnSubscribe(disposable -> showDialog())
+                        .subscribe(new DefaultObserver<SuccessEntity<String>>(this) {
+                            @Override
+                            public void onSuccess(SuccessEntity<String> response) {
+                                typeImgUrlStringBuilder.get().append(response.getContent()).append(",");
+                                int position = typePosition.get();
+                                position++;
+                                if (position < HouseResourceReleaseSizeData.getInstance().getList().size()) {//角标小于图片集合上传图片
+                                    uploadTypeImage(position);
+                                } else {//图片上传完成
+                                    typePosition.set(0);
+                                    addBuildingInfo();
+                                }
                             }
-                        }
-                    });
+                        });
+            }
         } else {
             addBuildingInfo();
         }
+
     }
 
 
@@ -306,7 +366,7 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
                             averagePrice.set(response.getContent().getAverage_price() + "");
                             switch (response.getContent().getBuild_type()) {
                                 case 1:
-                                    buildType.set( "居住建筑");
+                                    buildType.set("居住建筑");
                                     break;
                                 case 2:
                                     buildType.set("商业建筑");
@@ -315,8 +375,8 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
                                     buildType.set("");
                                     break;
                             }
-                            carNum.set(response.getContent().getCar_num()+"");
-                            switch (response.getContent().getDecoration_type()){
+                            carNum.set(response.getContent().getCar_num() + "");
+                            switch (response.getContent().getDecoration_type()) {
                                 case "1":
                                     decorationType.set("精装");
                                     break;
@@ -334,7 +394,7 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
                             listingName.set(response.getContent().getListing_name());
                             lon.set(response.getContent().getLongitude());
                             openTime.set(response.getContent().getOpen_time());
-                            switch (response.getContent().getProperties_type()){
+                            switch (response.getContent().getProperties_type()) {
                                 case 3:
                                     propertiesType.set("住宅");
                                     break;
@@ -356,10 +416,43 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
                             }
                             propertyCompany.set(response.getContent().getProperty_company());
                             propertyMoney.set(response.getContent().getProperty_money());
-                            propertyYear.set(response.getContent().getProperty_year()+"");
-                            resident.set(response.getContent().getResident()+"");
+                            propertyYear.set(response.getContent().getProperty_year() + "");
+                            resident.set(response.getContent().getResident() + "");
                             volumeRate.set(response.getContent().getVolume_rate());
-                        }catch (Exception e){
+                            for (HouseResourceDetailEntity.ImgsBean img : response.getContent().getImgs()) {
+                                bannerPathList.add(new HouseResourceReleaseBannerBean(img.getImg_url(), ""));
+                            }
+                            for (HouseResourceDetailEntity.FriendBean friendBean : response.getContent().getFriend()) {
+                                linkManList.add(new SelectFriendBean(friendBean.getHead_url(), friendBean.getPhone(), friendBean.getReal_name(), friendBean.getId(), true));
+                            }
+                            lookRule.set(response.getContent().getNotice().getLook_rule());
+                            commissionRule.set(response.getContent().getNotice().getCommission_rule());
+                            noticeId.set(response.getContent().getBroker_notice_id());
+                            for (HouseResourceDetailEntity.TypeBean typeBean : response.getContent().getType()) {
+                                HouseResourceReleaseSizeBean sizeBean = new HouseResourceReleaseSizeBean();
+                                sizeBean.setPrice(typeBean.getAverage_price() + "");
+                                sizeBean.setSize(typeBean.getArea());
+                                sizeBean.setRoomNum(typeBean.getType().substring(0, 1));
+                                sizeBean.setHallNum(typeBean.getType().substring(2, 3));
+                                sizeBean.setCookNum(typeBean.getType().substring(4, 5));
+                                sizeBean.setToiletNum(typeBean.getType().substring(6, 7));
+                                if (typeBean.getPrice_type() == 1) {
+                                    sizeBean.setHouseTypePriceEnum(HouseTypePriceEnum.Square);
+                                } else if (typeBean.getPrice_type() == 2) {
+                                    sizeBean.setHouseTypePriceEnum(HouseTypePriceEnum.ASuitOf);
+                                } else {
+                                    sizeBean.setHouseTypePriceEnum(HouseTypePriceEnum.Undetermined);
+                                }
+                                sizeBean.setHouseTypeSizeEnum(HouseTypeSizeEnum.BuildingSurface);
+                                sizeBean.setImagePath(typeBean.getImg_url());
+                                HouseResourceReleaseSizeData.getInstance().getList().add(sizeBean);
+                            }
+
+                            for (String label : response.getContent().getLabels()) {
+                                labelList.add(label);
+                            }
+                            adapterObservableField.get().notifyDataSetChanged();
+                        } catch (Exception e) {
 
                         }
 

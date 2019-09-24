@@ -33,7 +33,7 @@
 
         <me.goldze.mvvmhabit.view.shape.RadiusTextView
             android:id="@+id/tv_hs_price"
-            android:layout_width="@dimen/d50"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/d15"
             android:layout_marginStart="@dimen/d20"
             android:gravity="center"

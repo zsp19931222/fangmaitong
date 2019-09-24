@@ -1,8 +1,12 @@
 package com.techangkeji.model_mine.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -55,8 +59,17 @@ public class HouseResourceReleaseActivity extends BaseActivity<ActivityHouseReso
     @Override
     protected void onResume() {
         super.onResume();
-        if (!IsNullUtil.getInstance().isEmpty(viewModel.adapterObservableField.get())) {
-            viewModel.adapterObservableField.get().notifyDataSetChanged();
+        if (!IsNullUtil.getInstance().isEmpty(viewModel.houseResourceReleaseSizeAdapter.get())) {
+            viewModel.houseResourceReleaseSizeAdapter.get().notifyDataSetChanged();
+        }
+        if (!IsNullUtil.getInstance().isEmpty(viewModel.bannerAdapter.get())) {
+            viewModel.bannerAdapter.get().notifyDataSetChanged();
+        }
+        if (!IsNullUtil.getInstance().isEmpty(viewModel.linkManAdapter.get())) {
+            viewModel.linkManAdapter.get().notifyDataSetChanged();
+        }
+        if (!IsNullUtil.getInstance().isEmpty(viewModel.hsrdAdapter.get())) {
+            viewModel.hsrdAdapter.get().notifyDataSetChanged();
         }
     }
 
@@ -81,28 +94,38 @@ public class HouseResourceReleaseActivity extends BaseActivity<ActivityHouseReso
         initSize();
         releaseAdapter.notifyDataSetChanged();
         RxSubscriptions.add(RxBus.getDefault().toObservable(Object.class).subscribe(obj -> {
-             if (obj instanceof HouseResourceReleaseBannerPostBean) {//删除banner图片
+            if (obj instanceof HouseResourceReleaseBannerPostBean) {//删除banner图片
                 HouseResourceReleaseBannerPostBean postBean = (HouseResourceReleaseBannerPostBean) obj;
                 viewModel.bannerPathList.remove(postBean.getPosition());
-                releaseAdapter.notifyDataSetChanged();
+                viewModel.bannerAdapter.get().notifyDataSetChanged();
             } else if (obj instanceof LocationRxBusBean) {
                 LocationRxBusBean locationRxBusBean = (LocationRxBusBean) obj;
                 if (locationRxBusBean.getType() == 0) {
                     viewModel.address.set(locationRxBusBean.getAddress());
                     viewModel.lon.set(locationRxBusBean.getLongitude());
                     viewModel.lat.set(locationRxBusBean.getLatitude());
+                    new Handler().post(() -> viewModel.addressTextView.get().setText(locationRxBusBean.getAddress()));
                 } else {
                     viewModel.officeAddress.set(locationRxBusBean.getAddress());
+                    viewModel.salesLon.set(locationRxBusBean.getLongitude());
+                    viewModel.salesLat.set(locationRxBusBean.getLatitude());
+                    new Handler().post(() -> viewModel.officeAddressTextView.get().setText(locationRxBusBean.getAddress()));
                 }
-                releaseAdapter.notifyDataSetChanged();
             }
         }));
         RxSubscriptions.add(RxBus.getDefault().toObservable(ArrayList.class).subscribe(arrayList -> {
             viewModel.linkManList.addAll(arrayList);
-            releaseAdapter.notifyDataSetChanged();
+            viewModel.linkManAdapter.get().notifyDataSetChanged();
             ZLog.d(arrayList);
         }));
     }
+
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+        }
+    };
 
     /**
      * description: 设置banner
@@ -207,7 +230,7 @@ public class HouseResourceReleaseActivity extends BaseActivity<ActivityHouseReso
                     for (int i = 0; i < PictureSelector.obtainMultipleResult(data).size(); i++) {
                         viewModel.bannerPathList.add(new HouseResourceReleaseBannerBean(PictureSelector.obtainMultipleResult(data).get(i).getPath(), ""));
                     }
-                    releaseAdapter.notifyDataSetChanged();
+                    viewModel.bannerAdapter.get().notifyDataSetChanged();
                     break;
             }
         }

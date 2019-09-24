@@ -52,7 +52,7 @@ public class HRSDLabelPopupwindow extends BasePopupWindow {
                     viewModel.labelList.add(featuredLabelBean.getLabel_name());
                 }
             }
-            viewModel.adapterObservableField.get().notifyDataSetChanged();
+            viewModel.hsrdAdapter.get().notifyDataSetChanged();
             dismiss();
         });
     }

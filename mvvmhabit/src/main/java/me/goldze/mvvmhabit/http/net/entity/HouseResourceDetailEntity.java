@@ -10,56 +10,62 @@ import java.util.List;
 public class HouseResourceDetailEntity {
 
     /**
-     * imgs : [{"img_url":"https://fangmaitong01.oss-cn-zhangjiakou.aliyuncs.com/D6F47CF2F83065ACBFBCB01A65EBF422.jpg"},{"img_url":"https://fangmaitong01.oss-cn-zhangjiakou.aliyuncs.com/ADAD88512576EA2C455B9159676A6EB6.jpg"}]
-     * decoration_type : 1
-     * sales_address : 重庆市沙坪坝区天星桥正街46-28号
-     * property_money : 65.4
-     * latitude : 29.525098028958013
-     * average_price : 12000
-     * developer_name : 开发区
-     * open_time : 2020-01-01
-     * type : []
-     * labels : ["地铁房","学区房"]
-     * license : 456797
-     * property_year : 70
-     * car_num : 20
+     * decoration_type : 2
+     * sales_address : 北京市大兴区左堤路
+     * property_money : 755
+     * latitude : 39.82618753829337
+     * developer_name : 口卡
+     * open_time : 2005-01-01
+     * type : [{"area":"1200","img_url":"https://fangmaitong01.oss-cn-zhangjiakou.aliyuncs.com/A2A39F81F091B12DA37904657A01BDC0.jpg","average_price":359,"price_type":2,"type":"1室2厅3厨4卫"}]
+     * property_year : 6
+     * friend : [{"head_url":"https://fangmaitong01.oss-cn-zhangjiakou.aliyuncs.com/64DB72530CE70259B6499B8C792B21CB.jpg","phone":"18702305506","real_name":"我是1","id":1},{"head_url":"https://fangmaitong01.oss-cn-zhangjiakou.aliyuncs.com/64DB72530CE70259B6499B8C792B21CB.jpg","phone":"18702305506","real_name":"我是1","id":1}]
+     * car_num : 3
      * dynamic : []
-     * id : 16
-     * property_company : 4676
+     * id : 37
+     * property_company : 9
      * build_type : 1
      * properties_type : 3
-     * volume_rate : 1
-     * listing_name : 楼盘
-     * hand_time : 2030-01-01
-     * longitude : 106.46715599999995
+     * listing_name : 楼市
+     * longitude : 116.26501534066686
      * resident : 1
-     * notice : null
+     * notice : {"look_rule":"恶魔来了","commission_rule":"没有"}
+     * imgs : [{"img_url":"https://fangmaitong01.oss-cn-zhangjiakou.aliyuncs.com/ADB8980F52045F6033E17104C3145342.jpg"}]
+     * average_price : 125886
+     * broker_notice_id : 1
+     * labels : ["地铁房","学区房"]
+     * license : 9
+     * price_type : 1
+     * volume_rate : 2
+     * hand_time : 2012-01-01
      */
 
     private String decoration_type;
     private String sales_address;
     private String property_money;
     private String latitude;
-    private int average_price;
     private String developer_name;
     private String open_time;
-    private String license;
     private int property_year;
     private int car_num;
     private int id;
     private String property_company;
     private int build_type;
     private int properties_type;
-    private String volume_rate;
     private String listing_name;
-    private String hand_time;
     private String longitude;
     private int resident;
-    private Object notice;
-    private List<ImgsBean> imgs;
-    private List<?> type;
-    private List<String> labels;
+    private NoticeBean notice;
+    private int average_price;
+    private String broker_notice_id;
+    private String license;
+    private int price_type;
+    private String volume_rate;
+    private String hand_time;
+    private List<TypeBean> type;
+    private List<FriendBean> friend;
     private List<?> dynamic;
+    private List<ImgsBean> imgs;
+    private List<String> labels;
 
     public String getDecoration_type() {
         return decoration_type;
@@ -93,14 +99,6 @@ public class HouseResourceDetailEntity {
         this.latitude = latitude;
     }
 
-    public int getAverage_price() {
-        return average_price;
-    }
-
-    public void setAverage_price(int average_price) {
-        this.average_price = average_price;
-    }
-
     public String getDeveloper_name() {
         return developer_name;
     }
@@ -115,14 +113,6 @@ public class HouseResourceDetailEntity {
 
     public void setOpen_time(String open_time) {
         this.open_time = open_time;
-    }
-
-    public String getLicense() {
-        return license;
-    }
-
-    public void setLicense(String license) {
-        this.license = license;
     }
 
     public int getProperty_year() {
@@ -173,28 +163,12 @@ public class HouseResourceDetailEntity {
         this.properties_type = properties_type;
     }
 
-    public String getVolume_rate() {
-        return volume_rate;
-    }
-
-    public void setVolume_rate(String volume_rate) {
-        this.volume_rate = volume_rate;
-    }
-
     public String getListing_name() {
         return listing_name;
     }
 
     public void setListing_name(String listing_name) {
         this.listing_name = listing_name;
-    }
-
-    public String getHand_time() {
-        return hand_time;
-    }
-
-    public void setHand_time(String hand_time) {
-        this.hand_time = hand_time;
     }
 
     public String getLongitude() {
@@ -213,36 +187,76 @@ public class HouseResourceDetailEntity {
         this.resident = resident;
     }
 
-    public Object getNotice() {
+    public NoticeBean getNotice() {
         return notice;
     }
 
-    public void setNotice(Object notice) {
+    public void setNotice(NoticeBean notice) {
         this.notice = notice;
     }
 
-    public List<ImgsBean> getImgs() {
-        return imgs;
+    public int getAverage_price() {
+        return average_price;
     }
 
-    public void setImgs(List<ImgsBean> imgs) {
-        this.imgs = imgs;
+    public void setAverage_price(int average_price) {
+        this.average_price = average_price;
     }
 
-    public List<?> getType() {
+    public String getBroker_notice_id() {
+        return broker_notice_id;
+    }
+
+    public void setBroker_notice_id(String broker_notice_id) {
+        this.broker_notice_id = broker_notice_id;
+    }
+
+    public String getLicense() {
+        return license;
+    }
+
+    public void setLicense(String license) {
+        this.license = license;
+    }
+
+    public int getPrice_type() {
+        return price_type;
+    }
+
+    public void setPrice_type(int price_type) {
+        this.price_type = price_type;
+    }
+
+    public String getVolume_rate() {
+        return volume_rate;
+    }
+
+    public void setVolume_rate(String volume_rate) {
+        this.volume_rate = volume_rate;
+    }
+
+    public String getHand_time() {
+        return hand_time;
+    }
+
+    public void setHand_time(String hand_time) {
+        this.hand_time = hand_time;
+    }
+
+    public List<TypeBean> getType() {
         return type;
     }
 
-    public void setType(List<?> type) {
+    public void setType(List<TypeBean> type) {
         this.type = type;
     }
 
-    public List<String> getLabels() {
-        return labels;
+    public List<FriendBean> getFriend() {
+        return friend;
     }
 
-    public void setLabels(List<String> labels) {
-        this.labels = labels;
+    public void setFriend(List<FriendBean> friend) {
+        this.friend = friend;
     }
 
     public List<?> getDynamic() {
@@ -253,9 +267,153 @@ public class HouseResourceDetailEntity {
         this.dynamic = dynamic;
     }
 
+    public List<ImgsBean> getImgs() {
+        return imgs;
+    }
+
+    public void setImgs(List<ImgsBean> imgs) {
+        this.imgs = imgs;
+    }
+
+    public List<String> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(List<String> labels) {
+        this.labels = labels;
+    }
+
+    public static class NoticeBean {
+        /**
+         * look_rule : 恶魔来了
+         * commission_rule : 没有
+         */
+
+        private String look_rule;
+        private String commission_rule;
+
+        public String getLook_rule() {
+            return look_rule;
+        }
+
+        public void setLook_rule(String look_rule) {
+            this.look_rule = look_rule;
+        }
+
+        public String getCommission_rule() {
+            return commission_rule;
+        }
+
+        public void setCommission_rule(String commission_rule) {
+            this.commission_rule = commission_rule;
+        }
+    }
+
+    public static class TypeBean {
+        /**
+         * area : 1200
+         * img_url : https://fangmaitong01.oss-cn-zhangjiakou.aliyuncs.com/A2A39F81F091B12DA37904657A01BDC0.jpg
+         * average_price : 359
+         * price_type : 2
+         * type : 1室2厅3厨4卫
+         */
+
+        private String area;
+        private String img_url;
+        private int average_price;
+        private int price_type;
+        private String type;
+
+        public String getArea() {
+            return area;
+        }
+
+        public void setArea(String area) {
+            this.area = area;
+        }
+
+        public String getImg_url() {
+            return img_url;
+        }
+
+        public void setImg_url(String img_url) {
+            this.img_url = img_url;
+        }
+
+        public int getAverage_price() {
+            return average_price;
+        }
+
+        public void setAverage_price(int average_price) {
+            this.average_price = average_price;
+        }
+
+        public int getPrice_type() {
+            return price_type;
+        }
+
+        public void setPrice_type(int price_type) {
+            this.price_type = price_type;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+    }
+
+    public static class FriendBean {
+        /**
+         * head_url : https://fangmaitong01.oss-cn-zhangjiakou.aliyuncs.com/64DB72530CE70259B6499B8C792B21CB.jpg
+         * phone : 18702305506
+         * real_name : 我是1
+         * id : 1
+         */
+
+        private String head_url;
+        private String phone;
+        private String real_name;
+        private int id;
+
+        public String getHead_url() {
+            return head_url;
+        }
+
+        public void setHead_url(String head_url) {
+            this.head_url = head_url;
+        }
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+
+        public String getReal_name() {
+            return real_name;
+        }
+
+        public void setReal_name(String real_name) {
+            this.real_name = real_name;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+    }
+
     public static class ImgsBean {
         /**
-         * img_url : https://fangmaitong01.oss-cn-zhangjiakou.aliyuncs.com/D6F47CF2F83065ACBFBCB01A65EBF422.jpg
+         * img_url : https://fangmaitong01.oss-cn-zhangjiakou.aliyuncs.com/ADB8980F52045F6033E17104C3145342.jpg
          */
 
         private String img_url;

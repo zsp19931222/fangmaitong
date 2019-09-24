@@ -141,7 +141,6 @@
                 android:gravity="center_vertical"
                 android:hint="请输入"
                 android:inputType="number"
-
                 android:paddingStart="@dimen/d16"
                 android:textColor="@color/color_dark_333333"
                 android:textColorHint="@color/color_gray_999999"
@@ -151,33 +150,27 @@
 
             <CheckBox
                 android:id="@+id/cb_size1"
-                android:button="@drawable/cb_bg"
-                android:layout_width="@dimen/d22"
-                android:layout_height="@dimen/d22"
-                android:gravity="center"
-                android:layout_marginStart="@dimen/d10"
-                android:checked="true" />
-
-            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="㎡/建面"
+                android:layout_height="@dimen/d22"
+                android:layout_marginStart="@dimen/d10"
+                android:button="@drawable/cb_bg"
+                android:text=" ㎡/建面"
                 android:textColor="@color/color_dark_333333"
-                android:textSize="@dimen/font12" />
+                android:textSize="@dimen/font12"
+                android:gravity="center" />
+
 
             <CheckBox
                 android:id="@+id/cb_size2"
-                android:layout_width="@dimen/d22"
-                android:button="@drawable/cb_bg"
-                android:layout_height="@dimen/d22"
-                android:layout_marginStart="@dimen/d38" />
-
-            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="㎡/套内"
+                android:layout_height="@dimen/d22"
+                android:layout_marginStart="@dimen/d38"
+                android:text=" ㎡/套内"
+                android:gravity="center"
                 android:textColor="@color/color_dark_333333"
-                android:textSize="@dimen/font12" />
+                android:textSize="@dimen/font12"
+                android:button="@drawable/cb_bg" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -204,44 +197,33 @@
 
             <CheckBox
                 android:id="@+id/cb_price1"
-                android:layout_width="@dimen/d22"
-                android:button="@drawable/cb_bg"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/d22"
                 android:layout_marginStart="@dimen/d10"
-                android:checked="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="元/㎡"
+                android:button="@drawable/cb_bg"
+                android:gravity="center"
+                android:text=" 元/㎡"
                 android:textColor="@color/color_dark_333333"
                 android:textSize="@dimen/font12" />
 
+
             <CheckBox
                 android:id="@+id/cb_price2"
-                android:layout_width="@dimen/d22"
-                android:button="@drawable/cb_bg"
-                android:layout_height="@dimen/d22"
-                android:layout_marginStart="@dimen/d20" />
-
-            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="元/套"
+                android:layout_height="@dimen/d22"
+                android:layout_marginStart="@dimen/d20"
+                android:button="@drawable/cb_bg"
+                android:text=" 元/套"
                 android:textColor="@color/color_dark_333333"
                 android:textSize="@dimen/font12" />
 
             <CheckBox
                 android:id="@+id/cb_price3"
-                android:layout_width="@dimen/d22"
-                android:layout_height="@dimen/d22"
-                android:button="@drawable/cb_bg"
-                android:layout_marginStart="@dimen/d20" />
-
-            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="待定"
+                android:layout_height="@dimen/d22"
+                android:layout_marginStart="@dimen/d20"
+                android:button="@drawable/cb_bg"
+                android:text=" 待定"
                 android:textColor="@color/color_dark_333333"
                 android:textSize="@dimen/font12" />
         </LinearLayout>

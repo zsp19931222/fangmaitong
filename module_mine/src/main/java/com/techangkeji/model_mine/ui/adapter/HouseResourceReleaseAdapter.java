@@ -25,6 +25,7 @@ import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseBean;
 import com.techangkeji.model_mine.ui.data.HouseResourceReleaseSizeData;
 import com.techangkeji.model_mine.ui.popup.ArchitectTypePopupwindow;
 import com.techangkeji.model_mine.ui.popup.DecorationStatePopupwindow;
+import com.techangkeji.model_mine.ui.popup.HRSDLabelPopupwindow;
 import com.techangkeji.model_mine.ui.popup.PropertyTypePopupwindow;
 import com.techangkeji.model_mine.ui.popup.TimePickerPopupwindow;
 import com.techangkeji.model_mine.ui.viewModel.HouseResourceReleaseViewModel;
@@ -92,10 +93,11 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
 
     private void initBanner(BaseViewHolder helper) {
         tv_vhb_add = helper.getView(R.id.tv_vhb_add);
-        tv_vhb_add.setOnClickListener(view -> viewModel.selectImage(helper.itemView.getContext(),9));
+        tv_vhb_add.setOnClickListener(view -> viewModel.selectImage(helper.itemView.getContext(), 9));
         if (IsNullUtil.getInstance().isEmpty(bannerAdapter)) {
             RecyclerView bannerRecyclerView = helper.getView(R.id.rv_vhb);
             bannerAdapter = new HouseResourceReleaseBannerAdapter(R.layout.item_hsr_banner, viewModel.bannerPathList);
+            viewModel.bannerAdapter.set(bannerAdapter);
             bannerRecyclerView.setLayoutManager(new LinearLayoutManager(context));
             bannerRecyclerView.setAdapter(bannerAdapter);
         } else {
@@ -136,6 +138,7 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
         et_vhf_commission.setText(viewModel.commissionRule.get());
         et_vhf_look.setText(viewModel.lookRule.get());
 
+        viewModel.addressTextView.set(tv_vhf_address);
 
         tv_vhf_address.setOnClickListener(v -> ARouter.getInstance().build(ARouterPath.Public.MoreAddressActivity).withInt("addressType", 0).navigation());
         cb_vhf_square.setOnCheckedChangeListener((compoundButton, b) -> {
@@ -166,6 +169,7 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
             viewModel.startActivity(SelectFriendActivity.class);
         });
         LinkManAdapter linkManAdapter = new LinkManAdapter(R.layout.item_linkman, viewModel.linkManList, viewModel);
+        viewModel.linkManAdapter.set(linkManAdapter);
         rv_vhl.setLayoutManager(new LinearLayoutManager(context));
         rv_vhl.setAdapter(linkManAdapter);
     }
@@ -182,7 +186,7 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
     private TextView tv_vhd_property_type;
     private TextView tv_vhd_architecture_type;
     private TextView tv_vhd_decoration_state;
-    private TextView tv_vhd_offices_address;
+    private TextView tv_vhd_add;
     private ImageView iv_vhd_open_time;
     private ImageView iv_vhd_delivery_time;
     private EditText et_vhd_households;
@@ -204,7 +208,7 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
         tv_vhd_decoration_state = helper.getView(R.id.tv_vhd_decoration_state);
         iv_vhd_open_time = helper.getView(R.id.iv_vhd_open_time);
         iv_vhd_delivery_time = helper.getView(R.id.iv_vhd_delivery_time);
-        tv_vhd_offices_address = helper.getView(R.id.tv_vhd_offices_address);
+        tv_vhd_add = helper.getView(R.id.tv_vhd_add);
         et_vhd_households = helper.getView(R.id.et_vhd_households);
         et_vhd_plot_ratio = helper.getView(R.id.et_vhd_plot_ratio);
         et_vhd_stall_num = helper.getView(R.id.et_vhd_stall_num);
@@ -227,15 +231,16 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
         et_vhd_property_company.setText(viewModel.propertyCompany.get());
         et_vhd_property_fee.setText(viewModel.propertyMoney.get());
 
+        viewModel.officeAddressTextView.set(tv_vhd_address);
 
         tv_vhd_address.setOnClickListener(v -> ARouter.getInstance().build(ARouterPath.Public.MoreAddressActivity).withInt("addressType", 1).navigation());
 
+        tv_vhd_add.setOnClickListener(v -> new HRSDLabelPopupwindow(helper.itemView.getContext(), viewModel).showPopupWindow());
+
         //添加标签
         if (IsNullUtil.getInstance().isEmpty(hsrdAdapter)) {
-            if (!viewModel.labelList.contains("+")) {
-                viewModel.labelList.add("+");
-            }
-            HSRDAdapter hsrdAdapter = new HSRDAdapter(R.layout.item_hsrd, viewModel.labelList, viewModel);
+            hsrdAdapter = new HSRDAdapter(R.layout.item_hsrd, viewModel.labelList, viewModel);
+            viewModel.hsrdAdapter.set(hsrdAdapter);
             LinearLayoutManager gridLayoutManager = new LinearLayoutManager(context);
             gridLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
             rv_vhd.setLayoutManager(gridLayoutManager);
@@ -287,6 +292,7 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
         tv_vhs_add.setOnClickListener(view -> viewModel.startActivity(AddSizeActivity.class));
         if (IsNullUtil.getInstance().isEmpty(houseResourceReleaseSizeAdapter)) {
             houseResourceReleaseSizeAdapter = new HouseResourceReleaseSizeAdapter(R.layout.item_hsr_size, HouseResourceReleaseSizeData.getInstance().getList(), viewModel);
+            viewModel.houseResourceReleaseSizeAdapter.set(houseResourceReleaseSizeAdapter);
             rv_vhs.setLayoutManager(new LinearLayoutManager(context));
             rv_vhs.setAdapter(houseResourceReleaseSizeAdapter);
         } else {
@@ -334,7 +340,7 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
             if (cb_vhf_square.isChecked()) {
                 viewModel.priceType.set("1");
             }
-            if (cb_vhf_square.isChecked()) {
+            if (cb_vhf_suit.isChecked()) {
                 viewModel.priceType.set("2");
             }
             String propertiesType = "";
@@ -366,6 +372,8 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
             viewModel.volumeRate.set(et_vhd_plot_ratio.getText().toString());
             viewModel.bannerStringBuilder.get().setLength(0);
             viewModel.typeImgUrlStringBuilder.get().setLength(0);
+            viewModel.bannerPosition.set(0);
+            viewModel.typePosition.set(0);
             viewModel.uploadBannerImage(viewModel.bannerPosition.get());
         });
     }

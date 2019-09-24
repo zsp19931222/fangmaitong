@@ -29,7 +29,7 @@ public class LinkManAdapter extends BaseQuickAdapter<SelectFriendBean, BaseViewH
         helper.setText(R.id.tv_phone,item.getPhone());
         helper.getView(R.id.tv_il_delete).setOnClickListener(v -> {
             viewModel.linkManList.remove(helper.getAdapterPosition());
-            viewModel.adapterObservableField.get().notifyDataSetChanged();
+            viewModel.linkManAdapter.get().notifyDataSetChanged();
         });
         GlideLoadUtils.getInstance().glideLoad(helper.itemView.getContext(),item.getHead_url(),helper.getView(R.id.iv_il),0,22);
     }
