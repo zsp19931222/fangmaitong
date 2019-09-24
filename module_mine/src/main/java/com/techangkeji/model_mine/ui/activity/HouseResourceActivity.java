@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.blankj.utilcode.util.SPUtils;
+import com.goldze.base.bean.FeaturedLabelBean;
+import com.goldze.base.eventbus.FilterRxBusBean;
 import com.goldze.base.eventbus.HouseTypeRxBusBean;
 import com.goldze.base.eventbus.PriceRxBusBean;
 import com.goldze.base.eventbus.SortRxBusBean;
@@ -84,6 +86,15 @@ public class HouseResourceActivity extends BaseActivity<ActivityHouseResourceBin
                     viewModel.priceSort.set("0");
                     break;
             }
+            viewModel.getData();
+        }));
+        RxSubscriptions.add(RxBus.getDefault().toObservable(FilterRxBusBean.class).subscribe(filterRxBusBean -> {
+            viewModel.decoration.set(filterRxBusBean.getDecoration());
+            viewModel.specialLabel.set(filterRxBusBean.getSpecialLabel());
+            viewModel.propertyType.set(filterRxBusBean.getPropertyType());
+            viewModel.areaMin.set(filterRxBusBean.getAreaMin());
+            viewModel.areaMax.set(filterRxBusBean.getAreaMax());
+            viewModel.openType.set(filterRxBusBean.getOpenType());
             viewModel.getData();
         }));
     }

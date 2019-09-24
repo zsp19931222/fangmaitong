@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.goldze.mvvmhabit.bus.RxBus;
+import me.goldze.mvvmhabit.utils.ZLog;
 import me.goldze.mvvmhabit.view.MyVerticalDecoration;
 import razerdp.basepopup.BasePopupWindow;
 
@@ -65,6 +66,7 @@ public class HouseTypePopupwindow extends BasePopupWindow {
             } else {
                 houseTypeBean = new HouseTypeRxBusBean(strings.get(position));
             }
+            ZLog.d(houseTypeBean.getType());
             RxBus.getDefault().post(houseTypeBean);
             dismiss();
         });

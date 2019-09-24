@@ -6,6 +6,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.goldze.base.eventbus.SortRxBusBean;
 import com.techangkeji.module_hr.R;
+import com.techangkeji.module_hr.ui.listener.PopupSelectListener;
 
 import java.util.List;
 
@@ -19,6 +20,12 @@ public class SortAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, String item) {
         helper.setText(R.id.tv_ia, item);
-        helper.itemView.setOnClickListener(v -> RxBus.getDefault().post(new SortRxBusBean(item)));
+        helper.itemView.setOnClickListener(v ->popupSelectListener.select(helper.getAdapterPosition()));
+    }
+
+    private PopupSelectListener popupSelectListener;
+
+    public void setPopupSelectListener(PopupSelectListener popupSelectListener) {
+        this.popupSelectListener = popupSelectListener;
     }
 }

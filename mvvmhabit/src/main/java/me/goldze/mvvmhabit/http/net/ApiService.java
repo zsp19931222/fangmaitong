@@ -26,6 +26,7 @@ import me.goldze.mvvmhabit.http.net.entity.AreaListEntity;
 import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
 import me.goldze.mvvmhabit.http.net.entity.BuildingListEntity;
 import me.goldze.mvvmhabit.http.net.entity.FeaturedLabelEntity;
+import me.goldze.mvvmhabit.http.net.entity.HouseResourceDetailEntity;
 import me.goldze.mvvmhabit.http.net.entity.LocationEntity;
 import me.goldze.mvvmhabit.http.net.entity.SelectFriendEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
@@ -237,7 +238,7 @@ public interface ApiService<T extends BaseEntity> {
     //房源详情查询
     @GET(API + "auth/building/getBuildingInfoById")
     @Headers({"url_name:user_info"})
-    Observable<SuccessEntity> getBuildingInfoById(@QueryMap() Map<String,Object> map);
+    Observable<SuccessEntity<HouseResourceDetailEntity>> getBuildingInfoById(@QueryMap() Map<String,Object> map);
 
     //好友列表
     @GET(API + "auth/friend/getFriendList")

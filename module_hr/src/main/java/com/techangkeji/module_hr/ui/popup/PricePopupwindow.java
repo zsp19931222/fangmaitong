@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.goldze.base.eventbus.PriceRxBusBean;
 import com.techangkeji.module_hr.R;
 import com.techangkeji.module_hr.ui.adapter.PriceAdapter;
 import com.techangkeji.module_hr.ui.adapter.TypeAdapter;
@@ -16,6 +17,7 @@ import com.techangkeji.module_hr.ui.adapter.TypeAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.goldze.mvvmhabit.bus.RxBus;
 import me.goldze.mvvmhabit.view.MyVerticalDecoration;
 import me.goldze.mvvmhabit.view.shape.RadiusTextView;
 import razerdp.basepopup.BasePopupWindow;
@@ -55,6 +57,11 @@ public class PricePopupwindow extends BasePopupWindow {
         initAdapter();
         v_pa.getBackground().setAlpha(125);
         v_pa.setOnClickListener(view1 -> dismiss());
+        confirm.setOnClickListener(view ->{
+            PriceRxBusBean priceRxBusBean=new PriceRxBusBean(heiget.getText().toString(),low.getText().toString());
+            RxBus.getDefault().post(priceRxBusBean);
+            dismiss();
+        } );
     }
 
     private void initAdapter() {

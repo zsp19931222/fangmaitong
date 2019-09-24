@@ -9,6 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.goldze.base.bean.FeaturedLabelBean;
 import com.techangkeji.module_hr.R;
+import com.techangkeji.module_hr.ui.listener.PopupSelectListener;
 
 import java.util.List;
 
@@ -41,7 +42,13 @@ public class FilterAdapter extends BaseQuickAdapter<FeaturedLabelBean, BaseViewH
             }else {
                 item.setSelect(true);
             }
-            notifyDataSetChanged();
+            popupSelectListener.select(helper.getAdapterPosition());
         });
+    }
+
+    private PopupSelectListener popupSelectListener;
+
+    public void setPopupSelectListener(PopupSelectListener popupSelectListener) {
+        this.popupSelectListener = popupSelectListener;
     }
 }

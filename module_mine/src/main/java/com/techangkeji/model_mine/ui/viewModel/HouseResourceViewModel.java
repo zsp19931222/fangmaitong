@@ -33,6 +33,7 @@ import me.goldze.mvvmhabit.http.net.entity.FeaturedLabelEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.litepal.util.SaveAreaListUtil;
 import me.goldze.mvvmhabit.utils.RxUtils;
+import razerdp.basepopup.BasePopupWindow;
 
 public class HouseResourceViewModel extends BaseViewModel {
     public ObservableField<Integer> areaShow = new ObservableField<>(View.VISIBLE);
@@ -45,11 +46,12 @@ public class HouseResourceViewModel extends BaseViewModel {
     public ObservableList<AreaListEntity.DataBean> areaList = new ObservableArrayList<>();
     public ObservableList<BuildingListEntity.DataBean> buildingList = new ObservableArrayList<>();
     public ObservableField<HouseResourceAdapter> adapter = new ObservableField<>();
-    public ObservableList<FeaturedLabelBean> featuredLabelList = new ObservableArrayList();
-    public ObservableList<FeaturedLabelBean> buildLabeList = new ObservableArrayList();
+    public ObservableList<FeaturedLabelBean> featuredLabelList = new ObservableArrayList();//特色标签
+    public ObservableList<FeaturedLabelBean> buildLabeList = new ObservableArrayList();//物业类型
 
     public HouseResourceViewModel(@NonNull Application application) {
         super(application);
+
     }
 
     //发布房源
@@ -74,6 +76,7 @@ public class HouseResourceViewModel extends BaseViewModel {
     public ObservableField<String> houseType = new ObservableField<>("");//户型
     public ObservableField<String> areaMin = new ObservableField<>("");//最小面积
     public ObservableField<String> areaMax = new ObservableField<>("");//最大面积
+    public ObservableField<String> openType = new ObservableField<>("");//开盘时间（1-本月，2-下月，3-半年内，4-已开盘）
 
     /**
      * description:获取房源列表
@@ -101,12 +104,15 @@ public class HouseResourceViewModel extends BaseViewModel {
         parameter.put("type", type.get());
         parameter.put("areaMin", areaMin.get());
         parameter.put("areaMax", areaMax.get());
+        parameter.put("openType", openType.get());
+        parameter.put("houseType", houseType.get());
         ParameterLogUtil.getInstance().parameterLog(parameter);
         IdeaApi.getApiService()
                 .getBuildingList(parameter)
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                 .compose(RxUtils.schedulersTransformer())
-                .subscribe(new DefaultObserver<BuildingListEntity>() {
+                .doOnSubscribe(disposable -> showDialog())
+                .subscribe(new DefaultObserver<BuildingListEntity>(this) {
                     @Override
                     public void onSuccess(BuildingListEntity response) {
                         buildingList.addAll(response.getData());
@@ -220,7 +226,20 @@ public class HouseResourceViewModel extends BaseViewModel {
     public BindingCommand screenCommand = new BindingCommand(() -> {
         initShow();
         screenShow.set(View.VISIBLE);
-        new FilterPopupwindow(context.get(), featuredLabelList,buildLabeList).showPopupWindow(choiceView.get());
+
+        FilterPopupwindow filterPopupwindow = new FilterPopupwindow(context.get(), featuredLabelList, buildLabeList);
+        filterPopupwindow.showPopupWindow(choiceView.get());
+        filterPopupwindow.setOnDismissListener(new BasePopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                for (FeaturedLabelBean featuredLabelBean : featuredLabelList) {
+                    featuredLabelBean.setSelect(false);
+                }
+                for (FeaturedLabelBean featuredLabelBean : buildLabeList) {
+                    featuredLabelBean.setSelect(false);
+                }
+            }
+        });
     });
     public BindingCommand sortCommand = new BindingCommand(() -> {
         initShow();

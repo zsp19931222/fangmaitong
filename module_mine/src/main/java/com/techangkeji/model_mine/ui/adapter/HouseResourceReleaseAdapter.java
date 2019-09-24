@@ -127,7 +127,16 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
         et_vhf_look = helper.getView(R.id.et_vhf_look);
         cb_vhf_square = helper.getView(R.id.cb_vhf_square);
         cb_vhf_suit = helper.getView(R.id.cb_vhf_suit);
+
+
+        et_vhf_name.setText(viewModel.listingName.get());
+        et_vhf_price.setText(viewModel.averagePrice.get());
         tv_vhf_address.setText(viewModel.address.get());
+        et_vhf_dn.setText(viewModel.developerName.get());
+        et_vhf_commission.setText(viewModel.commissionRule.get());
+        et_vhf_look.setText(viewModel.lookRule.get());
+
+
         tv_vhf_address.setOnClickListener(v -> ARouter.getInstance().build(ARouterPath.Public.MoreAddressActivity).withInt("addressType", 0).navigation());
         cb_vhf_square.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
@@ -204,7 +213,21 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
         et_vhd_property_company = helper.getView(R.id.et_vhd_property_company);
         et_vhd_property_fee = helper.getView(R.id.et_vhd_property_fee);
 
+        tv_vhd_open_time.setText(viewModel.openTime.get());
+        tv_vhd_delivery_time.setText(viewModel.handTime.get());
         tv_vhd_address.setText(viewModel.officeAddress.get());
+        tv_vhd_property_type.setText(viewModel.propertiesType.get());
+        tv_vhd_architecture_type.setText(viewModel.buildType.get());
+        tv_vhd_decoration_state.setText(viewModel.decorationType.get());
+        et_vhd_households.setText(viewModel.resident.get());
+        et_vhd_plot_ratio.setText(viewModel.volumeRate.get());
+        et_vhd_stall_num.setText(viewModel.carNum.get());
+        et_vhd_age_limit.setText(viewModel.propertyYear.get());
+        et_vhd_licence.setText(viewModel.license.get());
+        et_vhd_property_company.setText(viewModel.propertyCompany.get());
+        et_vhd_property_fee.setText(viewModel.propertyMoney.get());
+
+
         tv_vhd_address.setOnClickListener(v -> ARouter.getInstance().build(ARouterPath.Public.MoreAddressActivity).withInt("addressType", 1).navigation());
 
         //添加标签

@@ -34,6 +34,7 @@ import me.goldze.mvvmhabit.http.net.DefaultObserver;
 import me.goldze.mvvmhabit.http.net.IdeaApi;
 import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
 import me.goldze.mvvmhabit.http.net.entity.FeaturedLabelEntity;
+import me.goldze.mvvmhabit.http.net.entity.HouseResourceDetailEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.RxUtils;
@@ -297,14 +298,70 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
                 .getBuildingInfoById(parameter)
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                 .compose(RxUtils.schedulersTransformer())
-                .subscribe(new DefaultObserver() {
+                .subscribe(new DefaultObserver<SuccessEntity<HouseResourceDetailEntity>>() {
                     @Override
-                    public void onSuccess(BaseEntity response) {
+                    public void onSuccess(SuccessEntity<HouseResourceDetailEntity> response) {
+                        try {
+                            officeAddress.set(response.getContent().getSales_address());
+                            averagePrice.set(response.getContent().getAverage_price() + "");
+                            switch (response.getContent().getBuild_type()) {
+                                case 1:
+                                    buildType.set( "居住建筑");
+                                    break;
+                                case 2:
+                                    buildType.set("商业建筑");
+                                    break;
+                                default:
+                                    buildType.set("");
+                                    break;
+                            }
+                            carNum.set(response.getContent().getCar_num()+"");
+                            switch (response.getContent().getDecoration_type()){
+                                case "1":
+                                    decorationType.set("精装");
+                                    break;
+                                case "2":
+                                    decorationType.set("简装");
+                                    break;
+                                case "3":
+                                    decorationType.set("毛坯");
+                                    break;
+                            }
+                            developerName.set(response.getContent().getDeveloper_name());
+                            handTime.set(response.getContent().getHand_time());
+                            lat.set(response.getContent().getLatitude());
+                            license.set(response.getContent().getLicense());
+                            listingName.set(response.getContent().getListing_name());
+                            lon.set(response.getContent().getLongitude());
+                            openTime.set(response.getContent().getOpen_time());
+                            switch (response.getContent().getProperties_type()){
+                                case 3:
+                                    propertiesType.set("住宅");
+                                    break;
+                                case 4:
+                                    propertiesType.set("别墅");
+                                    break;
+                                case 5:
+                                    propertiesType.set("商办");
+                                    break;
+                                case 6:
+                                    propertiesType.set("商铺");
+                                    break;
+                                case 7:
+                                    propertiesType.set("写字楼");
+                                    break;
+                                case 8:
+                                    propertiesType.set("商住");
+                                    break;
+                            }
+                            propertyCompany.set(response.getContent().getProperty_company());
+                            propertyMoney.set(response.getContent().getProperty_money());
+                            propertyYear.set(response.getContent().getProperty_year()+"");
+                            resident.set(response.getContent().getResident()+"");
+                            volumeRate.set(response.getContent().getVolume_rate());
+                        }catch (Exception e){
 
-                    }
-
-                    @Override
-                    public void onNext(Object o) {
+                        }
 
                     }
                 });

@@ -8,12 +8,14 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.goldze.base.eventbus.SortRxBusBean;
 import com.techangkeji.module_hr.R;
 import com.techangkeji.module_hr.ui.adapter.SortAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import me.goldze.mvvmhabit.bus.RxBus;
 import me.goldze.mvvmhabit.view.MyVerticalDecoration;
 import razerdp.basepopup.BasePopupWindow;
 
@@ -57,6 +59,10 @@ public class SortPopupwindow extends BasePopupWindow {
         rv.setLayoutManager(new LinearLayoutManager(context));
         rv.addItemDecoration(new MyVerticalDecoration(context, ContextCompat.getColor(context, R.color.color_f6), 1, 0, 0, true));
         rv.setAdapter(adapter);
+        adapter.setPopupSelectListener(position -> {
+            RxBus.getDefault().post(new SortRxBusBean(strings.get(position)));
+            dismiss();
+        });
     }
 
 }
