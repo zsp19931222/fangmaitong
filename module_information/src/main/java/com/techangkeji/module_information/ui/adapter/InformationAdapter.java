@@ -76,6 +76,7 @@ public class InformationAdapter extends BaseQuickAdapter<NewsListEntity.DataBean
         helper.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(helper.itemView.getContext(), InformationDetailActivity.class);
             intent.putExtra("id",item.getId()+"");
+            intent.putExtra("title",item.getNews_title());
             helper.itemView.getContext().startActivity(intent);
         });
     }

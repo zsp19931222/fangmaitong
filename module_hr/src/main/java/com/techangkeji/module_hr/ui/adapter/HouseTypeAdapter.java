@@ -4,8 +4,8 @@ import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.goldze.base.listener.PopupSelectListener;
 import com.techangkeji.module_hr.R;
-import com.techangkeji.module_hr.ui.listener.PopupSelectListener;
 
 import java.util.List;
 

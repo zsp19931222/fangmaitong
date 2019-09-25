@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -19,7 +20,10 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.goldze.base.constant.RxBusMessageEventConstants;
+import com.goldze.base.eventbus.SelectRxBusBean;
 import com.goldze.base.router.ARouterPath;
+import com.goldze.base.utils.BaiduLocationBean;
+import com.goldze.base.utils.LocationUtil;
 import com.hyphenate.EMClientListener;
 import com.hyphenate.EMContactListener;
 import com.hyphenate.EMMultiDeviceListener;
@@ -34,6 +38,8 @@ import com.techangkeji.module_main.databinding.ActivityMainBinding;
 import com.techangkeji.module_main.view.TabGroupView;
 import com.techangkeji.module_main.view.TabView;
 
+import org.litepal.LitePal;
+
 import java.util.List;
 
 import io.reactivex.observers.DefaultObserver;
@@ -45,12 +51,13 @@ import me.goldze.mvvmhabit.bus.RxSubscriptions;
 import me.goldze.mvvmhabit.http.net.IdeaApi;
 import me.goldze.mvvmhabit.http.net.body.AddFriendBody;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
+import me.goldze.mvvmhabit.litepal.DistrictLitePal;
 import me.goldze.mvvmhabit.utils.RxUtils;
 import me.goldze.mvvmhabit.utils.ToastUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
 
 @Route(path = ARouterPath.Main.PAGER_MAIN)
-public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewModel> implements TabGroupView.OnItemClickListener {
+public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> implements TabGroupView.OnItemClickListener {
     private FragmentTransaction fragmentTransaction;
     private FragmentManager fragmentManager;
     private Fragment home;
@@ -85,24 +92,45 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, BaseViewMode
                 RxBus.getDefault().post(new RxBusMessageEventConstants.InformationRxMessage(1));
             }
         }));
+        LocationUtil.getInstance().startLocation(this);
+        RxSubscriptions.add(RxBus.getDefault().toObservable(BaiduLocationBean.class).subscribe(baiduLocationBean -> {
+            viewModel.area.set(baiduLocationBean.getCity() + " " + baiduLocationBean.getDistrict());
+            viewModel.city.set(baiduLocationBean.getCity());
+            viewModel.sendLocation(baiduLocationBean);
+        }));
+        RxSubscriptions.add(RxBus.getDefault().toObservable(SelectRxBusBean.class).subscribe(areaItemBean -> {
+            ZLog.d(areaItemBean);
+            List<DistrictLitePal> newsList = LitePal
+                    .where("cityId = ?", areaItemBean.getParentId() + "")
+                    .find(DistrictLitePal.class);
+            if (newsList.size() > 0) {
+                viewModel.city.set(newsList.get(0).getCityName());
+                viewModel.area.set(newsList.get(0).getCityName() + " " + areaItemBean.getAreaName());
+            }
+        }));
     }
 
     @Override
     public void onClick(TabView tabLayout, int position) {
         switch (position) {
             case 0:
+                binding.title.setVisibility(View.VISIBLE);
                 initHome();
                 break;
             case 1:
+                binding.title.setVisibility(View.VISIBLE);
                 initHomeResource();
                 break;
             case 2:
+                binding.title.setVisibility(View.VISIBLE);
                 initInformation();
                 break;
             case 3:
+                binding.title.setVisibility(View.GONE);
                 initMessage();
                 break;
             case 4:
+                binding.title.setVisibility(View.GONE);
                 initMine();
                 break;
         }

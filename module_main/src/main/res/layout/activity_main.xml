@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    >
 
     <data>
 
         <variable
             name="viewModel"
-            type="me.goldze.mvvmhabit.base.BaseViewModel" />
+            type="com.techangkeji.module_main.MainViewModel" />
     </data>
 
     <LinearLayout
@@ -14,6 +15,69 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d44"
+            android:id="@+id/title"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/d15"
+                android:paddingEnd="@dimen/d15">
+
+                <ImageView
+                    android:layout_width="@dimen/d14"
+                    android:layout_height="@dimen/d14"
+                    android:src="@mipmap/dinwei" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/d3"
+                    android:maxWidth="@dimen/d75"
+                    binding:onClickCommand="@{viewModel.areaCommand}"
+                    android:maxLines="1"
+                    android:text="@={viewModel.area}"
+                    android:ellipsize="end"
+                    android:textColor="@color/color_dark_333333"
+                    android:textSize="@dimen/font12" />
+
+                <me.goldze.mvvmhabit.view.shape.RadiusLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/d30"
+                    android:layout_marginStart="@dimen/d15"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/d10"
+                    android:paddingEnd="@dimen/d10"
+                    binding:rv_backgroundColor="@color/color_f6"
+                    binding:rv_radius="@dimen/d15">
+
+                    <ImageView
+                        android:layout_width="@dimen/d14"
+                        android:layout_height="@dimen/d14"
+                        android:src="@mipmap/search" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/d5"
+                        android:layout_marginEnd="@dimen/d5"
+                        android:background="@null"
+                        android:ellipsize="end"
+                        android:hint="搜索本区（开发商名/楼盘名/商圈/标签）"
+                        android:singleLine="true"
+                        android:textColor="@color/color_dark_333333"
+                        android:textColorHint="@color/color_gray_999999"
+                        android:textSize="@dimen/font12" />
+                </me.goldze.mvvmhabit.view.shape.RadiusLinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
 
         <FrameLayout
             android:id="@+id/main_vp"
@@ -33,13 +97,13 @@
                 android:layout_weight="1"
                 android:background="@drawable/ripple"
                 android:gravity="center"
-                app:tab_checked="true"
-                app:tab_icon="@mipmap/home_icon"
-                app:tab_iconSelect="@mipmap/home_icon"
-                app:tab_name="首页"
-                app:tab_nameColor="@color/color_dark_333333"
-                app:tab_nameSelectColor="@color/color_dark_333333"
-                app:tab_nameSize="@dimen/font10" />
+                binding:tab_checked="true"
+                binding:tab_icon="@mipmap/home_icon"
+                binding:tab_iconSelect="@mipmap/home_icon"
+                binding:tab_name="首页"
+                binding:tab_nameColor="@color/color_dark_333333"
+                binding:tab_nameSelectColor="@color/color_dark_333333"
+                binding:tab_nameSize="@dimen/font10" />
 
             <com.techangkeji.module_main.view.TabView
                 android:layout_width="0dp"
@@ -47,38 +111,25 @@
                 android:layout_weight="1"
                 android:background="@drawable/ripple"
                 android:gravity="center"
-                app:tab_name="房源"
-                app:tab_icon="@mipmap/hr_icon"
-                app:tab_iconSelect="@mipmap/hr_icon"
-                app:tab_nameColor="@color/color_dark_333333"
-                app:tab_nameSelectColor="@color/color_dark_333333"
-                app:tab_nameSize="@dimen/font10" />
+                binding:tab_name="房源"
+                binding:tab_icon="@mipmap/hr_icon"
+                binding:tab_iconSelect="@mipmap/hr_icon"
+                binding:tab_nameColor="@color/color_dark_333333"
+                binding:tab_nameSelectColor="@color/color_dark_333333"
+                binding:tab_nameSize="@dimen/font10" />
 
             <com.techangkeji.module_main.view.TabView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:tab_icon="@mipmap/information_select_icon"
-                app:tab_iconSelect="@mipmap/information_select_icon"
+                binding:tab_icon="@mipmap/information_select_icon"
+                binding:tab_iconSelect="@mipmap/information_select_icon"
                 android:background="@drawable/ripple"
                 android:gravity="center"
-                app:tab_name="资讯"
-                app:tab_nameColor="@color/color_dark_333333"
-                app:tab_nameSelectColor="@color/color_dark_333333"
-                app:tab_nameSize="@dimen/font10" />
-
-            <com.techangkeji.module_main.view.TabView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/ripple"
-                android:gravity="center"
-                app:tab_name="社交"
-                app:tab_icon="@mipmap/mt_icon"
-                app:tab_iconSelect="@mipmap/mt_icon"
-                app:tab_nameColor="@color/color_dark_333333"
-                app:tab_nameSelectColor="@color/color_dark_333333"
-                app:tab_nameSize="@dimen/font10" />
+                binding:tab_name="资讯"
+                binding:tab_nameColor="@color/color_dark_333333"
+                binding:tab_nameSelectColor="@color/color_dark_333333"
+                binding:tab_nameSize="@dimen/font10" />
 
             <com.techangkeji.module_main.view.TabView
                 android:layout_width="0dp"
@@ -86,12 +137,25 @@
                 android:layout_weight="1"
                 android:background="@drawable/ripple"
                 android:gravity="center"
-                app:tab_icon="@mipmap/mine_icon"
-                app:tab_iconSelect="@mipmap/mine_icon"
-                app:tab_name="我的"
-                app:tab_nameColor="@color/color_dark_333333"
-                app:tab_nameSelectColor="@color/color_dark_333333"
-                app:tab_nameSize="@dimen/font10" />
+                binding:tab_name="社交"
+                binding:tab_icon="@mipmap/mt_icon"
+                binding:tab_iconSelect="@mipmap/mt_icon"
+                binding:tab_nameColor="@color/color_dark_333333"
+                binding:tab_nameSelectColor="@color/color_dark_333333"
+                binding:tab_nameSize="@dimen/font10" />
+
+            <com.techangkeji.module_main.view.TabView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ripple"
+                android:gravity="center"
+                binding:tab_icon="@mipmap/mine_icon"
+                binding:tab_iconSelect="@mipmap/mine_icon"
+                binding:tab_name="我的"
+                binding:tab_nameColor="@color/color_dark_333333"
+                binding:tab_nameSelectColor="@color/color_dark_333333"
+                binding:tab_nameSize="@dimen/font10" />
         </com.techangkeji.module_main.view.TabGroupView>
     </LinearLayout>
 </layout>

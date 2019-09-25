@@ -83,22 +83,7 @@ public class HomeFragment extends BaseLazyFragment<FragmentHomeBinding, HomeView
 
     @Override
     public void initData() {
-        LocationUtil.getInstance().startLocation(getActivity());
-        RxSubscriptions.add(RxBus.getDefault().toObservable(BaiduLocationBean.class).subscribe(baiduLocationBean -> {
-            viewModel.area.set(baiduLocationBean.getCity() + " " + baiduLocationBean.getDistrict());
-            viewModel.city.set(baiduLocationBean.getCity());
-            viewModel.sendLocation(baiduLocationBean);
-        }));
-        RxSubscriptions.add(RxBus.getDefault().toObservable(SelectRxBusBean.class).subscribe(areaItemBean -> {
-            ZLog.d(areaItemBean);
-            List<DistrictLitePal> newsList = LitePal
-                    .where("cityId = ?", areaItemBean.getParentId() + "")
-                    .find(DistrictLitePal.class);
-            if (newsList.size() > 0) {
-                viewModel.city.set(newsList.get(0).getCityName());
-                viewModel.area.set(newsList.get(0).getCityName() + " " + areaItemBean.getAreaName());
-            }
-        }));
+
     }
 
     @Override

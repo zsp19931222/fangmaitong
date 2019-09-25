@@ -6,4 +6,9 @@ android {
             applicationId "com.techangkeji.information"
         }
     }
+    dependencies {
+        if (!isBuildModule.toBoolean()) {
+            implementation project(path: ':module_friend_circle')
+        }
+    }
 }

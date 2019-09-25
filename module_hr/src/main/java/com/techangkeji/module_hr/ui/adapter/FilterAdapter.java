@@ -1,15 +1,13 @@
 package com.techangkeji.module_hr.ui.adapter;
 
-import android.graphics.Color;
-
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.goldze.base.bean.FeaturedLabelBean;
+import com.goldze.base.listener.PopupSelectListener;
 import com.techangkeji.module_hr.R;
-import com.techangkeji.module_hr.ui.listener.PopupSelectListener;
 
 import java.util.List;
 

@@ -32,42 +32,9 @@ import me.goldze.mvvmhabit.utils.ToastUtil;
  * email:zsp872126510@gmail.com
  */
 public class HomeViewModel extends BaseViewModel {
-    public ObservableField<String> area = new ObservableField<>("");
-    public ObservableField<String> city = new ObservableField<>("");
 
     public HomeViewModel(@NonNull Application application) {
         super(application);
     }
 
-    public BindingCommand areaCommand = new BindingCommand(() -> {
-        ARouter.getInstance().build(ARouterPath.Public.AreaSelectActivity).withString("city", city.get()).navigation();
-    });
-
-    /**
-     * description: 发送位置信息给后台
-     * author: Andy
-     * date: 2019/9/20  21:53
-     */
-    public void sendLocation(BaiduLocationBean baiduLocationBean) {
-        LocationBody locationBody = new LocationBody(
-                baiduLocationBean.getProvince(),
-                baiduLocationBean.getCity(),
-                baiduLocationBean.getDistrict(),
-                baiduLocationBean.getProvince() + baiduLocationBean.getCity() + baiduLocationBean.getDistrict(),
-                baiduLocationBean.getLongitude() + "",
-                baiduLocationBean.getLatitude() + "");
-        IdeaApi.getApiService()
-                .location(locationBody)
-                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
-                .compose(RxUtils.schedulersTransformer())
-                .doOnSubscribe(disposable1 -> showDialog())
-                .subscribe(new DefaultObserver<SuccessEntity<LocationEntity>>(this) {
-                    @Override
-                    public void onSuccess(SuccessEntity<LocationEntity> response) {
-                        SPUtils.getInstance().put("areaId", response.getContent().getAreaId() + "");
-                        SPUtils.getInstance().put("latitude", response.getContent().getLatitude());
-                        SPUtils.getInstance().put("longitude", response.getContent().getLongitude());
-                    }
-                });
-    }
 }

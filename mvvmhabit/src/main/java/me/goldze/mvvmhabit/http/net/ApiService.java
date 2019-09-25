@@ -13,6 +13,7 @@ import me.goldze.mvvmhabit.http.net.body.AuthRealNameBody;
 import me.goldze.mvvmhabit.http.net.body.BindingThirdBody;
 import me.goldze.mvvmhabit.http.net.body.CheckAuthCodeBody;
 import me.goldze.mvvmhabit.http.net.body.CommentBody;
+import me.goldze.mvvmhabit.http.net.body.CommentListBody;
 import me.goldze.mvvmhabit.http.net.body.LocationBody;
 import me.goldze.mvvmhabit.http.net.body.LoginBody;
 import me.goldze.mvvmhabit.http.net.body.MyMovingListBody;
@@ -32,6 +33,7 @@ import me.goldze.mvvmhabit.http.net.entity.SelectFriendEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.CommentBean;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.MyStateEntity;
+import me.goldze.mvvmhabit.http.net.entity.information.CommentListEntity;
 import me.goldze.mvvmhabit.http.net.entity.information.NewsListEntity;
 import me.goldze.mvvmhabit.http.net.entity.information.PlacardListEntity;
 import me.goldze.mvvmhabit.http.net.entity.login.RegisterEntity;
@@ -267,5 +269,15 @@ public interface ApiService<T extends BaseEntity> {
     @POST(API + "auth/news/getNewsInfo")
     @Headers({"url_name:message"})
     Observable<SuccessEntity<NewsListEntity.DataBean>> getNewsInfo(@QueryMap() Map<String,Object> map);
+
+    //资讯标签
+    @GET(API + "auth/label/getLabelList")
+    @Headers({"url_name:message"})
+    Observable<FeaturedLabelEntity> getLabelList();
+
+    //评论列表
+    @POST(API + "auth/comment/query")
+    @Headers({"url_name:login"})
+    Observable<CommentListEntity> getCommentList(@Body() CommentListBody myMovingListBody);
 
 }

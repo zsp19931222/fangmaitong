@@ -12,7 +12,7 @@
         android:layout_height="@dimen/d44"
         android:layout_marginStart="@dimen/d10"
         android:layout_marginTop="@dimen/d10"
-        android:background="@color/color_dark_333333" />
+        />
 
     <TextView
         android:id="@+id/tv_iid_name"
@@ -21,7 +21,6 @@
         android:layout_marginStart="@dimen/d5"
         android:layout_marginTop="@dimen/d25"
         android:layout_toEndOf="@id/iv_iid"
-        android:text="林某某"
         android:textColor="@color/color_dark_333333"
         android:textSize="@dimen/font14" />
 
@@ -32,7 +31,6 @@
         android:layout_marginStart="@dimen/d16"
         android:layout_marginTop="@dimen/d28"
         android:layout_toEndOf="@id/tv_iid_name"
-        android:text="林某某"
         android:textColor="@color/color_gray_666666"
         android:textSize="@dimen/font12" />
 
@@ -44,12 +42,12 @@
         android:layout_marginTop="@dimen/d28" />
 
     <TextView
+        android:id="@+id/tv_iid_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_iid_name"
         android:layout_marginTop="@dimen/d16"
         android:layout_toEndOf="@id/iv_iid"
-        android:text="轻轨小户持续销售，3#、4#  3T8H总高24层，套内均价1.1万-1.2万，详询销售中心：400-890-0000转899销售 轻轨小户持续销售，3#、4#  3T8H总高24层详询销售中心：400-890-0000转899销售"
         android:textColor="@color/color_gray_666666"
         android:textSize="@dimen/font12" />
 </RelativeLayout>

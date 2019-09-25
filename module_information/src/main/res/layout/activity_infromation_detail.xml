@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:binding="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,131 +8,154 @@
             type="com.techangkeji.module_information.ui.view_model.InformationDetailViewModel" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical">
 
-        <com.goldze.base.view.TitleVIew
-            android:id="@+id/title"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/d44" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
+            <com.goldze.base.view.TitleVIew
+                android:id="@+id/title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="@dimen/d44" />
 
-                <RelativeLayout
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="@dimen/d16"
-                    android:paddingEnd="@dimen/d16">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tv_hid_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/d10"
-                        android:text="@{viewModel.name}"
-                        android:textColor="@color/color_dark_333333"
-                        android:textSize="@dimen/font16" />
-
-                    <TextView
-                        android:id="@+id/tv_hid_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="@dimen/d16"
-                        android:text="@{viewModel.time}"
-                        android:textColor="@color/color_gray_666666"
-                        android:textSize="@dimen/font12" />
-
-                    <TextView
-                        android:id="@+id/tv_hid_type1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/tv_hid_name"
-                        android:layout_marginTop="@dimen/d18"
-                        android:text="@{viewModel.label}"
-                        android:textColor="@color/color_gray_666666"
-                        android:textSize="@dimen/font12" />
-
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/tv_hid_name"
-                        android:layout_marginTop="@dimen/d18"
-                        android:layout_toEndOf="@id/tv_hid_type1"
-                        android:gravity="right"
-                        android:orientation="horizontal">
+                        android:paddingStart="@dimen/d16"
+                        android:paddingEnd="@dimen/d16">
+
+                        <TextView
+                            android:id="@+id/tv_hid_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/d10"
+                            android:text="@{viewModel.name}"
+                            android:textColor="@color/color_dark_333333"
+                            android:textSize="@dimen/font16" />
+
+                        <TextView
+                            android:id="@+id/tv_hid_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="@dimen/d16"
+                            android:text="@{viewModel.time}"
+                            android:textColor="@color/color_gray_666666"
+                            android:textSize="@dimen/font12" />
+
+                        <TextView
+                            android:id="@+id/tv_hid_type1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_hid_name"
+                            android:layout_marginTop="@dimen/d18"
+                            android:text="@{viewModel.label}"
+                            android:textColor="@color/color_gray_666666"
+                            android:textSize="@dimen/font12" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_hid_name"
+                            android:layout_marginTop="@dimen/d18"
+                            android:layout_toEndOf="@id/tv_hid_type1"
+                            android:gravity="right"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@mipmap/eye_icon"
+                                android:drawablePadding="@dimen/d5"
+                                android:text="@{viewModel.look}"
+                                android:textColor="@color/color_gray_666666"
+                                android:textSize="@dimen/font10" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/d10"
+                                android:drawableStart="@mipmap/like_icon"
+                                android:drawablePadding="@dimen/d5"
+                                android:text="@{viewModel.like}"
+                                android:textColor="@color/color_gray_666666"
+                                android:textSize="@dimen/font10" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/d10"
+                                android:drawableStart="@mipmap/message_icon"
+                                android:drawablePadding="@dimen/d5"
+                                android:text="@{viewModel.comment}"
+                                android:textColor="@color/color_gray_666666"
+                                android:textSize="@dimen/font10" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_hid_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_hid_type1"
+                            android:layout_marginTop="@dimen/d30"
+                            android:text="@{viewModel.content}"
+                            android:textColor="@color/color_dark_333333"
+                            android:textSize="@dimen/font12" />
+
+                        <View
+                            style="@style/ViewLineStyle5dp"
+                            android:layout_below="@id/tv_hid_content"
+                            android:layout_marginTop="@dimen/d15" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableStart="@mipmap/eye_icon"
-                            android:drawablePadding="@dimen/d5"
-                            android:text="@{viewModel.look}"
-                            android:textColor="@color/color_gray_666666"
-                            android:textSize="@dimen/font10" />
+                            android:layout_below="@id/tv_hid_content"
+                            android:layout_marginTop="@dimen/d30"
+                            android:text="@{viewModel.commentSize}"
+                            android:textColor="@color/color_dark_333333"
+                            android:textSize="@dimen/font15" />
+                    </RelativeLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/d10"
-                            android:drawableStart="@mipmap/like_icon"
-                            android:drawablePadding="@dimen/d5"
-                            android:text="@{viewModel.like}"
-                            android:textColor="@color/color_gray_666666"
-                            android:textSize="@dimen/font10" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/d10"
-                            android:drawableStart="@mipmap/message_icon"
-                            android:drawablePadding="@dimen/d5"
-                            android:text="@{viewModel.comment}"
-                            android:textColor="@color/color_gray_666666"
-                            android:textSize="@dimen/font10" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/tv_hid_content"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/tv_hid_type1"
-                        android:layout_marginTop="@dimen/d30"
-                        android:text="@{viewModel.content}"
-                        android:textColor="@color/color_dark_333333"
-                        android:textSize="@dimen/font12" />
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
 
-                    <View
-                        style="@style/ViewLineStyle5dp"
-                        android:layout_below="@id/tv_hid_content"
-                        android:layout_marginTop="@dimen/d15" />
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d49"
+                android:gravity="center"
+                android:text="评论"
+                binding:onClickCommand="@{viewModel.commentCommand}"
+                android:textColor="@color/color_dark_333333"
+                android:textSize="@dimen/font15" />
+        </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/tv_hid_content"
-                        android:layout_marginTop="@dimen/d30"
-                        android:text="回复（666）"
-                        android:textColor="@color/color_dark_333333"
-                        android:textSize="@dimen/font15" />
-                </RelativeLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
-    </LinearLayout>
+        <com.kcrason.highperformancefriendscircle.widgets.EmojiPanelView
+            android:id="@+id/emoji_panel_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:gravity="bottom" />
+    </FrameLayout>
 </layout>

@@ -1,6 +1,8 @@
 package com.techangkeji.module_information.ui.view_model;
 
 import android.app.Application;
+import android.content.Context;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
@@ -10,13 +12,17 @@ import androidx.databinding.ObservableList;
 import com.blankj.utilcode.util.SPUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.techangkeji.module_information.ui.adapter.InformationAdapter;
+import com.techangkeji.module_information.ui.popup.InformationLabelPopupwindow;
+import com.techangkeji.module_information.ui.popup.InformationSortPopupwindow;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import me.goldze.mvvmhabit.base.BaseViewModel;
+import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.http.net.DefaultObserver;
 import me.goldze.mvvmhabit.http.net.IdeaApi;
+import me.goldze.mvvmhabit.http.net.entity.FeaturedLabelEntity;
 import me.goldze.mvvmhabit.http.net.entity.information.NewsListEntity;
 import me.goldze.mvvmhabit.utils.RxUtils;
 
@@ -29,8 +35,11 @@ public class InformationViewModel extends BaseViewModel {
     public ObservableField<String> labelId = new ObservableField<>("");
     public ObservableField<String> sortType = new ObservableField<>("");
     public ObservableList<NewsListEntity.DataBean> dataBeans = new ObservableArrayList<>();
+    public ObservableList<FeaturedLabelEntity.DataBean> labelList = new ObservableArrayList<>();
     public ObservableField<InformationAdapter> adapter = new ObservableField<>();
     public ObservableField<SmartRefreshLayout> srl = new ObservableField<>();
+    public ObservableField<View> ll_view=new ObservableField<>();
+    public ObservableField<Context> context=new ObservableField<>();
 
 
     public InformationViewModel(@NonNull Application application) {
@@ -55,4 +64,23 @@ public class InformationViewModel extends BaseViewModel {
                     }
                 });
     }
+    public void getLabelList() {
+        IdeaApi.getApiService()
+                .getLabelList()
+                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                .compose(RxUtils.schedulersTransformer())
+                .subscribe(new DefaultObserver<FeaturedLabelEntity>() {
+                    @Override
+                    public void onSuccess(FeaturedLabelEntity response) {
+                        labelList.addAll(response.getData());
+                    }
+                });
+    }
+
+    public BindingCommand sortCommand=new BindingCommand(() -> {
+        new InformationSortPopupwindow(context.get()).showPopupWindow(ll_view.get());
+    });
+    public BindingCommand labelCommand=new BindingCommand(() -> {
+        new InformationLabelPopupwindow(context.get(),labelList).showPopupWindow(ll_view.get());
+    });
 }
