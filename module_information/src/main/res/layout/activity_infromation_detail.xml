@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="me.goldze.mvvmhabit.base.BaseViewModel" />
+            type="com.techangkeji.module_information.ui.view_model.InformationDetailViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,9 +19,120 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/d44" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/d16"
+                    android:paddingEnd="@dimen/d16">
+
+                    <TextView
+                        android:id="@+id/tv_hid_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/d10"
+                        android:text="@{viewModel.name}"
+                        android:textColor="@color/color_dark_333333"
+                        android:textSize="@dimen/font16" />
+
+                    <TextView
+                        android:id="@+id/tv_hid_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="@dimen/d16"
+                        android:text="@{viewModel.time}"
+                        android:textColor="@color/color_gray_666666"
+                        android:textSize="@dimen/font12" />
+
+                    <TextView
+                        android:id="@+id/tv_hid_type1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_hid_name"
+                        android:layout_marginTop="@dimen/d18"
+                        android:text="@{viewModel.label}"
+                        android:textColor="@color/color_gray_666666"
+                        android:textSize="@dimen/font12" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_hid_name"
+                        android:layout_marginTop="@dimen/d18"
+                        android:layout_toEndOf="@id/tv_hid_type1"
+                        android:gravity="right"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@mipmap/eye_icon"
+                            android:drawablePadding="@dimen/d5"
+                            android:text="@{viewModel.look}"
+                            android:textColor="@color/color_gray_666666"
+                            android:textSize="@dimen/font10" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/d10"
+                            android:drawableStart="@mipmap/like_icon"
+                            android:drawablePadding="@dimen/d5"
+                            android:text="@{viewModel.like}"
+                            android:textColor="@color/color_gray_666666"
+                            android:textSize="@dimen/font10" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/d10"
+                            android:drawableStart="@mipmap/message_icon"
+                            android:drawablePadding="@dimen/d5"
+                            android:text="@{viewModel.comment}"
+                            android:textColor="@color/color_gray_666666"
+                            android:textSize="@dimen/font10" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_hid_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_hid_type1"
+                        android:layout_marginTop="@dimen/d30"
+                        android:text="@{viewModel.content}"
+                        android:textColor="@color/color_dark_333333"
+                        android:textSize="@dimen/font12" />
+
+                    <View
+                        style="@style/ViewLineStyle5dp"
+                        android:layout_below="@id/tv_hid_content"
+                        android:layout_marginTop="@dimen/d15" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_hid_content"
+                        android:layout_marginTop="@dimen/d30"
+                        android:text="回复（666）"
+                        android:textColor="@color/color_dark_333333"
+                        android:textSize="@dimen/font15" />
+                </RelativeLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 </layout>

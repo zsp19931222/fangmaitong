@@ -45,6 +45,7 @@ import me.goldze.mvvmhabit.http.net.entity.FeaturedLabelEntity;
 import me.goldze.mvvmhabit.http.net.entity.HouseResourceDetailEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
+import me.goldze.mvvmhabit.utils.IsNullUtil;
 import me.goldze.mvvmhabit.utils.RxUtils;
 import me.goldze.mvvmhabit.utils.ToastUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
@@ -234,9 +235,12 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
                 .subscribe(new DefaultObserver<SuccessEntity>(this) {
                     @Override
                     public void onSuccess(SuccessEntity response) {
-                        ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "发布房源成功");
+                        if (IsNullUtil.getInstance().isEmpty(houseID.get())) {
+                            ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "发布房源成功");
+                        } else {
+                            ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "修改房源成功");
+                        }
                         finish();
-                        HouseResourceReleaseSizeData.getInstance().getList().clear();
                     }
 
                 });
@@ -443,7 +447,11 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
                                 } else {
                                     sizeBean.setHouseTypePriceEnum(HouseTypePriceEnum.Undetermined);
                                 }
-                                sizeBean.setHouseTypeSizeEnum(HouseTypeSizeEnum.BuildingSurface);
+                                if (typeBean.getArea_type() == 1) {
+                                    sizeBean.setHouseTypeSizeEnum(HouseTypeSizeEnum.BuildingSurface);
+                                } else {
+                                    sizeBean.setHouseTypeSizeEnum(HouseTypeSizeEnum.Comprising);
+                                }
                                 sizeBean.setImagePath(typeBean.getImg_url());
                                 HouseResourceReleaseSizeData.getInstance().getList().add(sizeBean);
                             }
@@ -451,6 +459,7 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
                             for (String label : response.getContent().getLabels()) {
                                 labelList.add(label);
                             }
+                            address.set(response.getContent().getAddress());
                             adapterObservableField.get().notifyDataSetChanged();
                         } catch (Exception e) {
 
@@ -519,5 +528,11 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
                 .synOrAsy(true)//同步true或异步false 压缩 默认同步
                 .scaleEnabled(true)// 裁剪是否可放大缩小图片 true or false
                 .forResult(CHOOSE_REQUEST);//结果回调onActivityResult code
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        HouseResourceReleaseSizeData.getInstance().getList().clear();
     }
 }

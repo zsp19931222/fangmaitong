@@ -72,6 +72,11 @@ public abstract class DefaultObserver<T extends BaseEntity> implements Observer<
         this.smartRefreshLayout = smartRefreshLayout;
     }
 
+    public DefaultObserver(SmartRefreshLayout smartRefreshLayout, BaseViewModel baseViewModel) {
+        this.smartRefreshLayout = smartRefreshLayout;
+        this.baseViewModel = baseViewModel;
+    }
+
     public DefaultObserver(List<Disposable> disposableList, SmartRefreshLayout smartRefreshLayout) {
         this.disposableList = disposableList;
         this.smartRefreshLayout = smartRefreshLayout;

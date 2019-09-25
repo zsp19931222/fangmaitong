@@ -4,24 +4,28 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.goldze.base.utils.SimulationData;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.techangkeji.model_information.BR;
 import com.techangkeji.model_information.R;
 import com.techangkeji.model_information.databinding.FragmentINoticeBinding;
 import com.techangkeji.module_information.ui.adapter.NoticeAdapter;
+import com.techangkeji.module_information.ui.view_model.NoticeFragmentViewModel;
 
 import me.goldze.mvvmhabit.base.BaseLazyFragment;
-import me.goldze.mvvmhabit.base.BaseViewModel;
 
-public class NoticeFragment extends BaseLazyFragment<FragmentINoticeBinding, BaseViewModel> {
+public class NoticeFragment extends BaseLazyFragment<FragmentINoticeBinding, NoticeFragmentViewModel> {
     @Override
     public void fetchData() {
-        NoticeAdapter noticeAdapter = new NoticeAdapter(R.layout.item_i_notice, SimulationData.simulation());
+        NoticeAdapter noticeAdapter = new NoticeAdapter(R.layout.item_i_notice, viewModel.beanObservableList);
+        viewModel.adapter.set(noticeAdapter);
         binding.rv.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rv.setAdapter(noticeAdapter);
+        viewModel.getPlacardList();
     }
 
     @Override
@@ -32,5 +36,21 @@ public class NoticeFragment extends BaseLazyFragment<FragmentINoticeBinding, Bas
     @Override
     public int initVariableId() {
         return BR.viewModel;
+    }
+
+    @Override
+    public void initData() {
+        viewModel.srl.set(binding.srl);
+        binding.srl.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                viewModel.getPlacardList();
+            }
+
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+
+            }
+        });
     }
 }

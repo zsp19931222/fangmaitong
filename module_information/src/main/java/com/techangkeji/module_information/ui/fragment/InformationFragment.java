@@ -4,22 +4,27 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.goldze.base.utils.SimulationData;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.techangkeji.model_information.BR;
 import com.techangkeji.model_information.R;
 import com.techangkeji.model_information.databinding.FragmentIInformationBinding;
 import com.techangkeji.module_information.ui.adapter.InformationAdapter;
+import com.techangkeji.module_information.ui.view_model.InformationViewModel;
 
 import me.goldze.mvvmhabit.base.BaseLazyFragment;
-import me.goldze.mvvmhabit.base.BaseViewModel;
 
-public class InformationFragment extends BaseLazyFragment<FragmentIInformationBinding, BaseViewModel> {
+public class InformationFragment extends BaseLazyFragment<FragmentIInformationBinding, InformationViewModel> {
     @Override
     public void fetchData() {
-        InformationAdapter informationAdapter = new InformationAdapter(R.layout.item_i_information, SimulationData.simulation());
+        viewModel.getNewsList();
+        InformationAdapter informationAdapter = new InformationAdapter(R.layout.item_i_information, viewModel.dataBeans);
+        viewModel.adapter.set(informationAdapter);
         binding.rv.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rv.setAdapter(informationAdapter);
     }
@@ -36,6 +41,17 @@ public class InformationFragment extends BaseLazyFragment<FragmentIInformationBi
 
     @Override
     public void initData() {
+        viewModel.srl.set(binding.srl);
+        binding.srl.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                viewModel.getNewsList();
+            }
 
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+
+            }
+        });
     }
 }

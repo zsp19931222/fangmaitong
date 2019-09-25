@@ -66,6 +66,15 @@ public class HouseResourceDetailEntity {
     private List<?> dynamic;
     private List<ImgsBean> imgs;
     private List<String> labels;
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public String getDecoration_type() {
         return decoration_type;
@@ -323,6 +332,15 @@ public class HouseResourceDetailEntity {
         private int average_price;
         private int price_type;
         private String type;
+        private int area_type;
+
+        public int getArea_type() {
+            return area_type;
+        }
+
+        public void setArea_type(int area_type) {
+            this.area_type = area_type;
+        }
 
         public String getArea() {
             return area;

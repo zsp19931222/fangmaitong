@@ -32,6 +32,8 @@ import me.goldze.mvvmhabit.http.net.entity.SelectFriendEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.CommentBean;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.MyStateEntity;
+import me.goldze.mvvmhabit.http.net.entity.information.NewsListEntity;
+import me.goldze.mvvmhabit.http.net.entity.information.PlacardListEntity;
 import me.goldze.mvvmhabit.http.net.entity.login.RegisterEntity;
 import me.goldze.mvvmhabit.http.net.entity.login.SendCodeEntity;
 import okhttp3.MultipartBody;
@@ -57,6 +59,7 @@ public interface ApiService<T extends BaseEntity> {
     String LOGIN_BASE_URL = "http://39.98.33.32:10006/";
     String IMAGE_BASE_URL = "http://39.98.33.32:10006/";
     String IMAGE_BASE_URL1 = "http://39.98.33.32:10002/";
+    String IMAGE_BASE_URL2 = "http://39.98.33.32:10003/";
     String API = "/api/v2/";
 
 //    //注册
@@ -244,5 +247,25 @@ public interface ApiService<T extends BaseEntity> {
     @GET(API + "auth/friend/getFriendList")
     @Headers({"url_name:user_info"})
     Observable<SelectFriendEntity> getFriendList(@QueryMap() Map<String,Object> map);
+
+    //公告列表
+    @POST(API + "auth/placard/getPlacardList")
+    @Headers({"url_name:message"})
+    Observable<PlacardListEntity> getPlacardList(@QueryMap() Map<String,Object> map);
+
+    //公告详情
+    @POST(API + "auth/placard/getPlacardInfo")
+    @Headers({"url_name:message"})
+    Observable<PlacardListEntity> getPlacardInfo(@QueryMap() Map<String,Object> map);
+
+    //资讯列表
+    @POST(API + "auth/news/getNewsList")
+    @Headers({"url_name:message"})
+    Observable<NewsListEntity> getNewsList(@QueryMap() Map<String,Object> map);
+
+    //资讯详情
+    @POST(API + "auth/news/getNewsInfo")
+    @Headers({"url_name:message"})
+    Observable<SuccessEntity<NewsListEntity.DataBean>> getNewsInfo(@QueryMap() Map<String,Object> map);
 
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:binding="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="viewModel"
-            type="me.goldze.mvvmhabit.base.BaseViewModel" />
+            type="com.techangkeji.module_information.ui.view_model.NoticeViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,20 +18,22 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="@dimen/d44" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="高层住宅房价将大幅贬值"
-        android:textSize="@dimen/font15"
-        android:layout_marginStart="@dimen/d16"
-        android:layout_marginTop="@dimen/d16"
-        android:layout_marginEnd="@dimen/d16"
-        android:textColor="@color/color_dark_333333"/>
-        <LinearLayout
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/d16"
-            android:layout_marginTop="@dimen/d10"
+            android:layout_marginTop="@dimen/d16"
+            android:layout_marginEnd="@dimen/d16"
+            android:text="@{viewModel.placard_title}"
+            android:textColor="@color/color_dark_333333"
+            android:textSize="@dimen/font15" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/d16"
+            android:layout_marginTop="@dimen/d10"
             android:orientation="horizontal">
 
             <TextView
@@ -39,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="@dimen/d5"
                 android:gravity="center_vertical"
-                android:text="1小时前"
+                android:text="@{viewModel.create_time}"
                 android:textColor="@color/color_gray_666666"
                 android:textSize="@dimen/font10" />
 
@@ -50,16 +52,23 @@
                 android:drawableStart="@mipmap/eye_icon"
                 android:drawablePadding="@dimen/d5"
                 android:gravity="center_vertical"
-                android:text="1"
+                android:text="@{viewModel.look_num}"
                 android:textColor="@color/color_gray_666666"
                 android:textSize="@dimen/font10" />
         </LinearLayout>
-        <TextView
-            android:textSize="@dimen/font12"
-            android:layout_margin="@dimen/d16"
-            android:textColor="@color/color_dark_333333"
-            android:text="深圳瑞宝电脑技术服务有限公司，成立于2008年，我公司为各行各业提供专业的it技术服务，经过3年多的努力与发展，已具一定的规模及实力，现拥有一支技术精湛的it服务团队，以卓越的服务品质、专业安全的技术服务实力，为不同群体的用户提供更高更优质的it服务。"
+
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="@dimen/d125"
+            binding:url="@{viewModel.show_img_url}"
+            android:layout_margin="@dimen/d16" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d16"
+            android:text="@{viewModel.content}"
+            android:textColor="@color/color_dark_333333"
+            android:textSize="@dimen/font12" />
     </LinearLayout>
 </layout>

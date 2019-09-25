@@ -17,6 +17,7 @@ import okhttp3.ResponseBody;
 
 import static me.goldze.mvvmhabit.http.net.ApiService.IMAGE_BASE_URL;
 import static me.goldze.mvvmhabit.http.net.ApiService.IMAGE_BASE_URL1;
+import static me.goldze.mvvmhabit.http.net.ApiService.IMAGE_BASE_URL2;
 import static me.goldze.mvvmhabit.http.net.ApiService.LOGIN_BASE_URL;
 
 /**
@@ -66,9 +67,9 @@ public class MyLoggingInterceptor implements Interceptor {
                     newBaseUrl = HttpUrl.parse(IMAGE_BASE_URL1);
                     break;
                 case "home":
-                    newBaseUrl = HttpUrl.parse(LOGIN_BASE_URL);
+                    newBaseUrl = HttpUrl.parse(IMAGE_BASE_URL2);
                 case "message":
-                    newBaseUrl = HttpUrl.parse(LOGIN_BASE_URL);
+                    newBaseUrl = HttpUrl.parse(IMAGE_BASE_URL2);
                     break;
                 case "search":
                     newBaseUrl = HttpUrl.parse(LOGIN_BASE_URL);
