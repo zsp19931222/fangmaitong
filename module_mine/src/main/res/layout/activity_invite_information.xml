@@ -14,15 +14,17 @@
         android:background="@color/color_white"
         android:orientation="vertical">
 
-        <include
+        <com.goldze.base.view.TitleVIew
             android:id="@+id/title"
-            layout="@layout/title" />
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d44" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
         <View style="@style/ViewLineStyle" />
 
         <me.goldze.mvvmhabit.view.shape.RadiusTextView
@@ -33,10 +35,10 @@
             android:layout_marginEnd="@dimen/d16"
             android:layout_marginBottom="@dimen/d5"
             android:gravity="center"
-            binding:onClickCommand="@{viewModel.releaseCommand}"
             android:text="发布求职"
             android:textColor="@color/white"
             android:textSize="@dimen/font16"
+            binding:onClickCommand="@{viewModel.releaseCommand}"
             binding:rv_backgroundColor="@color/color_FF8C00"
             binding:rv_radius="@dimen/d25" />
     </LinearLayout>

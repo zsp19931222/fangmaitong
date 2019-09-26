@@ -10,13 +10,44 @@ public class LocationRxBusBean {
     private int type;//来源
     private String longitude;
     private String latitude;
+    private String province ; // 省
+    private String city ; // 市
+    private String district ; // 区
 
-    public LocationRxBusBean(String address, int type, String longitude, String latitude) {
+    public LocationRxBusBean(String address, int type, String longitude, String latitude, String province, String city, String district) {
         this.address = address;
         this.type = type;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.province = province;
+        this.city = city;
+        this.district = district;
     }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
 
     public String getLongitude() {
         return longitude;

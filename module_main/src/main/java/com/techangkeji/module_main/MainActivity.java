@@ -108,6 +108,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                 viewModel.area.set(newsList.get(0).getCityName() + " " + areaItemBean.getAreaName());
             }
         }));
+        viewModel.getAreaList();
     }
 
     @Override

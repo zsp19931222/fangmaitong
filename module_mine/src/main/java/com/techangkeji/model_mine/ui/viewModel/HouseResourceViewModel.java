@@ -43,7 +43,6 @@ public class HouseResourceViewModel extends BaseViewModel {
     public ObservableField<Integer> sortShow = new ObservableField<>(View.GONE);
     public ObservableField<Context> context = new ObservableField<>();
     public ObservableField<View> choiceView = new ObservableField<>();
-    public ObservableList<AreaListEntity.DataBean> areaList = new ObservableArrayList<>();
     public ObservableList<BuildingListEntity.DataBean> buildingList = new ObservableArrayList<>();
     public ObservableField<HouseResourceAdapter> adapter = new ObservableField<>();
     public ObservableList<FeaturedLabelBean> featuredLabelList = new ObservableArrayList();//特色标签
@@ -142,25 +141,6 @@ public class HouseResourceViewModel extends BaseViewModel {
                 });
     }
 
-    /**
-     * description: 获取地区
-     * author: Andy
-     * date: 2019/9/22  14:55
-     */
-    public void getAreaList() {
-        IdeaApi.getApiService()
-                .listAllArea()
-                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
-                .compose(RxUtils.schedulersTransformer())
-                .doOnSubscribe(disposable1 -> showDialog())
-                .subscribe(new DefaultObserver<AreaListEntity>(this) {
-                    @Override
-                    public void onSuccess(AreaListEntity response) {
-                        areaList.addAll(response.getData());
-                        SaveAreaListUtil.getInstance().save(response);
-                    }
-                });
-    }
 
     /**
      * description: 特色标签
@@ -209,7 +189,7 @@ public class HouseResourceViewModel extends BaseViewModel {
     public BindingCommand areaCommand = new BindingCommand(() -> {
         initShow();
         areaShow.set(View.VISIBLE);
-        new AreaPopupwindow(context.get(), areaList).showPopupWindow(choiceView.get());
+        new AreaPopupwindow(context.get()).showPopupWindow(choiceView.get());
     });
     public BindingCommand typeCommand = new BindingCommand(() -> {
         initShow();

@@ -39,7 +39,7 @@ public class HRViewModel extends BaseViewModel {
     public BindingCommand area = new BindingCommand(() -> {
         initShow();
         areaShow.set(View.VISIBLE);
-        new AreaPopupwindow(context.get(),areaList).showPopupWindow(choiceView.get());
+        new AreaPopupwindow(context.get()).showPopupWindow(choiceView.get());
     });
     public BindingCommand type = new BindingCommand(() -> {
         initShow();

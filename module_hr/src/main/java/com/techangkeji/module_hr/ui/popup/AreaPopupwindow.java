@@ -37,7 +37,7 @@ public class AreaPopupwindow extends BasePopupWindow {
     private List<AreaPopupBean> areaLevel2List = new ArrayList<>();
     private List<AreaPopupBean> areaLevel3List = new ArrayList<>();
 
-    public AreaPopupwindow(Context context, List<AreaListEntity.DataBean> dataBeanList) {
+    public AreaPopupwindow(Context context) {
         super(context);
         this.context = context;
         init(context);

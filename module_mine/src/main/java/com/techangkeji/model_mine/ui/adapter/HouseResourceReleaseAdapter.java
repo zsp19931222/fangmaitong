@@ -168,8 +168,12 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
         rv_vhl_add.setOnClickListener(v -> {
             viewModel.startActivity(SelectFriendActivity.class);
         });
-        LinkManAdapter linkManAdapter = new LinkManAdapter(R.layout.item_linkman, viewModel.linkManList, viewModel);
+        LinkManAdapter linkManAdapter = new LinkManAdapter(R.layout.item_linkman, viewModel.linkManList);
         viewModel.linkManAdapter.set(linkManAdapter);
+        linkManAdapter.setPopupSelectListener(position -> {
+            viewModel.linkManList.remove(position);
+            viewModel.linkManAdapter.get().notifyDataSetChanged();
+        });
         rv_vhl.setLayoutManager(new LinearLayoutManager(context));
         rv_vhl.setAdapter(linkManAdapter);
     }

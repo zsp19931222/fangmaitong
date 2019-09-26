@@ -35,7 +35,6 @@ public class HouseResourceActivity extends BaseActivity<ActivityHouseResourceBin
 
     @Override
     public void initData() {
-        viewModel.getAreaList();
         viewModel.getBuildingTypeLabel();
         viewModel.getFeaturedLabel();
         viewModel.context.set(this);

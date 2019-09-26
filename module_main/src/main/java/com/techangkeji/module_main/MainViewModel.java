@@ -15,8 +15,10 @@ import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.http.net.DefaultObserver;
 import me.goldze.mvvmhabit.http.net.IdeaApi;
 import me.goldze.mvvmhabit.http.net.body.LocationBody;
+import me.goldze.mvvmhabit.http.net.entity.AreaListEntity;
 import me.goldze.mvvmhabit.http.net.entity.LocationEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
+import me.goldze.mvvmhabit.litepal.util.SaveAreaListUtil;
 import me.goldze.mvvmhabit.utils.RxUtils;
 
 /**
@@ -61,4 +63,23 @@ public class MainViewModel extends BaseViewModel {
                     }
                 });
     }
+
+    /**
+     * description: 获取地区
+     * author: Andy
+     * date: 2019/9/22  14:55
+     */
+    public void getAreaList() {
+        IdeaApi.getApiService()
+                .listAllArea()
+                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                .compose(RxUtils.schedulersTransformer())
+                .subscribe(new DefaultObserver<AreaListEntity>(this) {
+                    @Override
+                    public void onSuccess(AreaListEntity response) {
+                        SaveAreaListUtil.getInstance().save(response);
+                    }
+                });
+    }
+
 }

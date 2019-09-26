@@ -23,11 +23,13 @@
         <me.goldze.mvvmhabit.view.shape.RadiusLinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d16"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="@dimen/d16"
-            android:layout_marginStart="@dimen/d16"
-            android:layout_marginEnd="@dimen/d16"
+            android:paddingStart="@dimen/d16"
+            android:paddingTop="@dimen/d10"
+            android:paddingEnd="@dimen/d16"
+            android:paddingBottom="@dimen/d10"
             binding:rv_backgroundColor="@color/color_f6"
             binding:rv_radius="@dimen/d15">
 
@@ -43,9 +45,9 @@
                 android:layout_marginStart="@dimen/d10"
                 android:background="@null"
                 android:hint="搜索街道名"
-                android:textColorHint="@color/color_gray_999999"
                 android:text="@={viewModel.searchText}"
                 android:textColor="@color/color_dark_333333"
+                android:textColorHint="@color/color_gray_999999"
                 android:textSize="@dimen/font12" />
         </me.goldze.mvvmhabit.view.shape.RadiusLinearLayout>
 
@@ -95,8 +97,8 @@
                 android:paddingStart="@dimen/d5"
                 android:paddingEnd="@dimen/d5"
                 android:text="@={viewModel.number}"
-                android:textSize="@dimen/font12"
                 android:textColorHint="@color/color_gray_999999"
+                android:textSize="@dimen/font12"
                 binding:rv_backgroundColor="@color/white"
                 binding:rv_strokeColor="@color/bgColor"
                 binding:rv_strokeWidth="@dimen/d1"

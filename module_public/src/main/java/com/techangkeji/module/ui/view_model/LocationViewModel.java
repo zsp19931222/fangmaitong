@@ -22,6 +22,9 @@ public class LocationViewModel extends BaseViewModel {
     public ObservableField<String> number = new ObservableField<>("");
     public ObservableField<String> longitude = new ObservableField<>("");
     public ObservableField<String> latitude = new ObservableField<>("");
+    public ObservableField<String> province = new ObservableField<>("");
+    public ObservableField<String> city = new ObservableField<>("");
+    public ObservableField<String> district = new ObservableField<>("");
     public ObservableField<Integer> addressType=new ObservableField<>(-1);
 
     public LocationViewModel(@NonNull Application application) {
@@ -30,7 +33,7 @@ public class LocationViewModel extends BaseViewModel {
 
     public BindingCommand confirmCommand = new BindingCommand(() ->
     {
-        LocationRxBusBean locationRxBusBean=new LocationRxBusBean(nowAddress.get() + number.get(),addressType.get(),longitude.get(),latitude.get());
+        LocationRxBusBean locationRxBusBean=new LocationRxBusBean(nowAddress.get() + number.get(),addressType.get(),longitude.get(),latitude.get(),province.get(),city.get(),district.get());
         RxBus.getDefault().post(locationRxBusBean);
         finish();
     }

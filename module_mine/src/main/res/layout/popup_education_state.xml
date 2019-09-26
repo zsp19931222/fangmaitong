@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<me.goldze.mvvmhabit.view.shape.RadiusLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/d150"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_gravity="right"
+    android:padding="@dimen/d16"
+    app:rv_backgroundColor="@color/white"
+    app:rv_radius="@dimen/d5">
+
+    <TextView
+        android:id="@+id/tv_pt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="不限"
+        android:textColor="@color/color_gray_666666"
+        android:textSize="@dimen/font14" />
+
+    <View
+        android:id="@+id/v_pt1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d1"
+        android:layout_marginTop="@dimen/d8"
+        android:background="@color/color_FF8C00"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/tv_pt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d12"
+        android:text="小学"
+        android:textColor="@color/color_gray_666666"
+        android:textSize="@dimen/font14" />
+
+    <View
+        android:id="@+id/v_pt2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d1"
+        android:layout_marginTop="@dimen/d8"
+        android:background="@color/color_FF8C00"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/tv_pt3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d12"
+        android:text="初中"
+        android:textColor="@color/color_gray_666666"
+        android:textSize="@dimen/font14" />
+
+    <View
+        android:id="@+id/v_pt3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d1"
+        android:layout_marginTop="@dimen/d8"
+        android:background="@color/color_FF8C00"
+        android:visibility="invisible" />
+    <TextView
+        android:id="@+id/tv_pt4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d12"
+        android:text="高中"
+        android:textColor="@color/color_gray_666666"
+        android:textSize="@dimen/font14" />
+
+    <View
+        android:id="@+id/v_pt4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d1"
+        android:layout_marginTop="@dimen/d8"
+        android:background="@color/color_FF8C00"
+        android:visibility="invisible" />
+    <TextView
+        android:id="@+id/tv_pt5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d12"
+        android:text="职高"
+        android:textColor="@color/color_gray_666666"
+        android:textSize="@dimen/font14" />
+
+    <View
+        android:id="@+id/v_pt5"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d1"
+        android:layout_marginTop="@dimen/d8"
+        android:background="@color/color_FF8C00"
+        android:visibility="invisible" />
+    <TextView
+        android:id="@+id/tv_pt6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d12"
+        android:text="大专"
+        android:textColor="@color/color_gray_666666"
+        android:textSize="@dimen/font14" />
+
+    <View
+        android:id="@+id/v_pt6"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d1"
+        android:layout_marginTop="@dimen/d8"
+        android:background="@color/color_FF8C00"
+        android:visibility="invisible" />
+    <TextView
+        android:id="@+id/tv_pt7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d12"
+        android:text="本科"
+        android:textColor="@color/color_gray_666666"
+        android:textSize="@dimen/font14" />
+
+    <View
+        android:id="@+id/v_pt7"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d1"
+        android:layout_marginTop="@dimen/d8"
+        android:background="@color/color_FF8C00"
+        android:visibility="invisible" />
+    <TextView
+        android:id="@+id/tv_pt8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/d12"
+        android:text="本科以上"
+        android:textColor="@color/color_gray_666666"
+        android:textSize="@dimen/font14" />
+
+    <View
+        android:id="@+id/v_pt8"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d1"
+        android:layout_marginTop="@dimen/d8"
+        android:background="@color/color_FF8C00"
+        android:visibility="invisible" />
+
+</me.goldze.mvvmhabit.view.shape.RadiusLinearLayout>

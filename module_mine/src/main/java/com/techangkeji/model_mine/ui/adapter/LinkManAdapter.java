@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.goldze.base.listener.PopupSelectListener;
 import com.goldze.base.utils.glide.GlideLoadUtils;
 import com.techangkeji.model_mine.R;
 import com.techangkeji.model_mine.ui.bean.SelectFriendBean;
@@ -17,10 +18,8 @@ import java.util.List;
  * email:zsp872126510@gmail.com
  */
 public class LinkManAdapter extends BaseQuickAdapter<SelectFriendBean, BaseViewHolder> {
-    private HouseResourceReleaseViewModel viewModel;
-    public LinkManAdapter(int layoutResId, @Nullable List<SelectFriendBean> data,HouseResourceReleaseViewModel viewModel) {
+    public LinkManAdapter(int layoutResId, @Nullable List<SelectFriendBean> data) {
         super(layoutResId, data);
-        this.viewModel=viewModel;
     }
 
     @Override
@@ -28,9 +27,13 @@ public class LinkManAdapter extends BaseQuickAdapter<SelectFriendBean, BaseViewH
         helper.setText(R.id.tv_name,item.getReal_name());
         helper.setText(R.id.tv_phone,item.getPhone());
         helper.getView(R.id.tv_il_delete).setOnClickListener(v -> {
-            viewModel.linkManList.remove(helper.getAdapterPosition());
-            viewModel.linkManAdapter.get().notifyDataSetChanged();
+            popupSelectListener.select(helper.getAdapterPosition());
         });
         GlideLoadUtils.getInstance().glideLoad(helper.itemView.getContext(),item.getHead_url(),helper.getView(R.id.iv_il),0,22);
+    }
+    private PopupSelectListener popupSelectListener;
+
+    public void setPopupSelectListener(PopupSelectListener popupSelectListener) {
+        this.popupSelectListener = popupSelectListener;
     }
 }

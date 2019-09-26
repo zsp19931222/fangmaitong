@@ -165,6 +165,12 @@ public class LocationActivity extends BaseActivity<ActivityLocationBinding, Loca
                 viewModel.nowAddress.set(reverseGeoCodeResult.getAddress());
                 viewModel.longitude.set(reverseGeoCodeResult.getLocation().longitude+"");
                 viewModel.latitude.set(reverseGeoCodeResult.getLocation().latitude+"");
+                viewModel.province.set(reverseGeoCodeResult.getAddressDetail().province);
+                viewModel.city.set(reverseGeoCodeResult.getAddressDetail().city);
+                viewModel.district.set(reverseGeoCodeResult.getAddressDetail().district);
+                ZLog.d(reverseGeoCodeResult.getAddressDetail().district);
+                ZLog.d( reverseGeoCodeResult.getAddressDetail().city);
+                ZLog.d( reverseGeoCodeResult.getAddressDetail().province);
             }
         });
         //发起反地理编码请求(经纬度->地址信息)

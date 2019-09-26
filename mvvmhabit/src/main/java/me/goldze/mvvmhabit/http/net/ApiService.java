@@ -17,6 +17,8 @@ import me.goldze.mvvmhabit.http.net.body.CommentListBody;
 import me.goldze.mvvmhabit.http.net.body.LocationBody;
 import me.goldze.mvvmhabit.http.net.body.LoginBody;
 import me.goldze.mvvmhabit.http.net.body.MyMovingListBody;
+import me.goldze.mvvmhabit.http.net.body.RecruitmentBody;
+import me.goldze.mvvmhabit.http.net.body.RecruitmentListBody;
 import me.goldze.mvvmhabit.http.net.body.ReleaseMovingBody;
 import me.goldze.mvvmhabit.http.net.body.SendCodeBody;
 import me.goldze.mvvmhabit.http.net.body.UntiedThirdBody;
@@ -279,5 +281,15 @@ public interface ApiService<T extends BaseEntity> {
     @POST(API + "auth/comment/query")
     @Headers({"url_name:login"})
     Observable<CommentListEntity> getCommentList(@Body() CommentListBody myMovingListBody);
+
+    //招聘
+    @POST(API + "setting/tcRecruitments")
+    @Headers({"url_name:login"})
+    Observable<CommentListEntity> addRecruitments(@Body() RecruitmentBody myMovingListBody);
+
+    //招聘列表
+    @POST(API + "/setting/tcRecruitments/list")
+    @Headers({"url_name:login"})
+    Observable<CommentListEntity> recruitmentsList(@Body() RecruitmentListBody myMovingListBody);
 
 }
