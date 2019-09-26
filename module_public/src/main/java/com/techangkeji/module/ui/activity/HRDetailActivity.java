@@ -20,12 +20,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.goldze.mvvmhabit.base.BaseActivity;
+import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.ZLog;
 
 @Route(path = ARouterPath.Public.HRDetailActivity)
 public class HRDetailActivity extends BaseActivity<ActivityHrDetailBinding, HRDetailViewModel> {
     private List<HRDetailAdapterBean> hrDetailAdapterBeans = new ArrayList<>();
     private HRDetailAdapter hrDetailAdapter;
+
+    private int id;
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -39,17 +42,25 @@ public class HRDetailActivity extends BaseActivity<ActivityHrDetailBinding, HRDe
 
     @Override
     public void initData() {
-        hrDetailAdapter = new HRDetailAdapter(hrDetailAdapterBeans, this);
+        hrDetailAdapter = new HRDetailAdapter(hrDetailAdapterBeans, this, viewModel);
+        viewModel.adapterObservableField.set(hrDetailAdapter);
         binding.rv.setLayoutManager(new LinearLayoutManager(this));
         binding.rv.setAdapter(hrDetailAdapter);
         for (int i = 1; i < 10; i++) {
             init(i);
         }
         hrDetailAdapter.notifyDataSetChanged();
+        try {
+            id = getIntent().getExtras().getInt("id");
+            viewModel.buildingInfo(id);
+            viewModel.recommendBuilding(id);
+        } catch (Exception e) {
+
+        }
+
     }
 
     private void init(int i) {
-
         HRDetailAdapterBean homeAdapterBean = new HRDetailAdapterBean();
         homeAdapterBean.setType(i);
         hrDetailAdapterBeans.add(homeAdapterBean);
@@ -58,7 +69,8 @@ public class HRDetailActivity extends BaseActivity<ActivityHrDetailBinding, HRDe
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);ZLog.d("onActivityResult","onActivityResult");
+        super.onActivityResult(requestCode, resultCode, data);
+        ZLog.d("onActivityResult", "onActivityResult");
         ZLog.d("onActivityResult");
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }

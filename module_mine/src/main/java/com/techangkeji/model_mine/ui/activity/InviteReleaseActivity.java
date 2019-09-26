@@ -42,6 +42,7 @@ public class InviteReleaseActivity extends BaseActivity<ActivityInviteReleaseBin
             viewModel.district.set(locationRxBusBean.getDistrict());
         }));
         RxSubscriptions.add(RxBus.getDefault().toObservable(ArrayList.class).subscribe(arrayList -> {
+            ZLog.d(arrayList);
             viewModel.linkManList.addAll(arrayList);
             viewModel.linkManAdapter.get().notifyDataSetChanged();
             ZLog.d(arrayList);
@@ -50,7 +51,7 @@ public class InviteReleaseActivity extends BaseActivity<ActivityInviteReleaseBin
     }
 
     private void initLinkMan() {
-        LinkManAdapter linkManAdapter = new LinkManAdapter(R.layout.item_linkman, viewModel.linkManList);
+        LinkManAdapter linkManAdapter = new LinkManAdapter(R.layout.item_mine_linkman, viewModel.linkManList);
         viewModel.linkManAdapter.set(linkManAdapter);
         binding.rv.setLayoutManager(new LinearLayoutManager(this));
         binding.rv.setAdapter(linkManAdapter);

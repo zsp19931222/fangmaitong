@@ -51,6 +51,8 @@ public class InformationViewModel extends BaseViewModel {
         map.put("areaId", SPUtils.getInstance().getString("areaId"));
         map.put("labelId", labelId.get());
         map.put("sortType", sortType.get());
+        map.put("pageSize", "10");
+        map.put("pageNum","1");
         IdeaApi.getApiService()
                 .getNewsList(map)
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))

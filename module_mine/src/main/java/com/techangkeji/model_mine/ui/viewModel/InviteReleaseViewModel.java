@@ -18,12 +18,18 @@ import com.techangkeji.model_mine.ui.bean.SelectFriendBean;
 import com.techangkeji.model_mine.ui.popup.EducationStatePopupwindow;
 import com.techangkeji.model_mine.ui.popup.JobStatePopupwindow;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import me.goldze.mvvmhabit.base.BaseApplication;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.http.net.DefaultObserver;
 import me.goldze.mvvmhabit.http.net.IdeaApi;
 import me.goldze.mvvmhabit.http.net.body.RecruitmentBody;
 import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
+import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
+import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.IsNullUtil;
 import me.goldze.mvvmhabit.utils.RxUtils;
 import me.goldze.mvvmhabit.utils.ToastUtil;
@@ -97,22 +103,27 @@ public class InviteReleaseViewModel extends BaseViewModel {
             recruitmentBody.setPosition(position.get());
             recruitmentBody.setWorkNature(job.get());
             recruitmentBody.setEducation(education.get());
+            recruitmentBody.setRecruitmentHumenId(LocalDataHelper.getInstance().getUserInfo().getUserId());
+            List<Long> contactIds = new ArrayList<>();
+            contactIds.add(LocalDataHelper.getInstance().getUserInfo().getUserId());
+            for (SelectFriendBean selectFriendBean : linkManList) {
+                contactIds.add((long) selectFriendBean.getId());
+            }
+            recruitmentBody.setContactIds(contactIds);
             ZLog.d(recruitmentBody);
             IdeaApi.getApiService()
                     .addRecruitments(recruitmentBody)
                     .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                     .compose(RxUtils.schedulersTransformer())
-                    .doOnSubscribe(disposable -> showDialog()).subscribe(new DefaultObserver(this) {
-                @Override
-                public void onSuccess(BaseEntity response) {
+                    .doOnSubscribe(disposable -> showDialog())
+                    .subscribe(new DefaultObserver<SuccessEntity>(this) {
+                        @Override
+                        public void onSuccess(SuccessEntity response) {
+                            ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "发布成功");
+                            finish();
+                        }
 
-                }
-
-                @Override
-                public void onNext(Object o) {
-
-                }
-            });
+                    });
         }
     });
 

@@ -31,6 +31,7 @@ import me.goldze.mvvmhabit.http.net.entity.BuildingListEntity;
 import me.goldze.mvvmhabit.http.net.entity.FeaturedLabelEntity;
 import me.goldze.mvvmhabit.http.net.entity.HouseResourceDetailEntity;
 import me.goldze.mvvmhabit.http.net.entity.LocationEntity;
+import me.goldze.mvvmhabit.http.net.entity.RecruitmentListEntity;
 import me.goldze.mvvmhabit.http.net.entity.SelectFriendEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.CommentBean;
@@ -64,6 +65,7 @@ public interface ApiService<T extends BaseEntity> {
     String IMAGE_BASE_URL = "http://39.98.33.32:10006/";
     String IMAGE_BASE_URL1 = "http://39.98.33.32:10002/";
     String IMAGE_BASE_URL2 = "http://39.98.33.32:10003/";
+    String IMAGE_BASE_URL3 = "http://39.98.33.32:10005/";
     String API = "/api/v2/";
 
 //    //注册
@@ -282,14 +284,19 @@ public interface ApiService<T extends BaseEntity> {
     @Headers({"url_name:login"})
     Observable<CommentListEntity> getCommentList(@Body() CommentListBody myMovingListBody);
 
-    //招聘
-    @POST(API + "setting/tcRecruitments")
-    @Headers({"url_name:login"})
-    Observable<CommentListEntity> addRecruitments(@Body() RecruitmentBody myMovingListBody);
+    //新增招聘
+    @POST(API+"tcRecruitments")
+    @Headers({"url_name:search"})
+    Observable<SuccessEntity> addRecruitments(@Body() RecruitmentBody myMovingListBody);
 
     //招聘列表
-    @POST(API + "/setting/tcRecruitments/list")
-    @Headers({"url_name:login"})
-    Observable<CommentListEntity> recruitmentsList(@Body() RecruitmentListBody myMovingListBody);
+    @POST(API+"tcRecruitments/list")
+    @Headers({"url_name:search"})
+    Observable<RecruitmentListEntity> recruitmentsList(@Body() RecruitmentListBody myMovingListBody);
+
+    //推荐房源
+    @POST(API + "auth/building/recommendBuilding")
+    @Headers({"url_name:user_info"})
+    Observable<SuccessEntity> recommendBuilding(@QueryMap() Map<String,Object> map);
 
 }

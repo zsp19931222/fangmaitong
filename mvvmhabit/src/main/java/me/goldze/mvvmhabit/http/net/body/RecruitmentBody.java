@@ -8,39 +8,39 @@ import java.util.List;
  * email:zsp872126510@gmail.com
  */
 public class RecruitmentBody {
-    private String remark ; // 备注
-    private double moneyDown = -1 ; // 薪资下限
-    private String workAddress ; // 工作地址
-    private String createTime ; // 创建时间
-    private int topping = -1 ; // 设为推荐 0-不置顶 1-置顶
-    private String recruitmentHumenAccount ; // 招聘人帐号
-    private int qualificationAuthenticate = -1 ; // 资质认证 0-未认证 1-认证已通过 2-认证未通过
-    private String recruitmentHumenHeadUrl ; // 招聘人头像
-    private int sex = -1 ; // 1-男、2-女、0-未知
-    private int del = -1 ; // 删除标志
-    private String treatment ; // 福利待遇
-    private long areaId = -1 ; // 区域id
-    private int contactId = -1 ; // 应聘联系人 关联tab_tc_contact的id
-    private int state = -1 ; // 状态 1-未审核 2-审核已通过 3-审核未通过
-    private String recruitmentHumenIdentity ; // 招聘人身份
-    private String recruitmentTitle ; // 招聘标题
-    private String workContent ; // 工作简介
-    private String position ; // 职位
-    private String workYear ; // 工作年限
-    private long recruitmentHumenId = -1 ; // 关联tab_tc_user的id
-    private String recruitmentHumenName ; // 招聘人姓名
-    private double moneyUp = -1 ; // 薪资上限
-    private String workNature ; // 工作性质
-    private long id = -1 ; // 编号
-    private String education ; // 学历
-    private int recommend = -1 ; // 设为推荐 0-不推荐 1-推荐
-//    private TcUser user;
-
+    private String remark; // 备注
+    private double moneyDown = -1; // 薪资下限
+    private String workAddress; // 工作地址
+    private String createTime; // 创建时间
+    private int topping = -1; // 设为推荐 0-不置顶 1-置顶
+    private String recruitmentHumenAccount; // 招聘人帐号
+    private int qualificationAuthenticate = -1; // 资质认证 0-未认证 1-认证已通过 2-认证未通过
+    private String recruitmentHumenHeadUrl; // 招聘人头像
+    private int sex = -1; // 1-男、2-女、0-未知
+    private int del = -1; // 删除标志
+    private String treatment; // 福利待遇
+    private long areaId = -1; // 区域id
+    private int contactId = -1; // 应聘联系人 关联tab_tc_contact的id
+    private int state = -1; // 状态 1-未审核 2-审核已通过 3-审核未通过
+    private String recruitmentHumenIdentity; // 招聘人身份
+    private String recruitmentTitle; // 招聘标题
+    private String workContent; // 工作简介
+    private String position; // 职位
+    private String workYear; // 工作年限
+    private long recruitmentHumenId = -1; // 关联tab_tc_user的id
+    private String recruitmentHumenName; // 招聘人姓名
+    private double moneyUp = -1; // 薪资上限
+    private String workNature; // 工作性质
+    private long id = -1; // 编号
+    private String education; // 学历
+    private int recommend = -1; // 设为推荐 0-不推荐 1-推荐
+    //    private TcUser user;
+    private List<Long> contactIds; // 应聘联系人
     private List<Long> ids;
 
-    private String district ; // 区
-    private String province ; // 省
-    private String city ; // 市
+    private String district; // 区
+    private String province; // 省
+    private String city; // 市
 
     public String getRemark() {
         return remark;
@@ -282,6 +282,14 @@ public class RecruitmentBody {
         this.city = city;
     }
 
+    public List<Long> getContactIds() {
+        return contactIds;
+    }
+
+    public void setContactIds(List<Long> contactIds) {
+        this.contactIds = contactIds;
+    }
+
     @Override
     public String toString() {
         return "RecruitmentBody{" +
@@ -311,6 +319,7 @@ public class RecruitmentBody {
                 ", id=" + id +
                 ", education='" + education + '\'' +
                 ", recommend=" + recommend +
+                ", contactIds=" + contactIds +
                 ", ids=" + ids +
                 ", district='" + district + '\'' +
                 ", province='" + province + '\'' +

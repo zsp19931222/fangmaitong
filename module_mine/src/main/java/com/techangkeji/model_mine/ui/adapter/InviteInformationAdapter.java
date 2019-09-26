@@ -4,16 +4,33 @@ import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.techangkeji.model_mine.R;
 
 import java.util.List;
 
-public class InviteInformationAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
-    public InviteInformationAdapter(int layoutResId, @Nullable List<String> data) {
+import me.goldze.mvvmhabit.http.net.entity.RecruitmentListEntity;
+
+public class InviteInformationAdapter extends BaseQuickAdapter<RecruitmentListEntity.DataBean, BaseViewHolder> {
+    public InviteInformationAdapter(int layoutResId, @Nullable List<RecruitmentListEntity.DataBean> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, String item) {
-
+    protected void convert(BaseViewHolder helper, RecruitmentListEntity.DataBean item) {
+        helper.setText(R.id.tv_iii_title, item.getRecruitmentTitle());
+        switch (item.getState()){
+            case 1:
+                helper.setText(R.id.tv_iii_state,"未审核");
+                break;
+            case 2:
+                helper.setText(R.id.tv_iii_state,"通过审核");
+                break;
+            case 3:
+                helper.setText(R.id.tv_iii_state,"未通过审核");
+                break;
+        }
+        helper.setText(R.id.tv_iii_area,"地区："+item.getWorkAddress());
+        helper.setText(R.id.tv_iii_time,"发布时间："+item.getCreateTime());
+        helper.setText(R.id.tv_iii_price,"薪资待遇："+item.getMoneyDown()+"-"+item.getMoneyUp());
     }
 }

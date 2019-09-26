@@ -54,6 +54,7 @@
         android:gravity="center"
         android:text="实名认证后可查看"
         android:textColor="@color/color_gray_666666"
+        android:id="@+id/smrz_no"
         android:textSize="@dimen/font12"
         app:rv_backgroundColor="@color/color_EDEDED"
         app:rv_radius="@dimen/d10" />

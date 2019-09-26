@@ -28,12 +28,11 @@ public class InviteInformationActivity extends BaseActivity<ActivityInviteInform
 
     @Override
     public void initData() {
-        List<String> strings = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            strings.add("");
-        }
-        InviteInformationAdapter inviteInformationAdapter = new InviteInformationAdapter(R.layout.item_invite_information, strings);
+        binding.title.setTitle("我的招聘");
+        InviteInformationAdapter inviteInformationAdapter = new InviteInformationAdapter(R.layout.item_invite_information, viewModel.dataBeans);
+        viewModel.adapter.set(inviteInformationAdapter);
         binding.rv.setLayoutManager(new LinearLayoutManager(this));
         binding.rv.setAdapter(inviteInformationAdapter);
+        viewModel.recruitmentsList();
     }
 }

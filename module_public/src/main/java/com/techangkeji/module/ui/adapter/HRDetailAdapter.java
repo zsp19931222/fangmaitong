@@ -2,6 +2,8 @@ package com.techangkeji.module.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -17,14 +19,19 @@ import com.chad.library.adapter.base.util.MultiTypeDelegate;
 import com.goldze.base.router.ARouterPath;
 import com.goldze.base.utils.BannerSetting;
 import com.goldze.base.utils.ShareUtil;
+import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseBannerBean;
+import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseSizeBean;
 import com.techangkeji.module.R;
 import com.techangkeji.module.ui.activity.CommentActivity;
 import com.techangkeji.module.ui.activity.HouseSizeActivity;
 import com.techangkeji.module.ui.activity.HouseStateActivity;
 import com.techangkeji.module.ui.bean.HRDetailAdapterBean;
+import com.techangkeji.module.ui.view_model.HRDetailViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 
 /**
  * description:
@@ -33,10 +40,12 @@ import java.util.List;
  */
 public class HRDetailAdapter extends BaseQuickAdapter<HRDetailAdapterBean, BaseViewHolder> {
     private Context context;
+    private HRDetailViewModel viewModel;
 
-    public HRDetailAdapter(@Nullable List<HRDetailAdapterBean> data, Context context) {
+    public HRDetailAdapter(@Nullable List<HRDetailAdapterBean> data, Context context, HRDetailViewModel viewModel) {
         super(data);
         this.context = context;
+        this.viewModel = viewModel;
         setMultiTypeDelegate(new MultiTypeDelegate<HRDetailAdapterBean>() {
             @Override
             protected int getItemType(HRDetailAdapterBean homeAdapterBean) {
@@ -63,40 +72,68 @@ public class HRDetailAdapter extends BaseQuickAdapter<HRDetailAdapterBean, BaseV
             case HRDetailAdapterBean.Banner:
                 ConvenientBanner banner = helper.getView(R.id.banner);
                 List<Object> images = new ArrayList<>();
-                for (int i = 0; i < 3; i++) {
-                    images.add("https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=508387608,2848974022&fm=26&gp=0.jpg");
+                for (HouseResourceReleaseBannerBean houseResourceReleaseBannerBean : viewModel.bannerPathList) {
+                    images.add(houseResourceReleaseBannerBean.getImagePath());
                 }
                 BannerSetting.getInstance().setBanner(context, banner, images);
                 helper.getView(R.id.tv_hrd_inform).setOnClickListener(view -> {
-                    ARouter.getInstance().build(ARouterPath.Home.InformActivity).navigation();
+                    ARouter.getInstance().build(ARouterPath.Home.InformActivity).withString("listingId", viewModel.id + "").withString("listingName", viewModel.listingName.get()).navigation();
+                });
+                helper.setText(R.id.tv_hrd_name, viewModel.listingName.get());
+                helper.setText(R.id.tv_hrd_time, viewModel.openTime.get());
+                helper.setText(R.id.tv_hrd_price, "均价 " + viewModel.averagePrice.get() + "元/m²");
+                helper.setText(R.id.tv_hrd_area, viewModel.address.get());
+                helper.setText(R.id.tv_hrd_company, viewModel.developerName.get());
+                helper.getView(R.id.tv_hrd_area).setOnClickListener(v -> {
+                    Bundle bundle=new Bundle();
+                    bundle.putString("longitude",viewModel.lon.get());
+                    bundle.putString("latitude",viewModel.lat.get());
+                    ARouter.getInstance().build(ARouterPath.Public.Location1Activity).withBundle("bundle",bundle).navigation();
                 });
                 break;
             case HRDetailAdapterBean.Notice:
+                helper.setText(R.id.tv_yjgz, viewModel.commissionRule.get());
+                helper.setText(R.id.tv_dkgz, viewModel.lookRule.get());
+                if (LocalDataHelper.getInstance().getUserInfo().getRealNameAuthenticate() == 1) {//实名认证通过
+                    helper.getView(R.id.smrz_yes).setVisibility(View.VISIBLE);
+                    helper.getView(R.id.smrz_no).setVisibility(View.GONE);
+                } else {
+                    helper.getView(R.id.smrz_yes).setVisibility(View.GONE);
+                    helper.getView(R.id.smrz_no).setVisibility(View.VISIBLE);
+                }
                 break;
             case HRDetailAdapterBean.Attache:
                 RecyclerView recyclerViewAttache = helper.getView(R.id.rv_ha);
-                List<String> stringsAttache = new ArrayList<>();
-                for (int i = 0; i < 11; i++) {
-                    stringsAttache.add("");
-                }
-                HRDAttacheAdapter hrdAttacheAdapter = new HRDAttacheAdapter(R.layout.item_hrd_attache, stringsAttache);
+                HRDAttacheAdapter hrdAttacheAdapter = new HRDAttacheAdapter(R.layout.item_hrd_attache, viewModel.linkManList);
                 recyclerViewAttache.setLayoutManager(new LinearLayoutManager(context));
                 recyclerViewAttache.setAdapter(hrdAttacheAdapter);
+                if (LocalDataHelper.getInstance().getUserInfo().getRealNameAuthenticate() == 1) {//实名认证通过
+                    recyclerViewAttache.setVisibility(View.VISIBLE);
+                    helper.getView(R.id.smrz_no).setVisibility(View.GONE);
+                } else {
+                    recyclerViewAttache.setVisibility(View.GONE);
+                    helper.getView(R.id.smrz_no).setVisibility(View.VISIBLE);
+                }
                 break;
             case HRDetailAdapterBean.Detail:
                 RecyclerView recyclerViewV = helper.getView(R.id.rv_hrdhd_horizontal);
-                List<String> strings = new ArrayList<>();
-                for (int i = 0; i < 11; i++) {
-                    strings.add("");
-                }
-                HRDDetailHorizontalAdapter horizontalAdapter = new HRDDetailHorizontalAdapter(R.layout.item_hrd_house_detail_horizontal, strings);
+                HRDDetailHorizontalAdapter horizontalAdapter = new HRDDetailHorizontalAdapter(R.layout.item_hrd_house_detail_horizontal, viewModel.labelList);
                 recyclerViewV.setLayoutManager(new GridLayoutManager(context, 5));
                 recyclerViewV.setAdapter(horizontalAdapter);
 
-                List<String> strings1 = new ArrayList<>();
-                for (int i = 0; i < 11; i++) {
-                    strings1.add("");
-                }
+                List<HRDDetailVerticalAdapter.HRDDetailVerticalBean> strings1 = new ArrayList<>();
+                strings1.add(new HRDDetailVerticalAdapter.HRDDetailVerticalBean("交房时间", viewModel.handTime.get()));
+                strings1.add(new HRDDetailVerticalAdapter.HRDDetailVerticalBean("售楼处地址", viewModel.officeAddress.get()));
+                strings1.add(new HRDDetailVerticalAdapter.HRDDetailVerticalBean("物业类型", viewModel.propertiesType.get()));
+                strings1.add(new HRDDetailVerticalAdapter.HRDDetailVerticalBean("建筑类别", viewModel.buildType.get()));
+                strings1.add(new HRDDetailVerticalAdapter.HRDDetailVerticalBean("装修状态", viewModel.decorationType.get()));
+                strings1.add(new HRDDetailVerticalAdapter.HRDDetailVerticalBean("住户数", viewModel.resident.get()));
+                strings1.add(new HRDDetailVerticalAdapter.HRDDetailVerticalBean("容积率", viewModel.volumeRate.get()));
+                strings1.add(new HRDDetailVerticalAdapter.HRDDetailVerticalBean("车位数", viewModel.carNum.get()));
+                strings1.add(new HRDDetailVerticalAdapter.HRDDetailVerticalBean("产权年限", viewModel.propertyYear.get()));
+                strings1.add(new HRDDetailVerticalAdapter.HRDDetailVerticalBean("预售许可证号", viewModel.license.get()));
+                strings1.add(new HRDDetailVerticalAdapter.HRDDetailVerticalBean("物业公司", viewModel.propertyCompany.get()));
+                strings1.add(new HRDDetailVerticalAdapter.HRDDetailVerticalBean("物业公司", viewModel.propertyMoney.get() + "元"));
                 RecyclerView recyclerViewH = helper.getView(R.id.rv_hrdhd_vertical);
                 HRDDetailVerticalAdapter verticalAdapter = new HRDDetailVerticalAdapter(R.layout.item_hrd_house_detail_vertical, strings1);
                 recyclerViewH.setLayoutManager(new LinearLayoutManager(context));
@@ -104,15 +141,13 @@ public class HRDetailAdapter extends BaseQuickAdapter<HRDetailAdapterBean, BaseV
                 break;
             case HRDetailAdapterBean.Size:
                 RecyclerView recyclerViewHHS = helper.getView(R.id.rv_hhs);
-                List<String> stringsHHS = new ArrayList<>();
-                for (int i = 0; i < 4; i++) {
-                    stringsHHS.add("");
-                }
-                HRDSizeAdapter hrdSizeAdapter = new HRDSizeAdapter(R.layout.item_hrd_house_size, stringsHHS);
+                HRDSizeAdapter hrdSizeAdapter = new HRDSizeAdapter(R.layout.item_hrd_house_size, viewModel.sizeList);
                 recyclerViewHHS.setLayoutManager(new GridLayoutManager(context, 4));
                 recyclerViewHHS.setAdapter(hrdSizeAdapter);
                 helper.getView(R.id.tv_more).setOnClickListener(view -> {
                     Intent intent = new Intent(context, HouseSizeActivity.class);
+                    ArrayList<HouseResourceReleaseSizeBean> sizeBeans = new ArrayList<>(viewModel.sizeList);
+                    intent.putExtra("sizeList", sizeBeans);
                     context.startActivity(intent);
                 });
                 break;

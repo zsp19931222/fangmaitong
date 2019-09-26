@@ -28,6 +28,8 @@ import me.goldze.mvvmhabit.utils.ToastUtil;
 public class InformViewModel extends BaseViewModel {
     public ObservableField<String> reason = new ObservableField<>("");
     public ObservableField<String> explain = new ObservableField<>("");
+    public ObservableField<String> listingName=new ObservableField<>("");
+    public ObservableField<String> listingId=new ObservableField<>("");
 
     public InformViewModel(@NonNull Application application) {
         super(application);
@@ -38,7 +40,7 @@ public class InformViewModel extends BaseViewModel {
             ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), TipsConstants.PARAMETER_ERROR);
             return;
         }
-        AppReportBody appReportBody = new AppReportBody(0, explain.get(), reason.get(), "测试房源", null, 0, LocalDataHelper.getInstance().getUserInfo().getUserId(), 1, 0);
+        AppReportBody appReportBody = new AppReportBody(0, explain.get(), reason.get(), listingName.get(), null, 0, LocalDataHelper.getInstance().getUserInfo().getUserId(), Long.valueOf(listingId.get()), 0);
         IdeaApi.getApiService().appReport(appReportBody)
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                 .compose(RxUtils.schedulersTransformer())

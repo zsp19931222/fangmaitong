@@ -43,6 +43,7 @@ public class RecruitmentListBody {
     private String endTime ; // 结束时间
     private String sort;
 
+
     public int getOffset() {
         return offset;
     }

@@ -19,7 +19,7 @@ public class HomeResourceRecommendAdapter extends BaseQuickAdapter<String, BaseV
     @Override
     protected void convert(BaseViewHolder helper, String item) {
         helper.itemView.setOnClickListener(view ->
-                ARouter.getInstance().build(ARouterPath.Public.HRDetailActivity).navigation()
+                ARouter.getInstance().build(ARouterPath.Public.HRDetailActivity).withInt("id",39).navigation()
         );
     }
 }

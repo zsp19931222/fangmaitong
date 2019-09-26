@@ -12,6 +12,7 @@ import androidx.databinding.ObservableList;
 import com.blankj.utilcode.util.SPUtils;
 import com.goldze.base.bean.FeaturedLabelBean;
 import com.goldze.base.utils.ParameterLogUtil;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.techangkeji.model_mine.ui.activity.HouseResourceReleaseActivity;
 import com.techangkeji.model_mine.ui.adapter.HouseResourceAdapter;
 import com.techangkeji.module_hr.ui.popup.AreaPopupwindow;
@@ -48,6 +49,8 @@ public class HouseResourceViewModel extends BaseViewModel {
     public ObservableList<FeaturedLabelBean> featuredLabelList = new ObservableArrayList();//特色标签
     public ObservableList<FeaturedLabelBean> buildLabeList = new ObservableArrayList();//物业类型
 
+    public ObservableField<SmartRefreshLayout> srl=new ObservableField<>();
+
     public HouseResourceViewModel(@NonNull Application application) {
         super(application);
 
@@ -82,8 +85,10 @@ public class HouseResourceViewModel extends BaseViewModel {
      * author: Andy
      * date: 2019/9/22  14:43
      */
-    public void getData() {
-        buildingList.clear();
+    public void getData(int pageNum) {
+        if (pageNum==1){
+            buildingList.clear();
+        }
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("areaId", areaCode.get());
         parameter.put("decoration", decoration.get());
@@ -105,13 +110,15 @@ public class HouseResourceViewModel extends BaseViewModel {
         parameter.put("areaMax", areaMax.get());
         parameter.put("openType", openType.get());
         parameter.put("houseType", houseType.get());
+        parameter.put("pageSize", "20");
+        parameter.put("pageNum", pageNum+"");
         ParameterLogUtil.getInstance().parameterLog(parameter);
         IdeaApi.getApiService()
                 .getBuildingList(parameter)
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                 .compose(RxUtils.schedulersTransformer())
                 .doOnSubscribe(disposable -> showDialog())
-                .subscribe(new DefaultObserver<BuildingListEntity>(this) {
+                .subscribe(new DefaultObserver<BuildingListEntity>(srl.get(),this) {
                     @Override
                     public void onSuccess(BuildingListEntity response) {
                         buildingList.addAll(response.getData());

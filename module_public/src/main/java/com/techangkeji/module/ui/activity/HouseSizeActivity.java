@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.goldze.base.view.TitleVIew;
+import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseSizeBean;
 import com.techangkeji.module.BR;
 import com.techangkeji.module.R;
 import com.techangkeji.module.databinding.ActivityHouseSizeBinding;
@@ -31,13 +32,11 @@ public class HouseSizeActivity extends BaseActivity<ActivityHouseSizeBinding, Ho
 
     @Override
     public void initData() {
+        ArrayList<HouseResourceReleaseSizeBean> sizeBeans =  (ArrayList<HouseResourceReleaseSizeBean>) getIntent().getSerializableExtra("sizeList");
+
         TitleVIew titleVIew= (TitleVIew) binding.title;
         titleVIew.setTitle("户型图");
-        List<String> strings = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            strings.add("");
-        }
-        HouseSizeAdapter houseSizeAdapter = new HouseSizeAdapter(R.layout.item_house_size, strings);
+        HouseSizeAdapter houseSizeAdapter = new HouseSizeAdapter(R.layout.item_house_size, sizeBeans);
         binding.rv.setLayoutManager(new LinearLayoutManager(this));
         binding.rv.addItemDecoration(new MyVerticalDecoration(this, ContextCompat.getColor(this, R.color.color_f6), 1, 0, 0, true));
         binding.rv.setAdapter(houseSizeAdapter);

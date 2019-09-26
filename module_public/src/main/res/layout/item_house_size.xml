@@ -33,7 +33,7 @@
             android:layout_height="@dimen/d15"
             android:layout_marginStart="@dimen/d20"
             android:gravity="center"
-
+            android:id="@+id/tv_hs_price"
             android:text="售价待定"
             android:textColor="@color/color_FF8C00"
             android:textSize="@dimen/font10"

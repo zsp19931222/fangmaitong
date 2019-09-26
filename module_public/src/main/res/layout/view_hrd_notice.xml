@@ -53,12 +53,14 @@
         android:layout_marginEnd="@dimen/d16"
         android:gravity="center"
         android:text="实名认证后可查看"
+        android:id="@+id/smrz_no"
         android:textColor="@color/color_gray_666666"
         android:textSize="@dimen/font12"
         app:rv_backgroundColor="@color/color_EDEDED"
         app:rv_radius="@dimen/d10" />
 
     <LinearLayout
+        android:id="@+id/smrz_yes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -85,6 +87,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_yjgz"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/d16"
@@ -114,6 +117,7 @@
                 android:textSize="@dimen/font12" />
         </LinearLayout>
         <TextView
+            android:id="@+id/tv_dkgz"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/d16"

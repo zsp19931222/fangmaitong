@@ -43,6 +43,8 @@ public class InformActivity extends BaseActivity<ActivityInformBinding, InformVi
             informPopup.setOnSelectString(select -> viewModel.reason.set(select));
             informPopup.showPopupWindow(view);
         });
+        viewModel.listingName.set(getIntent().getExtras().getString("listingName"));
+        viewModel.listingId.set(getIntent().getExtras().getString("listingId"));
     }
 
 }

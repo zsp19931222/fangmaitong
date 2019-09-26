@@ -42,6 +42,8 @@ public class NoticeFragmentViewModel extends BaseViewModel {
     public void getPlacardList() {
         Map<String, Object> map = new HashMap<>();
         map.put("areaId", SPUtils.getInstance().getString("areaId"));
+        map.put("pageSize", "20");
+        map.put("pageNum", "1");
         IdeaApi.getApiService()
                 .getPlacardList(map)
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))

@@ -9,6 +9,7 @@
     android:layout_marginEnd="@dimen/d2"
     android:paddingStart="@dimen/d10"
     android:paddingTop="@dimen/d3"
+    android:id="@+id/tv_label"
     android:layout_marginTop="@dimen/d5"
     android:paddingEnd="@dimen/d10"
     android:paddingBottom="@dimen/d3"

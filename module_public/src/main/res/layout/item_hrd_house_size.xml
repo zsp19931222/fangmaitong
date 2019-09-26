@@ -16,10 +16,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:rv_corner_radius="@dimen/d3"
-            app:rv_mask_color="@color/color_gray_999999" />
+            />
 
         <me.goldze.mvvmhabit.view.shape.RadiusTextView
             android:id="@+id/tv_hhs_type"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="@dimen/d20"
             android:layout_alignParentBottom="true"

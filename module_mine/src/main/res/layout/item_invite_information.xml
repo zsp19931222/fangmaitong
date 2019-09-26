@@ -12,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/d10"
-        android:text="某某公司，招聘经纪人"
         android:textColor="@color/color_dark_333333"
         android:textSize="@dimen/font14" />
 
@@ -22,7 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="@dimen/d10"
-        android:text="通过审核"
         android:textColor="@color/color_FF8C00"
         android:textSize="@dimen/font14" />
 
@@ -32,7 +30,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_iii_title"
         android:layout_marginTop="@dimen/d14"
-        android:text="地区：上海 普陀"
         android:textColor="@color/color_gray_999999"
         android:textSize="@dimen/font12" />
 
@@ -42,7 +39,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_iii_area"
         android:layout_marginTop="@dimen/d14"
-        android:text="开盘时间：2019-09-09"
         android:textColor="@color/color_gray_999999"
         android:textSize="@dimen/font12" />
 
@@ -52,7 +48,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_iii_time"
         android:layout_marginTop="@dimen/d14"
-        android:text=" 均价：5000/m"
         android:textColor="@color/color_gray_999999"
         android:textSize="@dimen/font12" />
 

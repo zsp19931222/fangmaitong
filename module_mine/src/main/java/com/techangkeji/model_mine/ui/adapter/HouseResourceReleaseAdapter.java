@@ -1,6 +1,5 @@
 package com.techangkeji.model_mine.ui.adapter;
 
-import android.Manifest;
 import android.content.Context;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -8,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,7 +15,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.util.MultiTypeDelegate;
 import com.goldze.base.router.ARouterPath;
-import com.goldze.base.utils.PermissionsUtils;
 import com.techangkeji.model_mine.R;
 import com.techangkeji.model_mine.ui.activity.AddSizeActivity;
 import com.techangkeji.model_mine.ui.activity.SelectFriendActivity;
@@ -35,8 +32,6 @@ import java.util.List;
 import me.goldze.mvvmhabit.utils.IsNullUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
 import me.goldze.mvvmhabit.view.shape.RadiusTextView;
-
-import static com.goldze.base.constant.RxBusMessageEventConstants.OPEN_GALLERY;
 
 public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceReleaseBean, BaseViewHolder> {
     private Context context;
@@ -168,7 +163,7 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
         rv_vhl_add.setOnClickListener(v -> {
             viewModel.startActivity(SelectFriendActivity.class);
         });
-        LinkManAdapter linkManAdapter = new LinkManAdapter(R.layout.item_linkman, viewModel.linkManList);
+        LinkManAdapter linkManAdapter = new LinkManAdapter(R.layout.item_mine_linkman, viewModel.linkManList);
         viewModel.linkManAdapter.set(linkManAdapter);
         linkManAdapter.setPopupSelectListener(position -> {
             viewModel.linkManList.remove(position);

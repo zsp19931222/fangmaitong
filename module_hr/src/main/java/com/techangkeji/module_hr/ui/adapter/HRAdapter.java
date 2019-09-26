@@ -17,7 +17,7 @@ public class HRAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, String item) {
         helper.itemView.setOnClickListener(view -> {
-            ARouter.getInstance().build(ARouterPath.Public.HRDetailActivity).navigation();
+            ARouter.getInstance().build(ARouterPath.Public.HRDetailActivity).withInt("id",39).navigation();
         });
     }
 }
