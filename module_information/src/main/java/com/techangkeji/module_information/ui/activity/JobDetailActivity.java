@@ -27,8 +27,8 @@ public class JobDetailActivity extends BaseActivity<ActivityJobDetailBinding, Ba
     @Override
     public void initData() {
         binding.title.setTitle("求职详情");
-        InviteDetailAdapter inviteDetailAdapter = new InviteDetailAdapter(R.layout.item_linkman, SimulationData.simulation());
-        binding.rv.setLayoutManager(new LinearLayoutManager(this));
-        binding.rv.setAdapter(inviteDetailAdapter);
+//        InviteDetailAdapter inviteDetailAdapter = new InviteDetailAdapter(R.layout.item_linkman, SimulationData.simulation());
+//        binding.rv.setLayoutManager(new LinearLayoutManager(this));
+//        binding.rv.setAdapter(inviteDetailAdapter);
     }
 }

@@ -75,13 +75,15 @@ public class InviteDetailActivity extends BaseActivity<ActivityInviteDetailBindi
         viewModel.inviteCompany.set(dataBean.getRecruitmentTitle());
         viewModel.inviteName.set(dataBean.getPosition());
         viewModel.invitePrice.set(dataBean.getMoneyDown()+"-"+dataBean.getMoneyUp());
-//        viewModel.inviteWelfare.set();
+        viewModel.inviteWelfare.set(IsNullUtil.getInstance().StringNull((String) dataBean.getTreatment()));
+        viewModel.inviteEducation.set(dataBean.getEducation());
+        viewModel.inviteYear.set((String) dataBean.getWorkYear());
+        viewModel.inviteAddress.set(dataBean.getWorkAddress());
+        viewModel.inviteNature.set(dataBean.getWorkNature());
+        viewModel.inviteContent.set(dataBean.getWorkContent());
+        viewModel.id=dataBean.getRecruitmentHumenId();
         binding.title.setTitle("招聘详情");
-        List<String> strings = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            strings.add("");
-        }
-        InviteDetailAdapter inviteDetailAdapter = new InviteDetailAdapter(R.layout.item_linkman, strings);
+        InviteDetailAdapter inviteDetailAdapter = new InviteDetailAdapter(R.layout.item_linkman, dataBean.getContactUser());
         binding.rv.setLayoutManager(new LinearLayoutManager(this));
         binding.rv.setAdapter(inviteDetailAdapter);
     }

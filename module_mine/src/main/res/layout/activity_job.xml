@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.techangkeji.model_mine.ui.viewModel.InviteInformationViewModel" />
+            type="com.techangkeji.model_mine.ui.viewModel.JobViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -35,7 +35,7 @@
             android:layout_marginEnd="@dimen/d16"
             android:layout_marginBottom="@dimen/d5"
             android:gravity="center"
-            android:text="发布招聘"
+            android:text="发布求职"
             android:textColor="@color/white"
             android:textSize="@dimen/font16"
             binding:onClickCommand="@{viewModel.releaseCommand}"

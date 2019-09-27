@@ -15,6 +15,7 @@ import com.techangkeji.model_mine.ui.activity.FeedBackActivity;
 import com.techangkeji.model_mine.ui.activity.HouseResourceActivity;
 import com.techangkeji.model_mine.ui.activity.InformationCommentActivity;
 import com.techangkeji.model_mine.ui.activity.InviteInformationActivity;
+import com.techangkeji.model_mine.ui.activity.JobActivity;
 import com.techangkeji.model_mine.ui.activity.PersonActivity;
 import com.techangkeji.model_mine.ui.activity.QualificationAuthActivity;
 import com.techangkeji.model_mine.ui.activity.SettingActivity;
@@ -50,6 +51,8 @@ public class MineViewModel extends BaseViewModel {
     public BindingCommand informationCommentCommand = new BindingCommand(() -> startActivity(InformationCommentActivity.class));
     //招聘
     public BindingCommand inviteInformationCommentCommand = new BindingCommand(() -> startActivity(InviteInformationActivity.class));
+    //求职
+    public BindingCommand jobCommentCommand = new BindingCommand(() -> startActivity(JobActivity.class));
     //房源
     public BindingCommand houseResourceCommand = new BindingCommand(() -> startActivity(HouseResourceActivity.class));
     //收藏

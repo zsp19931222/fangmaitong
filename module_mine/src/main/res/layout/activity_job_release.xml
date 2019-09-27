@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.techangkeji.model_mine.ui.viewModel.InviteReleaseViewModel" />
+            type="com.techangkeji.model_mine.ui.viewModel.JobReleaseViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -39,7 +39,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/d30"
-                        android:text="招聘标题（必填）"
+                        android:text="求职标题（必填）"
                         android:textColor="@color/color_dark_333333"
                         android:textSize="@dimen/font16" />
 
@@ -67,7 +67,7 @@
                     android:background="@color/color_EFF2F4"
                     android:gravity="center_vertical"
                     android:paddingStart="@dimen/d16"
-                    android:text="招聘基础信息（必填）"
+                    android:text="求职基础信息（必填）"
                     android:textColor="@color/color_dark_333333"
                     android:textSize="@dimen/font14" />
 
@@ -78,80 +78,8 @@
                     android:paddingStart="@dimen/d16"
                     android:paddingEnd="@dimen/d16">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/d30"
-                        android:text="职位名称"
-                        android:textColor="@color/color_dark_333333"
-                        android:textSize="@dimen/font16" />
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/d20"
-                        android:background="@null"
-                        android:hint="请输入职位"
-                        android:text="@={viewModel.position}"
-                        android:textColor="@color/color_gray_999999"
-                        android:textColorHint="@color/color_gray_999999"
-                        android:textSize="@dimen/font12" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/d1"
-                        android:layout_marginTop="@dimen/d5"
-                        android:background="@color/color_f6" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/d30"
-                        android:text="薪酬范围"
-                        android:textColor="@color/color_dark_333333"
-                        android:textSize="@dimen/font16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/d20"
-                        android:background="@null"
-                        android:hint="请输入薪酬范围(如果是具体范围请用‘-’隔开，例如：2000-5000)"
-                        android:text="@={viewModel.compensation}"
-                        android:textColor="@color/color_gray_999999"
-                        android:textColorHint="@color/color_gray_999999"
-                        android:textSize="@dimen/font12" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/d1"
-                        android:layout_marginTop="@dimen/d5"
-                        android:background="@color/color_f6" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/d30"
-                        android:text="福利待遇"
-                        android:textColor="@color/color_dark_333333"
-                        android:textSize="@dimen/font16" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/d20"
-                        android:background="@null"
-                        android:hint="请输入福利待遇"
-                        android:text="@={viewModel.welfare}"
-                        android:textColor="@color/color_gray_999999"
-                        android:textColorHint="@color/color_gray_999999"
-                        android:textSize="@dimen/font12" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/d1"
-                        android:layout_marginTop="@dimen/d5"
-                        android:background="@color/color_f6" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -171,31 +99,6 @@
                         android:textColorHint="@color/color_gray_999999"
                         android:textSize="@dimen/font12" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/d1"
-                        android:layout_marginTop="@dimen/d5"
-                        android:background="@color/color_f6" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/d30"
-                        android:text="学历要求"
-                        android:textColor="@color/color_dark_333333"
-                        android:textSize="@dimen/font16" />
-
-                    <TextView
-                        android:id="@+id/tv_ir_education"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/d20"
-                        android:background="@null"
-                        android:drawableEnd="@mipmap/xjt"
-                        android:text="@{viewModel.education}"
-                        android:textColor="@color/color_dark_333333"
-                        android:textSize="@dimen/font12"
-                        binding:onClickCommand="@{viewModel.educationCommand}" />
 
                     <View
                         android:layout_width="match_parent"
@@ -260,7 +163,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/d30"
-                        android:text="公司简介"
+                        android:text="个人简介"
                         android:textColor="@color/color_dark_333333"
                         android:textSize="@dimen/font16" />
 
@@ -277,7 +180,7 @@
                             android:layout_height="match_parent"
                             android:background="@null"
                             android:gravity="top"
-                            android:hint="请输入公司简介..."
+                            android:hint="请输入个人简介..."
                             android:text="@={viewModel.synopsis}"
                             android:textColor="@color/color_gray_999999"
                             android:textColorHint="@color/color_gray_999999"
@@ -285,33 +188,47 @@
                     </me.goldze.mvvmhabit.view.shape.RadiusRelativeLayout>
 
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <me.goldze.mvvmhabit.view.shape.RadiusTextView
-                        android:layout_width="@dimen/d170"
-                        android:layout_height="@dimen/d30"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginStart="@dimen/d16"
-                        android:layout_marginTop="@dimen/d24"
-                        android:layout_marginEnd="@dimen/d16"
-                        android:layout_marginBottom="@dimen/d5"
-                        android:gravity="center"
-                        android:text="+ 添加好友为联系人"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/font12"
-                        binding:onClickCommand="@{viewModel.addLinkManCommand}"
-                        binding:rv_backgroundColor="@color/color_FF8C00"
-                        binding:rv_radius="@dimen/d25" />
-
+                <View style="@style/ViewLineStyle5dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/d15"
+                        android:text="联系人"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/d15"
+                        android:orientation="horizontal">
+                        <me.goldze.mvvmhabit.view.shape.RadiusImageView
+                            android:layout_width="@dimen/d44"
+                            android:layout_height="@dimen/d44"
+                            binding:url="@{viewModel.headUrl}"
+                            binding:rv_is_circle="true"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/d10"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="发布人自己为唯一联系人"
+                                android:textSize="@dimen/font14"
+                                android:textColor="@color/color_dark_333333"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{viewModel.phone}"
+                                android:textSize="@dimen/font12"
+                                android:textColor="@color/color_dark_333333"/>
+                        </LinearLayout>
+                    </LinearLayout>
                     <me.goldze.mvvmhabit.view.shape.RadiusTextView
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/d40"
                         android:layout_margin="@dimen/d16"
                         android:gravity="center"
-                        android:text="提交审核"
+                        android:text="发布"
                         android:textColor="@color/white"
                         android:textSize="@dimen/font16"
                         binding:onClickCommand="@{viewModel.submitCommand}"
@@ -358,4 +275,5 @@
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
+
 </layout>

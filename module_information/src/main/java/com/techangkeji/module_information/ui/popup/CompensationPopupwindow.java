@@ -110,6 +110,7 @@ public class CompensationPopupwindow extends BasePopupWindow {
                     break;
             }
             RxBus.getDefault().post(priceRxBusBean);
+            dismiss();
         });
     }
 

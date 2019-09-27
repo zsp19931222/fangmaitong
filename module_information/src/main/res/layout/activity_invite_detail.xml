@@ -45,7 +45,8 @@
 
                     <ImageView
                         android:layout_width="@dimen/d70"
-                        android:layout_height="@dimen/d70" />
+                        android:layout_height="@dimen/d70"
+                        binding:url="@{viewModel.hrUrl}" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -56,21 +57,21 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="林某某"
+                            android:text="@{viewModel.hrName}"
                             android:textColor="@color/color_dark_333333"
                             android:textSize="@dimen/font12" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="账号：5022332"
+                            android:text="@{viewModel.hrNum}"
                             android:textColor="@color/color_dark_333333"
                             android:textSize="@dimen/font12" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="总代"
+                            android:text="@{viewModel.hrIdent}"
                             android:textColor="@color/color_dark_333333"
                             android:textSize="@dimen/font12" />
 
@@ -80,36 +81,41 @@
                             android:orientation="horizontal">
 
                             <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                                android:id="@+id/zzrz"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/d5"
-                                android:id="@+id/zzrz"
                                 android:text="资质认证"
                                 android:textColor="@color/white"
-
                                 android:textSize="@dimen/font10"
+                                android:layout_marginStart="@dimen/d10"
+                                android:visibility="@{viewModel.hrAuthZZ}"
                                 binding:rv_backgroundColor="@color/color_FF8C00"
                                 binding:rv_radius="@dimen/d3" />
 
                             <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                                android:id="@+id/smrz"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/zzrz"
                                 android:padding="@dimen/d5"
                                 android:text="实名认证"
-                                android:id="@+id/smrz"
-                                android:layout_toEndOf="@id/zzrz"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/font10"
+                                android:layout_marginStart="@dimen/d10"
+                                android:visibility="@{viewModel.hrAuthSM}"
                                 binding:rv_backgroundColor="@color/color_FF8C00"
                                 binding:rv_radius="@dimen/d3" />
 
                             <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                                android:id="@+id/jjrrz"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/d5"
-                                android:text="经纪人认证"
                                 android:layout_toEndOf="@id/smrz"
-                                android:id="@+id/jjrrz"
+                                android:padding="@dimen/d5"
+                                android:layout_marginStart="@dimen/d10"
+                                android:text="经纪人认证"
+                                android:visibility="@{viewModel.hrAuthJJR}"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/font10"
                                 binding:rv_backgroundColor="@color/color_FF8C00"
@@ -125,7 +131,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/d16"
-                    android:text="某某公司，招聘经纪人"
+                    android:text="@{viewModel.inviteCompany}"
                     android:textColor="@color/color_dark_333333"
                     android:textSize="@dimen/font15" />
 
@@ -165,7 +171,7 @@
                         android:layout_weight="2"
                         android:background="@color/color_f6"
                         android:gravity="center"
-                        android:text="代理"
+                        android:text="@{viewModel.inviteName}"
                         android:textColor="@color/color_dark_333333"
                         android:textSize="@dimen/font12" />
                 </LinearLayout>
@@ -195,7 +201,7 @@
                         android:layout_weight="2"
                         android:background="@color/color_f6"
                         android:gravity="center"
-                        android:text="面议"
+                        android:text="@{viewModel.invitePrice}"
                         android:textColor="@color/color_dark_333333"
                         android:textSize="@dimen/font12" />
                 </LinearLayout>
@@ -225,7 +231,7 @@
                         android:layout_weight="2"
                         android:background="@color/color_f6"
                         android:gravity="center"
-                        android:text="代理"
+                        android:text="@{viewModel.inviteWelfare}"
                         android:textColor="@color/color_dark_333333"
                         android:textSize="@dimen/font12" />
                 </LinearLayout>
@@ -255,7 +261,7 @@
                         android:layout_weight="2"
                         android:background="@color/color_f6"
                         android:gravity="center"
-                        android:text="代理"
+                        android:text="@{viewModel.inviteEducation}"
                         android:textColor="@color/color_dark_333333"
                         android:textSize="@dimen/font12" />
                 </LinearLayout>
@@ -285,7 +291,7 @@
                         android:layout_weight="2"
                         android:background="@color/color_f6"
                         android:gravity="center"
-                        android:text="代理"
+                        android:text="@{viewModel.inviteYear}"
                         android:textColor="@color/color_dark_333333"
                         android:textSize="@dimen/font12" />
                 </LinearLayout>
@@ -315,7 +321,7 @@
                         android:layout_weight="2"
                         android:background="@color/color_f6"
                         android:gravity="center"
-                        android:text="代理"
+                        android:text="@{viewModel.inviteAddress}"
                         android:textColor="@color/color_dark_333333"
                         android:textSize="@dimen/font12" />
                 </LinearLayout>
@@ -345,7 +351,7 @@
                         android:layout_weight="2"
                         android:background="@color/color_f6"
                         android:gravity="center"
-                        android:text="代理"
+                        android:text="@{viewModel.inviteNature}"
                         android:textColor="@color/color_dark_333333"
                         android:textSize="@dimen/font12" />
                 </LinearLayout>
@@ -367,7 +373,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/d16"
                     android:layout_marginEnd="@dimen/d16"
-                    android:text="深圳瑞宝电脑技术服务有限公司，成立于2008年，我公司为各行各业提供专业的it技术服务，经过3年多的努力与发展，已具一定的规模及实力，现拥有一支技术精湛的it服务团队，以卓越的服务品质、专业安全的技术服务实力，为不同群体的用户提供更高更优质的it服务。"
+                    android:text="@{viewModel.inviteContent}"
                     android:textColor="@color/color_dark_333333"
                     android:textSize="@dimen/font12" />
 

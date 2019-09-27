@@ -21,6 +21,7 @@ import me.goldze.mvvmhabit.http.net.body.RecruitmentBody;
 import me.goldze.mvvmhabit.http.net.body.RecruitmentListBody;
 import me.goldze.mvvmhabit.http.net.body.ReleaseMovingBody;
 import me.goldze.mvvmhabit.http.net.body.SendCodeBody;
+import me.goldze.mvvmhabit.http.net.body.TcJobHuntingListBody;
 import me.goldze.mvvmhabit.http.net.body.UntiedThirdBody;
 import me.goldze.mvvmhabit.http.net.body.UpdateBody;
 import me.goldze.mvvmhabit.http.net.body.UpdatePasswordBody;
@@ -37,6 +38,7 @@ import me.goldze.mvvmhabit.http.net.entity.SelectFriendEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.CommentBean;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.MyStateEntity;
+import me.goldze.mvvmhabit.http.net.entity.friend_circle.UserDetailEntity;
 import me.goldze.mvvmhabit.http.net.entity.information.CommentListEntity;
 import me.goldze.mvvmhabit.http.net.entity.information.NewsListEntity;
 import me.goldze.mvvmhabit.http.net.entity.information.PlacardListEntity;
@@ -176,6 +178,16 @@ public interface ApiService<T extends BaseEntity> {
     @Headers({"url_name:login"})
     Observable<SuccessEntity<RegisterEntity>> bindingThird(@Body() BindingThirdBody authBrokerBody);
 
+    //好友的动态列表
+    @GET(API + "auth/moving/friendId/{friendId}/{page}/20")
+    @Headers({"url_name:login"})
+    Observable<MyStateEntity> friendStateList(@Path("page") int page,@Path("friendId") int friendId);
+
+    //获取个人详情
+    @GET(API + "auth/user/{id}")
+    @Headers({"url_name:login"})
+    Observable<SuccessEntity<UserDetailEntity>> userDetailData(@Path("id") long id);
+
     //点赞
     @POST(API + "auth/vote")
     @Headers({"url_name:login"})
@@ -296,10 +308,25 @@ public interface ApiService<T extends BaseEntity> {
     @Headers({"url_name:search"})
     Observable<RecruitmentListEntity> recruitmentsList(@Body() RecruitmentListBody myMovingListBody);
 
+    //发布求职
+    @POST(API+"auth/tcJobHuntings")
+    @Headers({"url_name:search"})
+    Observable<SuccessEntity> tcJobHuntings(@Body() RecruitmentBody myMovingListBody);
+
+    //求职列表
+    @POST(API+"auth/job/getTcJobHuntingList")
+    @Headers({"url_name:search"})
+    Observable<RecruitmentListEntity> getTcJobHuntingList(@QueryMap() Map<String,Object> map);
+
     //推荐房源
     @POST(API + "auth/building/recommendBuilding")
     @Headers({"url_name:user_info"})
     Observable<RecommendBuildingEntity> recommendBuilding(@QueryMap() Map<String,Object> map);
+
+    //我的收藏
+    @POST(API + "auth/building/myCollectionList")
+    @Headers({"url_name:user_info"})
+    Observable<RecommendBuildingEntity> myCollectionList(@QueryMap() Map<String,Object> map);
 
     //获取百度静态图
     @GET("staticimage/v2")

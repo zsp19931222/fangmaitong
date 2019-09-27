@@ -8,7 +8,8 @@ import java.util.List;
  * author:created by Andy on 2019/9/26 23:16
  * email:zsp872126510@gmail.com
  */
-public class RecruitmentListEntity extends BaseEntity{
+public class RecruitmentListEntity extends BaseEntity implements Serializable{
+
 
     private List<DataBean> data;
 
@@ -20,7 +21,7 @@ public class RecruitmentListEntity extends BaseEntity{
         this.data = data;
     }
 
-    public static class DataBean implements Serializable {
+    public static class DataBean implements Serializable{
         /**
          * remark : null
          * moneyDown : 2000.0
@@ -36,7 +37,7 @@ public class RecruitmentListEntity extends BaseEntity{
          * areaId : -1
          * contactId : -1
          * contactIds : null
-         * state : 0
+         * state : 1
          * recruitmentHumenIdentity : null
          * recruitmentTitle : 标题
          * workContent : 没有公司简介
@@ -50,11 +51,7 @@ public class RecruitmentListEntity extends BaseEntity{
          * education : 本科
          * recommend : -1
          * user : {"imNickname":null,"remark":null,"imUsername":"18702305506","squareNum":0,"movingNum":0,"qqProvince":null,"wxappOpenId":null,"createTime":"2019-09-20 10:40:07","qqAvatarUrl":null,"brokerAuthenticate":0,"wechatNickname":null,"headUrl":"https://fangmaitong01.oss-cn-zhangjiakou.aliyuncs.com/64DB72530CE70259B6499B8C792B21CB.jpg","password":"123456","recruitmentNum":0,"wechatLanguage":null,"qualificationAuthenticate":0,"qqNickname":null,"realName":"我是1","phone":"18702305506","oldPassword":null,"wechatAvatarUrl":null,"wechatProvince":null,"jobhuntingNum":0,"identity":0,"realNameAuthenticate":0,"wechatCountry":null,"sex":2,"del":0,"qqOpenId":null,"wechatCity":null,"qqCity":null,"name":"look","imPassword":"123456","state":0,"mail":null,"age":0,"buildNum":0,"cumulativeLoginTime":6242260,"id":1,"lastLogin":"2019-09-26","enable":0,"wechatOpenId":null,"qqLanguage":null,"freeze":0,"collectNum":0,"qqCountry":null,"recommend":-1,"ids":null,"recom":-1}
-         * contactUser : null
-         * ids : null
-         * district : null
-         * province : null
-         * city : null
+         * contactUser : [{"imNickname":null,"remark":null,"imUsername":null,"squareNum":-1,"movingNum":-1,"qqProvince":null,"wxappOpenId":null,"createTime":null,"qqAvatarUrl":null,"brokerAuthenticate":-1,"wechatNickname":null,"headUrl":null,"password":"123456","recruitmentNum":-1,"wechatLanguage":null,"qualificationAuthenticate":-1,"qqNickname":null,"realName":null,"phone":"18702305506","oldPassword":null,"wechatAvatarUrl":null,"wechatProvince":null,"jobhuntingNum":-1,"identity":0,"realNameAuthenticate":-1,"wechatCountry":null,"sex":2,"del":0,"qqOpenId":null,"wechatCity":null,"qqCity":null,"name":"look","imPassword":null,"state":0,"mail":null,"age":0,"buildNum":-1,"cumulativeLoginTime":-1,"id":1,"lastLogin":null,"enable":0,"wechatOpenId":null,"qqLanguage":null,"freeze":0,"collectNum":-1,"qqCountry":null,"recommend":-1,"ids":null,"recom":-1}]
          */
 
         private Object remark;
@@ -85,11 +82,7 @@ public class RecruitmentListEntity extends BaseEntity{
         private String education;
         private int recommend;
         private UserBean user;
-        private Object contactUser;
-        private Object ids;
-        private Object district;
-        private Object province;
-        private Object city;
+        private List<ContactUserBean> contactUser;
 
         public Object getRemark() {
             return remark;
@@ -315,47 +308,15 @@ public class RecruitmentListEntity extends BaseEntity{
             this.user = user;
         }
 
-        public Object getContactUser() {
+        public List<ContactUserBean> getContactUser() {
             return contactUser;
         }
 
-        public void setContactUser(Object contactUser) {
+        public void setContactUser(List<ContactUserBean> contactUser) {
             this.contactUser = contactUser;
         }
 
-        public Object getIds() {
-            return ids;
-        }
-
-        public void setIds(Object ids) {
-            this.ids = ids;
-        }
-
-        public Object getDistrict() {
-            return district;
-        }
-
-        public void setDistrict(Object district) {
-            this.district = district;
-        }
-
-        public Object getProvince() {
-            return province;
-        }
-
-        public void setProvince(Object province) {
-            this.province = province;
-        }
-
-        public Object getCity() {
-            return city;
-        }
-
-        public void setCity(Object city) {
-            this.city = city;
-        }
-
-        public static class UserBean {
+        public static class UserBean implements Serializable{
             /**
              * imNickname : null
              * remark : null
@@ -775,6 +736,554 @@ public class RecruitmentListEntity extends BaseEntity{
             }
 
             public void setLastLogin(String lastLogin) {
+                this.lastLogin = lastLogin;
+            }
+
+            public int getEnable() {
+                return enable;
+            }
+
+            public void setEnable(int enable) {
+                this.enable = enable;
+            }
+
+            public Object getWechatOpenId() {
+                return wechatOpenId;
+            }
+
+            public void setWechatOpenId(Object wechatOpenId) {
+                this.wechatOpenId = wechatOpenId;
+            }
+
+            public Object getQqLanguage() {
+                return qqLanguage;
+            }
+
+            public void setQqLanguage(Object qqLanguage) {
+                this.qqLanguage = qqLanguage;
+            }
+
+            public int getFreeze() {
+                return freeze;
+            }
+
+            public void setFreeze(int freeze) {
+                this.freeze = freeze;
+            }
+
+            public int getCollectNum() {
+                return collectNum;
+            }
+
+            public void setCollectNum(int collectNum) {
+                this.collectNum = collectNum;
+            }
+
+            public Object getQqCountry() {
+                return qqCountry;
+            }
+
+            public void setQqCountry(Object qqCountry) {
+                this.qqCountry = qqCountry;
+            }
+
+            public int getRecommend() {
+                return recommend;
+            }
+
+            public void setRecommend(int recommend) {
+                this.recommend = recommend;
+            }
+
+            public Object getIds() {
+                return ids;
+            }
+
+            public void setIds(Object ids) {
+                this.ids = ids;
+            }
+
+            public int getRecom() {
+                return recom;
+            }
+
+            public void setRecom(int recom) {
+                this.recom = recom;
+            }
+        }
+
+        public static class ContactUserBean implements Serializable{
+            /**
+             * imNickname : null
+             * remark : null
+             * imUsername : null
+             * squareNum : -1
+             * movingNum : -1
+             * qqProvince : null
+             * wxappOpenId : null
+             * createTime : null
+             * qqAvatarUrl : null
+             * brokerAuthenticate : -1
+             * wechatNickname : null
+             * headUrl : null
+             * password : 123456
+             * recruitmentNum : -1
+             * wechatLanguage : null
+             * qualificationAuthenticate : -1
+             * qqNickname : null
+             * realName : null
+             * phone : 18702305506
+             * oldPassword : null
+             * wechatAvatarUrl : null
+             * wechatProvince : null
+             * jobhuntingNum : -1
+             * identity : 0
+             * realNameAuthenticate : -1
+             * wechatCountry : null
+             * sex : 2
+             * del : 0
+             * qqOpenId : null
+             * wechatCity : null
+             * qqCity : null
+             * name : look
+             * imPassword : null
+             * state : 0
+             * mail : null
+             * age : 0
+             * buildNum : -1
+             * cumulativeLoginTime : -1
+             * id : 1
+             * lastLogin : null
+             * enable : 0
+             * wechatOpenId : null
+             * qqLanguage : null
+             * freeze : 0
+             * collectNum : -1
+             * qqCountry : null
+             * recommend : -1
+             * ids : null
+             * recom : -1
+             */
+
+            private Object imNickname;
+            private Object remark;
+            private Object imUsername;
+            private int squareNum;
+            private int movingNum;
+            private Object qqProvince;
+            private Object wxappOpenId;
+            private Object createTime;
+            private Object qqAvatarUrl;
+            private int brokerAuthenticate;
+            private Object wechatNickname;
+            private Object headUrl;
+            private String password;
+            private int recruitmentNum;
+            private Object wechatLanguage;
+            private int qualificationAuthenticate;
+            private Object qqNickname;
+            private Object realName;
+            private String phone;
+            private Object oldPassword;
+            private Object wechatAvatarUrl;
+            private Object wechatProvince;
+            private int jobhuntingNum;
+            private int identity;
+            private int realNameAuthenticate;
+            private Object wechatCountry;
+            private int sex;
+            private int del;
+            private Object qqOpenId;
+            private Object wechatCity;
+            private Object qqCity;
+            private String name;
+            private Object imPassword;
+            private int state;
+            private Object mail;
+            private int age;
+            private int buildNum;
+            private int cumulativeLoginTime;
+            private int id;
+            private Object lastLogin;
+            private int enable;
+            private Object wechatOpenId;
+            private Object qqLanguage;
+            private int freeze;
+            private int collectNum;
+            private Object qqCountry;
+            private int recommend;
+            private Object ids;
+            private int recom;
+
+            public ContactUserBean(Object imNickname, Object remark, Object imUsername, int squareNum, int movingNum, Object qqProvince, Object wxappOpenId, Object createTime, Object qqAvatarUrl, int brokerAuthenticate, Object wechatNickname, Object headUrl, String password, int recruitmentNum, Object wechatLanguage, int qualificationAuthenticate, Object qqNickname, Object realName, String phone, Object oldPassword, Object wechatAvatarUrl, Object wechatProvince, int jobhuntingNum, int identity, int realNameAuthenticate, Object wechatCountry, int sex, int del, Object qqOpenId, Object wechatCity, Object qqCity, String name, Object imPassword, int state, Object mail, int age, int buildNum, int cumulativeLoginTime, int id, Object lastLogin, int enable, Object wechatOpenId, Object qqLanguage, int freeze, int collectNum, Object qqCountry, int recommend, Object ids, int recom) {
+                this.imNickname = imNickname;
+                this.remark = remark;
+                this.imUsername = imUsername;
+                this.squareNum = squareNum;
+                this.movingNum = movingNum;
+                this.qqProvince = qqProvince;
+                this.wxappOpenId = wxappOpenId;
+                this.createTime = createTime;
+                this.qqAvatarUrl = qqAvatarUrl;
+                this.brokerAuthenticate = brokerAuthenticate;
+                this.wechatNickname = wechatNickname;
+                this.headUrl = headUrl;
+                this.password = password;
+                this.recruitmentNum = recruitmentNum;
+                this.wechatLanguage = wechatLanguage;
+                this.qualificationAuthenticate = qualificationAuthenticate;
+                this.qqNickname = qqNickname;
+                this.realName = realName;
+                this.phone = phone;
+                this.oldPassword = oldPassword;
+                this.wechatAvatarUrl = wechatAvatarUrl;
+                this.wechatProvince = wechatProvince;
+                this.jobhuntingNum = jobhuntingNum;
+                this.identity = identity;
+                this.realNameAuthenticate = realNameAuthenticate;
+                this.wechatCountry = wechatCountry;
+                this.sex = sex;
+                this.del = del;
+                this.qqOpenId = qqOpenId;
+                this.wechatCity = wechatCity;
+                this.qqCity = qqCity;
+                this.name = name;
+                this.imPassword = imPassword;
+                this.state = state;
+                this.mail = mail;
+                this.age = age;
+                this.buildNum = buildNum;
+                this.cumulativeLoginTime = cumulativeLoginTime;
+                this.id = id;
+                this.lastLogin = lastLogin;
+                this.enable = enable;
+                this.wechatOpenId = wechatOpenId;
+                this.qqLanguage = qqLanguage;
+                this.freeze = freeze;
+                this.collectNum = collectNum;
+                this.qqCountry = qqCountry;
+                this.recommend = recommend;
+                this.ids = ids;
+                this.recom = recom;
+            }
+
+            public Object getImNickname() {
+                return imNickname;
+            }
+
+            public void setImNickname(Object imNickname) {
+                this.imNickname = imNickname;
+            }
+
+            public Object getRemark() {
+                return remark;
+            }
+
+            public void setRemark(Object remark) {
+                this.remark = remark;
+            }
+
+            public Object getImUsername() {
+                return imUsername;
+            }
+
+            public void setImUsername(Object imUsername) {
+                this.imUsername = imUsername;
+            }
+
+            public int getSquareNum() {
+                return squareNum;
+            }
+
+            public void setSquareNum(int squareNum) {
+                this.squareNum = squareNum;
+            }
+
+            public int getMovingNum() {
+                return movingNum;
+            }
+
+            public void setMovingNum(int movingNum) {
+                this.movingNum = movingNum;
+            }
+
+            public Object getQqProvince() {
+                return qqProvince;
+            }
+
+            public void setQqProvince(Object qqProvince) {
+                this.qqProvince = qqProvince;
+            }
+
+            public Object getWxappOpenId() {
+                return wxappOpenId;
+            }
+
+            public void setWxappOpenId(Object wxappOpenId) {
+                this.wxappOpenId = wxappOpenId;
+            }
+
+            public Object getCreateTime() {
+                return createTime;
+            }
+
+            public void setCreateTime(Object createTime) {
+                this.createTime = createTime;
+            }
+
+            public Object getQqAvatarUrl() {
+                return qqAvatarUrl;
+            }
+
+            public void setQqAvatarUrl(Object qqAvatarUrl) {
+                this.qqAvatarUrl = qqAvatarUrl;
+            }
+
+            public int getBrokerAuthenticate() {
+                return brokerAuthenticate;
+            }
+
+            public void setBrokerAuthenticate(int brokerAuthenticate) {
+                this.brokerAuthenticate = brokerAuthenticate;
+            }
+
+            public Object getWechatNickname() {
+                return wechatNickname;
+            }
+
+            public void setWechatNickname(Object wechatNickname) {
+                this.wechatNickname = wechatNickname;
+            }
+
+            public Object getHeadUrl() {
+                return headUrl;
+            }
+
+            public void setHeadUrl(Object headUrl) {
+                this.headUrl = headUrl;
+            }
+
+            public String getPassword() {
+                return password;
+            }
+
+            public void setPassword(String password) {
+                this.password = password;
+            }
+
+            public int getRecruitmentNum() {
+                return recruitmentNum;
+            }
+
+            public void setRecruitmentNum(int recruitmentNum) {
+                this.recruitmentNum = recruitmentNum;
+            }
+
+            public Object getWechatLanguage() {
+                return wechatLanguage;
+            }
+
+            public void setWechatLanguage(Object wechatLanguage) {
+                this.wechatLanguage = wechatLanguage;
+            }
+
+            public int getQualificationAuthenticate() {
+                return qualificationAuthenticate;
+            }
+
+            public void setQualificationAuthenticate(int qualificationAuthenticate) {
+                this.qualificationAuthenticate = qualificationAuthenticate;
+            }
+
+            public Object getQqNickname() {
+                return qqNickname;
+            }
+
+            public void setQqNickname(Object qqNickname) {
+                this.qqNickname = qqNickname;
+            }
+
+            public Object getRealName() {
+                return realName;
+            }
+
+            public void setRealName(Object realName) {
+                this.realName = realName;
+            }
+
+            public String getPhone() {
+                return phone;
+            }
+
+            public void setPhone(String phone) {
+                this.phone = phone;
+            }
+
+            public Object getOldPassword() {
+                return oldPassword;
+            }
+
+            public void setOldPassword(Object oldPassword) {
+                this.oldPassword = oldPassword;
+            }
+
+            public Object getWechatAvatarUrl() {
+                return wechatAvatarUrl;
+            }
+
+            public void setWechatAvatarUrl(Object wechatAvatarUrl) {
+                this.wechatAvatarUrl = wechatAvatarUrl;
+            }
+
+            public Object getWechatProvince() {
+                return wechatProvince;
+            }
+
+            public void setWechatProvince(Object wechatProvince) {
+                this.wechatProvince = wechatProvince;
+            }
+
+            public int getJobhuntingNum() {
+                return jobhuntingNum;
+            }
+
+            public void setJobhuntingNum(int jobhuntingNum) {
+                this.jobhuntingNum = jobhuntingNum;
+            }
+
+            public int getIdentity() {
+                return identity;
+            }
+
+            public void setIdentity(int identity) {
+                this.identity = identity;
+            }
+
+            public int getRealNameAuthenticate() {
+                return realNameAuthenticate;
+            }
+
+            public void setRealNameAuthenticate(int realNameAuthenticate) {
+                this.realNameAuthenticate = realNameAuthenticate;
+            }
+
+            public Object getWechatCountry() {
+                return wechatCountry;
+            }
+
+            public void setWechatCountry(Object wechatCountry) {
+                this.wechatCountry = wechatCountry;
+            }
+
+            public int getSex() {
+                return sex;
+            }
+
+            public void setSex(int sex) {
+                this.sex = sex;
+            }
+
+            public int getDel() {
+                return del;
+            }
+
+            public void setDel(int del) {
+                this.del = del;
+            }
+
+            public Object getQqOpenId() {
+                return qqOpenId;
+            }
+
+            public void setQqOpenId(Object qqOpenId) {
+                this.qqOpenId = qqOpenId;
+            }
+
+            public Object getWechatCity() {
+                return wechatCity;
+            }
+
+            public void setWechatCity(Object wechatCity) {
+                this.wechatCity = wechatCity;
+            }
+
+            public Object getQqCity() {
+                return qqCity;
+            }
+
+            public void setQqCity(Object qqCity) {
+                this.qqCity = qqCity;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public Object getImPassword() {
+                return imPassword;
+            }
+
+            public void setImPassword(Object imPassword) {
+                this.imPassword = imPassword;
+            }
+
+            public int getState() {
+                return state;
+            }
+
+            public void setState(int state) {
+                this.state = state;
+            }
+
+            public Object getMail() {
+                return mail;
+            }
+
+            public void setMail(Object mail) {
+                this.mail = mail;
+            }
+
+            public int getAge() {
+                return age;
+            }
+
+            public void setAge(int age) {
+                this.age = age;
+            }
+
+            public int getBuildNum() {
+                return buildNum;
+            }
+
+            public void setBuildNum(int buildNum) {
+                this.buildNum = buildNum;
+            }
+
+            public int getCumulativeLoginTime() {
+                return cumulativeLoginTime;
+            }
+
+            public void setCumulativeLoginTime(int cumulativeLoginTime) {
+                this.cumulativeLoginTime = cumulativeLoginTime;
+            }
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public Object getLastLogin() {
+                return lastLogin;
+            }
+
+            public void setLastLogin(Object lastLogin) {
                 this.lastLogin = lastLogin;
             }
 
