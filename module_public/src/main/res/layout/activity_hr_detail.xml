@@ -42,20 +42,8 @@
                 android:id="@+id/rv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/d50"
                 android:background="@color/white"
                 android:overScrollMode="never" />
-
-            <TextView
-                android:id="@+id/tv_hr_share"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/d50"
-                android:layout_alignParentBottom="true"
-                android:background="@color/white"
-                android:gravity="center"
-                android:text="分享"
-                android:textColor="@color/color_dark_333333"
-                android:textSize="@dimen/font15" />
         </RelativeLayout>
 
     </LinearLayout>

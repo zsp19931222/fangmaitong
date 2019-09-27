@@ -30,6 +30,7 @@ import io.reactivex.observers.DefaultObserver;
 import me.goldze.mvvmhabit.base.BaseApplication;
 import me.goldze.mvvmhabit.utils.IsNullUtil;
 import me.goldze.mvvmhabit.utils.ToastUtil;
+import me.goldze.mvvmhabit.utils.ZLog;
 
 import static com.goldze.base.constant.TipsConstants.GET_PERMISSIONS_FAILED;
 
@@ -110,6 +111,7 @@ public class ShareUtil {
         return bitmap;
     }
 
+
     /**
      * description:recycleview截屏
      * author: Andy
@@ -129,6 +131,7 @@ public class ShareUtil {
             final int cacheSize = maxMemory / 8;
             LruCache<String, Bitmap> bitmaCache = new LruCache<>(cacheSize);
             for (int i = 0; i < size; i++) {
+                if (i==1||i==2)continue;
                 RecyclerView.ViewHolder holder = adapter.createViewHolder(view, adapter.getItemViewType(i));
                 adapter.onBindViewHolder(holder, i);
                 holder.itemView.measure(
@@ -156,6 +159,7 @@ public class ShareUtil {
             }
 
             for (int i = 0; i < size; i++) {
+                if (i==1||i==2)continue;
                 Bitmap bitmap = bitmaCache.get(String.valueOf(i));
                 bigCanvas.drawBitmap(bitmap, 0f, iHeight, paint);
                 iHeight += bitmap.getHeight();

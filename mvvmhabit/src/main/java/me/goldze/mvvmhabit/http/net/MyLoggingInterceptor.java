@@ -19,6 +19,7 @@ import static me.goldze.mvvmhabit.http.net.ApiService.IMAGE_BASE_URL;
 import static me.goldze.mvvmhabit.http.net.ApiService.IMAGE_BASE_URL1;
 import static me.goldze.mvvmhabit.http.net.ApiService.IMAGE_BASE_URL2;
 import static me.goldze.mvvmhabit.http.net.ApiService.IMAGE_BASE_URL3;
+import static me.goldze.mvvmhabit.http.net.ApiService.IMAGE_BASE_URL4;
 import static me.goldze.mvvmhabit.http.net.ApiService.LOGIN_BASE_URL;
 
 /**
@@ -79,7 +80,7 @@ public class MyLoggingInterceptor implements Interceptor {
                     newBaseUrl = HttpUrl.parse(LOGIN_BASE_URL);
                     break;
                 case "micro_application":
-                    newBaseUrl = HttpUrl.parse(LOGIN_BASE_URL);
+                    newBaseUrl = HttpUrl.parse(IMAGE_BASE_URL4);
                     break;
                 default:
                     newBaseUrl = oldHttpUrl;

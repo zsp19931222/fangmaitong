@@ -15,6 +15,7 @@
             android:id="@+id/iv_hhs"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@mipmap/default_image"
             app:rv_corner_radius="@dimen/d3"
             />
 

@@ -31,6 +31,7 @@ import me.goldze.mvvmhabit.http.net.entity.BuildingListEntity;
 import me.goldze.mvvmhabit.http.net.entity.FeaturedLabelEntity;
 import me.goldze.mvvmhabit.http.net.entity.HouseResourceDetailEntity;
 import me.goldze.mvvmhabit.http.net.entity.LocationEntity;
+import me.goldze.mvvmhabit.http.net.entity.RecommendBuildingEntity;
 import me.goldze.mvvmhabit.http.net.entity.RecruitmentListEntity;
 import me.goldze.mvvmhabit.http.net.entity.SelectFriendEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
@@ -66,6 +67,7 @@ public interface ApiService<T extends BaseEntity> {
     String IMAGE_BASE_URL1 = "http://39.98.33.32:10002/";
     String IMAGE_BASE_URL2 = "http://39.98.33.32:10003/";
     String IMAGE_BASE_URL3 = "http://39.98.33.32:10005/";
+    String IMAGE_BASE_URL4 = "http://api.map.baidu.com/";
     String API = "/api/v2/";
 
 //    //注册
@@ -297,6 +299,11 @@ public interface ApiService<T extends BaseEntity> {
     //推荐房源
     @POST(API + "auth/building/recommendBuilding")
     @Headers({"url_name:user_info"})
-    Observable<SuccessEntity> recommendBuilding(@QueryMap() Map<String,Object> map);
+    Observable<RecommendBuildingEntity> recommendBuilding(@QueryMap() Map<String,Object> map);
+
+    //获取百度静态图
+    @GET("staticimage/v2")
+    @Headers({"url_name:micro_application"})
+    Observable<String> baiduImage(@QueryMap() Map<String,Object> map);
 
 }

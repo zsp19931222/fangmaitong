@@ -57,14 +57,13 @@ public class HRDetailActivity extends BaseActivity<ActivityHrDetailBinding, HRDe
         } catch (Exception e) {
 
         }
-
+        viewModel.recyclerView.set(binding.rv);
     }
 
     private void init(int i) {
         HRDetailAdapterBean homeAdapterBean = new HRDetailAdapterBean();
         homeAdapterBean.setType(i);
         hrDetailAdapterBeans.add(homeAdapterBean);
-        binding.tvHrShare.setOnClickListener(view -> ShareUtil.getInstance().share(this, binding.rv));
     }
 
     @Override

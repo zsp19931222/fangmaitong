@@ -1,5 +1,6 @@
 package me.goldze.mvvmhabit.http.net.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class RecruitmentListEntity extends BaseEntity{
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable {
         /**
          * remark : null
          * moneyDown : 2000.0

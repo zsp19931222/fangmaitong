@@ -3,8 +3,10 @@ package com.techangkeji.module.ui.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.widget.ZoomControls;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -12,13 +14,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.UiSettings;
+import com.baidu.mapapi.model.LatLng;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.util.MultiTypeDelegate;
+import com.goldze.base.constant.RxBusMessageEventConstants;
 import com.goldze.base.router.ARouterPath;
 import com.goldze.base.utils.BannerSetting;
 import com.goldze.base.utils.ShareUtil;
+import com.goldze.base.utils.glide.GlideLoadUtils;
 import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseBannerBean;
 import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseSizeBean;
 import com.techangkeji.module.R;
@@ -31,7 +43,9 @@ import com.techangkeji.module.ui.view_model.HRDetailViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.goldze.mvvmhabit.bus.RxBus;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
+import me.goldze.mvvmhabit.utils.ZLog;
 
 /**
  * description:
@@ -85,10 +99,10 @@ public class HRDetailAdapter extends BaseQuickAdapter<HRDetailAdapterBean, BaseV
                 helper.setText(R.id.tv_hrd_area, viewModel.address.get());
                 helper.setText(R.id.tv_hrd_company, viewModel.developerName.get());
                 helper.getView(R.id.tv_hrd_area).setOnClickListener(v -> {
-                    Bundle bundle=new Bundle();
-                    bundle.putString("longitude",viewModel.lon.get());
-                    bundle.putString("latitude",viewModel.lat.get());
-                    ARouter.getInstance().build(ARouterPath.Public.Location1Activity).withBundle("bundle",bundle).navigation();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("longitude", viewModel.lon.get());
+                    bundle.putString("latitude", viewModel.lat.get());
+                    ARouter.getInstance().build(ARouterPath.Public.Location1Activity).withBundle("bundle", bundle).navigation();
                 });
                 break;
             case HRDetailAdapterBean.Notice:
@@ -152,18 +166,19 @@ public class HRDetailAdapter extends BaseQuickAdapter<HRDetailAdapterBean, BaseV
                 });
                 break;
             case HRDetailAdapterBean.Site:
+                ZLog.d(viewModel.baiduImageUrl.get());
+                GlideLoadUtils.getInstance().glideLoad(context, viewModel.baiduImageUrl.get(), helper.getView(R.id.iv_baiduMap), 0);
                 break;
             case HRDetailAdapterBean.State:
                 RecyclerView recyclerViewState = helper.getView(R.id.rv_hs);
-                List<String> stringsState = new ArrayList<>();
-                for (int i = 0; i < 4; i++) {
-                    stringsState.add("");
-                }
-                HRDStateAdapter hrdStateAdapter = new HRDStateAdapter(R.layout.item_hrd_state, stringsState);
+                HRDStateAdapter hrdStateAdapter = new HRDStateAdapter(R.layout.item_hrd_state, viewModel.stateList);
+                viewModel.stateAdapter.set(hrdStateAdapter);
                 recyclerViewState.setLayoutManager(new LinearLayoutManager(context));
                 recyclerViewState.setAdapter(hrdStateAdapter);
                 helper.getView(R.id.tv_more).setOnClickListener(view -> {
                     Intent intent = new Intent(context, HouseStateActivity.class);
+                    intent.putExtra("listingName", viewModel.listingName.get());
+                    intent.putExtra("id", viewModel.id);
                     context.startActivity(intent);
                 });
                 break;
@@ -178,18 +193,21 @@ public class HRDetailAdapter extends BaseQuickAdapter<HRDetailAdapterBean, BaseV
                 recyclerViewComment.setAdapter(hrdCommentAdapter);
                 helper.getView(R.id.tv_more).setOnClickListener(view -> {
                     Intent intent = new Intent(context, CommentActivity.class);
+
                     context.startActivity(intent);
                 });
                 break;
             case HRDetailAdapterBean.Recommend:
                 RecyclerView recyclerViewRecommend = helper.getView(R.id.rv_hr);
-                List<String> stringsRecommend = new ArrayList<>();
-                for (int i = 0; i < 4; i++) {
-                    stringsRecommend.add("");
-                }
-                HRDRecommendAdapter hrdRecommendAdapter = new HRDRecommendAdapter(R.layout.item_home_resource, stringsRecommend);
+                HRDRecommendAdapter hrdRecommendAdapter = new HRDRecommendAdapter(R.layout.item_public_home_resource, viewModel.recommendBuildingList);
+                viewModel.recommendAdapter.set(hrdRecommendAdapter);
                 recyclerViewRecommend.setLayoutManager(new LinearLayoutManager(context));
                 recyclerViewRecommend.setAdapter(hrdRecommendAdapter);
+                helper.getView(R.id.tv_hr_share).setOnClickListener(view -> ShareUtil.getInstance().share(context, viewModel.recyclerView.get()));
+                helper.getView(R.id.tv_more).setOnClickListener(view -> {
+                    viewModel.finish();
+                    new Handler().postDelayed(() -> RxBus.getDefault().post(RxBusMessageEventConstants.ZZFY), 500);
+                });
                 break;
         }
     }

@@ -22,7 +22,6 @@
             android:id="@+id/tv_hs_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="2019-08-11  16：:45:59"
             android:textColor="@color/color_dark_333333"
             android:textSize="@dimen/font12" />
 
@@ -30,7 +29,6 @@
             android:id="@+id/tv_hs_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="撒大大"
             android:textColor="@color/color_dark_333333"
             android:textSize="@dimen/font12" />
     </LinearLayout>

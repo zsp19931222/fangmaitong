@@ -8,10 +8,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -19,6 +21,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.SPUtils;
 import com.goldze.base.constant.RxBusMessageEventConstants;
 import com.goldze.base.eventbus.SelectRxBusBean;
 import com.goldze.base.router.ARouterPath;
@@ -80,16 +83,23 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     public void initData() {
         fragmentManager = getSupportFragmentManager();
         binding.mainTgv.setOnItemClickListener(this);
-        initHome();
+        if (SPUtils.getInstance().getBoolean("fromRegister")) {
+            initMine();
+            SPUtils.getInstance().put("fromRegister", false);
+        } else {
+            initHome();
+        }
         RxSubscriptions.add(RxBus.getDefault().toObservable(String.class).subscribe(s -> {
             if (RxBusMessageEventConstants.XF.equals(s)) {
                 initHomeResource();
             } else if (RxBusMessageEventConstants.ZXZX.equals(s)) {
                 initInformation();
                 RxBus.getDefault().post(new RxBusMessageEventConstants.InformationRxMessage(0));
-            }else if (RxBusMessageEventConstants.ZPXX.equals(s)){
+            } else if (RxBusMessageEventConstants.ZPXX.equals(s)) {
                 initInformation();
                 RxBus.getDefault().post(new RxBusMessageEventConstants.InformationRxMessage(1));
+            } else if (RxBusMessageEventConstants.ZZFY.equals(s)) {
+                initHomeResource();
             }
         }));
         LocationUtil.getInstance().startLocation(this);
@@ -175,6 +185,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
             }
             fragmentTransaction.commit();
         } catch (Exception e) {
+            ZLog.d(e.toString());
             e.printStackTrace();
         }
     }
@@ -446,4 +457,5 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         //选取screenHeight*2/3进行判断
         return screenHeight * 2 / 3 > rect.bottom;
     }
+
 }

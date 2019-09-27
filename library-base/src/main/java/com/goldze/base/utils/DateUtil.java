@@ -152,7 +152,7 @@ public class DateUtil {
         if (IsNullUtil.getInstance().isEmpty(format)) {
             format = "yyyy-MM-dd HH:mm:ss";
         }
-        Long timeStamp = Long.parseLong(timeStampString) * 1000L;
+        Long timeStamp = Long.parseLong(timeStampString);
         return new SimpleDateFormat(format, Locale.CHINA).format(new Date(timeStamp));
     }
 

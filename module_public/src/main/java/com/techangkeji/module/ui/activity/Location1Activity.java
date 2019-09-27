@@ -12,6 +12,8 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.model.LatLngBounds;
+import com.baidu.mapapi.overlayutil.PoiOverlay;
+import com.baidu.mapapi.search.core.PoiChildrenInfo;
 import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
 import com.baidu.mapapi.search.poi.PoiBoundSearchOption;
 import com.baidu.mapapi.search.poi.PoiCitySearchOption;
@@ -21,6 +23,7 @@ import com.baidu.mapapi.search.poi.PoiIndoorResult;
 import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
 import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
+import com.baidu.mapapi.search.poi.PoiSortType;
 import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
 import com.baidu.mapapi.search.sug.SuggestionSearchOption;
@@ -50,7 +53,6 @@ public class Location1Activity extends BaseActivity<ActivityLocation1Binding, Ba
     private SuggestionSearch suggestionSearch;
     private List<SuggestionResult.SuggestionInfo> suggestionInfoList = new ArrayList<>();
     private LatLng latLng;
-
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_location1;
@@ -63,26 +65,37 @@ public class Location1Activity extends BaseActivity<ActivityLocation1Binding, Ba
 
     @Override
     public void initData() {
-        binding.title.setTitle("楼盘位置");
-        Bundle bundle = getIntent().getBundleExtra("bundle");
-        longitude = bundle.getString("longitude");
-        latitude = bundle.getString("latitude");
-        baiduMap = binding.map.getMap();
-        latLng = new LatLng(Double.valueOf(latitude), Double.valueOf(longitude));
-        MapStatus.Builder builder = new MapStatus.Builder();
-        builder.target(latLng).zoom(18.0f);
-        baiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-        MarkerOptions options = new MarkerOptions();
+        try {
+            binding.title.setTitle("楼盘位置");
+            Bundle bundle = getIntent().getBundleExtra("bundle");
+            longitude = bundle.getString("longitude");
+            latitude = bundle.getString("latitude");
+            baiduMap = binding.map.getMap();
+            latLng = new LatLng(Double.valueOf(latitude), Double.valueOf(longitude));
+            MapStatus.Builder builder = new MapStatus.Builder();
+            builder.target(latLng).zoom(18.0f);
+            baiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+            MarkerOptions options = new MarkerOptions();
 
-        // 图标
-        options.icon(BitmapDescriptorFactory.fromResource(R.mipmap.dinwei));
-        options.position(latLng);
-        // Bundle结束
-        baiduMap.addOverlay(options);//显示在地图上
-        binding.dt.setOnClickListener(v -> {
-            initSuggestionSearch("地铁");
-        });
-        initPOI();
+            // 图标
+            options.icon(BitmapDescriptorFactory.fromResource(R.mipmap.dinwei));
+            options.position(latLng);
+            // Bundle结束
+            baiduMap.addOverlay(options);//显示在地图上
+            binding.dt.setOnClickListener(v -> {
+                initSuggestionSearch("地铁");
+            });
+            binding.cy.setOnClickListener(v -> {
+                initSuggestionSearch("餐饮");
+            });
+            binding.gw.setOnClickListener(v -> {
+                initSuggestionSearch("购物");
+            });
+            initPOI();
+        }catch (Exception e){
+
+        }
+
     }
 
     /**
@@ -95,8 +108,19 @@ public class Location1Activity extends BaseActivity<ActivityLocation1Binding, Ba
         suggestionSearch.setOnGetSuggestionResultListener(suggestionResult -> {
             if (IsNullUtil.getInstance().isEmpty(suggestionResult.getAllSuggestions())) return;
             ZLog.d(suggestionResult.getAllSuggestions());
+            for (SuggestionResult.SuggestionInfo allSuggestion : suggestionResult.getAllSuggestions()) {
+                ZLog.d(allSuggestion.pt);
+                if (IsNullUtil.getInstance().isEmpty(allSuggestion.getPt()))continue;
+                MarkerOptions options = new MarkerOptions();
+                // 图标
+                options.icon(BitmapDescriptorFactory.fromResource(R.mipmap.dinwei));
+                options.position(allSuggestion.getPt());
+                // Bundle结束
+                baiduMap.addOverlay(options);//显示在地图上
+            }
+
         });
-        suggestionSearch.requestSuggestion(new SuggestionSearchOption().city("北京").location(latLng).keyword(search));
+        suggestionSearch.requestSuggestion(new SuggestionSearchOption().city("全国").location(latLng).keyword(search));
     }
 
 
@@ -108,8 +132,10 @@ public class Location1Activity extends BaseActivity<ActivityLocation1Binding, Ba
         mPoiSearch.searchNearby(new PoiNearbySearchOption()
                 .keyword("地铁")
                 .location(latLng)
-                .radius(5000)
-                .pageNum(10));
+                .sortType(PoiSortType.distance_from_near_to_far)
+                .radius(15000)
+                .pageNum(10)
+        );
     }
 
 
@@ -134,4 +160,5 @@ public class Location1Activity extends BaseActivity<ActivityLocation1Binding, Ba
 
         }
     };
+
 }

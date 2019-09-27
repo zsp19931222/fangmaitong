@@ -31,18 +31,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/tv_more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="查看更多>"
-            android:textColor="@color/color_gray_999999"
-            android:textSize="@dimen/font10" />
     </LinearLayout>
+
     <me.goldze.mvvmhabit.view.shape.RadiusImageView
         android:layout_width="match_parent"
         android:layout_marginStart="@dimen/d16"
         android:layout_marginEnd="@dimen/d16"
+        android:id="@+id/iv_baiduMap"
+        android:background="@mipmap/default_image"
         app:rv_corner_radius="@dimen/d8"
         android:layout_marginTop="@dimen/d20"
         android:layout_height="@dimen/d150" />

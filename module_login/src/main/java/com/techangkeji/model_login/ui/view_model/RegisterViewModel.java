@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.ObservableField;
 
+import com.blankj.utilcode.util.SPUtils;
 import com.goldze.base.utils.RandomUtil;
 import com.goldze.base.utils.SHA1Util;
 import com.techangkeji.model_login.R;
@@ -131,6 +132,7 @@ public class RegisterViewModel extends BaseViewModel {
                         perfectionUserInfoPopup.setOnConfirmListener(() -> {
                             showDialog("正在登录请稍后");
 //                            LoginUtil.getInstance().saveUserInfo(response);
+                            SPUtils.getInstance().put("fromRegister",true);
                             LoginUtil.getInstance().requestPermissions(context.get(),response);
                         });
                         perfectionUserInfoPopup.showPopupWindow();

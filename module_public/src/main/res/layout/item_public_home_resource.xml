@@ -10,6 +10,7 @@
     android:paddingBottom="@dimen/d10">
 
     <ImageView
+        android:id="@+id/iv_ihr"
         android:layout_width="@dimen/d100"
         android:layout_height="@dimen/d75" />
 
@@ -48,7 +49,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/d26"
-            android:text="茶园新区  通江大道      建面75-155m"
             android:textColor="@color/color_dark_333333"
             android:textSize="@dimen/font12" />
 
@@ -57,6 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/d42"
             android:text="32000元/m"
+            android:id="@+id/tv_ihr_price"
             android:textColor="#FF3333"
             android:textSize="@dimen/font12" />
 
@@ -74,6 +75,7 @@
                 android:paddingStart="@dimen/d3"
                 android:paddingEnd="@dimen/d3"
                 android:text="住宅"
+                android:id="@+id/tv_ihr_type"
                 android:textSize="@dimen/font10"
                 binding:rv_backgroundColor="@color/color_FFDEB6"
                 binding:rv_radius="@dimen/d3"
@@ -84,6 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/d8"
                 android:text="在售"
+                android:id="@+id/tv_ihr_sales_status"
                 android:textColor="@color/color_dark_333333"
                 android:textSize="@dimen/font10" />
 
@@ -93,8 +96,8 @@
                 android:layout_marginStart="@dimen/d8"
                 android:paddingStart="@dimen/d3"
                 android:paddingEnd="@dimen/d3"
-                android:text="项目在建"
                 android:textSize="@dimen/font10"
+                android:id="@+id/tv_ihr_label1"
                 binding:rv_backgroundColor="@color/color_EEEEEE"
                 binding:rv_radius="@dimen/d3"
                 binding:rv_textColor="@color/color_gray_999999" />
@@ -105,7 +108,18 @@
                 android:layout_marginStart="@dimen/d8"
                 android:paddingStart="@dimen/d3"
                 android:paddingEnd="@dimen/d3"
-                android:text="高绿化率"
+                android:id="@+id/tv_ihr_label2"
+                android:textSize="@dimen/font10"
+                binding:rv_backgroundColor="@color/color_EEEEEE"
+                binding:rv_radius="@dimen/d3"
+                binding:rv_textColor="@color/color_gray_999999" />
+            <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/d15"
+                android:layout_marginStart="@dimen/d8"
+                android:paddingStart="@dimen/d3"
+                android:paddingEnd="@dimen/d3"
+                android:id="@+id/tv_ihr_label3"
                 android:textSize="@dimen/font10"
                 binding:rv_backgroundColor="@color/color_EEEEEE"
                 binding:rv_radius="@dimen/d3"

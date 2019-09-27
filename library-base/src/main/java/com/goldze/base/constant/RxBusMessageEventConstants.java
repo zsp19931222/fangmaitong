@@ -25,6 +25,7 @@ public class RxBusMessageEventConstants {
     public final static String XF = "新房";
     public final static String ZXZX = "最新资讯";
     public final static String ZPXX = "招聘信息";
+    public final static String ZZFY = "跳转房源";
 
 
     /**

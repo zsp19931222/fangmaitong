@@ -3,14 +3,12 @@
     package="com.techangkeji.module">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <application
-       >
+    <application>
         <activity android:name=".ui.activity.HRDetailActivity" />
         <activity android:name=".ui.activity.HouseSizeActivity" />
         <activity android:name=".ui.activity.HouseStateActivity" />
         <activity android:name=".ui.activity.CommentActivity" />
         <activity android:name=".ui.activity.AreaSelectActivity" />
-        <activity android:name=".ui.activity.MoreAddressActivity" />
         <activity android:name=".ui.activity.LocationActivity" />
         <activity android:name=".ui.activity.Location1Activity" />
     </application>

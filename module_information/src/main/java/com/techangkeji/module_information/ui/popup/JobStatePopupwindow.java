@@ -53,13 +53,7 @@ public class JobStatePopupwindow extends BasePopupWindow {
         rv.setLayoutManager(new LinearLayoutManager(context));
         rv.setAdapter(sortAdapter);
         sortAdapter.setSelectListener(position -> {
-            String s;
-            if (position==0){
-                s="";
-            }else {
-                s=""+position;
-            }
-            RxBus.getDefault().post(new SortRxBusBean(s));
+            RxBus.getDefault().post(new SortRxBusBean(strings.get(position).getStr()));
             dismiss();
         });
     }

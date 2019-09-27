@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import me.goldze.mvvmhabit.bus.RxBus;
 import me.goldze.mvvmhabit.http.net.entity.AreaListEntity;
 import me.goldze.mvvmhabit.litepal.CityLitePal;
 import me.goldze.mvvmhabit.litepal.DistrictLitePal;
@@ -116,5 +117,9 @@ public class AreaPopupwindow extends BasePopupWindow {
         rv_pa_3.setLayoutManager(new LinearLayoutManager(context));
         rv_pa_3.addItemDecoration(new MyVerticalDecoration(context, ContextCompat.getColor(context, R.color.color_f6), 1, 0, 0, true));
         rv_pa_3.setAdapter(adapter3);
+        adapter3.setOnSelectListener((position, level) -> {
+            RxBus.getDefault().post(new AreaPopupBean(level,areaLevel3List.get(position).getName(),areaLevel3List.get(position).getId(),false));
+            dismiss();
+        });
     }
 }

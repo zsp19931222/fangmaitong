@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.goldze.base.eventbus.PriceRxBusBean;
+import com.goldze.base.listener.PopupSelectListener;
 import com.techangkeji.module_hr.R;
 
 import java.util.List;
@@ -65,6 +66,14 @@ public class PriceAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
                 break;
 
         }
-        RxBus.getDefault().post(priceRxBusBean);
+        helper.itemView.setOnClickListener(view -> {
+            popupSelectListener.select(helper.getAdapterPosition());
+        });
+    }
+
+    private PopupSelectListener popupSelectListener;
+
+    public void setPopupSelectListener(PopupSelectListener popupSelectListener) {
+        this.popupSelectListener = popupSelectListener;
     }
 }

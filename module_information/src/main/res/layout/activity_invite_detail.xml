@@ -74,15 +74,48 @@
                             android:textColor="@color/color_dark_333333"
                             android:textSize="@dimen/font12" />
 
-                        <me.goldze.mvvmhabit.view.shape.RadiusTextView
-                            android:layout_width="wrap_content"
+                        <RelativeLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/d5"
-                            android:text="资质认证"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/font10"
-                            binding:rv_backgroundColor="@color/color_FF8C00"
-                            binding:rv_radius="@dimen/d3" />
+                            android:orientation="horizontal">
+
+                            <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/d5"
+                                android:id="@+id/zzrz"
+                                android:text="资质认证"
+                                android:textColor="@color/white"
+
+                                android:textSize="@dimen/font10"
+                                binding:rv_backgroundColor="@color/color_FF8C00"
+                                binding:rv_radius="@dimen/d3" />
+
+                            <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/d5"
+                                android:text="实名认证"
+                                android:id="@+id/smrz"
+                                android:layout_toEndOf="@id/zzrz"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/font10"
+                                binding:rv_backgroundColor="@color/color_FF8C00"
+                                binding:rv_radius="@dimen/d3" />
+
+                            <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/d5"
+                                android:text="经纪人认证"
+                                android:layout_toEndOf="@id/smrz"
+                                android:id="@+id/jjrrz"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/font10"
+                                binding:rv_backgroundColor="@color/color_FF8C00"
+                                binding:rv_radius="@dimen/d3" />
+                        </RelativeLayout>
+
                     </LinearLayout>
                 </LinearLayout>
 

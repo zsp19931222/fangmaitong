@@ -6,19 +6,17 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.goldze.base.view.TitleVIew;
+import com.kcrason.highperformancefriendscircle.others.DataCenter;
 import com.techangkeji.module.BR;
 import com.techangkeji.module.R;
-import com.techangkeji.module.databinding.ActivityHouseSizeBinding;
 import com.techangkeji.module.databinding.ActivityHouseStateBinding;
-import com.techangkeji.module.ui.adapter.HouseSizeAdapter;
 import com.techangkeji.module.ui.adapter.HouseStateAdapter;
-import com.techangkeji.module.ui.view_model.HouseSizeViewModel;
 import com.techangkeji.module.ui.view_model.HouseStateViewModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import me.goldze.mvvmhabit.base.BaseActivity;
+import me.goldze.mvvmhabit.bus.RxBus;
+import me.goldze.mvvmhabit.bus.RxSubscriptions;
+import me.goldze.mvvmhabit.http.net.body.CommentBody;
 import me.goldze.mvvmhabit.view.MyVerticalDecoration;
 
 public class HouseStateActivity extends BaseActivity<ActivityHouseStateBinding, HouseStateViewModel> {
@@ -34,15 +32,19 @@ public class HouseStateActivity extends BaseActivity<ActivityHouseStateBinding, 
 
     @Override
     public void initData() {
-        TitleVIew titleVIew= (TitleVIew) binding.title;
-        titleVIew.setTitle("楼盘动态");
-        List<String> strings = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            strings.add("");
-        }
-        HouseStateAdapter houseSizeAdapter = new HouseStateAdapter(R.layout.item_house_state, strings);
+        viewModel.id = (int) getIntent().getExtras().get("id");
+        viewModel.emojiPanelView.set(binding.emojiPanelView);
+        binding.emojiPanelView.initEmojiPanel(DataCenter.emojiDataSources);
+        TitleVIew titleVIew = (TitleVIew) binding.title;
+        titleVIew.setTitle(getIntent().getExtras().getString("listingName"));
+        HouseStateAdapter houseSizeAdapter = new HouseStateAdapter(R.layout.item_house_state, viewModel.dataBeans);
+        viewModel.adapter.set(houseSizeAdapter);
         binding.rv.setLayoutManager(new LinearLayoutManager(this));
         binding.rv.addItemDecoration(new MyVerticalDecoration(this, ContextCompat.getColor(this, R.color.color_f6), 1, 0, 0, true));
         binding.rv.setAdapter(houseSizeAdapter);
+        viewModel.getCommentList();
+        RxSubscriptions.add(RxBus.getDefault().toObservable(CommentBody.class).subscribe(commentBody -> {
+            viewModel.comment(commentBody);
+        }));
     }
 }
