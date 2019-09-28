@@ -14,6 +14,7 @@ import java.util.Map;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.http.net.DefaultObserver;
 import me.goldze.mvvmhabit.http.net.IdeaApi;
+import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.information.PlacardListEntity;
 import me.goldze.mvvmhabit.utils.RxUtils;
 
@@ -45,16 +46,14 @@ public class NoticeViewModel extends BaseViewModel {
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                 .compose(RxUtils.schedulersTransformer())
                 .doOnSubscribe(disposable -> showDialog())
-                .subscribe(new DefaultObserver<PlacardListEntity>(this) {
+                .subscribe(new DefaultObserver<SuccessEntity<PlacardListEntity.DataBean>>(this) {
                     @Override
-                    public void onSuccess(PlacardListEntity response) {
-                        for (PlacardListEntity.DataBean datum : response.getData()) {
-                            create_time.set(DateUtil.getInstance().getData(datum.getCreate_time()));
-                            show_img_url.set(datum.getShow_img_url());
-                            placard_title.set(datum.getPlacard_title());
-                            look_num.set(datum.getLook_num()+"");
-                            content.set(datum.getContent());
-                        }
+                    public void onSuccess(SuccessEntity<PlacardListEntity.DataBean> response) {
+                            create_time.set(DateUtil.getInstance().getData(response.getContent().getCreate_time()));
+                            show_img_url.set(response.getContent().getShow_img_url());
+                            placard_title.set(response.getContent().getPlacard_title());
+                            look_num.set(response.getContent().getLook_num()+"");
+                            content.set(response.getContent().getContent());
                     }
                 });
     }

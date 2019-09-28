@@ -7,6 +7,7 @@ import java.util.Map;
 import io.reactivex.Observable;
 import me.goldze.mvvmhabit.http.net.body.AddFriendBody;
 import me.goldze.mvvmhabit.http.net.body.AppReportBody;
+import me.goldze.mvvmhabit.http.net.body.AppReportListBody;
 import me.goldze.mvvmhabit.http.net.body.AuthBrokerBody;
 import me.goldze.mvvmhabit.http.net.body.AuthQualificationBody;
 import me.goldze.mvvmhabit.http.net.body.AuthRealNameBody;
@@ -14,6 +15,7 @@ import me.goldze.mvvmhabit.http.net.body.BindingThirdBody;
 import me.goldze.mvvmhabit.http.net.body.CheckAuthCodeBody;
 import me.goldze.mvvmhabit.http.net.body.CommentBody;
 import me.goldze.mvvmhabit.http.net.body.CommentListBody;
+import me.goldze.mvvmhabit.http.net.body.FeedBackBody;
 import me.goldze.mvvmhabit.http.net.body.LocationBody;
 import me.goldze.mvvmhabit.http.net.body.LoginBody;
 import me.goldze.mvvmhabit.http.net.body.MyMovingListBody;
@@ -25,6 +27,7 @@ import me.goldze.mvvmhabit.http.net.body.UntiedThirdBody;
 import me.goldze.mvvmhabit.http.net.body.UpdateBody;
 import me.goldze.mvvmhabit.http.net.body.UpdatePasswordBody;
 import me.goldze.mvvmhabit.http.net.body.VoteBody;
+import me.goldze.mvvmhabit.http.net.entity.AppReportListEntity;
 import me.goldze.mvvmhabit.http.net.entity.AreaListEntity;
 import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
 import me.goldze.mvvmhabit.http.net.entity.BuildingListEntity;
@@ -32,6 +35,7 @@ import me.goldze.mvvmhabit.http.net.entity.FeaturedLabelEntity;
 import me.goldze.mvvmhabit.http.net.entity.HouseResourceDetailEntity;
 import me.goldze.mvvmhabit.http.net.entity.LocationEntity;
 import me.goldze.mvvmhabit.http.net.entity.RecommendBuildingEntity;
+import me.goldze.mvvmhabit.http.net.entity.RecommendFriendEntity;
 import me.goldze.mvvmhabit.http.net.entity.RecruitmentListEntity;
 import me.goldze.mvvmhabit.http.net.entity.SelectFriendEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
@@ -227,6 +231,27 @@ public interface ApiService<T extends BaseEntity> {
     @Headers({"url_name:login"})
     Observable<AreaListEntity> listAllArea();
 
+    //举报列表
+    @POST(API + "auth/appReport/query")
+    @Headers({"url_name:login"})
+    Observable<AppReportListEntity> appReportList(@Body() AppReportListBody appReportListBody);
+
+    //反馈
+    @POST(API + "auth/appFeedback")
+    @Headers({"url_name:login"})
+    Observable<SuccessEntity> appFeedback(@Body() FeedBackBody appReportListBody);
+
+
+    //反馈
+    @POST(API + "auth/appFeedback/query")
+    @Headers({"url_name:login"})
+    Observable<AppReportListEntity> appFeedbackList(@Body() AppReportListBody appReportListBody);
+
+    //推荐好友
+    @GET(API + "recommend/{areaId}")
+    @Headers({"url_name:login"})
+    Observable<RecommendFriendEntity> recommend(@Path("areaId") int entityId);
+
     //房源发布
     @POST(API + "auth/building/addBuildingInfo")
     @Headers({"url_name:user_info"})
@@ -275,7 +300,7 @@ public interface ApiService<T extends BaseEntity> {
     //公告详情
     @POST(API + "auth/placard/getPlacardInfo")
     @Headers({"url_name:message"})
-    Observable<PlacardListEntity> getPlacardInfo(@QueryMap() Map<String,Object> map);
+    Observable<SuccessEntity<PlacardListEntity.DataBean>> getPlacardInfo(@QueryMap() Map<String,Object> map);
 
     //资讯列表
     @POST(API + "auth/news/getNewsList")

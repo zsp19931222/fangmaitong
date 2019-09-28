@@ -13,7 +13,9 @@ import com.chad.library.adapter.base.util.MultiTypeDelegate;
 import com.goldze.base.constant.RxBusMessageEventConstants;
 import com.goldze.base.router.ARouterPath;
 import com.techangkeji.model_home.R;
+import com.techangkeji.model_home.ui.activity.RecommendFriendActivity;
 import com.techangkeji.model_home.ui.bean.HomeAdapterBean;
+import com.techangkeji.model_home.ui.view_midel.HomeViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +29,10 @@ import me.goldze.mvvmhabit.view.MyVerticalDecoration;
  * email:zsp872126510@gmail.com
  */
 public class HomeAdapter extends BaseQuickAdapter<HomeAdapterBean, BaseViewHolder> {
-    public HomeAdapter(@Nullable List<HomeAdapterBean> data) {
+    private HomeViewModel viewModel;
+    public HomeAdapter(@Nullable List<HomeAdapterBean> data,HomeViewModel viewModel) {
         super(data);
+        this.viewModel=viewModel;
         setMultiTypeDelegate(new MultiTypeDelegate<HomeAdapterBean>() {
             @Override
             protected int getItemType(HomeAdapterBean homeAdapterBean) {
@@ -83,16 +87,13 @@ public class HomeAdapter extends BaseQuickAdapter<HomeAdapterBean, BaseViewHolde
     }
 
     private void initFriendRecommend(BaseViewHolder helper) {
-        List<String> strings = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            strings.add("" + i);
-        }
         RecyclerView recyclerView = helper.getView(R.id.rv_lh);
-        FriendRecommendAdapter friendRecommendAdapter = new FriendRecommendAdapter(R.layout.item_friend_recommend, strings);
+        FriendRecommendAdapter friendRecommendAdapter = new FriendRecommendAdapter(R.layout.item_friend_recommend, viewModel.recommendFriedList);
+        viewModel.friendRecommendAdapter.set(friendRecommendAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(helper.itemView.getContext(), 3));
         recyclerView.setAdapter(friendRecommendAdapter);
         helper.getView(R.id.tv_lh_more).setOnClickListener(v -> {
-            ARouter.getInstance().build(ARouterPath.Message.AddContactActivity).navigation();
+            viewModel.startActivity(RecommendFriendActivity.class);
         });
     }
 

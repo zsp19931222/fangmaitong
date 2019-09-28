@@ -9,6 +9,8 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.goldze.base.router.ARouterPath;
 import com.goldze.base.utils.DateUtil;
 import com.kcrason.highperformancefriendscircle.Constants;
 import com.kcrason.highperformancefriendscircle.beans.CommentBean;
@@ -25,6 +27,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import me.goldze.mvvmhabit.base.BaseViewModel;
+import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.http.net.DefaultObserver;
 import me.goldze.mvvmhabit.http.net.IdeaApi;
 import me.goldze.mvvmhabit.http.net.body.CommentBody;
@@ -59,10 +62,11 @@ public class UserDetailViewModel extends BaseViewModel {
     public ObservableField<Integer> hrAuthSM = new ObservableField<>(View.GONE);
     public ObservableField<Integer> hrAuthZZ = new ObservableField<>(View.GONE);
     public ObservableField<Integer> hrAuthJJR = new ObservableField<>(View.GONE);
-    public ObservableField<String> visits=new ObservableField<>("");//最近出没地
-    public ObservableField<String> lastLogin=new ObservableField<>("");//最近登录
-    public ObservableField<String> buildNum=new ObservableField<>("");
-    public ObservableField<String> recruitmentNum =new ObservableField<>("");
+    public ObservableField<String> visits = new ObservableField<>("");//最近出没地
+    public ObservableField<String> lastLogin = new ObservableField<>("");//最近登录
+    public ObservableField<String> buildNum = new ObservableField<>("");
+    public ObservableField<String> recruitmentNum = new ObservableField<>("");
+    private String phone;
 
     public UserDetailViewModel(@NonNull Application application) {
         super(application);
@@ -294,9 +298,10 @@ public class UserDetailViewModel extends BaseViewModel {
                     @Override
                     public void onSuccess(SuccessEntity<UserDetailEntity> response) {
                         ZLog.d(response);
+                        phone = response.getContent().getPhone();
                         hrUrl.set(response.getContent().getHeadUrl());
                         hrName.set(response.getContent().getRealName());
-                        hrNum.set("账号："+response.getContent().getId());
+                        hrNum.set("账号：" + response.getContent().getId());
                         switch (LocalDataHelper.getInstance().getUserInfo().getIdentity()) {
                             case 1:
                                 hrIdent.set("总代");
@@ -311,27 +316,47 @@ public class UserDetailViewModel extends BaseViewModel {
                                 hrIdent.set("经纪人");
                                 break;
                         }
-                        visits.set("最近出没地："+response.getContent().getLocation().getLocation());
-                        lastLogin.set("最近登录："+ DateUtil.getInstance().getData(response.getContent().getLastLogin()+" 00:00:00"));
-                        if (response.getContent().getBrokerAuthenticate()==1){
+                        visits.set("最近出没地：" + response.getContent().getLocation().getLocation());
+                        lastLogin.set("最近登录：" + DateUtil.getInstance().getData(response.getContent().getLastLogin() + " 00:00:00"));
+                        if (response.getContent().getBrokerAuthenticate() == 1) {
                             hrAuthJJR.set(View.VISIBLE);
-                        }else {
+                        } else {
                             hrAuthJJR.set(View.GONE);
                         }
-                        if (response.getContent().getQualificationAuthenticate()==1){
+                        if (response.getContent().getQualificationAuthenticate() == 1) {
                             hrAuthZZ.set(View.VISIBLE);
-                        }else {
+                        } else {
                             hrAuthZZ.set(View.GONE);
                         }
-                        if (response.getContent().getRealNameAuthenticate()==1){
+                        if (response.getContent().getRealNameAuthenticate() == 1) {
                             hrAuthSM.set(View.VISIBLE);
-                        }else {
+                        } else {
                             hrAuthSM.set(View.GONE);
                         }
-                        buildNum.set("房源"+"("+response.getContent().getBuildNum()+")");
-                        recruitmentNum.set("招聘"+"("+response.getContent().getRecruitmentNum()+")");
+                        buildNum.set("房源" + "(" + response.getContent().getBuildNum() + ")");
+                        recruitmentNum.set("招聘" + "(" + response.getContent().getRecruitmentNum() + ")");
                     }
 
                 });
     }
+
+    /**
+     * description: 聊天界面
+     * author: Andy
+     * date: 2019/9/28  21:48
+     */
+    public BindingCommand chatCommand = new BindingCommand(() -> {
+        if (IsNullUtil.getInstance().isEmpty(phone)) return;
+        ARouter.getInstance().build(ARouterPath.Message.ChatActivity).withString("userId", phone).navigation();
+    });
+
+    /**
+     * description: 添加好友
+     * author: Andy
+     * date: 2019/9/28  22:01
+     */
+    public BindingCommand addFriendCommand=new BindingCommand(() -> {
+        if (IsNullUtil.getInstance().isEmpty(phone)) return;
+        ARouter.getInstance().build(ARouterPath.Message.AddContactActivity).withString("userId", phone).navigation();
+    });
 }

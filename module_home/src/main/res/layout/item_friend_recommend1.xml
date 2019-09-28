@@ -7,7 +7,7 @@
     android:paddingBottom="@dimen/d10"
     android:paddingStart="@dimen/d16"
     android:paddingEnd="@dimen/d16"
-    android:layout_height="@dimen/d145">
+    android:layout_height="@dimen/d200">
 
     <ImageView
         android:id="@+id/iv_ifr"
@@ -21,6 +21,7 @@
         android:layout_height="@dimen/d15"
         android:gravity="center_vertical"
         android:paddingStart="@dimen/d2"
+        android:text="经纪人"
         android:textSize="@dimen/font10"
         binding:rv_backgroundColor="@color/color_1BBDBB"
         binding:rv_bottomRightRadius="@dimen/d5"
@@ -66,6 +67,7 @@
             android:id="@+id/iv_ifr_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="名称"
             android:textColor="@color/white"
             android:textSize="@dimen/font12" />
 

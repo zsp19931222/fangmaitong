@@ -69,7 +69,7 @@ public class HomeFragment extends BaseLazyFragment<FragmentHomeBinding, HomeView
 
     @Override
     public void fetchData() {
-        homeAdapter = new HomeAdapter(homeAdapterBeans);
+        homeAdapter = new HomeAdapter(homeAdapterBeans,viewModel);
         initHeader();
         binding.rv.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rv.setAdapter(homeAdapter);
@@ -80,6 +80,7 @@ public class HomeFragment extends BaseLazyFragment<FragmentHomeBinding, HomeView
         homeAdapter.notifyDataSetChanged();
         viewModel.recommendBuildHome();
         viewModel.recommendNewsHome();
+        viewModel.recommendFriend();
     }
 
     @Override

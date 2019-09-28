@@ -42,6 +42,7 @@ public class ARouterPath {
         public static final String MapActivity = Message + "/MapActivity";
         public static final String ReleaseInformationActivity = Message + "/ReleaseInformationActivity";
         public static final String AddContactActivity = Message + "/AddContactActivity";
+        public static final String ChatActivity = Message + "/ChatActivity";
     }
 
     /**

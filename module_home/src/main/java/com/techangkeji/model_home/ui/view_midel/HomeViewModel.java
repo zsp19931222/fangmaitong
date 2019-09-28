@@ -3,12 +3,15 @@ package com.techangkeji.model_home.ui.view_midel;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
+import androidx.databinding.ObservableList;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.SPUtils;
 import com.goldze.base.router.ARouterPath;
 import com.goldze.base.utils.BaiduLocationBean;
+import com.techangkeji.model_home.ui.adapter.FriendRecommendAdapter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +24,7 @@ import me.goldze.mvvmhabit.http.net.body.AuthRealNameBody;
 import me.goldze.mvvmhabit.http.net.body.LocationBody;
 import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
 import me.goldze.mvvmhabit.http.net.entity.LocationEntity;
+import me.goldze.mvvmhabit.http.net.entity.RecommendFriendEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.RxUtils;
@@ -32,6 +36,9 @@ import me.goldze.mvvmhabit.utils.ToastUtil;
  * email:zsp872126510@gmail.com
  */
 public class HomeViewModel extends BaseViewModel {
+
+    public ObservableList<RecommendFriendEntity.DataBean> recommendFriedList=new ObservableArrayList<>();
+    public ObservableField<FriendRecommendAdapter> friendRecommendAdapter=new ObservableField<>();
 
     public HomeViewModel(@NonNull Application application) {
         super(application);
@@ -82,6 +89,24 @@ public class HomeViewModel extends BaseViewModel {
                     @Override
                     public void onNext(Object o) {
 
+                    }
+                });
+    }
+    /**
+     * description: 推荐好友
+     * author: Andy
+     * date: 2019/9/28  23:39
+     */
+
+    public void recommendFriend(){
+        IdeaApi.getApiService().recommend(Integer.parseInt(SPUtils.getInstance().getString("areaId")))
+                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                .compose(RxUtils.schedulersTransformer())
+                .subscribe(new DefaultObserver<RecommendFriendEntity>() {
+                    @Override
+                    public void onSuccess(RecommendFriendEntity response) {
+                        recommendFriedList.addAll(response.getData());
+                        friendRecommendAdapter.get().notifyDataSetChanged();
                     }
                 });
     }

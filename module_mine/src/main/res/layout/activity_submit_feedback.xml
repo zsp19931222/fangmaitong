@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
-        android:padding="@dimen/d16">
+        >
 
         <com.goldze.base.view.TitleVIew
             android:id="@+id/title"
@@ -24,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="反馈标题"
+            android:layout_margin="@dimen/d16"
             android:textColor="@color/color_dark_333333"
             android:textSize="@dimen/font16" />
 
@@ -33,6 +34,8 @@
             android:layout_marginTop="@dimen/d10"
             android:background="@null"
             android:hint="请输入标题"
+            android:layout_marginStart="@dimen/d16"
+            android:layout_marginEnd="@dimen/d16"
             android:text="@={viewModel.title}"
             android:textColor="@color/color_dark_333333"
             android:textColorHint="@color/color_gray_999999"
@@ -41,6 +44,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d16"
             android:layout_marginTop="@dimen/d16"
             android:text="反馈内容"
             android:textColor="@color/color_dark_333333"
@@ -52,7 +56,9 @@
             android:layout_marginTop="@dimen/d10"
             android:background="@null"
             android:hint="请输入反馈内容"
-            android:text="@{viewModel.content}"
+            android:layout_marginStart="@dimen/d16"
+            android:layout_marginEnd="@dimen/d16"
+            android:text="@={viewModel.content}"
             android:textColor="@color/color_dark_333333"
             android:textColorHint="@color/color_gray_999999"
             android:textSize="@dimen/font14" />

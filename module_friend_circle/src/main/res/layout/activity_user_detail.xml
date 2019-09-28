@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:binding="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.techangkeji.module_friend_circle.ui.viewModel.UserDetailViewModel" />
@@ -34,8 +36,8 @@
 
                 <ImageView
                     android:layout_width="@dimen/d100"
-                    binding:url="@{viewModel.hrUrl}"
-                    android:layout_height="@dimen/d100" />
+                    android:layout_height="@dimen/d100"
+                    binding:url="@{viewModel.hrUrl}" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -176,13 +178,42 @@
             <com.scwang.smartrefresh.layout.SmartRefreshLayout
                 android:id="@+id/srl"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d49"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/color_FF8C00"
+                    android:gravity="center"
+                    android:text="打招呼"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font15"
+                    binding:onClickCommand="@{viewModel.chatCommand}" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/color_gray_999999"
+                    android:gravity="center"
+                    android:text="加好友"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font15"
+                    binding:onClickCommand="@{viewModel.addFriendCommand}" />
+            </LinearLayout>
         </LinearLayout>
 
         <com.kcrason.highperformancefriendscircle.widgets.EmojiPanelView

@@ -11,6 +11,7 @@
         <activity android:name=".ui.activity.HouseMortgagePledgeActivity" />
         <activity android:name=".ui.activity.CreditActivity" />
         <activity android:name=".ui.activity.AuctionActivity" />
+        <activity android:name=".ui.activity.RecommendFriendActivity" />
     </application>
 
 </manifest>

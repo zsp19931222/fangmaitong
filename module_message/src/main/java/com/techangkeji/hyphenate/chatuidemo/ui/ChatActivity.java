@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.goldze.base.router.ARouterPath;
 import com.hyphenate.easeui.ui.EaseChatFragment;
 import com.hyphenate.util.EasyUtils;
 import com.techangkeji.hyphenate.chatuidemo.runtimepermissions.PermissionsManager;
@@ -14,6 +16,7 @@ import com.techangkeji.model_message.R;
  * chat activity_invite_information，EaseChatFragment was used {@link #EaseChatFragment}
  *
  */
+@Route(path = ARouterPath.Message.ChatActivity)
 public class ChatActivity extends BaseActivity{
     public static ChatActivity activityInstance;
     private EaseChatFragment chatFragment;

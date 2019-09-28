@@ -29,6 +29,8 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.widget.EaseAlertDialog;
 import com.techangkeji.hyphenate.chatuidemo.DemoHelper;
 import com.techangkeji.model_message.R;
+import com.umeng.commonsdk.debug.E;
+
 @Route(path = ARouterPath.Message.AddContactActivity)
 public class AddContactActivity extends BaseActivity{
 	private EditText editText;
@@ -37,14 +39,20 @@ public class AddContactActivity extends BaseActivity{
 	private Button searchBtn;
 	private String toAddUsername;
 	private ProgressDialog progressDialog;
+	private String userId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.em_activity_add_contact);
 		TextView mTextView = (TextView) findViewById(R.id.add_list_friends);
-		
+		try {
+			userId=getIntent().getExtras().getString("userId");
+		}catch (Exception e){
+			userId="";
+		}
 		editText = (EditText) findViewById(R.id.edit_note);
+		editText.setText(userId);
 		String strAdd = getResources().getString(R.string.add_friend);
 		mTextView.setText(strAdd);
 		String strUserName = getResources().getString(R.string.user_name);
