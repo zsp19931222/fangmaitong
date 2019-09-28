@@ -78,7 +78,8 @@ public class HomeFragment extends BaseLazyFragment<FragmentHomeBinding, HomeView
         initRecruitment();
         initNewInformation();
         homeAdapter.notifyDataSetChanged();
-
+        viewModel.recommendBuildHome();
+        viewModel.recommendNewsHome();
     }
 
     @Override

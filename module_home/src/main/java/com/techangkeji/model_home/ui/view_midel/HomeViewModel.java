@@ -37,4 +37,52 @@ public class HomeViewModel extends BaseViewModel {
         super(application);
     }
 
+    /**
+     * description: 推荐房源
+     * author: Andy
+     * date: 2019/9/28  14:43
+     */
+    public void recommendBuildHome() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("areaId", SPUtils.getInstance().getString("areaId"));
+        IdeaApi.getApiService().recommendBuildHome(map)
+                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                .compose(RxUtils.schedulersTransformer())
+                .subscribe(new DefaultObserver() {
+                    @Override
+                    public void onSuccess(BaseEntity response) {
+
+                    }
+
+                    @Override
+                    public void onNext(Object o) {
+
+                    }
+                });
+    }
+
+    /**
+     * description: 推荐资讯
+     * author: Andy
+     * date: 2019/9/28  14:44
+     */
+
+    public void recommendNewsHome() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("areaId", SPUtils.getInstance().getString("areaId"));
+        IdeaApi.getApiService().recommendNewsHome(map)
+                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                .compose(RxUtils.schedulersTransformer())
+                .subscribe(new DefaultObserver() {
+                    @Override
+                    public void onSuccess(BaseEntity response) {
+
+                    }
+
+                    @Override
+                    public void onNext(Object o) {
+
+                    }
+                });
+    }
 }

@@ -18,6 +18,7 @@ import com.techangkeji.model_mine.ui.activity.InviteInformationActivity;
 import com.techangkeji.model_mine.ui.activity.JobActivity;
 import com.techangkeji.model_mine.ui.activity.PersonActivity;
 import com.techangkeji.model_mine.ui.activity.QualificationAuthActivity;
+import com.techangkeji.model_mine.ui.activity.ReportActivity;
 import com.techangkeji.model_mine.ui.activity.SettingActivity;
 
 import me.goldze.mvvmhabit.base.BaseViewModel;
@@ -65,5 +66,7 @@ public class MineViewModel extends BaseViewModel {
     public BindingCommand myStateCommand = new BindingCommand(() -> ARouter.getInstance().build(ARouterPath.FriendCircle.MyStateActivity).navigation());
     //我的广场信息
     public BindingCommand myInformationCommand = new BindingCommand(() -> ARouter.getInstance().build(ARouterPath.FriendCircle.MyStateActivity).navigation());
+    //我的举报
+    public BindingCommand reportCommand = new BindingCommand(() -> startActivity(ReportActivity.class));
 
 }

@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="me.goldze.mvvmhabit.base.BaseViewModel" />
+            type="com.techangkeji.model_mine.ui.viewModel.CollectViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,10 +14,10 @@
         android:background="@color/color_white"
         android:orientation="vertical">
 
-      <com.goldze.base.view.TitleVIew
-          android:layout_width="match_parent"
-          android:layout_height="@dimen/d44"
-          android:id="@+id/title"/>
+        <com.goldze.base.view.TitleVIew
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d44" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -60,7 +60,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                binding:onClickCommand="@{viewModel.areaCommand}">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -74,7 +75,8 @@
                 <View
                     android:layout_width="@dimen/d30"
                     android:layout_height="@dimen/d3"
-                    android:background="@color/color_FF8C00" />
+                    android:background="@color/color_FF8C00"
+                    android:visibility="@{viewModel.areaShow}" />
             </LinearLayout>
 
             <LinearLayout
@@ -82,7 +84,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                binding:onClickCommand="@{viewModel.typeCommand}">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -96,7 +99,8 @@
                 <View
                     android:layout_width="@dimen/d30"
                     android:layout_height="@dimen/d3"
-                    android:background="@color/color_FF8C00" />
+                    android:background="@color/color_FF8C00"
+                    android:visibility="@{viewModel.typeShow}" />
             </LinearLayout>
 
             <LinearLayout
@@ -104,7 +108,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                binding:onClickCommand="@{viewModel.priceCommand}">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -118,7 +123,8 @@
                 <View
                     android:layout_width="@dimen/d30"
                     android:layout_height="@dimen/d3"
-                    android:background="@color/color_FF8C00" />
+                    android:background="@color/color_FF8C00"
+                    android:visibility="@{viewModel.priceShow}" />
             </LinearLayout>
 
             <LinearLayout
@@ -126,7 +132,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                binding:onClickCommand="@{viewModel.screenCommand}">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -140,7 +147,8 @@
                 <View
                     android:layout_width="@dimen/d30"
                     android:layout_height="@dimen/d3"
-                    android:background="@color/color_FF8C00" />
+                    android:background="@color/color_FF8C00"
+                    android:visibility="@{viewModel.screenShow}" />
             </LinearLayout>
 
             <LinearLayout
@@ -148,7 +156,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                binding:onClickCommand="@{viewModel.sortCommand}">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -162,15 +171,22 @@
                 <View
                     android:layout_width="@dimen/d30"
                     android:layout_height="@dimen/d3"
-                    android:background="@color/color_FF8C00" />
+                    android:background="@color/color_FF8C00"
+                    android:visibility="@{viewModel.sortShow}" />
             </LinearLayout>
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv"
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/srl"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
     </LinearLayout>
 </layout>

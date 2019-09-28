@@ -21,7 +21,6 @@ import me.goldze.mvvmhabit.http.net.body.RecruitmentBody;
 import me.goldze.mvvmhabit.http.net.body.RecruitmentListBody;
 import me.goldze.mvvmhabit.http.net.body.ReleaseMovingBody;
 import me.goldze.mvvmhabit.http.net.body.SendCodeBody;
-import me.goldze.mvvmhabit.http.net.body.TcJobHuntingListBody;
 import me.goldze.mvvmhabit.http.net.body.UntiedThirdBody;
 import me.goldze.mvvmhabit.http.net.body.UpdateBody;
 import me.goldze.mvvmhabit.http.net.body.UpdatePasswordBody;
@@ -318,15 +317,40 @@ public interface ApiService<T extends BaseEntity> {
     @Headers({"url_name:search"})
     Observable<RecruitmentListEntity> getTcJobHuntingList(@QueryMap() Map<String,Object> map);
 
-    //推荐房源
+    //推荐房源房源详情
     @POST(API + "auth/building/recommendBuilding")
     @Headers({"url_name:user_info"})
     Observable<RecommendBuildingEntity> recommendBuilding(@QueryMap() Map<String,Object> map);
+
+    //推荐房源首页
+    @GET(API + "auth/building/recommend")
+    @Headers({"url_name:user_info"})
+    Observable<RecommendBuildingEntity> recommendBuildHome(@QueryMap() Map<String,Object> map);
+
+    //推荐资讯
+    @GET(API + "auth/news/recommend")
+    @Headers({"url_name:message"})
+    Observable<RecommendBuildingEntity> recommendNewsHome(@QueryMap() Map<String,Object> map);
 
     //我的收藏
     @POST(API + "auth/building/myCollectionList")
     @Headers({"url_name:user_info"})
     Observable<RecommendBuildingEntity> myCollectionList(@QueryMap() Map<String,Object> map);
+
+    //添加收藏
+    @POST(API + "auth/collection/addCollection")
+    @Headers({"url_name:user_info"})
+    Observable<SuccessEntity> addCollection(@QueryMap() Map<String,Object> map);
+
+    //取消收藏
+    @POST(API + "auth/collection/deleteCollection")
+    @Headers({"url_name:user_info"})
+    Observable<SuccessEntity> deleteCollection(@QueryMap() Map<String,Object> map);
+
+    //是否收藏
+    @POST(API + "auth/collection/isCollection")
+    @Headers({"url_name:user_info"})
+    Observable<SuccessEntity<Integer>> isCollection(@QueryMap() Map<String,Object> map);
 
     //获取百度静态图
     @GET("staticimage/v2")

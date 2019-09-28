@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ZoomControls;
 
@@ -80,16 +81,30 @@ public class HRDetailAdapter extends BaseQuickAdapter<HRDetailAdapterBean, BaseV
         ;
     }
 
+    private boolean isBannerSetting = false;
+
     @Override
     protected void convert(BaseViewHolder helper, HRDetailAdapterBean item) {
         switch (helper.getItemViewType()) {
             case HRDetailAdapterBean.Banner:
+                ImageView collectIv = helper.getView(R.id.tv_hrd_collect);
+                ZLog.d(viewModel.isCollect);
+                if (viewModel.isCollect) {
+                    GlideLoadUtils.getInstance().glideLoad(helper.itemView.getContext(), R.mipmap.collect, collectIv, 0);
+                    collectIv.setOnClickListener(v -> viewModel.deleteCollection());
+                } else {
+                    GlideLoadUtils.getInstance().glideLoad(helper.itemView.getContext(), R.mipmap.no_collect, collectIv, 0);
+                    collectIv.setOnClickListener(v -> viewModel.addCollection());
+                }
                 ConvenientBanner banner = helper.getView(R.id.banner);
                 List<Object> images = new ArrayList<>();
                 for (HouseResourceReleaseBannerBean houseResourceReleaseBannerBean : viewModel.bannerPathList) {
                     images.add(houseResourceReleaseBannerBean.getImagePath());
                 }
-                BannerSetting.getInstance().setBanner(context, banner, images);
+                if (images.size() > 0 && !isBannerSetting) {
+                    isBannerSetting = true;
+                    BannerSetting.getInstance().setBanner(context, banner, images);
+                }
                 helper.getView(R.id.tv_hrd_inform).setOnClickListener(view -> {
                     ARouter.getInstance().build(ARouterPath.Home.InformActivity).withString("listingId", viewModel.id + "").withString("listingName", viewModel.listingName.get()).navigation();
                 });

@@ -26,6 +26,8 @@
         <activity android:name=".ui.activity.SelectFriendActivity" />
         <activity android:name=".ui.activity.JobReleaseActivity" />
         <activity android:name=".ui.activity.JobActivity" />
+        <activity android:name=".ui.activity.SubmitFeedBackActivity" />
+        <activity android:name=".ui.activity.ReportActivity" />
     </application>
 
 </manifest>

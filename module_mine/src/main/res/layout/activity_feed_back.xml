@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="me.goldze.mvvmhabit.base.BaseViewModel" />
+            type="com.techangkeji.model_mine.ui.viewModel.FeedBackViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -42,6 +42,7 @@
                 android:text="提交新反馈"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font16"
+                binding:onClickCommand="@{viewModel.newFeedBackCommand}"
                 binding:rv_backgroundColor="@color/color_FF8C00"
                 binding:rv_radius="@dimen/d25" />
         </RelativeLayout>

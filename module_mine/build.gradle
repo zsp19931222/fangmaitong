@@ -11,4 +11,5 @@ android {
 dependencies {
     api project(path: ':module_hr')
     api project(path: ':module_message')
+    api project(path: ':module_friend_circle')
 }
