@@ -34,8 +34,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/d60"
+            binding:onClickCommand="@{viewModel.clearCacheCommand}"
             android:drawableRight="@drawable/more_1x"
-            android:text="清除缓存（500mb）"
+            android:text="@{viewModel.sizeText}"
             android:textColor="@color/color_dark_333333"
             android:textSize="@dimen/font14" />
 

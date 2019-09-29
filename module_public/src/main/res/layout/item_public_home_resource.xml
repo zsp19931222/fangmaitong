@@ -12,6 +12,7 @@
     <ImageView
         android:id="@+id/iv_ihr"
         android:layout_width="@dimen/d100"
+        android:scaleType="fitXY"
         android:layout_height="@dimen/d75" />
 
     <RelativeLayout

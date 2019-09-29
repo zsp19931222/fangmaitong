@@ -13,12 +13,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/title" />
+        <com.goldze.base.view.TitleVIew
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d44" />
 
         <com.baidu.mapapi.map.MapView
             android:id="@+id/mapView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true" />
+            android:layout_height="match_parent" />
     </LinearLayout>
 </layout>

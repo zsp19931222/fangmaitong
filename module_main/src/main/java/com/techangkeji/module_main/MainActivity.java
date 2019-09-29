@@ -30,6 +30,7 @@ import com.goldze.base.utils.LocationUtil;
 import com.hyphenate.EMClientListener;
 import com.hyphenate.EMContactListener;
 import com.hyphenate.EMMultiDeviceListener;
+import com.hyphenate.chat.EMChatManager;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -119,6 +120,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
             }
         }));
         viewModel.getAreaList();
+        binding.tabMessage.setUnreadCount(EMClient.getInstance().chatManager().getUnreadMessageCount());
     }
 
     @Override

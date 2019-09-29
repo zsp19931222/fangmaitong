@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:binding="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -15,10 +14,11 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical">
+
         <LinearLayout
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="@dimen/d44"
-            android:id="@+id/title"
             android:orientation="vertical">
 
             <LinearLayout
@@ -38,13 +38,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/d3"
+                    android:ellipsize="end"
                     android:maxWidth="@dimen/d75"
-                    binding:onClickCommand="@{viewModel.areaCommand}"
                     android:maxLines="1"
                     android:text="@={viewModel.area}"
-                    android:ellipsize="end"
                     android:textColor="@color/color_dark_333333"
-                    android:textSize="@dimen/font12" />
+                    android:textSize="@dimen/font12"
+                    binding:onClickCommand="@{viewModel.areaCommand}" />
 
                 <me.goldze.mvvmhabit.view.shape.RadiusLinearLayout
                     android:layout_width="match_parent"
@@ -54,6 +54,7 @@
                     android:orientation="horizontal"
                     android:paddingStart="@dimen/d10"
                     android:paddingEnd="@dimen/d10"
+                    binding:onClickCommand="@{viewModel.searchCommand}"
                     binding:rv_backgroundColor="@color/color_f6"
                     binding:rv_radius="@dimen/d15">
 
@@ -111,9 +112,9 @@
                 android:layout_weight="1"
                 android:background="@drawable/ripple"
                 android:gravity="center"
-                binding:tab_name="房源"
                 binding:tab_icon="@mipmap/hr_icon"
                 binding:tab_iconSelect="@mipmap/hr_icon"
+                binding:tab_name="房源"
                 binding:tab_nameColor="@color/color_dark_333333"
                 binding:tab_nameSelectColor="@color/color_dark_333333"
                 binding:tab_nameSize="@dimen/font10" />
@@ -122,24 +123,25 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                binding:tab_icon="@mipmap/information_select_icon"
-                binding:tab_iconSelect="@mipmap/information_select_icon"
                 android:background="@drawable/ripple"
                 android:gravity="center"
+                binding:tab_icon="@mipmap/information_select_icon"
+                binding:tab_iconSelect="@mipmap/information_select_icon"
                 binding:tab_name="资讯"
                 binding:tab_nameColor="@color/color_dark_333333"
                 binding:tab_nameSelectColor="@color/color_dark_333333"
                 binding:tab_nameSize="@dimen/font10" />
 
             <com.techangkeji.module_main.view.TabView
+                android:id="@+id/tab_message"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/ripple"
                 android:gravity="center"
-                binding:tab_name="社交"
                 binding:tab_icon="@mipmap/mt_icon"
                 binding:tab_iconSelect="@mipmap/mt_icon"
+                binding:tab_name="社交"
                 binding:tab_nameColor="@color/color_dark_333333"
                 binding:tab_nameSelectColor="@color/color_dark_333333"
                 binding:tab_nameSize="@dimen/font10" />

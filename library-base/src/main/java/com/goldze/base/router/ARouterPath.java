@@ -62,6 +62,7 @@ public class ARouterPath {
         public static final String AreaSelectActivity = Public + "/AreaSelectActivity";
         public static final String MoreAddressActivity = Public + "/MoreAddressActivity";
         public static final String Location1Activity = Public + "/Location1Activity";
+        public static final String SearchActivity = Public + "/SearchActivity";
     }
     /**
      * 我的页面

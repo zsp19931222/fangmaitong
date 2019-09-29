@@ -26,7 +26,6 @@ import me.goldze.mvvmhabit.http.net.entity.FeaturedLabelEntity;
 public class InformationFragment extends BaseLazyFragment<FragmentIInformationBinding, InformationViewModel> {
     @Override
     public void fetchData() {
-        viewModel.getNewsList();
         InformationAdapter informationAdapter = new InformationAdapter(R.layout.item_i_information, viewModel.dataBeans);
         viewModel.adapter.set(informationAdapter);
         binding.rv.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -52,21 +51,31 @@ public class InformationFragment extends BaseLazyFragment<FragmentIInformationBi
         binding.srl.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                viewModel.pageNum++;
                 viewModel.getNewsList();
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                viewModel.pageNum=1;
                 viewModel.getNewsList();
             }
         });
         RxSubscriptions.add(RxBus.getDefault().toObservable(InformationSortPopupwindow.InformationSortRxBean.class).subscribe(informationSortRxBean -> {
             viewModel.sortType.set(informationSortRxBean.getSelectPosition());
+            viewModel.pageNum=1;
             viewModel.getNewsList();
         }));
         RxSubscriptions.add(RxBus.getDefault().toObservable(FeaturedLabelEntity.DataBean.class).subscribe(dataBean -> {
             viewModel.labelId.set(dataBean.getId() + "");
+            viewModel.pageNum=1;
             viewModel.getNewsList();
+        }));
+        RxSubscriptions.add(RxBus.getDefault().toObservable(String.class).subscribe(s -> {
+            if ("获取区域ID成功".equals(s)){
+                viewModel.pageNum=1;
+                viewModel.getNewsList();
+            }
         }));
     }
 }

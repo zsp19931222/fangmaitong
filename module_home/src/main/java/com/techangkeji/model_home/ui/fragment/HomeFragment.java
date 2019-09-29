@@ -1,12 +1,10 @@
 package com.techangkeji.model_home.ui.fragment;
 
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.annotation.Nullable;
@@ -15,19 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.baidu.mapapi.model.inner.GeoPoint;
-import com.baidu.mapapi.search.core.SearchResult;
-import com.baidu.mapapi.search.geocode.GeoCodeResult;
-import com.baidu.mapapi.search.geocode.GeoCoder;
-import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
-import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
-import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.bigkoo.convenientbanner.ConvenientBanner;
-import com.goldze.base.eventbus.SelectRxBusBean;
 import com.goldze.base.router.ARouterPath;
-import com.goldze.base.utils.BaiduLocationBean;
-import com.goldze.base.utils.LocationUtil;
 import com.techangkeji.model_home.R;
 import com.techangkeji.model_home.databinding.FragmentHomeBinding;
 import com.techangkeji.model_home.ui.adapter.GridAdapter;
@@ -38,15 +25,12 @@ import com.techangkeji.model_home.ui.bean.HomeGridViewBean;
 import com.techangkeji.model_home.ui.utils.BannerSetting;
 import com.techangkeji.model_home.ui.view_midel.HomeViewModel;
 
-import org.litepal.LitePal;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import me.goldze.mvvmhabit.base.BaseLazyFragment;
 import me.goldze.mvvmhabit.bus.RxBus;
 import me.goldze.mvvmhabit.bus.RxSubscriptions;
-import me.goldze.mvvmhabit.litepal.DistrictLitePal;
 import me.goldze.mvvmhabit.utils.ZLog;
 
 import static com.techangkeji.model_home.ui.bean.HomeAdapterBean.FriendRecommend;
@@ -68,8 +52,17 @@ public class HomeFragment extends BaseLazyFragment<FragmentHomeBinding, HomeView
     private HomeAdapter homeAdapter;
 
     @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.recommendBuildHome();
+        viewModel.recommendNewsHome();
+        viewModel.recommendFriend();
+        viewModel.getNewPlacard();
+    }
+
+    @Override
     public void fetchData() {
-        homeAdapter = new HomeAdapter(homeAdapterBeans,viewModel);
+        homeAdapter = new HomeAdapter(homeAdapterBeans, viewModel);
         initHeader();
         binding.rv.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rv.setAdapter(homeAdapter);
@@ -78,14 +71,20 @@ public class HomeFragment extends BaseLazyFragment<FragmentHomeBinding, HomeView
         initRecruitment();
         initNewInformation();
         homeAdapter.notifyDataSetChanged();
-        viewModel.recommendBuildHome();
-        viewModel.recommendNewsHome();
-        viewModel.recommendFriend();
+        RxSubscriptions.add(RxBus.getDefault().toObservable(String.class).subscribe(s -> {
+            ZLog.d(s);
+            if ("获取区域ID成功".equals(s)) {
+                viewModel.recommendBuildHome();
+                viewModel.recommendNewsHome();
+                viewModel.recommendFriend();
+                viewModel.getNewPlacard();
+            }
+        }));
     }
 
     @Override
     public void initData() {
-
+        viewModel.context.set(getContext());
     }
 
     @Override
@@ -177,15 +176,6 @@ public class HomeFragment extends BaseLazyFragment<FragmentHomeBinding, HomeView
     }
 
     private void initViewFlipper() {
-        List<String> strings = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            strings.add("资讯" + i);
-        }
-        for (int i = 0; i < strings.size(); i++) {
-            final View ll_content = View.inflate(getContext(), R.layout.item_flipper, null);
-            TextView tv_content = ll_content.findViewById(R.id.bus_notice_text);
-            tv_content.setText(strings.get(i));
-            vf_hh_notice.addView(ll_content);
-        }
+        viewModel.vf_hh_notice.set(vf_hh_notice);
     }
 }

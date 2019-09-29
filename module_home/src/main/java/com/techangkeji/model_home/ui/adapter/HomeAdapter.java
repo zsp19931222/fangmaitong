@@ -72,12 +72,9 @@ public class HomeAdapter extends BaseQuickAdapter<HomeAdapterBean, BaseViewHolde
 
 
     private void initHomeResourceRecommend(BaseViewHolder helper) {
-        List<String> strings = new ArrayList<>();
-        for (int i = 0; i < 23; i++) {
-            strings.add("" + i);
-        }
         RecyclerView recyclerView = helper.getView(R.id.rv_lh);
-        HomeResourceRecommendAdapter HomeResourceRecommendAdapter = new HomeResourceRecommendAdapter(R.layout.item_home_resource, strings);
+        HomeResourceRecommendAdapter HomeResourceRecommendAdapter = new HomeResourceRecommendAdapter(R.layout.item_home_resource, viewModel.buildingList);
+        viewModel.buildingAdapter.set(HomeResourceRecommendAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(helper.itemView.getContext()));
         recyclerView.addItemDecoration(new MyVerticalDecoration(helper.itemView.getContext(), ContextCompat.getColor(helper.itemView.getContext(), R.color.color_f6), 1, 0, 0, true));
         recyclerView.setAdapter(HomeResourceRecommendAdapter);
@@ -113,12 +110,9 @@ public class HomeAdapter extends BaseQuickAdapter<HomeAdapterBean, BaseViewHolde
     }
 
     private void initNewInformation(BaseViewHolder helper) {
-        List<String> strings = new ArrayList<>();
-        for (int i = 0; i < 13; i++) {
-            strings.add("" + i);
-        }
         RecyclerView recyclerView = helper.getView(R.id.rv_lh);
-        NewInformationAdapter informationAdapter = new NewInformationAdapter(R.layout.item_information, strings);
+        NewInformationAdapter informationAdapter = new NewInformationAdapter(R.layout.item_information, viewModel.newsList);
+        viewModel.newsAdapter.set(informationAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(helper.itemView.getContext()));
         recyclerView.addItemDecoration(new MyVerticalDecoration(helper.itemView.getContext(), ContextCompat.getColor(helper.itemView.getContext(), R.color.color_f6), 1, 0, 0, true));
         recyclerView.setAdapter(informationAdapter);

@@ -2,6 +2,7 @@ package com.techangkeji.module.ui.adapter;
 
 import androidx.annotation.Nullable;
 
+import com.blankj.utilcode.util.SPUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.goldze.base.eventbus.SelectRxBusBean;
@@ -28,7 +29,8 @@ public class ItemAreaAdapter1 extends BaseQuickAdapter<AreaItemBean, BaseViewHol
         helper.setText(R.id.tv_area, item.getAreaName());
         ZLog.d(item.getAreaName());
         helper.itemView.setOnClickListener(v -> {
-            SelectRxBusBean selectRxBusBean=new SelectRxBusBean(item.getId(),item.getParentId(),item.getAreaName());
+            SPUtils.getInstance().put("areaId", item.getId() + "");
+            SelectRxBusBean selectRxBusBean = new SelectRxBusBean(item.getId(), item.getParentId(), item.getAreaName());
             RxBus.getDefault().post(selectRxBusBean);
         });
     }

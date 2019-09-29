@@ -19,7 +19,7 @@ public class HRDSizeAdapter extends BaseQuickAdapter<HouseResourceReleaseSizeBea
 
     @Override
     protected void convert(BaseViewHolder helper, HouseResourceReleaseSizeBean item) {
-        GlideLoadUtils.getInstance().glideLoad(helper.itemView.getContext(),item.getImagePath(),helper.getView(R.id.iv_hhs),0,0);
+        GlideLoadUtils.getInstance().glideLoad(helper.itemView.getContext(),item.getImagePath(),helper.getView(R.id.iv_hhs),0);
         helper.setText(R.id.tv_hhs_structure,item.getRoomNum()+"室"+item.getHallNum()+"厅"+item.getCookNum()+"厨"+item.getToiletNum()+"卫");
         if (item.getHouseTypeSizeEnum()==BuildingSurface){
             helper.setText(R.id.tv_hhs_acreage,"建面"+item.getSize()+"m²");

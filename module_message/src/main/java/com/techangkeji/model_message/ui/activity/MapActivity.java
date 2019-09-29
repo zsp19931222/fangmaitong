@@ -1,9 +1,7 @@
 package com.techangkeji.model_message.ui.activity;
 
 
-import android.location.Geocoder;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.baidu.location.BDAbstractLocationListener;
@@ -11,7 +9,6 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.clusterutil.clustering.ClusterItem;
-import com.baidu.mapapi.clusterutil.clustering.ClusterManager;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
@@ -27,9 +24,6 @@ import com.techangkeji.model_message.R;
 import com.techangkeji.model_message.databinding.ActivityMapBinding;
 import com.techangkeji.model_message.ui.view_model.MapViewModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import me.goldze.mvvmhabit.base.BaseActivity;
 
 /**
@@ -42,7 +36,6 @@ public class MapActivity extends BaseActivity<ActivityMapBinding, MapViewModel> 
     private MapView mMapView;
     private BaiduMap mBaiduMap;
     private LocationClient mLocationClient;
-    ClusterManager<MyItem> mClusterManager;
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -56,61 +49,16 @@ public class MapActivity extends BaseActivity<ActivityMapBinding, MapViewModel> 
 
     @Override
     public void initData() {
+        viewModel.context=this;
+        binding.title.setTitle("地图找房");
         mMapView = binding.mapView;
         mBaiduMap = mMapView.getMap();
+        viewModel.mBaiduMap=mBaiduMap;
         mBaiduMap.setMyLocationEnabled(true);
         mBaiduMap.setOnMapLoadedCallback(this);
         startLocation();
-        ClusterManager();
-    }
+        viewModel.getMapBuilding();
 
-    /**
-     * description:
-     * author: Andy
-     * date: 2019/9/11 0011 11:37
-     */
-    private void ClusterManager() {
-        // 定义点聚合管理类ClusterManager
-        mClusterManager = new ClusterManager<>(this, mBaiduMap);
-        // 添加Marker点
-        addMarkers();
-        // 设置地图监听，当地图状态发生改变时，进行点聚合运算
-        mBaiduMap.setOnMapStatusChangeListener(mClusterManager);
-        // 设置maker点击时的响应
-        mBaiduMap.setOnMarkerClickListener(mClusterManager);
-
-        mClusterManager.setOnClusterClickListener(cluster -> {
-            Toast.makeText(MapActivity.this,
-                    "有" + cluster.getSize() + "个点", Toast.LENGTH_SHORT).show();
-            return false;
-        });
-        mClusterManager.setOnClusterItemClickListener(item -> {
-            Toast.makeText(MapActivity.this,
-                    "点击单个Item", Toast.LENGTH_SHORT).show();
-
-            return false;
-        });
-    }
-
-    public void addMarkers() {
-        // 添加Marker点
-        LatLng llA = new LatLng(29.517126, 106.46362);
-        LatLng llB = new LatLng(29.522233, 106.467519);
-        LatLng llC = new LatLng(29.52514, 106.467105);
-        LatLng llD = new LatLng(29.517126, 106.401394);
-        LatLng llE = new LatLng(29.517126, 106.331394);
-        LatLng llF = new LatLng(29.517126, 106.441394);
-        LatLng llG = new LatLng(29.517126, 106.411394);
-
-        List<MyItem> items = new ArrayList<>();
-        items.add(new MyItem(llA, "九龙坡\n1.1万/m\n2个"));
-        items.add(new MyItem(llB, "九龙坡\n1.1万/m\n4个"));
-        items.add(new MyItem(llC, "九龙坡\n1.1万/m\n6个"));
-//        items.add(new MyItem(llD));
-//        items.add(new MyItem(llE));
-//        items.add(new MyItem(llF));
-//        items.add(new MyItem(llG));
-        mClusterManager.addItems(items);
     }
 
     @Override
@@ -120,7 +68,7 @@ public class MapActivity extends BaseActivity<ActivityMapBinding, MapViewModel> 
     }
 
     //ClusterItem接口的实现类
-    public class MyItem implements ClusterItem {
+    public static class MyItem implements ClusterItem {
         LatLng mPosition;
         private String area;
 

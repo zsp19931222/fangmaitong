@@ -25,7 +25,6 @@ public class NoticeFragment extends BaseLazyFragment<FragmentINoticeBinding, Not
         viewModel.adapter.set(noticeAdapter);
         binding.rv.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rv.setAdapter(noticeAdapter);
-        viewModel.getPlacardList();
     }
 
     @Override
@@ -44,12 +43,14 @@ public class NoticeFragment extends BaseLazyFragment<FragmentINoticeBinding, Not
         binding.srl.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                viewModel.pageNum++;
                 viewModel.getPlacardList();
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-
+                viewModel.pageNum=1;
+                viewModel.getPlacardList();
             }
         });
     }

@@ -11,6 +11,7 @@
         <activity android:name=".ui.activity.AreaSelectActivity" />
         <activity android:name=".ui.activity.LocationActivity" />
         <activity android:name=".ui.activity.Location1Activity" />
+        <activity android:name=".ui.activity.SearchActivity" />
     </application>
 
 </manifest>

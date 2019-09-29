@@ -56,6 +56,8 @@ public class MineFragment extends BaseLazyFragment<FragmentMineBinding, MineView
                 name = LocalDataHelper.getInstance().getUserInfo().getWechatNickname();
             } else if (!IsNullUtil.getInstance().isEmpty(LocalDataHelper.getInstance().getUserInfo().getQqNickname())) {
                 name = LocalDataHelper.getInstance().getUserInfo().getQqNickname();
+            }else {
+                name=LocalDataHelper.getInstance().getUserInfo().getPhone().substring(4,8);
             }
             viewModel.name.set(name);
 
@@ -101,7 +103,7 @@ public class MineFragment extends BaseLazyFragment<FragmentMineBinding, MineView
             }
             //账号
             if (!IsNullUtil.getInstance().isEmpty(LocalDataHelper.getInstance().getUserInfo().getUserId())) {
-                viewModel.account.set("账号：" + LocalDataHelper.getInstance().getUserInfo().getUserId());
+                viewModel.account.set("账号：" + LocalDataHelper.getInstance().getUserInfo().getPhone());
             }
         } catch (Exception e) {
             ZLog.d(e.toString());

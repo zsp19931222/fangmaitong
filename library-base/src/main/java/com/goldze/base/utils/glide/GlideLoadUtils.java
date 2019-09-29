@@ -95,7 +95,8 @@ public class GlideLoadUtils implements GlideLoadInterface {
                             .apply(new RequestOptions()
                                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                                     .placeholder(default_image)
-                                    .error(default_image).centerCrop()
+                                    .error(default_image)
+//                                    .centerCrop()
                             )
                             .into(imageView);
                 }

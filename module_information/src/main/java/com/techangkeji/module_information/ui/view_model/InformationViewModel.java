@@ -38,8 +38,9 @@ public class InformationViewModel extends BaseViewModel {
     public ObservableList<FeaturedLabelEntity.DataBean> labelList = new ObservableArrayList<>();
     public ObservableField<InformationAdapter> adapter = new ObservableField<>();
     public ObservableField<SmartRefreshLayout> srl = new ObservableField<>();
-    public ObservableField<View> ll_view=new ObservableField<>();
-    public ObservableField<Context> context=new ObservableField<>();
+    public ObservableField<View> ll_view = new ObservableField<>();
+    public ObservableField<Context> context = new ObservableField<>();
+    public int pageNum = 1;
 
 
     public InformationViewModel(@NonNull Application application) {
@@ -47,12 +48,15 @@ public class InformationViewModel extends BaseViewModel {
     }
 
     public void getNewsList() {
+        if (pageNum == 1) {
+            dataBeans.clear();
+        }
         Map<String, Object> map = new HashMap<>();
         map.put("areaId", SPUtils.getInstance().getString("areaId"));
         map.put("labelId", labelId.get());
         map.put("sortType", sortType.get());
-        map.put("pageSize", "10");
-        map.put("pageNum","1");
+        map.put("pageSize", "20");
+        map.put("pageNum", pageNum + "");
         IdeaApi.getApiService()
                 .getNewsList(map)
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
@@ -66,6 +70,7 @@ public class InformationViewModel extends BaseViewModel {
                     }
                 });
     }
+
     public void getLabelList() {
         IdeaApi.getApiService()
                 .getLabelList()
@@ -79,10 +84,17 @@ public class InformationViewModel extends BaseViewModel {
                 });
     }
 
-    public BindingCommand sortCommand=new BindingCommand(() -> {
+    @Override
+    public void onResume() {
+        super.onResume();
+        pageNum = 1;
+        getNewsList();
+    }
+
+    public BindingCommand sortCommand = new BindingCommand(() -> {
         new InformationSortPopupwindow(context.get()).showPopupWindow(ll_view.get());
     });
-    public BindingCommand labelCommand=new BindingCommand(() -> {
-        new InformationLabelPopupwindow(context.get(),labelList).showPopupWindow(ll_view.get());
+    public BindingCommand labelCommand = new BindingCommand(() -> {
+        new InformationLabelPopupwindow(context.get(), labelList).showPopupWindow(ll_view.get());
     });
 }

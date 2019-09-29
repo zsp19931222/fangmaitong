@@ -9,6 +9,7 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
 
+import com.blankj.utilcode.util.SPUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.techangkeji.module_hr.ui.popup.AreaPopupwindow;
 import com.techangkeji.module_information.ui.adapter.InviteAdapter;
@@ -56,6 +57,7 @@ public class InviteViewModel extends BaseViewModel {
         }
         recruitmentBody.setMax(30);
         recruitmentBody.setPage(pageNum);
+        recruitmentBody.setAreaId(Integer.parseInt(SPUtils.getInstance().getString("areaId")));
         ZLog.d(recruitmentBody);
         IdeaApi.getApiService()
                 .recruitmentsList(recruitmentBody)

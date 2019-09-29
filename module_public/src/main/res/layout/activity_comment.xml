@@ -14,16 +14,16 @@
         android:background="@color/color_f6"
         android:orientation="vertical">
 
-        <include
+        <com.goldze.base.view.TitleVIew
             android:id="@+id/title"
-            layout="@layout/title" />
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d44" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:overScrollMode="never" />
+            android:layout_weight="1" />
 
         <TextView
             android:layout_width="match_parent"

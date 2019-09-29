@@ -12,6 +12,7 @@ import com.goldze.base.utils.BaiduLocationBean;
 
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
+import me.goldze.mvvmhabit.bus.RxBus;
 import me.goldze.mvvmhabit.http.net.DefaultObserver;
 import me.goldze.mvvmhabit.http.net.IdeaApi;
 import me.goldze.mvvmhabit.http.net.body.LocationBody;
@@ -60,6 +61,7 @@ public class MainViewModel extends BaseViewModel {
                         SPUtils.getInstance().put("areaId", response.getContent().getAreaId() + "");
                         SPUtils.getInstance().put("latitude", response.getContent().getLatitude());
                         SPUtils.getInstance().put("longitude", response.getContent().getLongitude());
+                        RxBus.getDefault().post("获取区域ID成功");
                     }
                 });
     }
@@ -81,5 +83,12 @@ public class MainViewModel extends BaseViewModel {
                     }
                 });
     }
+
+    /**
+    * description: 跳转搜索
+    * author: Andy
+    * date: 2019/9/29 0029 16:13
+    */
+    public BindingCommand searchCommand=new BindingCommand(() -> ARouter.getInstance().build(ARouterPath.Public.SearchActivity).navigation());
 
 }

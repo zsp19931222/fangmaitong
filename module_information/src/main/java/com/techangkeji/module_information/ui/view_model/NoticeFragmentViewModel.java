@@ -29,6 +29,7 @@ public class NoticeFragmentViewModel extends BaseViewModel {
     public ObservableList<PlacardListEntity.DataBean> beanObservableList = new ObservableArrayList<>();
     public ObservableField<NoticeAdapter> adapter = new ObservableField<>();
     public ObservableField<SmartRefreshLayout> srl = new ObservableField<>();
+    public int pageNum = 1;
 
     public NoticeFragmentViewModel(@NonNull Application application) {
         super(application);
@@ -40,10 +41,13 @@ public class NoticeFragmentViewModel extends BaseViewModel {
      * date: 2019/9/25 0025 14:35
      */
     public void getPlacardList() {
+        if (pageNum==1){
+            beanObservableList.clear();
+        }
         Map<String, Object> map = new HashMap<>();
         map.put("areaId", SPUtils.getInstance().getString("areaId"));
         map.put("pageSize", "20");
-        map.put("pageNum", "1");
+        map.put("pageNum", pageNum + "");
         IdeaApi.getApiService()
                 .getPlacardList(map)
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
@@ -56,5 +60,12 @@ public class NoticeFragmentViewModel extends BaseViewModel {
                         adapter.get().notifyDataSetChanged();
                     }
                 });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        pageNum = 1;
+        getPlacardList();
     }
 }

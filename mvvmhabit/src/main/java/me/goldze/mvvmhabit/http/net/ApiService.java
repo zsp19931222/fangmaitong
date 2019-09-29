@@ -34,6 +34,8 @@ import me.goldze.mvvmhabit.http.net.entity.BuildingListEntity;
 import me.goldze.mvvmhabit.http.net.entity.FeaturedLabelEntity;
 import me.goldze.mvvmhabit.http.net.entity.HouseResourceDetailEntity;
 import me.goldze.mvvmhabit.http.net.entity.LocationEntity;
+import me.goldze.mvvmhabit.http.net.entity.MapBuildingEntity;
+import me.goldze.mvvmhabit.http.net.entity.NewPlacardEntity;
 import me.goldze.mvvmhabit.http.net.entity.RecommendBuildingEntity;
 import me.goldze.mvvmhabit.http.net.entity.RecommendFriendEntity;
 import me.goldze.mvvmhabit.http.net.entity.RecruitmentListEntity;
@@ -292,6 +294,11 @@ public interface ApiService<T extends BaseEntity> {
     @Headers({"url_name:user_info"})
     Observable<SelectFriendEntity> getFriendList(@QueryMap() Map<String,Object> map);
 
+    //地图找房
+    @POST(API + "auth/building/getMapBuilding")
+    @Headers({"url_name:user_info"})
+    Observable<MapBuildingEntity> getMapBuilding();
+
     //公告列表
     @POST(API + "auth/placard/getPlacardList")
     @Headers({"url_name:message"})
@@ -355,7 +362,7 @@ public interface ApiService<T extends BaseEntity> {
     //推荐资讯
     @GET(API + "auth/news/recommend")
     @Headers({"url_name:message"})
-    Observable<RecommendBuildingEntity> recommendNewsHome(@QueryMap() Map<String,Object> map);
+    Observable<NewsListEntity> recommendNewsHome(@QueryMap() Map<String,Object> map);
 
     //我的收藏
     @POST(API + "auth/building/myCollectionList")
@@ -377,9 +384,9 @@ public interface ApiService<T extends BaseEntity> {
     @Headers({"url_name:user_info"})
     Observable<SuccessEntity<Integer>> isCollection(@QueryMap() Map<String,Object> map);
 
-    //获取百度静态图
-    @GET("staticimage/v2")
-    @Headers({"url_name:micro_application"})
-    Observable<String> baiduImage(@QueryMap() Map<String,Object> map);
+    //首页公告
+    @GET(API + "auth/placard/getNewPlacard")
+    @Headers({"url_name:message"})
+    Observable<NewPlacardEntity> getNewPlacard();
 
 }
