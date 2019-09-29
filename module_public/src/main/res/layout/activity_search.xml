@@ -58,6 +58,7 @@
                         android:layout_marginEnd="@dimen/d5"
                         android:background="@null"
                         android:ellipsize="end"
+                        android:text="@{viewModel.input}"
                         android:hint="搜索本区（开发商名/楼盘名/商圈/标签）"
                         android:singleLine="true"
                         android:textColor="@color/color_dark_333333"

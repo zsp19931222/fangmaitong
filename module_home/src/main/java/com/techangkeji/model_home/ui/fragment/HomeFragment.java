@@ -58,6 +58,7 @@ public class HomeFragment extends BaseLazyFragment<FragmentHomeBinding, HomeView
         viewModel.recommendNewsHome();
         viewModel.recommendFriend();
         viewModel.getNewPlacard();
+        viewModel.RecruitmentsRecommend();
     }
 
     @Override
@@ -80,6 +81,7 @@ public class HomeFragment extends BaseLazyFragment<FragmentHomeBinding, HomeView
                 viewModel.getNewPlacard();
             }
         }));
+        viewModel.bannerList();
     }
 
     @Override
@@ -135,30 +137,18 @@ public class HomeFragment extends BaseLazyFragment<FragmentHomeBinding, HomeView
         rv_hh_label = header.findViewById(R.id.rv_hh_label);
         rv_hh_gridview = header.findViewById(R.id.rv_hh_gridview);
         banner = header.findViewById(R.id.banner);
+        viewModel.banner.set(banner);
         vf_hh_notice = header.findViewById(R.id.vf_hh_notice);
         initLabel();
-        initBanner();
         initGrid();
         initViewFlipper();
     }
 
     private void initLabel() {
-        List<String> strings = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            strings.add("");
-        }
-        LabelAdapter labelAdapter = new LabelAdapter(R.layout.item_label, strings);
-        rv_hh_label.setLayoutManager(new GridLayoutManager(getContext(), 5));
-        rv_hh_label.setAdapter(labelAdapter);
+        viewModel.rv_hh_label.set(rv_hh_label);
+        viewModel.tcWords();
     }
 
-    private void initBanner() {
-        List<Object> images = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            images.add("https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=508387608,2848974022&fm=26&gp=0.jpg");
-        }
-        BannerSetting.getInstance().setBanner(getContext(), banner, images);
-    }
 
     private void initGrid() {
         List<HomeGridViewBean> homeGridViewBeans = new ArrayList<>();

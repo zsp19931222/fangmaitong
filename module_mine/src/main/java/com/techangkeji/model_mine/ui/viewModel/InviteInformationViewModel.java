@@ -25,6 +25,7 @@ import me.goldze.mvvmhabit.utils.RxUtils;
 public class InviteInformationViewModel extends BaseViewModel {
     public ObservableList<RecruitmentListEntity.DataBean> dataBeans = new ObservableArrayList<>();
     public ObservableField<InviteInformationAdapter> adapter = new ObservableField<>();
+    public int pageNum = 1;
 
     public InviteInformationViewModel(@NonNull Application application) {
         super(application);
@@ -44,8 +45,8 @@ public class InviteInformationViewModel extends BaseViewModel {
      */
     public void recruitmentsList() {
         RecruitmentListBody recruitmentBody = new RecruitmentListBody();
-        recruitmentBody.setMax(10);
-        recruitmentBody.setPage(1);
+        recruitmentBody.setMax(20);
+        recruitmentBody.setPage(pageNum);
         recruitmentBody.setRecruitmentHumenId(LocalDataHelper.getInstance().getUserInfo().getUserId());
         IdeaApi.getApiService()
                 .recruitmentsList(recruitmentBody)

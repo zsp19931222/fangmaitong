@@ -30,6 +30,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     // meizu push
     implementation 'com.meizu.flyme.internet:push-internal:3.7.0@aar'
+    implementation project(path: ':module_hr')
     //配置集成sdk
 }
 // ADD THIS AT THE BOTTOM

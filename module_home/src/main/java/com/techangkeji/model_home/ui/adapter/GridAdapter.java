@@ -26,7 +26,11 @@ public class GridAdapter extends BaseQuickAdapter<HomeGridViewBean, BaseViewHold
         helper.setText(R.id.tv_ig, item.getName());
         GlideLoadUtils.getInstance().glideLoad(helper.itemView.getContext(), item.getImage(), helper.getView(R.id.iv_ig), 0);
         helper.itemView.setOnClickListener(view -> {
-            if ("新房".equals(item.getName()) || "商业地产".equals(item.getName())) {
+            if ("新房".equals(item.getName())) {
+                RxBus.getDefault().post("新房");
+                RxBus.getDefault().post(RxBusMessageEventConstants.XF);
+            }else if("商业地产".equals(item.getName())){
+                RxBus.getDefault().post("商业地产");
                 RxBus.getDefault().post(RxBusMessageEventConstants.XF);
             } else if ("地图找房".equals(item.getName())) {
                 ARouter.getInstance().build(ARouterPath.Message.MapActivity).navigation();

@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.goldze.base.listener.PopupSelectListener;
 import com.techangkeji.module_hr.R;
 import com.techangkeji.module_hr.ui.adapter.AreaAdapter;
 import com.techangkeji.module_hr.ui.adapter.TypeAdapter;
@@ -15,6 +16,7 @@ import com.techangkeji.module_hr.ui.adapter.TypeAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.goldze.mvvmhabit.bus.RxBus;
 import me.goldze.mvvmhabit.view.MyVerticalDecoration;
 import razerdp.basepopup.BasePopupWindow;
 
@@ -24,10 +26,12 @@ public class TypePopupwindow extends BasePopupWindow {
     private View v_pa;
     private Context context;
 
-    public TypePopupwindow(Context context) {
+    public TypePopupwindow(Context context,List<String> strings) {
         super(context);
         this.context = context;
         init(context);
+        initAdapter(strings);
+
     }
 
     @Override
@@ -40,20 +44,19 @@ public class TypePopupwindow extends BasePopupWindow {
         setBackgroundColor(Color.parseColor("#00000000"));
         rv = findViewById(R.id.rv_it);
         v_pa = findViewById(R.id.v_fill);
-        initAdapter();
         v_pa.getBackground().setAlpha(125);
         v_pa.setOnClickListener(view1 -> dismiss());
     }
 
-    private void initAdapter() {
-        List<String> strings = new ArrayList<>();
-        strings.add("不限");
-        strings.add("住宅");
-        strings.add("别墅");
+    private void initAdapter(List<String> strings) {
         adapter = new TypeAdapter(R.layout.item_area, strings);
         rv.setLayoutManager(new LinearLayoutManager(context));
         rv.addItemDecoration(new MyVerticalDecoration(context, ContextCompat.getColor(context, R.color.color_f6), 1, 0, 0, true));
         rv.setAdapter(adapter);
+        adapter.setSelectListener(position -> {
+            RxBus.getDefault().post(strings.get(position));
+            dismiss();
+        });
     }
 
 }

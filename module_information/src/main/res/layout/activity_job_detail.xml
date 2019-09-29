@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="viewModel"
-            type="me.goldze.mvvmhabit.base.BaseViewModel" />
+            type="com.techangkeji.module_information.ui.view_model.JobDetailViewModel" />
     </data>
 
     <LinearLayout
@@ -40,11 +40,13 @@
                     android:paddingStart="@dimen/d16"
                     android:paddingTop="@dimen/d10"
                     android:paddingEnd="@dimen/d16"
-                    android:paddingBottom="@dimen/d10">
+                    android:paddingBottom="@dimen/d10"
+                    binding:onClickCommand="@{viewModel.circleCommand}">
 
                     <ImageView
                         android:layout_width="@dimen/d70"
-                        android:layout_height="@dimen/d70" />
+                        android:layout_height="@dimen/d70"
+                        binding:url="@{viewModel.hrUrl}" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -55,35 +57,74 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="林某某"
+                            android:text="@{viewModel.hrName}"
                             android:textColor="@color/color_dark_333333"
                             android:textSize="@dimen/font12" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="账号：5022332"
+                            android:text="@{viewModel.hrNum}"
                             android:textColor="@color/color_dark_333333"
                             android:textSize="@dimen/font12" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="总代"
+                            android:text="@{viewModel.hrIdent}"
                             android:textColor="@color/color_dark_333333"
                             android:textSize="@dimen/font12" />
 
-                        <me.goldze.mvvmhabit.view.shape.RadiusTextView
-                            android:layout_width="wrap_content"
+                        <RelativeLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/d5"
-                            android:text="资质认证"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/font10"
-                            app:rv_backgroundColor="@color/color_FF8C00"
-                            app:rv_radius="@dimen/d3" />
+                            android:orientation="horizontal">
+
+                            <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                                android:id="@+id/zzrz"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/d10"
+                                android:padding="@dimen/d5"
+                                android:text="资质认证"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/font10"
+                                android:visibility="@{viewModel.hrAuthZZ}"
+                                binding:rv_backgroundColor="@color/color_FF8C00"
+                                binding:rv_radius="@dimen/d3" />
+
+                            <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                                android:id="@+id/smrz"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/d10"
+                                android:layout_toEndOf="@id/zzrz"
+                                android:padding="@dimen/d5"
+                                android:text="实名认证"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/font10"
+                                android:visibility="@{viewModel.hrAuthSM}"
+                                binding:rv_backgroundColor="@color/color_FF8C00"
+                                binding:rv_radius="@dimen/d3" />
+
+                            <me.goldze.mvvmhabit.view.shape.RadiusTextView
+                                android:id="@+id/jjrrz"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/d10"
+                                android:layout_toEndOf="@id/smrz"
+                                android:padding="@dimen/d5"
+                                android:text="经纪人认证"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/font10"
+                                android:visibility="@{viewModel.hrAuthJJR}"
+                                binding:rv_backgroundColor="@color/color_FF8C00"
+                                binding:rv_radius="@dimen/d3" />
+                        </RelativeLayout>
+
                     </LinearLayout>
                 </LinearLayout>
+
 
                 <View style="@style/ViewLineStyle" />
 
@@ -131,7 +172,7 @@
                         android:layout_weight="2"
                         android:background="@color/color_f6"
                         android:gravity="center"
-                        android:text="代理"
+                        android:text="@{viewModel.inviteYear}"
                         android:textColor="@color/color_dark_333333"
                         android:textSize="@dimen/font12" />
                 </LinearLayout>
@@ -161,7 +202,7 @@
                         android:layout_weight="2"
                         android:background="@color/color_f6"
                         android:gravity="center"
-                        android:text="面议"
+                        android:text="@{viewModel.inviteAddress}"
                         android:textColor="@color/color_dark_333333"
                         android:textSize="@dimen/font12" />
                 </LinearLayout>
@@ -191,7 +232,7 @@
                         android:layout_weight="2"
                         android:background="@color/color_f6"
                         android:gravity="center"
-                        android:text="代理"
+                        android:text="@{viewModel.inviteNature}"
                         android:textColor="@color/color_dark_333333"
                         android:textSize="@dimen/font12" />
                 </LinearLayout>
@@ -213,7 +254,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/d16"
                     android:layout_marginEnd="@dimen/d16"
-                    android:text="深圳瑞宝电脑技术服务有限公司，成立于2008年，我公司为各行各业提供专业的it技术服务，经过3年多的努力与发展，已具一定的规模及实力，现拥有一支技术精湛的it服务团队，以卓越的服务品质、专业安全的技术服务实力，为不同群体的用户提供更高更优质的it服务。"
+                    android:text="@{viewModel.inviteContent}"
                     android:textColor="@color/color_dark_333333"
                     android:textSize="@dimen/font12" />
 
@@ -229,10 +270,52 @@
                     android:textColor="@color/color_dark_333333"
                     android:textSize="@dimen/font15" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="@dimen/d55"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/d35"
+                        android:layout_height="@dimen/d35"
+                        android:layout_marginStart="@dimen/font16"
+                        binding:url="@{viewModel.hrUrl}" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.hrName}"
+                        android:textColor="@color/color_dark_333333"
+                        android:textSize="@dimen/font15" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/d6"
+                        android:text="@{viewModel.phone}"
+                        android:textColor="@color/color_gray_666666"
+                        android:textSize="@dimen/font12" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="@dimen/d28"
+                        android:layout_height="@dimen/d28"
+                        android:src="@mipmap/phone_call_icon"
+                        binding:onClickCommand="@{viewModel.phoneCommand}" />
+
+                    <ImageView
+                        android:layout_width="@dimen/d28"
+                        android:layout_height="@dimen/d28"
+                        android:layout_marginStart="@dimen/d10"
+                        android:layout_marginEnd="@dimen/d16"
+                        android:src="@mipmap/send_message_icon"
+                        binding:onClickCommand="@{viewModel.sendMessage}" />
+                </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>

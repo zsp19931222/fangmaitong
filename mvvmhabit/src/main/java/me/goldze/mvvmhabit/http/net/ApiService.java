@@ -11,6 +11,7 @@ import me.goldze.mvvmhabit.http.net.body.AppReportListBody;
 import me.goldze.mvvmhabit.http.net.body.AuthBrokerBody;
 import me.goldze.mvvmhabit.http.net.body.AuthQualificationBody;
 import me.goldze.mvvmhabit.http.net.body.AuthRealNameBody;
+import me.goldze.mvvmhabit.http.net.body.BannerBody;
 import me.goldze.mvvmhabit.http.net.body.BindingThirdBody;
 import me.goldze.mvvmhabit.http.net.body.CheckAuthCodeBody;
 import me.goldze.mvvmhabit.http.net.body.CommentBody;
@@ -19,20 +20,24 @@ import me.goldze.mvvmhabit.http.net.body.FeedBackBody;
 import me.goldze.mvvmhabit.http.net.body.LocationBody;
 import me.goldze.mvvmhabit.http.net.body.LoginBody;
 import me.goldze.mvvmhabit.http.net.body.MyMovingListBody;
+import me.goldze.mvvmhabit.http.net.body.RecommendFriendBody;
 import me.goldze.mvvmhabit.http.net.body.RecruitmentBody;
 import me.goldze.mvvmhabit.http.net.body.RecruitmentListBody;
 import me.goldze.mvvmhabit.http.net.body.ReleaseMovingBody;
 import me.goldze.mvvmhabit.http.net.body.SendCodeBody;
+import me.goldze.mvvmhabit.http.net.body.TcJobHuntingListBody;
 import me.goldze.mvvmhabit.http.net.body.UntiedThirdBody;
 import me.goldze.mvvmhabit.http.net.body.UpdateBody;
 import me.goldze.mvvmhabit.http.net.body.UpdatePasswordBody;
 import me.goldze.mvvmhabit.http.net.body.VoteBody;
 import me.goldze.mvvmhabit.http.net.entity.AppReportListEntity;
 import me.goldze.mvvmhabit.http.net.entity.AreaListEntity;
+import me.goldze.mvvmhabit.http.net.entity.BannerEntity;
 import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
 import me.goldze.mvvmhabit.http.net.entity.BuildingListEntity;
 import me.goldze.mvvmhabit.http.net.entity.FeaturedLabelEntity;
 import me.goldze.mvvmhabit.http.net.entity.HouseResourceDetailEntity;
+import me.goldze.mvvmhabit.http.net.entity.JobHuntingEntity;
 import me.goldze.mvvmhabit.http.net.entity.LocationEntity;
 import me.goldze.mvvmhabit.http.net.entity.MapBuildingEntity;
 import me.goldze.mvvmhabit.http.net.entity.NewPlacardEntity;
@@ -41,6 +46,7 @@ import me.goldze.mvvmhabit.http.net.entity.RecommendFriendEntity;
 import me.goldze.mvvmhabit.http.net.entity.RecruitmentListEntity;
 import me.goldze.mvvmhabit.http.net.entity.SelectFriendEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
+import me.goldze.mvvmhabit.http.net.entity.WordEntity;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.CommentBean;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.MyStateEntity;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.UserDetailEntity;
@@ -186,7 +192,7 @@ public interface ApiService<T extends BaseEntity> {
     //好友的动态列表
     @GET(API + "auth/moving/friendId/{friendId}/{page}/20")
     @Headers({"url_name:login"})
-    Observable<MyStateEntity> friendStateList(@Path("page") int page,@Path("friendId") int friendId);
+    Observable<MyStateEntity> friendStateList(@Path("page") int page, @Path("friendId") int friendId);
 
     //获取个人详情
     @GET(API + "auth/user/{id}")
@@ -257,7 +263,12 @@ public interface ApiService<T extends BaseEntity> {
     //房源发布
     @POST(API + "auth/building/addBuildingInfo")
     @Headers({"url_name:user_info"})
-    Observable<SuccessEntity> addBuildingInfo(@QueryMap() Map<String,Object> map);
+    Observable<SuccessEntity> addBuildingInfo(@QueryMap() Map<String, Object> map);
+
+    //房源列表
+    @POST(API + "auth/building/getBuildingList")
+    @Headers({"url_name:user_info"})
+    Observable<BuildingListEntity> getBuildingList(@QueryMap() Map<String, Object> map);
 
     //特色标签
     @GET(API + "auth/label/getFeaturedLabel")
@@ -267,7 +278,7 @@ public interface ApiService<T extends BaseEntity> {
     //建筑类型标签
     @GET(API + "auth/label/getTypeLabel")
     @Headers({"url_name:user_info"})
-    Observable<SuccessEntity> getTypeLabel(@QueryMap() Map<String,Object> map);
+    Observable<SuccessEntity> getTypeLabel(@QueryMap() Map<String, Object> map);
 
     //建筑类型标签
     @GET(API + "auth/label/getBuildLabel")
@@ -275,9 +286,9 @@ public interface ApiService<T extends BaseEntity> {
     Observable<FeaturedLabelEntity> getBuildLabel();
 
     //我的房源列表
-    @POST(API + "auth/building/getBuildingList")
+    @POST(API + "auth/building/myBuildingList")
     @Headers({"url_name:user_info"})
-    Observable<BuildingListEntity> getBuildingList(@QueryMap() Map<String,Object> map);
+    Observable<BuildingListEntity> myBuildingList(@QueryMap() Map<String, Object> map);
 
     //删除房源
     @POST(API + "auth/building/deleteBuilding/{id}")
@@ -287,37 +298,37 @@ public interface ApiService<T extends BaseEntity> {
     //房源详情查询
     @GET(API + "auth/building/getBuildingInfoById")
     @Headers({"url_name:user_info"})
-    Observable<SuccessEntity<HouseResourceDetailEntity>> getBuildingInfoById(@QueryMap() Map<String,Object> map);
+    Observable<SuccessEntity<HouseResourceDetailEntity>> getBuildingInfoById(@QueryMap() Map<String, Object> map);
 
     //好友列表
     @GET(API + "auth/friend/getFriendList")
     @Headers({"url_name:user_info"})
-    Observable<SelectFriendEntity> getFriendList(@QueryMap() Map<String,Object> map);
+    Observable<SelectFriendEntity> getFriendList(@QueryMap() Map<String, Object> map);
 
     //地图找房
     @POST(API + "auth/building/getMapBuilding")
     @Headers({"url_name:user_info"})
-    Observable<MapBuildingEntity> getMapBuilding();
+    Observable<MapBuildingEntity> getMapBuilding(@QueryMap() Map<String, Object> map);
 
     //公告列表
     @POST(API + "auth/placard/getPlacardList")
     @Headers({"url_name:message"})
-    Observable<PlacardListEntity> getPlacardList(@QueryMap() Map<String,Object> map);
+    Observable<PlacardListEntity> getPlacardList(@QueryMap() Map<String, Object> map);
 
     //公告详情
     @POST(API + "auth/placard/getPlacardInfo")
     @Headers({"url_name:message"})
-    Observable<SuccessEntity<PlacardListEntity.DataBean>> getPlacardInfo(@QueryMap() Map<String,Object> map);
+    Observable<SuccessEntity<PlacardListEntity.DataBean>> getPlacardInfo(@QueryMap() Map<String, Object> map);
 
     //资讯列表
     @POST(API + "auth/news/getNewsList")
     @Headers({"url_name:message"})
-    Observable<NewsListEntity> getNewsList(@QueryMap() Map<String,Object> map);
+    Observable<NewsListEntity> getNewsList(@QueryMap() Map<String, Object> map);
 
     //资讯详情
     @POST(API + "auth/news/getNewsInfo")
     @Headers({"url_name:message"})
-    Observable<SuccessEntity<NewsListEntity.DataBean>> getNewsInfo(@QueryMap() Map<String,Object> map);
+    Observable<SuccessEntity<NewsListEntity.DataBean>> getNewsInfo(@QueryMap() Map<String, Object> map);
 
     //资讯标签
     @GET(API + "auth/label/getLabelList")
@@ -330,63 +341,91 @@ public interface ApiService<T extends BaseEntity> {
     Observable<CommentListEntity> getCommentList(@Body() CommentListBody myMovingListBody);
 
     //新增招聘
-    @POST(API+"tcRecruitments")
+    @POST(API + "tcRecruitments")
     @Headers({"url_name:search"})
     Observable<SuccessEntity> addRecruitments(@Body() RecruitmentBody myMovingListBody);
 
     //招聘列表
-    @POST(API+"tcRecruitments/list")
+    @POST(API + "tcRecruitments/list")
     @Headers({"url_name:search"})
     Observable<RecruitmentListEntity> recruitmentsList(@Body() RecruitmentListBody myMovingListBody);
 
+
     //发布求职
-    @POST(API+"auth/tcJobHuntings")
+    @POST(API + "auth/tcJobHuntings")
     @Headers({"url_name:search"})
     Observable<SuccessEntity> tcJobHuntings(@Body() RecruitmentBody myMovingListBody);
 
-    //求职列表
-    @POST(API+"auth/job/getTcJobHuntingList")
+    //我的求职列表
+    @POST(API + "auth/tcJobHuntings/list")
     @Headers({"url_name:search"})
-    Observable<RecruitmentListEntity> getTcJobHuntingList(@QueryMap() Map<String,Object> map);
+    Observable<JobHuntingEntity> getTcJobHuntingList(@Body() RecruitmentListBody myMovingListBody);
+
+
+    //求职列表
+    @POST(API + "auth/tcJobHuntings/list")
+    @Headers({"url_name:search"})
+    Observable<JobHuntingEntity> tcJobHuntingsList(@Body() RecruitmentListBody myMovingListBody);
+
 
     //推荐房源房源详情
     @POST(API + "auth/building/recommendBuilding")
     @Headers({"url_name:user_info"})
-    Observable<RecommendBuildingEntity> recommendBuilding(@QueryMap() Map<String,Object> map);
+    Observable<RecommendBuildingEntity> recommendBuilding(@QueryMap() Map<String, Object> map);
 
     //推荐房源首页
     @GET(API + "auth/building/recommend")
     @Headers({"url_name:user_info"})
-    Observable<RecommendBuildingEntity> recommendBuildHome(@QueryMap() Map<String,Object> map);
+    Observable<RecommendBuildingEntity> recommendBuildHome(@QueryMap() Map<String, Object> map);
 
     //推荐资讯
     @GET(API + "auth/news/recommend")
     @Headers({"url_name:message"})
-    Observable<NewsListEntity> recommendNewsHome(@QueryMap() Map<String,Object> map);
+    Observable<NewsListEntity> recommendNewsHome(@QueryMap() Map<String, Object> map);
 
     //我的收藏
     @POST(API + "auth/building/myCollectionList")
     @Headers({"url_name:user_info"})
-    Observable<RecommendBuildingEntity> myCollectionList(@QueryMap() Map<String,Object> map);
+    Observable<RecommendBuildingEntity> myCollectionList(@QueryMap() Map<String, Object> map);
 
     //添加收藏
     @POST(API + "auth/collection/addCollection")
     @Headers({"url_name:user_info"})
-    Observable<SuccessEntity> addCollection(@QueryMap() Map<String,Object> map);
+    Observable<SuccessEntity> addCollection(@QueryMap() Map<String, Object> map);
 
     //取消收藏
     @POST(API + "auth/collection/deleteCollection")
     @Headers({"url_name:user_info"})
-    Observable<SuccessEntity> deleteCollection(@QueryMap() Map<String,Object> map);
+    Observable<SuccessEntity> deleteCollection(@QueryMap() Map<String, Object> map);
 
     //是否收藏
     @POST(API + "auth/collection/isCollection")
     @Headers({"url_name:user_info"})
-    Observable<SuccessEntity<Integer>> isCollection(@QueryMap() Map<String,Object> map);
+    Observable<SuccessEntity<Integer>> isCollection(@QueryMap() Map<String, Object> map);
 
     //首页公告
     @GET(API + "auth/placard/getNewPlacard")
     @Headers({"url_name:message"})
     Observable<NewPlacardEntity> getNewPlacard();
+
+    //banner
+    @POST(API + "auth/tcBanners/list")
+    @Headers({"url_name:user_info"})
+    Observable<BannerEntity> bannerList(@Body BannerBody bannerBody);
+
+    //找人
+    @POST(API + "user/list")
+    @Headers({"url_name:login"})
+    Observable<RecommendFriendEntity> userList(@Body RecommendFriendBody recommendFriendBody);
+
+    //首页标签
+    @GET(API + "auth/tcWords")
+    @Headers({"url_name:user_info"})
+    Observable<WordEntity> tcWords();
+
+    //推荐招聘
+    @GET(API + "tcRecruitments/recommend/{areaId}")
+    @Headers({"url_name:search"})
+    Observable<RecruitmentListEntity> RecruitmentsRecommend(@Path("areaId") int entityId);
 
 }

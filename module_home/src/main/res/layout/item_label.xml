@@ -5,6 +5,7 @@
     android:layout_height="@dimen/d20"
     android:layout_marginStart="@dimen/d2"
     android:layout_marginEnd="@dimen/d2"
+    android:id="@+id/label"
     android:gravity="center"
     android:orientation="vertical"
     android:text="楼盘标签"

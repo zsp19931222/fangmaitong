@@ -10,9 +10,6 @@ import com.techangkeji.model_mine.databinding.ActivityInviteInformationBinding;
 import com.techangkeji.model_mine.ui.adapter.InviteInformationAdapter;
 import com.techangkeji.model_mine.ui.viewModel.InviteInformationViewModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import me.goldze.mvvmhabit.base.BaseActivity;
 
 public class InviteInformationActivity extends BaseActivity<ActivityInviteInformationBinding, InviteInformationViewModel> {

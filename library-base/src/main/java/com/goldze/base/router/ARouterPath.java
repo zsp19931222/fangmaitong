@@ -91,5 +91,6 @@ public class ARouterPath {
         public static final String InviteDetailActivity = Information + "/InviteDetailActivity";
         public static final String InformationMainFragment = Information + "/InformationMainFragment";
         public static final String InformationDetailActivity = Information + "/InformationDetailActivity";
+        public static final String NoticeActivity = Information + "/NoticeActivity";
     }
 }

@@ -125,6 +125,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/d44"
+        android:background="@color/white"
         android:paddingStart="@dimen/d16"
         android:paddingEnd="@dimen/d16">
 

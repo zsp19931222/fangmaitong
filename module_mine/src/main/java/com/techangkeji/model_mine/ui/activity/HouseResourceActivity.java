@@ -71,7 +71,7 @@ public class HouseResourceActivity extends BaseActivity<ActivityHouseResourceBin
             viewModel.lon.set("");
             viewModel.hotSort.set("");
             viewModel.priceSort.set("");
-            viewModel.priceSort.set("");
+            viewModel.openingTimeSort.set("");
             switch (sortRxBusBean.getSort()) {
                 case "距离最近":
                     viewModel.lat.set(SPUtils.getInstance().getString("latitude"));
@@ -87,10 +87,10 @@ public class HouseResourceActivity extends BaseActivity<ActivityHouseResourceBin
                     viewModel.priceSort.set("0");
                     break;
                 case "开盘时间从近到远":
-                    viewModel.priceSort.set("1");
+                    viewModel.openingTimeSort.set("1");
                     break;
                 case "开盘时间从远到近":
-                    viewModel.priceSort.set("0");
+                    viewModel.openingTimeSort.set("0");
                     break;
             }
             viewModel.getData(1);

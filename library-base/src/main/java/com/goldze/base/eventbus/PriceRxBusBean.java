@@ -9,7 +9,7 @@ public class PriceRxBusBean {
     private String max;//最大价格
     private String min;//最低
 
-    public PriceRxBusBean(String max, String min) {
+    public PriceRxBusBean(String min,String max) {
         this.max = max;
         this.min = min;
     }

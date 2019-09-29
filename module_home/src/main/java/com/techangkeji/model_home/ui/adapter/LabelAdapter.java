@@ -4,18 +4,23 @@ import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.techangkeji.model_home.R;
 
 import java.util.List;
 
+import me.goldze.mvvmhabit.http.net.entity.WordEntity;
 import me.goldze.mvvmhabit.utils.ZLog;
 
-public class LabelAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
-    public LabelAdapter(int layoutResId, @Nullable List<String> data) {
+public class LabelAdapter extends BaseQuickAdapter<WordEntity.DataBean, BaseViewHolder> {
+    public LabelAdapter(int layoutResId, @Nullable List<WordEntity.DataBean> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, String item) {
+    protected void convert(BaseViewHolder helper, WordEntity.DataBean item) {
+        helper.itemView.setOnClickListener(v -> {
+        });
+        helper.setText(R.id.label, item.getWordName());
         ZLog.d(item);
     }
 }

@@ -10,17 +10,25 @@ import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.blankj.utilcode.util.SPUtils;
 import com.goldze.base.router.ARouterPath;
 import com.goldze.base.utils.BaiduLocationBean;
 import com.techangkeji.model_home.R;
 import com.techangkeji.model_home.ui.adapter.FriendRecommendAdapter;
 import com.techangkeji.model_home.ui.adapter.HomeResourceRecommendAdapter;
+import com.techangkeji.model_home.ui.adapter.LabelAdapter;
 import com.techangkeji.model_home.ui.adapter.NewInformationAdapter;
+import com.techangkeji.model_home.ui.adapter.RecruitmentAdapter;
+import com.techangkeji.model_home.ui.utils.BannerSetting;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import me.goldze.mvvmhabit.base.BaseViewModel;
@@ -28,13 +36,17 @@ import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.http.net.DefaultObserver;
 import me.goldze.mvvmhabit.http.net.IdeaApi;
 import me.goldze.mvvmhabit.http.net.body.AuthRealNameBody;
+import me.goldze.mvvmhabit.http.net.body.BannerBody;
 import me.goldze.mvvmhabit.http.net.body.LocationBody;
+import me.goldze.mvvmhabit.http.net.entity.BannerEntity;
 import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
 import me.goldze.mvvmhabit.http.net.entity.LocationEntity;
 import me.goldze.mvvmhabit.http.net.entity.NewPlacardEntity;
 import me.goldze.mvvmhabit.http.net.entity.RecommendBuildingEntity;
 import me.goldze.mvvmhabit.http.net.entity.RecommendFriendEntity;
+import me.goldze.mvvmhabit.http.net.entity.RecruitmentListEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
+import me.goldze.mvvmhabit.http.net.entity.WordEntity;
 import me.goldze.mvvmhabit.http.net.entity.information.NewsListEntity;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.RxUtils;
@@ -130,8 +142,9 @@ public class HomeViewModel extends BaseViewModel {
      * author: Andy
      * date: 2019/9/29 0029 14:30
      */
-    public ObservableField<Context> context=new ObservableField<>();
-    public ObservableField<ViewFlipper> vf_hh_notice=new ObservableField<>();
+    public ObservableField<Context> context = new ObservableField<>();
+    public ObservableField<ViewFlipper> vf_hh_notice = new ObservableField<>();
+
     public void getNewPlacard() {
         IdeaApi.getApiService()
                 .getNewPlacard()
@@ -150,4 +163,82 @@ public class HomeViewModel extends BaseViewModel {
                     }
                 });
     }
+
+    /**
+     * description: 获取banner
+     * author: Andy
+     * date: 2019/9/29  23:22
+     */
+    private BannerBody bannerBody = new BannerBody();
+    public ObservableList<BannerEntity.DataBean.EntityListBean> bannerList = new ObservableArrayList<>();
+    public ObservableField<ConvenientBanner> banner = new ObservableField<>();
+
+    public void bannerList() {
+        bannerBody.setAreaId(Integer.parseInt(SPUtils.getInstance().getString("areaId")));
+        IdeaApi.getApiService().bannerList(bannerBody)
+                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                .compose(RxUtils.schedulersTransformer())
+                .subscribe(new DefaultObserver<BannerEntity>() {
+                    @Override
+                    public void onSuccess(BannerEntity response) {
+                        bannerList.addAll(response.getData().getEntityList());
+                        initBanner();
+                    }
+
+                });
+    }
+
+    private void initBanner() {
+        BannerSetting.getInstance().setBanner(context.get(), banner.get(), bannerList);
+    }
+
+    /**
+     * description: 标签
+     * author: Andy
+     * date: 2019/9/30  0:51
+     */
+    public ObservableList<WordEntity.DataBean> label = new ObservableArrayList<>();
+    public ObservableField<RecyclerView> rv_hh_label = new ObservableField<>();
+
+    public void tcWords() {
+        IdeaApi.getApiService().tcWords()
+                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                .compose(RxUtils.schedulersTransformer())
+                .subscribe(new DefaultObserver<WordEntity>() {
+                    @Override
+                    public void onSuccess(WordEntity response) {
+                        label.addAll(response.getData());
+                        initLabel();
+                    }
+
+                });
+    }
+
+    private void initLabel() {
+        LabelAdapter labelAdapter = new LabelAdapter(R.layout.item_label, label);
+        rv_hh_label.get().setLayoutManager(new GridLayoutManager(context.get(), 5));
+        rv_hh_label.get().setAdapter(labelAdapter);
+    }
+
+    /**
+     * description: 推荐招聘
+     * author: Andy
+     * date: 2019/9/30  1:27
+     */
+    public ObservableList<RecruitmentListEntity.DataBean> recruitmentsRecommendList=new ObservableArrayList<>();
+    public ObservableField<RecruitmentAdapter> RecruitmentAdapter=new ObservableField<>();
+    public void RecruitmentsRecommend() {
+        IdeaApi.getApiService().RecruitmentsRecommend(Integer.parseInt(SPUtils.getInstance().getString("areaId")))
+                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                .compose(RxUtils.schedulersTransformer())
+                .subscribe(new DefaultObserver<RecruitmentListEntity>() {
+                    @Override
+                    public void onSuccess(RecruitmentListEntity response) {
+                        recruitmentsRecommendList.addAll(response.getData());
+                        RecruitmentAdapter.get();
+                    }
+
+                });
+    }
+
 }

@@ -1,6 +1,8 @@
 package com.techangkeji.model_home.ui.activity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 
@@ -16,6 +18,8 @@ import com.techangkeji.model_home.ui.view_midel.RecommendFriendViewModel;
 import java.util.ArrayList;
 
 import me.goldze.mvvmhabit.base.BaseActivity;
+import me.goldze.mvvmhabit.bus.RxBus;
+import me.goldze.mvvmhabit.bus.RxSubscriptions;
 
 /**
  * description:
@@ -35,11 +39,59 @@ public class RecommendFriendActivity extends BaseActivity<ActivityRecommendFrien
 
     @Override
     public void initData() {
-    binding.title.setTitle("找人");
-    viewModel.choiceView.set(binding.choiceView);
-    viewModel.context.set(this);
-    viewModel.friendRecommendAdapter=new FriendRecommendAdapter(R.layout.item_friend_recommend1,viewModel.recommendFriedList);
-    binding.rv.setLayoutManager(new GridLayoutManager(this,2));
-    binding.rv.setAdapter(viewModel.friendRecommendAdapter);
+        viewModel.srl.set(binding.srl);
+        binding.title.setTitle("找人");
+        viewModel.choiceView.set(binding.choiceView);
+        viewModel.context.set(this);
+        viewModel.friendRecommendAdapter = new FriendRecommendAdapter(R.layout.item_friend_recommend1, viewModel.recommendFriedList);
+        binding.rv.setLayoutManager(new GridLayoutManager(this, 2));
+        binding.rv.setAdapter(viewModel.friendRecommendAdapter);
+        viewModel.userList();
+
+        RxSubscriptions.add(RxBus.getDefault().toObservable(String.class).subscribe(s -> {
+            switch (s) {
+                case "不限":
+                    if (viewModel.isCheckClassify) {
+                        viewModel.recommendFriendBody.setIdentity(-1);
+                    } else {
+                        viewModel.recommendFriendBody.setSex(-1);
+                    }
+                    break;
+                case "经纪人":
+                    viewModel.recommendFriendBody.setIdentity(4);
+                    break;
+                case "总代":
+                    viewModel.recommendFriendBody.setIdentity(1);
+                    break;
+                case "分销商":
+                    viewModel.recommendFriendBody.setIdentity(-1);
+                    break;
+                case "男":
+                    viewModel.recommendFriendBody.setSex(1);
+                    break;
+                case "女":
+                    viewModel.recommendFriendBody.setSex(0);
+                    break;
+            }
+            viewModel.pageNum = 1;
+            viewModel.userList();
+        }));
+        binding.et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                viewModel.pageNum = 1;
+                viewModel.userList();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 }

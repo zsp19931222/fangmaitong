@@ -32,6 +32,7 @@ import me.goldze.mvvmhabit.http.net.entity.AreaListEntity;
 import me.goldze.mvvmhabit.http.net.entity.BuildingListEntity;
 import me.goldze.mvvmhabit.http.net.entity.FeaturedLabelEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
+import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.litepal.util.SaveAreaListUtil;
 import me.goldze.mvvmhabit.utils.RxUtils;
 import razerdp.basepopup.BasePopupWindow;
@@ -49,7 +50,7 @@ public class HouseResourceViewModel extends BaseViewModel {
     public ObservableList<FeaturedLabelBean> featuredLabelList = new ObservableArrayList();//特色标签
     public ObservableList<FeaturedLabelBean> buildLabeList = new ObservableArrayList();//物业类型
 
-    public ObservableField<SmartRefreshLayout> srl=new ObservableField<>();
+    public ObservableField<SmartRefreshLayout> srl = new ObservableField<>();
 
     public HouseResourceViewModel(@NonNull Application application) {
         super(application);
@@ -86,7 +87,7 @@ public class HouseResourceViewModel extends BaseViewModel {
      * date: 2019/9/22  14:43
      */
     public void getData(int pageNum) {
-        if (pageNum==1){
+        if (pageNum == 1) {
             buildingList.clear();
         }
         Map<String, Object> parameter = new HashMap<>();
@@ -111,14 +112,15 @@ public class HouseResourceViewModel extends BaseViewModel {
         parameter.put("openType", openType.get());
         parameter.put("houseType", houseType.get());
         parameter.put("pageSize", "20");
-        parameter.put("pageNum", pageNum+"");
+        parameter.put("pageNum", pageNum + "");
+        parameter.put("id", LocalDataHelper.getInstance().getUserInfo().getUserId());
         ParameterLogUtil.getInstance().parameterLog(parameter);
         IdeaApi.getApiService()
-                .getBuildingList(parameter)
+                .myBuildingList(parameter)
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                 .compose(RxUtils.schedulersTransformer())
                 .doOnSubscribe(disposable -> showDialog())
-                .subscribe(new DefaultObserver<BuildingListEntity>(srl.get(),this) {
+                .subscribe(new DefaultObserver<BuildingListEntity>(srl.get(), this) {
                     @Override
                     public void onSuccess(BuildingListEntity response) {
                         buildingList.addAll(response.getData());

@@ -95,12 +95,9 @@ public class HomeAdapter extends BaseQuickAdapter<HomeAdapterBean, BaseViewHolde
     }
 
     private void initRecruitment(BaseViewHolder helper) {
-        List<String> strings = new ArrayList<>();
-        for (int i = 0; i < 43; i++) {
-            strings.add("" + i);
-        }
         RecyclerView recyclerView = helper.getView(R.id.rv_lh);
-        RecruitmentAdapter recruitmentAdapter = new RecruitmentAdapter(R.layout.item_recruitment, strings);
+        RecruitmentAdapter recruitmentAdapter = new RecruitmentAdapter(R.layout.item_recruitment, viewModel.recruitmentsRecommendList);
+        viewModel.RecruitmentAdapter.set(recruitmentAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(helper.itemView.getContext()));
         recyclerView.addItemDecoration(new MyVerticalDecoration(helper.itemView.getContext(), ContextCompat.getColor(helper.itemView.getContext(), R.color.color_f6), 1, 0, 0, true));
         recyclerView.setAdapter(recruitmentAdapter);

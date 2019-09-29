@@ -29,7 +29,7 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                binding:onClickCommand="@{viewModel.area}">
+                binding:onClickCommand="@{viewModel.areaCommand}">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -53,7 +53,7 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                binding:onClickCommand="@{viewModel.type}">
+                binding:onClickCommand="@{viewModel.typeCommand}">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -77,7 +77,7 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                binding:onClickCommand="@{viewModel.price}">
+                binding:onClickCommand="@{viewModel.priceCommand}">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -101,7 +101,7 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                binding:onClickCommand="@{viewModel.screen}">
+                binding:onClickCommand="@{viewModel.screenCommand}">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -125,7 +125,7 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                binding:onClickCommand="@{viewModel.sort}">
+                binding:onClickCommand="@{viewModel.sortCommand}">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -153,7 +153,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             binding:srlEnableAutoLoadMore="true"
-            binding:srlEnableRefresh="false">
+            binding:srlEnableRefresh="true">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv"

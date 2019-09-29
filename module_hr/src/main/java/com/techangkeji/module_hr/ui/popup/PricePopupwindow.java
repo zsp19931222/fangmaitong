@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.goldze.base.eventbus.PriceRxBusBean;
+import com.goldze.base.listener.PopupSelectListener;
 import com.techangkeji.module_hr.R;
 import com.techangkeji.module_hr.ui.adapter.PriceAdapter;
 import com.techangkeji.module_hr.ui.adapter.TypeAdapter;
@@ -57,11 +58,11 @@ public class PricePopupwindow extends BasePopupWindow {
         initAdapter();
         v_pa.getBackground().setAlpha(125);
         v_pa.setOnClickListener(view1 -> dismiss());
-        confirm.setOnClickListener(view ->{
-            PriceRxBusBean priceRxBusBean=new PriceRxBusBean(heiget.getText().toString(),low.getText().toString());
+        confirm.setOnClickListener(view -> {
+            PriceRxBusBean priceRxBusBean = new PriceRxBusBean(heiget.getText().toString(), low.getText().toString());
             RxBus.getDefault().post(priceRxBusBean);
             dismiss();
-        } );
+        });
     }
 
     private void initAdapter() {
@@ -74,6 +75,34 @@ public class PricePopupwindow extends BasePopupWindow {
         strings.add("400-500万");
         strings.add("500万以上");
         adapter = new PriceAdapter(R.layout.item_area, strings);
+        adapter.setPopupSelectListener(position -> {
+            PriceRxBusBean priceRxBusBean;
+            switch (strings.get(position)) {
+                case "不限":
+                    priceRxBusBean = new PriceRxBusBean("", "");
+                    break;
+                case "100万以下":
+                    priceRxBusBean = new PriceRxBusBean("0", "100");
+                    break;
+                case "100-200万":
+                    priceRxBusBean = new PriceRxBusBean("100", "200");
+                    break;
+                case "200-300万":
+                    priceRxBusBean = new PriceRxBusBean("200", "300");
+                    break;
+                case "300-400万":
+                    priceRxBusBean = new PriceRxBusBean("300", "400");
+                    break;
+                case "400-500万":
+                    priceRxBusBean = new PriceRxBusBean("400", "500");
+                    break;
+                default:
+                    priceRxBusBean = new PriceRxBusBean("", "");
+                    break;
+            }
+            RxBus.getDefault().post(priceRxBusBean);
+            dismiss();
+        });
         rv.setLayoutManager(new LinearLayoutManager(context));
         rv.addItemDecoration(new MyVerticalDecoration(context, ContextCompat.getColor(context, R.color.color_f6), 1, 0, 0, true));
         rv.setAdapter(adapter);

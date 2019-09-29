@@ -6,13 +6,20 @@ import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.bumptech.glide.Glide;
+import com.goldze.base.constant.RxBusMessageEventConstants;
+import com.goldze.base.router.ARouterPath;
 import com.techangkeji.model_home.R;
 
 import java.util.List;
+
+import me.goldze.mvvmhabit.bus.RxBus;
+import me.goldze.mvvmhabit.http.net.entity.BannerEntity;
+import me.goldze.mvvmhabit.utils.IsNullUtil;
 
 /**
  * description:
@@ -35,7 +42,7 @@ public class BannerSetting {
      * author: Andy
      * date: 2019/7/8 0008 10:17
      */
-    public void setBanner(Context context, ConvenientBanner banner, List<Object> images) {
+    public void setBanner(Context context, ConvenientBanner banner, List<BannerEntity.DataBean.EntityListBean> images) {
         banner.setPages(new CBViewHolderCreator() {
             @Override
             public Holder createHolder(View itemView) {
@@ -62,7 +69,7 @@ public class BannerSetting {
         ;
     }
 
-    public class LocalImageHolderView extends Holder<Object> {
+    public class LocalImageHolderView extends Holder<BannerEntity.DataBean.EntityListBean> {
         private ImageView imageView;
         private Context context;
 
@@ -77,10 +84,34 @@ public class BannerSetting {
         }
 
         @Override
-        public void updateUI(Object data) {
+        public void updateUI(BannerEntity.DataBean.EntityListBean data) {
             if (!isDestroy((Activity) context)) {
-                Glide.with(context).load(data).into(imageView);
+                Glide.with(context).load(data.getImgUrl()).into(imageView);
             }
+            imageView.setOnClickListener(v -> {
+                if (IsNullUtil.getInstance().isEmpty(data.getOuterUrl())) {
+
+                } else {
+                    switch (data.getInnerType()) {
+                        case 1://房源
+                            ARouter.getInstance().build(ARouterPath.Public.HRDetailActivity).withInt("id", Integer.parseInt(data.getImgUrl())).navigation();
+                            break;
+                        case 2://资讯
+                            RxBus.getDefault().post(RxBusMessageEventConstants.ZXZX);
+                            break;
+                        case 3://招聘
+                            RxBus.getDefault().post(RxBusMessageEventConstants.ZPXX);
+                            break;
+                        case 4://求职
+                            RxBus.getDefault().post(RxBusMessageEventConstants.ZPXX);
+                            break;
+                        case 5://公告
+                            ARouter.getInstance().build(ARouterPath.Information.NoticeActivity).withInt("id", Integer.parseInt(data.getImgUrl())).navigation();
+                            break;
+                    }
+                }
+            });
+
         }
 
         //判断Activity是否Destroy

@@ -17,6 +17,7 @@ import com.techangkeji.model_information.R;
 import com.techangkeji.model_information.databinding.FragmentIInviteBinding;
 import com.techangkeji.module_hr.ui.bean.AreaPopupBean;
 import com.techangkeji.module_information.ui.adapter.InviteAdapter;
+import com.techangkeji.module_information.ui.adapter.JobAdapter;
 import com.techangkeji.module_information.ui.view_model.InviteViewModel;
 
 import me.goldze.mvvmhabit.base.BaseLazyFragment;
@@ -26,10 +27,8 @@ import me.goldze.mvvmhabit.bus.RxSubscriptions;
 public class InviteFragment extends BaseLazyFragment<FragmentIInviteBinding, InviteViewModel> {
     @Override
     public void fetchData() {
-        InviteAdapter inviteAdapter = new InviteAdapter(R.layout.item_i_invite, viewModel.dataBeans);
-        viewModel.adapter.set(inviteAdapter);
-        binding.rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.rv.setAdapter(inviteAdapter);
+        initInvite();
+        initJob();
         RxSubscriptions.add(RxBus.getDefault().toObservable(PriceRxBusBean.class).subscribe(priceRxBusBean -> {//薪资选择结果
             viewModel.recruitmentBody.setMoneyDown(Double.valueOf(priceRxBusBean.getMin()));
             viewModel.recruitmentBody.setMoneyUp(Double.valueOf(priceRxBusBean.getMax()));
@@ -70,19 +69,42 @@ public class InviteFragment extends BaseLazyFragment<FragmentIInviteBinding, Inv
 
     @Override
     public void initData() {
-    viewModel.context.set(getActivity());
-    viewModel.choiceView.set(binding.choiceView);
-    viewModel.srl.set(binding.srl);
-    viewModel.recruitmentsList();
+        viewModel.context.set(getActivity());
+        viewModel.choiceView.set(binding.choiceView);
+        viewModel.srl.set(binding.srl);
+        viewModel.recruitmentsList();
     }
 
     /**
-    * description: 更新数据
-    * author: Andy
-    * date: 2019/9/27 0027 17:32
-    */
-    private void refreshData(){
-        viewModel.pageNum=1;
+     * description: 更新数据
+     * author: Andy
+     * date: 2019/9/27 0027 17:32
+     */
+    private void refreshData() {
+        viewModel.pageNum = 1;
         viewModel.recruitmentsList();
+    }
+
+    /**
+     * description: 加载招聘
+     * author: Andy
+     * date: 2019/9/29  22:34
+     */
+    private void initInvite() {
+        InviteAdapter inviteAdapter = new InviteAdapter(R.layout.item_i_invite, viewModel.dataBeans);
+        viewModel.adapter.set(inviteAdapter);
+        binding.rvZp.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvZp.setAdapter(inviteAdapter);
+    }
+    /**
+     * description: 加载求职
+     * author: Andy
+     * date: 2019/9/29  22:34
+     */
+    private void initJob() {
+        JobAdapter inviteAdapter = new JobAdapter(R.layout.item_i_invite, viewModel.JobHuntingList);
+        viewModel.jobAdapter.set(inviteAdapter);
+        binding.rvQz.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvQz.setAdapter(inviteAdapter);
     }
 }
