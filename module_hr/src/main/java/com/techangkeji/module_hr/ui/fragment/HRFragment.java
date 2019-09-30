@@ -22,11 +22,8 @@ import com.techangkeji.module_hr.R;
 import com.techangkeji.module_hr.databinding.FragmentHrBinding;
 import com.techangkeji.module_hr.ui.adapter.HRAdapter;
 import com.techangkeji.module_hr.ui.bean.AreaPopupBean;
-import com.techangkeji.module_hr.ui.popup.AreaPopupwindow;
+import com.techangkeji.module_hr.ui.popup.TypePopupwindow;
 import com.techangkeji.module_hr.ui.view_model.HRViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import me.goldze.mvvmhabit.base.BaseLazyFragment;
 import me.goldze.mvvmhabit.bus.RxBus;
@@ -47,12 +44,13 @@ public class HRFragment extends BaseLazyFragment<FragmentHrBinding, HRViewModel>
         binding.rv.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rv.setAdapter(hrAdapter);
         RxSubscriptions.add(RxBus.getDefault().toObservable(String.class).subscribe(s -> {
-            switch (s){
+            ZLog.d(s);
+            switch (s) {
                 case "新房":
-                    viewModel.isBusiness=false;
+                    viewModel.isBusiness = false;
                     break;
                 case "商业地产":
-                    viewModel.isBusiness=true;
+                    viewModel.isBusiness = true;
                     break;
             }
         }));
@@ -63,6 +61,7 @@ public class HRFragment extends BaseLazyFragment<FragmentHrBinding, HRViewModel>
             viewModel.getData();
         }));
         RxSubscriptions.add(RxBus.getDefault().toObservable(HouseTypeRxBusBean.class).subscribe(houseTypeRxBusBean -> {
+
             viewModel.houseType.set(houseTypeRxBusBean.getType());
             viewModel.pageNum = 1;
             viewModel.getData();
@@ -113,6 +112,39 @@ public class HRFragment extends BaseLazyFragment<FragmentHrBinding, HRViewModel>
             viewModel.pageNum = 1;
             viewModel.getData();
         }));
+        RxSubscriptions.add(RxBus.getDefault().toObservable(TypePopupwindow.TypeRxBean.class).subscribe(typeRxBean -> {
+            switch (typeRxBean.getString()){
+                case "住宅":
+                    viewModel.type.set("1");
+                    viewModel.propertyType.set("3");
+                    break;
+                case "别墅":
+                    viewModel.type.set("1");
+                    viewModel.propertyType.set("4");
+                    break;
+                case "商办":
+                    viewModel.type.set("2");
+                    viewModel.propertyType.set("5");
+                    break;
+                case "商铺":
+                    viewModel.type.set("2");
+                    viewModel.propertyType.set("6");
+                    break;
+                case "写字楼":
+                    viewModel.type.set("2");
+                    viewModel.propertyType.set("7");
+                    break;
+                case "商住":
+                    viewModel.type.set("2");
+                    viewModel.propertyType.set("8");
+                    break;
+                    default:
+                        viewModel.propertyType.set("");
+                        break;
+            }
+            viewModel.pageNum = 1;
+            viewModel.getData();
+        }));
         binding.srl.setEnableAutoLoadMore(true);
         binding.srl.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
@@ -149,7 +181,7 @@ public class HRFragment extends BaseLazyFragment<FragmentHrBinding, HRViewModel>
     @Override
     public void onResume() {
         super.onResume();
-        viewModel.pageNum=1;
+        viewModel.pageNum = 1;
         viewModel.getData();
     }
 }

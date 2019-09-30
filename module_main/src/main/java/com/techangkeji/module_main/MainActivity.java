@@ -93,6 +93,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         RxSubscriptions.add(RxBus.getDefault().toObservable(String.class).subscribe(s -> {
             if (RxBusMessageEventConstants.XF.equals(s)) {
                 initHomeResource();
+                RxBus.getDefault().post("新房");
+            } else if (RxBusMessageEventConstants.SYDC.equals(s)) {
+                initHomeResource();
+                RxBus.getDefault().post("商业地产");
             } else if (RxBusMessageEventConstants.ZXZX.equals(s)) {
                 initInformation();
                 RxBus.getDefault().post(new RxBusMessageEventConstants.InformationRxMessage(0));
@@ -125,6 +129,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     @Override
     public void onClick(TabView tabLayout, int position) {
+        viewModel.position = position;
         switch (position) {
             case 0:
                 binding.title.setVisibility(View.VISIBLE);

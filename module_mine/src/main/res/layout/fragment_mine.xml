@@ -70,10 +70,10 @@
                             android:textSize="@dimen/font16" />
 
                         <ImageView
+                            android:id="@+id/iv_sex"
                             android:layout_width="@dimen/d14"
                             android:layout_height="@dimen/d14"
-                            android:layout_marginStart="@dimen/d5"
-                            android:src="@mipmap/woman_icon" />
+                            android:layout_marginStart="@dimen/d5" />
                     </LinearLayout>
 
                     <TextView
@@ -334,6 +334,7 @@
                 android:orientation="horizontal"
                 android:paddingTop="@dimen/d15"
                 android:paddingBottom="@dimen/d15"
+                android:visibility="@{viewModel.showHR}"
                 binding:onClickCommand="@{viewModel.houseResourceCommand}">
 
                 <ImageView

@@ -3,6 +3,7 @@ package com.techangkeji.module_hr.ui.popup;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,14 +34,21 @@ public class FilterPopupwindow extends BasePopupWindow {
     private List<FeaturedLabelBean> decorationLabelBeans = new ArrayList<>();
     private List<FeaturedLabelBean> openTimeLabelBeans = new ArrayList<>();
     private TextView reset, confirm;
+    private LinearLayout ll_type,ll_size;
 
-    public FilterPopupwindow(Context context,
-                             List<FeaturedLabelBean> featuredLabelBeans,
-                             List<FeaturedLabelBean> buildLabelBeans
-    ) {
+
+    public FilterPopupwindow(Context context, List<FeaturedLabelBean> featuredLabelBeans,List<FeaturedLabelBean> buildLabelBeans,boolean showTypeAndSize) {
         super(context);
         this.context = context;
         init(context);
+        if (showTypeAndSize){
+            ll_type.setVisibility(View.VISIBLE);
+            ll_size.setVisibility(View.VISIBLE);
+        }else {
+            ll_type.setVisibility(View.GONE);
+            ll_size.setVisibility(View.GONE);
+
+        }
         this.featuredLabelBeans.addAll(featuredLabelBeans);
         this.buildLabelBeans.addAll(buildLabelBeans);
 
@@ -76,6 +84,8 @@ public class FilterPopupwindow extends BasePopupWindow {
         rv_pf4 = findViewById(R.id.rv_pf4);
         rv_pf5 = findViewById(R.id.rv_pf5);
         v_pa = findViewById(R.id.v_fill);
+        ll_type = findViewById(R.id.ll_type);
+        ll_size = findViewById(R.id.ll_size);
         initAdapter1();
         initAdapter2();
         initAdapter3();

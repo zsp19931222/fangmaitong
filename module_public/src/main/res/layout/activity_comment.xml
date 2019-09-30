@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,31 +9,46 @@
             type="com.techangkeji.module.ui.view_model.CommentViewModel" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_f6"
         android:orientation="vertical">
 
-        <com.goldze.base.view.TitleVIew
-            android:id="@+id/title"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/d44" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv"
+            <com.goldze.base.view.TitleVIew
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d44" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/d50"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="发表评论"
+                android:textColor="@color/color_dark_333333"
+                android:textSize="@dimen/font15"
+                binding:onClickCommand="@{viewModel.commentCommand}" />
+        </LinearLayout>
+
+        <com.kcrason.highperformancefriendscircle.widgets.EmojiPanelView
+            android:id="@+id/emoji_panel_view"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:gravity="bottom" />
+    </FrameLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/d50"
-            android:background="@color/white"
-            android:gravity="center"
-            android:text="发表评论"
-            android:textColor="@color/color_dark_333333"
-            android:textSize="@dimen/font15" />
 
-    </LinearLayout>
 </layout>

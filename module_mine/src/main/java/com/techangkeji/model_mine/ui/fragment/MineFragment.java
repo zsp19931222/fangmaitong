@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.goldze.base.router.ARouterPath;
+import com.goldze.base.utils.glide.GlideLoadUtils;
 import com.techangkeji.model_mine.BR;
 import com.techangkeji.model_mine.R;
 import com.techangkeji.model_mine.databinding.FragmentMineBinding;
@@ -69,6 +70,7 @@ public class MineFragment extends BaseLazyFragment<FragmentMineBinding, MineView
                     viewModel.brokerAuthenticateShow.set(View.VISIBLE);
                 }
             }
+            //资质认证
             if (!IsNullUtil.getInstance().isEmpty(LocalDataHelper.getInstance().getUserInfo().getQualificationAuthenticate())) {
                 if (LocalDataHelper.getInstance().getUserInfo().getQualificationAuthenticate() == 1) {
                     viewModel.qualificationAuthenticateShow.set(View.GONE);
@@ -76,6 +78,7 @@ public class MineFragment extends BaseLazyFragment<FragmentMineBinding, MineView
                     viewModel.qualificationAuthenticateShow.set(View.VISIBLE);
                 }
             }
+            //实名认证
             if (!IsNullUtil.getInstance().isEmpty(LocalDataHelper.getInstance().getUserInfo().getRealNameAuthenticate())) {
                 if (LocalDataHelper.getInstance().getUserInfo().getRealNameAuthenticate() == 1) {
                     viewModel.realNameAuthenticateShow.set(View.GONE);
@@ -89,21 +92,32 @@ public class MineFragment extends BaseLazyFragment<FragmentMineBinding, MineView
                 switch (LocalDataHelper.getInstance().getUserInfo().getIdentity()) {
                     case 1:
                         viewModel.identity.set("总代");
+                        viewModel.showHR.set(View.VISIBLE);
+                        viewModel.brokerAuthenticateShow.set(View.VISIBLE);
                         break;
                     case 2:
                         viewModel.identity.set("渠道代理");
+                        viewModel.showHR.set(View.GONE);
                         break;
                     case 3:
                         viewModel.identity.set("联合代理");
+                        viewModel.showHR.set(View.GONE);
                         break;
                     case 4:
                         viewModel.identity.set("经纪人");
+                        viewModel.showHR.set(View.GONE);
+                        viewModel.qualificationAuthenticateShow.set(View.VISIBLE);
                         break;
                 }
             }
             //账号
             if (!IsNullUtil.getInstance().isEmpty(LocalDataHelper.getInstance().getUserInfo().getUserId())) {
                 viewModel.account.set("账号：" + LocalDataHelper.getInstance().getUserInfo().getPhone());
+            }
+            if (LocalDataHelper.getInstance().getUserInfo().getSex()==1){
+                GlideLoadUtils.getInstance().glideLoad(getContext(),R.mipmap.man_icon,binding.ivSex,0);
+            }else if (LocalDataHelper.getInstance().getUserInfo().getSex()==2){
+                GlideLoadUtils.getInstance().glideLoad(getContext(),R.mipmap.woman_icon,binding.ivSex,0);
             }
         } catch (Exception e) {
             ZLog.d(e.toString());

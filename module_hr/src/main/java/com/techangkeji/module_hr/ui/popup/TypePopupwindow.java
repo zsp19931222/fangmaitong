@@ -54,9 +54,24 @@ public class TypePopupwindow extends BasePopupWindow {
         rv.addItemDecoration(new MyVerticalDecoration(context, ContextCompat.getColor(context, R.color.color_f6), 1, 0, 0, true));
         rv.setAdapter(adapter);
         adapter.setSelectListener(position -> {
-            RxBus.getDefault().post(strings.get(position));
+            RxBus.getDefault().post(new TypeRxBean(strings.get(position)));
             dismiss();
         });
     }
 
+    public class TypeRxBean{
+        private String string;
+
+        public TypeRxBean(String string) {
+            this.string = string;
+        }
+
+        public String getString() {
+            return string;
+        }
+
+        public void setString(String string) {
+            this.string = string;
+        }
+    }
 }

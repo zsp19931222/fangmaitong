@@ -21,10 +21,12 @@ import com.techangkeji.model_mine.ui.activity.QualificationAuthActivity;
 import com.techangkeji.model_mine.ui.activity.ReportActivity;
 import com.techangkeji.model_mine.ui.activity.SettingActivity;
 
+import me.goldze.mvvmhabit.base.BaseApplication;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.IsNullUtil;
+import me.goldze.mvvmhabit.utils.ToastUtil;
 
 public class MineViewModel extends BaseViewModel {
     public ObservableField<String> name = new ObservableField<>("");
@@ -34,6 +36,7 @@ public class MineViewModel extends BaseViewModel {
     public ObservableField<Integer> brokerAuthenticateShow = new ObservableField<>(View.GONE);//经纪人认证
     public ObservableField<String> identity = new ObservableField<>("");//身份
     public ObservableField<String> account = new ObservableField<>("");//账号
+    public ObservableField<Integer> showHR = new ObservableField<>(View.GONE);//总代才显示
 
 
     public MineViewModel(@NonNull Application application) {
@@ -51,11 +54,17 @@ public class MineViewModel extends BaseViewModel {
     //资讯评论
     public BindingCommand informationCommentCommand = new BindingCommand(() -> startActivity(InformationCommentActivity.class));
     //招聘
-    public BindingCommand inviteInformationCommentCommand = new BindingCommand(() -> startActivity(InviteInformationActivity.class));
+    public BindingCommand inviteInformationCommentCommand = new BindingCommand(() -> {
+
+        startActivity(InviteInformationActivity.class);
+    });
     //求职
     public BindingCommand jobCommentCommand = new BindingCommand(() -> startActivity(JobActivity.class));
     //房源
-    public BindingCommand houseResourceCommand = new BindingCommand(() -> startActivity(HouseResourceActivity.class));
+    public BindingCommand houseResourceCommand = new BindingCommand(() -> {
+
+        startActivity(HouseResourceActivity.class);
+    });
     //收藏
     public BindingCommand collectCommand = new BindingCommand(() -> startActivity(CollectActivity.class));
     //设置

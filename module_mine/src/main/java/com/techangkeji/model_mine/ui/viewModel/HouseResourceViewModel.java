@@ -24,6 +24,7 @@ import com.techangkeji.module_hr.ui.popup.SortPopupwindow;
 import java.util.HashMap;
 import java.util.Map;
 
+import me.goldze.mvvmhabit.base.BaseApplication;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.http.net.DefaultObserver;
@@ -35,6 +36,7 @@ import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.litepal.util.SaveAreaListUtil;
 import me.goldze.mvvmhabit.utils.RxUtils;
+import me.goldze.mvvmhabit.utils.ToastUtil;
 import razerdp.basepopup.BasePopupWindow;
 
 public class HouseResourceViewModel extends BaseViewModel {
@@ -58,7 +60,15 @@ public class HouseResourceViewModel extends BaseViewModel {
     }
 
     //发布房源
-    public BindingCommand houseResourceReleaseCommand = new BindingCommand(() -> startActivity(HouseResourceReleaseActivity.class));
+    public BindingCommand houseResourceReleaseCommand = new BindingCommand(() -> {
+        if (LocalDataHelper.getInstance().getUserInfo().getIdentity() == 1) {//总代的身份
+            if (LocalDataHelper.getInstance().getUserInfo().getQualificationAuthenticate() != 1) {//没有资质认证
+                ToastUtil.normalToast(BaseApplication.getInstance().getApplicationContext(), "需资质认证");
+                return;
+            }
+        }
+        startActivity(HouseResourceReleaseActivity.class);
+    });
 
     public ObservableField<String> areaCode = new ObservableField<>(SPUtils.getInstance().getString("areaId"));//区域编号
     public ObservableField<String> decoration = new ObservableField<>("");//装修(1-精装，2-简装，3-毛坯)
@@ -216,7 +226,7 @@ public class HouseResourceViewModel extends BaseViewModel {
         initShow();
         screenShow.set(View.VISIBLE);
 
-        FilterPopupwindow filterPopupwindow = new FilterPopupwindow(context.get(), featuredLabelList, buildLabeList);
+        FilterPopupwindow filterPopupwindow = new FilterPopupwindow(context.get(), featuredLabelList, buildLabeList, true);
         filterPopupwindow.showPopupWindow(choiceView.get());
         filterPopupwindow.setOnDismissListener(new BasePopupWindow.OnDismissListener() {
             @Override

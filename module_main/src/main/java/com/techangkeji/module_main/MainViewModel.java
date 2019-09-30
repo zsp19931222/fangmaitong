@@ -30,6 +30,8 @@ import me.goldze.mvvmhabit.utils.RxUtils;
 public class MainViewModel extends BaseViewModel {
     public ObservableField<String> area = new ObservableField<>("");
     public ObservableField<String> city = new ObservableField<>("");
+    public int position=0;//点击下标
+
     public MainViewModel(@NonNull Application application) {
         super(application);
     }
@@ -85,10 +87,16 @@ public class MainViewModel extends BaseViewModel {
     }
 
     /**
-    * description: 跳转搜索
-    * author: Andy
-    * date: 2019/9/29 0029 16:13
-    */
-    public BindingCommand searchCommand=new BindingCommand(() -> ARouter.getInstance().build(ARouterPath.Public.SearchActivity).navigation());
+     * description: 跳转搜索
+     * author: Andy
+     * date: 2019/9/29 0029 16:13
+     */
+    public BindingCommand searchCommand = new BindingCommand(() -> {
+        if (position==0||position==1) {
+            ARouter.getInstance().build(ARouterPath.Public.SearchActivity).withInt("from", 0).withString("input","").navigation();
+        }else if (position==2){
+            ARouter.getInstance().build(ARouterPath.Public.SearchActivity).withInt("from", 1).withString("input","").navigation();
+        }
+    });
 
 }

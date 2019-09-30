@@ -17,6 +17,7 @@ import com.techangkeji.model_mine.ui.adapter.JobAdapter;
 import java.util.HashMap;
 import java.util.Map;
 
+import me.goldze.mvvmhabit.base.BaseApplication;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.http.net.DefaultObserver;
@@ -27,6 +28,7 @@ import me.goldze.mvvmhabit.http.net.entity.JobHuntingEntity;
 import me.goldze.mvvmhabit.http.net.entity.RecruitmentListEntity;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.RxUtils;
+import me.goldze.mvvmhabit.utils.ToastUtil;
 
 public class JobViewModel extends BaseViewModel {
     public ObservableList<JobHuntingEntity.DataBean> dataBeans = new ObservableArrayList<>();
@@ -42,7 +44,16 @@ public class JobViewModel extends BaseViewModel {
      * author: Andy
      * date: 2019/9/27  22:42
      */
-    public BindingCommand releaseCommand = new BindingCommand(() -> startActivity(JobReleaseActivity.class));
+    public BindingCommand releaseCommand = new BindingCommand(() -> {
+        if (LocalDataHelper.getInstance().getUserInfo().getIdentity() == 4) {//总代的身份
+            if (LocalDataHelper.getInstance().getUserInfo().getRealNameAuthenticate() != 1) {
+                ToastUtil.normalToast(BaseApplication.getInstance().getApplicationContext(), "需实名认证");
+                return;
+            }
+        }
+
+        startActivity(JobReleaseActivity.class);
+    });
 
     @Override
     public void onResume() {

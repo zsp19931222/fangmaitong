@@ -11,6 +11,7 @@ import com.techangkeji.model_mine.ui.activity.InviteReleaseActivity;
 import com.techangkeji.model_mine.ui.activity.JobReleaseActivity;
 import com.techangkeji.model_mine.ui.adapter.InviteInformationAdapter;
 
+import me.goldze.mvvmhabit.base.BaseApplication;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.http.net.DefaultObserver;
@@ -21,6 +22,7 @@ import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
 import me.goldze.mvvmhabit.http.net.entity.RecruitmentListEntity;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.RxUtils;
+import me.goldze.mvvmhabit.utils.ToastUtil;
 
 public class InviteInformationViewModel extends BaseViewModel {
     public ObservableList<RecruitmentListEntity.DataBean> dataBeans = new ObservableArrayList<>();
@@ -36,7 +38,15 @@ public class InviteInformationViewModel extends BaseViewModel {
      * author: Andy
      * date: 2019/9/27  22:42
      */
-    public BindingCommand releaseCommand = new BindingCommand(() -> startActivity(InviteReleaseActivity.class));
+    public BindingCommand releaseCommand = new BindingCommand(() -> {
+        if (LocalDataHelper.getInstance().getUserInfo().getIdentity() == 1) {//总代的身份
+            if (LocalDataHelper.getInstance().getUserInfo().getQualificationAuthenticate() != 1) {
+                ToastUtil.normalToast(BaseApplication.getInstance().getApplicationContext(), "需资质认证");
+                return;
+            }
+        }
+        startActivity(InviteReleaseActivity.class);
+    });
 
     /**
      * description: 招聘列表

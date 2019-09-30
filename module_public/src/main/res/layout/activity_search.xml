@@ -57,10 +57,11 @@
                         android:layout_marginStart="@dimen/d5"
                         android:layout_marginEnd="@dimen/d5"
                         android:background="@null"
+                        android:id="@+id/et"
                         android:ellipsize="end"
-                        android:text="@{viewModel.input}"
-                        android:hint="搜索本区（开发商名/楼盘名/商圈/标签）"
+                        android:hint="@{viewModel.hint}"
                         android:singleLine="true"
+                        android:text="@={viewModel.input}"
                         android:textColor="@color/color_dark_333333"
                         android:textColorHint="@color/color_gray_999999"
                         android:textSize="@dimen/font12" />
@@ -74,10 +75,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_hr"
+                    android:visibility="@{viewModel.showHR}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_information"
+                    android:visibility="@{viewModel.showInformation}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </RelativeLayout>
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
     </LinearLayout>
 </layout>

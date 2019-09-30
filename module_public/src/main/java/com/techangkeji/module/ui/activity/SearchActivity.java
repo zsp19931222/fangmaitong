@@ -1,6 +1,11 @@
 package com.techangkeji.module.ui.activity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.goldze.base.router.ARouterPath;
@@ -8,6 +13,8 @@ import com.techangkeji.module.BR;
 import com.techangkeji.module.R;
 import com.techangkeji.module.databinding.ActivitySearchBinding;
 import com.techangkeji.module.ui.view_model.SearchViewModel;
+import com.techangkeji.module_hr.ui.adapter.HRAdapter;
+import com.techangkeji.module_information.ui.adapter.InformationAdapter;
 
 import me.goldze.mvvmhabit.base.BaseActivity;
 
@@ -29,4 +36,44 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
         return BR.viewModel;
     }
 
+    @Override
+    public void initData() {
+        viewModel.from = getIntent().getExtras().getInt("from");
+        if (viewModel.from == 0) {
+            viewModel.hint.set("搜索本区房源");
+            viewModel.showHR.set(View.VISIBLE);
+            viewModel.showInformation.set(View.GONE);
+        } else {
+            viewModel.hint.set("搜索本区资讯");
+            viewModel.showHR.set(View.GONE);
+            viewModel.showInformation.set(View.VISIBLE);
+        }
+        viewModel.srl.set(binding.srl);
+        viewModel.hrAdapter = new HRAdapter(com.techangkeji.module_hr.R.layout.item_home_resource, viewModel.buildingList);
+        binding.rvHr.setLayoutManager(new LinearLayoutManager(this));
+        binding.rvHr.setAdapter(viewModel.hrAdapter);
+
+        viewModel.informationAdapter = new InformationAdapter(com.techangkeji.model_information.R.layout.item_i_information, viewModel.dataBeans);
+        binding.rvInformation.setLayoutManager(new LinearLayoutManager(this));
+        binding.rvInformation.setAdapter(viewModel.informationAdapter);
+
+        viewModel.input.set(getIntent().getExtras().getString("input"));
+        viewModel.searchData();
+        binding.et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                viewModel.searchData();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
 }

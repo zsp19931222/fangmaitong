@@ -13,4 +13,5 @@ dependencies {
     api project(path: ':module_mine')
     api project(path: ':module_message')
     api project(path: ':module_friend_circle')
+    api project(path: ':module_information')
 }

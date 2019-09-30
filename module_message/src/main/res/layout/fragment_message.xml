@@ -27,7 +27,7 @@
                     android:layout_width="@dimen/d20"
                     android:layout_height="@dimen/d16"
                     android:layout_centerInParent="true"
-                    android:background="@color/color_gray_999999" />
+                    android:background="@mipmap/duoyonghu" />
 
                 <me.goldze.mvvmhabit.view.shape.RadiusTextView
                     android:layout_width="@dimen/d8"

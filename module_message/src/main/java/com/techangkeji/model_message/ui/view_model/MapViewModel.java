@@ -209,7 +209,7 @@ public class MapViewModel extends BaseViewModel {
         initShow();
         screenShow.set(View.VISIBLE);
 
-        FilterPopupwindow filterPopupwindow = new FilterPopupwindow(context, featuredLabelList, buildLabeList);
+        FilterPopupwindow filterPopupwindow = new FilterPopupwindow(context, featuredLabelList, buildLabeList,true);
         filterPopupwindow.showPopupWindow(choiceView.get());
         filterPopupwindow.setOnDismissListener(new BasePopupWindow.OnDismissListener() {
             @Override

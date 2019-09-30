@@ -100,10 +100,10 @@
                 android:gravity="center"
                 binding:tab_checked="true"
                 binding:tab_icon="@mipmap/home_icon"
-                binding:tab_iconSelect="@mipmap/home_icon"
+                binding:tab_iconSelect="@mipmap/home_select_icon"
                 binding:tab_name="首页"
                 binding:tab_nameColor="@color/color_dark_333333"
-                binding:tab_nameSelectColor="@color/color_dark_333333"
+                binding:tab_nameSelectColor="@color/color_FF8C00"
                 binding:tab_nameSize="@dimen/font10" />
 
             <com.techangkeji.module_main.view.TabView
@@ -113,10 +113,10 @@
                 android:background="@drawable/ripple"
                 android:gravity="center"
                 binding:tab_icon="@mipmap/hr_icon"
-                binding:tab_iconSelect="@mipmap/hr_icon"
+                binding:tab_iconSelect="@mipmap/hr_select_icon"
                 binding:tab_name="房源"
                 binding:tab_nameColor="@color/color_dark_333333"
-                binding:tab_nameSelectColor="@color/color_dark_333333"
+                binding:tab_nameSelectColor="@color/color_FF8C00"
                 binding:tab_nameSize="@dimen/font10" />
 
             <com.techangkeji.module_main.view.TabView
@@ -125,11 +125,11 @@
                 android:layout_weight="1"
                 android:background="@drawable/ripple"
                 android:gravity="center"
-                binding:tab_icon="@mipmap/information_select_icon"
+                binding:tab_icon="@mipmap/information_icon"
                 binding:tab_iconSelect="@mipmap/information_select_icon"
                 binding:tab_name="资讯"
                 binding:tab_nameColor="@color/color_dark_333333"
-                binding:tab_nameSelectColor="@color/color_dark_333333"
+                binding:tab_nameSelectColor="@color/color_FF8C00"
                 binding:tab_nameSize="@dimen/font10" />
 
             <com.techangkeji.module_main.view.TabView
@@ -140,10 +140,10 @@
                 android:background="@drawable/ripple"
                 android:gravity="center"
                 binding:tab_icon="@mipmap/mt_icon"
-                binding:tab_iconSelect="@mipmap/mt_icon"
+                binding:tab_iconSelect="@mipmap/mt_select_icon"
                 binding:tab_name="社交"
                 binding:tab_nameColor="@color/color_dark_333333"
-                binding:tab_nameSelectColor="@color/color_dark_333333"
+                binding:tab_nameSelectColor="@color/color_FF8C00"
                 binding:tab_nameSize="@dimen/font10" />
 
             <com.techangkeji.module_main.view.TabView
@@ -153,10 +153,10 @@
                 android:background="@drawable/ripple"
                 android:gravity="center"
                 binding:tab_icon="@mipmap/mine_icon"
-                binding:tab_iconSelect="@mipmap/mine_icon"
+                binding:tab_iconSelect="@mipmap/mine_select_icon"
                 binding:tab_name="我的"
                 binding:tab_nameColor="@color/color_dark_333333"
-                binding:tab_nameSelectColor="@color/color_dark_333333"
+                binding:tab_nameSelectColor="@color/color_FF8C00"
                 binding:tab_nameSize="@dimen/font10" />
         </com.techangkeji.module_main.view.TabGroupView>
     </LinearLayout>

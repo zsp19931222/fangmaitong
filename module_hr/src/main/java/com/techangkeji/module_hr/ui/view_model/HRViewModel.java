@@ -92,26 +92,6 @@ public class HRViewModel extends BaseViewModel {
         if (pageNum == 1) {
             buildingList.clear();
         }
-//        switch (response.getContent().getProperties_type()) {
-//            case 3:
-//                propertyType.set("住宅");
-//                break;
-//            case 4:
-//                propertyType.set("别墅");
-//                break;
-//            case 5:
-//                propertyType.set("商办");
-//                break;
-//            case 6:
-//                propertyType.set("商铺");
-//                break;
-//            case 7:
-//                propertyType.set("写字楼");
-//                break;
-//            case 8:
-//                propertyType.set("商住");
-//                break;
-//        }
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("areaId", areaCode.get());
         parameter.put("decoration", decoration.get());
@@ -231,7 +211,7 @@ public class HRViewModel extends BaseViewModel {
         initShow();
         screenShow.set(View.VISIBLE);
 
-        FilterPopupwindow filterPopupwindow = new FilterPopupwindow(context.get(), featuredLabelList, buildLabeList);
+        FilterPopupwindow filterPopupwindow = new FilterPopupwindow(context.get(), featuredLabelList, buildLabeList,false);
         filterPopupwindow.showPopupWindow(choiceView.get());
         filterPopupwindow.setOnDismissListener(new BasePopupWindow.OnDismissListener() {
             @Override

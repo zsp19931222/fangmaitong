@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.kcrason.highperformancefriendscircle.others.DataCenter;
 import com.techangkeji.module.BR;
 import com.techangkeji.module.R;
 import com.techangkeji.module.databinding.ActivityCommentBinding;
@@ -30,7 +31,10 @@ public class CommentActivity extends BaseActivity<ActivityCommentBinding, Commen
 
     @Override
     public void initData() {
-
+        binding.title.setTitle("楼盘点评");
+        viewModel.context.set(this);
+        viewModel.emojiPanelView.set(binding.emojiPanelView);
+        binding.emojiPanelView.initEmojiPanel(DataCenter.emojiDataSources);
         List<String> strings = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             strings.add("");

@@ -27,7 +27,7 @@
                 android:layout_width="@dimen/d16"
                 android:layout_height="@dimen/d16"
                 android:layout_alignParentEnd="true"
-                android:background="@color/color_dark_333333" />
+                android:background="@mipmap/banner_delete" />
         </RelativeLayout>
     </RelativeLayout>
 
