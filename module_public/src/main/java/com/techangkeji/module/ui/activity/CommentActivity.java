@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.goldze.base.router.ARouterPath;
 import com.kcrason.highperformancefriendscircle.others.DataCenter;
 import com.techangkeji.module.BR;
 import com.techangkeji.module.R;
@@ -18,6 +20,7 @@ import java.util.List;
 import me.goldze.mvvmhabit.base.BaseActivity;
 import me.goldze.mvvmhabit.view.MyVerticalDecoration;
 
+@Route(path = ARouterPath.Public.CommentActivity)
 public class CommentActivity extends BaseActivity<ActivityCommentBinding, CommentViewModel> {
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -33,12 +36,7 @@ public class CommentActivity extends BaseActivity<ActivityCommentBinding, Commen
     public void initData() {
         binding.title.setTitle("楼盘点评");
         viewModel.context.set(this);
-        viewModel.emojiPanelView.set(binding.emojiPanelView);
-        binding.emojiPanelView.initEmojiPanel(DataCenter.emojiDataSources);
         List<String> strings = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            strings.add("");
-        }
         CommentStateAdapter houseSizeAdapter = new CommentStateAdapter(R.layout.item_hrd_comment, strings);
         binding.rv.setLayoutManager(new LinearLayoutManager(this));
         binding.rv.addItemDecoration(new MyVerticalDecoration(this, ContextCompat.getColor(this, R.color.color_f6), 1, 0, 0, true));

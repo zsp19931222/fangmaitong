@@ -93,18 +93,23 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         RxSubscriptions.add(RxBus.getDefault().toObservable(String.class).subscribe(s -> {
             if (RxBusMessageEventConstants.XF.equals(s)) {
                 initHomeResource();
+                binding.mainTgv.setCurrentItem(1);
                 RxBus.getDefault().post("新房");
             } else if (RxBusMessageEventConstants.SYDC.equals(s)) {
                 initHomeResource();
+                binding.mainTgv.setCurrentItem(1);
                 RxBus.getDefault().post("商业地产");
             } else if (RxBusMessageEventConstants.ZXZX.equals(s)) {
                 initInformation();
+                binding.mainTgv.setCurrentItem(2);
                 RxBus.getDefault().post(new RxBusMessageEventConstants.InformationRxMessage(0));
             } else if (RxBusMessageEventConstants.ZPXX.equals(s)) {
                 initInformation();
+                binding.mainTgv.setCurrentItem(2);
                 RxBus.getDefault().post(new RxBusMessageEventConstants.InformationRxMessage(1));
             } else if (RxBusMessageEventConstants.ZZFY.equals(s)) {
                 initHomeResource();
+                binding.mainTgv.setCurrentItem(1);
             }
         }));
         LocationUtil.getInstance().startLocation(this);

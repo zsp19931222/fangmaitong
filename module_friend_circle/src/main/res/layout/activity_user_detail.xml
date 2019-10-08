@@ -161,7 +161,8 @@
                     android:gravity="center"
                     android:text="@{viewModel.buildNum}"
                     android:textColor="@color/color_dark_333333"
-                    android:textSize="@dimen/font12" />
+                    android:textSize="@dimen/font12"
+                    binding:onClickCommand="@{viewModel.HrListCommand}" />
 
                 <TextView
                     android:layout_width="0dp"

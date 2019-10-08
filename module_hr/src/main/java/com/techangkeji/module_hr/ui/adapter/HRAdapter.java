@@ -54,5 +54,7 @@ public class HRAdapter extends BaseQuickAdapter<BuildingListEntity.DataBean, Bas
         }
         GlideLoadUtils.getInstance().glideLoad(helper.itemView.getContext(), item.getUrl(), helper.getView(R.id.iv_ihr), 0);
         helper.setText(R.id.rv_ihr_type, item.getType());
+        helper.itemView.setOnClickListener(view -> ARouter.getInstance().build(ARouterPath.Public.HRDetailActivity).withInt("id",item.getId()).navigation());
+
     }
 }

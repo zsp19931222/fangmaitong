@@ -359,4 +359,11 @@ public class UserDetailViewModel extends BaseViewModel {
         if (IsNullUtil.getInstance().isEmpty(phone)) return;
         ARouter.getInstance().build(ARouterPath.Message.AddContactActivity).withString("userId", phone).navigation();
     });
+
+    /**
+    * description: 房源列表
+    * author: Andy
+    * date: 2019/10/8 0008 16:51
+    */
+    public BindingCommand HrListCommand=new BindingCommand(() -> ARouter.getInstance().build(ARouterPath.Public.HRListActivity).withInt("id", friendId).navigation());
 }
