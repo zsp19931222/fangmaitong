@@ -2,8 +2,11 @@ package com.techangkeji.model_mine.ui.activity;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.techangkeji.model_mine.BR;
 import com.techangkeji.model_mine.R;
 import com.techangkeji.model_mine.databinding.ActivityInviteInformationBinding;
@@ -26,10 +29,24 @@ public class InviteInformationActivity extends BaseActivity<ActivityInviteInform
     @Override
     public void initData() {
         binding.title.setTitle("我的招聘");
-        InviteInformationAdapter inviteInformationAdapter = new InviteInformationAdapter(R.layout.item_invite_information, viewModel.dataBeans);
+        InviteInformationAdapter inviteInformationAdapter = new InviteInformationAdapter(R.layout.item_invite_information, viewModel.dataBeans,viewModel);
         viewModel.adapter.set(inviteInformationAdapter);
         binding.rv.setLayoutManager(new LinearLayoutManager(this));
         binding.rv.setAdapter(inviteInformationAdapter);
         viewModel.recruitmentsList();
+        viewModel.srl.set(binding.srl);
+        binding.srl.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                viewModel.pageNum++;
+                viewModel.recruitmentsList();
+            }
+
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                viewModel.pageNum=1;
+                viewModel.recruitmentsList();
+            }
+        });
     }
 }

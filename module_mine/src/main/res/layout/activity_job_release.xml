@@ -228,7 +228,7 @@
                         android:layout_height="@dimen/d40"
                         android:layout_margin="@dimen/d16"
                         android:gravity="center"
-                        android:text="发布"
+                        android:text="@{viewModel.btn}"
                         android:textColor="@color/white"
                         android:textSize="@dimen/font16"
                         binding:onClickCommand="@{viewModel.submitCommand}"

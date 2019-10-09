@@ -25,6 +25,7 @@ import me.goldze.mvvmhabit.http.net.body.RecruitmentBody;
 import me.goldze.mvvmhabit.http.net.body.RecruitmentListBody;
 import me.goldze.mvvmhabit.http.net.body.ReleaseMovingBody;
 import me.goldze.mvvmhabit.http.net.body.SendCodeBody;
+import me.goldze.mvvmhabit.http.net.body.TcJobHuntingBody;
 import me.goldze.mvvmhabit.http.net.body.TcJobHuntingListBody;
 import me.goldze.mvvmhabit.http.net.body.UntiedThirdBody;
 import me.goldze.mvvmhabit.http.net.body.UpdateBody;
@@ -345,6 +346,16 @@ public interface ApiService<T extends BaseEntity> {
     @Headers({"url_name:search"})
     Observable<SuccessEntity> addRecruitments(@Body() RecruitmentBody myMovingListBody);
 
+    //修改招聘
+    @PUT(API + "tcRecruitments")
+    @Headers({"url_name:search"})
+    Observable<SuccessEntity> changeRecruitments(@Body() RecruitmentBody myMovingListBody);
+
+    //删除招聘
+    @DELETE(API + "tcRecruitments/{id}")
+    @Headers({"url_name:search"})
+    Observable<SuccessEntity> deleteRecruitments(@Path("id") int id);
+
     //招聘列表
     @POST(API + "tcRecruitments/list")
     @Headers({"url_name:search"})
@@ -354,7 +365,17 @@ public interface ApiService<T extends BaseEntity> {
     //发布求职
     @POST(API + "auth/tcJobHuntings")
     @Headers({"url_name:search"})
-    Observable<SuccessEntity> tcJobHuntings(@Body() RecruitmentBody myMovingListBody);
+    Observable<SuccessEntity> tcJobHuntings(@Body() TcJobHuntingBody myMovingListBody);
+
+    //修改求职
+    @PUT(API + "auth/tcJobHuntings")
+    @Headers({"url_name:search"})
+    Observable<SuccessEntity> changeTcJobHuntings(@Body() TcJobHuntingBody myMovingListBody);
+
+    //删除求职
+    @DELETE(API + "auth/tcJobHuntings/{id}")
+    @Headers({"url_name:search"})
+    Observable<SuccessEntity> deleteTcJobHuntings(@Path("id") int id);
 
     //我的求职列表
     @POST(API + "auth/tcJobHuntings/list")

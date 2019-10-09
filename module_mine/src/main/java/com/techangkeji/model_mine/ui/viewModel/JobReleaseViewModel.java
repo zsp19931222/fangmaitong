@@ -23,6 +23,7 @@ import me.goldze.mvvmhabit.http.net.DefaultObserver;
 import me.goldze.mvvmhabit.http.net.IdeaApi;
 import me.goldze.mvvmhabit.http.net.body.RecruitmentBody;
 import me.goldze.mvvmhabit.http.net.body.RecruitmentListBody;
+import me.goldze.mvvmhabit.http.net.body.TcJobHuntingBody;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.IsNullUtil;
@@ -46,12 +47,16 @@ public class JobReleaseViewModel extends BaseViewModel {
     public ObservableField<String> province = new ObservableField<>("");
     public ObservableField<String> city = new ObservableField<>("");
     public ObservableField<String> district = new ObservableField<>("");
+    public ObservableField<Long> id = new ObservableField<>();
+
+    public ObservableField<String> btn = new ObservableField<>("");
     public ObservableField<Context> context = new ObservableField<>();
     public ObservableField<TextView> tv_ir_job = new ObservableField<>();
 
     public BindingCommand addressCommand = new BindingCommand(() -> {
         ARouter.getInstance().build(ARouterPath.Public.MoreAddressActivity).withInt("addressType", 1).navigation();
     });
+
     public JobReleaseViewModel(@NonNull Application application) {
         super(application);
     }
@@ -69,33 +74,50 @@ public class JobReleaseViewModel extends BaseViewModel {
                 IsNullUtil.getInstance().isEmpty(job.get())) {
             ToastUtil.errorToast(context.get(), TipsConstants.PARAMETER_ERROR, false);
         } else {
-            RecruitmentBody recruitmentBody = new RecruitmentBody();
+            TcJobHuntingBody recruitmentBody = new TcJobHuntingBody();
             recruitmentBody.setCity(city.get());
             recruitmentBody.setDistrict(district.get());
             recruitmentBody.setProvince(province.get());
             recruitmentBody.setWorkAddress(address.get());
-            recruitmentBody.setRecruitmentTitle(title.get());
+            recruitmentBody.setHuntingTitle(title.get());
             recruitmentBody.setWorkContent(synopsis.get());
             recruitmentBody.setWorkNature(job.get());
             recruitmentBody.setWorkYear(year.get());
-            recruitmentBody.setRecruitmentHumenId(LocalDataHelper.getInstance().getUserInfo().getUserId());
-            List<Long> contactIds = new ArrayList<>();
-            contactIds.add(LocalDataHelper.getInstance().getUserInfo().getUserId());
-            recruitmentBody.setContactIds(contactIds);
-            ZLog.d(recruitmentBody);
-            IdeaApi.getApiService()
-                    .tcJobHuntings(recruitmentBody)
-                    .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
-                    .compose(RxUtils.schedulersTransformer())
-                    .doOnSubscribe(disposable -> showDialog())
-                    .subscribe(new DefaultObserver<SuccessEntity>(this) {
-                        @Override
-                        public void onSuccess(SuccessEntity response) {
-                            ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "发布成功");
-                            finish();
-                        }
 
-                    });
+            recruitmentBody.setHuntingHumenId(LocalDataHelper.getInstance().getUserInfo().getUserId());
+            recruitmentBody.setContactId((int) LocalDataHelper.getInstance().getUserInfo().getUserId());
+            if ("重新提交".equals(btn.get())) {//代表是修改
+                recruitmentBody.setId(id.get());
+                IdeaApi.getApiService()
+                        .changeTcJobHuntings(recruitmentBody)
+                        .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                        .compose(RxUtils.schedulersTransformer())
+                        .doOnSubscribe(disposable -> showDialog())
+                        .subscribe(new DefaultObserver<SuccessEntity>(this) {
+                            @Override
+                            public void onSuccess(SuccessEntity response) {
+                                ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "修改成功");
+                                finish();
+                            }
+
+                        });
+            } else {
+                IdeaApi.getApiService()
+                        .tcJobHuntings(recruitmentBody)
+                        .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                        .compose(RxUtils.schedulersTransformer())
+                        .doOnSubscribe(disposable -> showDialog())
+                        .subscribe(new DefaultObserver<SuccessEntity>(this) {
+                            @Override
+                            public void onSuccess(SuccessEntity response) {
+                                ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "发布成功");
+                                finish();
+                            }
+
+                        });
+            }
+            ZLog.d(recruitmentBody);
+
         }
     });
 

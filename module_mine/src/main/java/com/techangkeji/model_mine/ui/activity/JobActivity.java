@@ -35,7 +35,7 @@ public class JobActivity extends BaseActivity<ActivityJobBinding, JobViewModel> 
     public void initData() {
         viewModel.srl.set(binding.srl);
         binding.title.setTitle("我的求职");
-        viewModel.jobAdapter=new JobAdapter(R.layout.item_invite_information,viewModel.dataBeans);
+        viewModel.jobAdapter=new JobAdapter(R.layout.item_invite_information,viewModel.dataBeans,viewModel);
         binding.rv.setLayoutManager(new LinearLayoutManager(this));
         binding.rv.setAdapter(viewModel.jobAdapter);
         binding.srl.setEnableAutoLoadMore(true);

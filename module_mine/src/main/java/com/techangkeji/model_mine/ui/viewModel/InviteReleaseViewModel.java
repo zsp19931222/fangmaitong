@@ -12,6 +12,7 @@ import androidx.databinding.ObservableList;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.goldze.base.constant.TipsConstants;
 import com.goldze.base.router.ARouterPath;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.techangkeji.model_mine.ui.activity.SelectFriendActivity;
 import com.techangkeji.model_mine.ui.adapter.LinkManAdapter;
 import com.techangkeji.model_mine.ui.bean.SelectFriendBean;
@@ -56,6 +57,8 @@ public class InviteReleaseViewModel extends BaseViewModel {
     public ObservableField<Context> context = new ObservableField<>();
     public ObservableField<TextView> tv_ir_education = new ObservableField<>();
     public ObservableField<TextView> tv_ir_job = new ObservableField<>();
+    public ObservableField<String> btn=new ObservableField<>("");
+    public ObservableField<Long> id=new ObservableField<>();
 
     public ObservableField<LinkManAdapter> linkManAdapter = new ObservableField<>();
     public ObservableList<SelectFriendBean> linkManList = new ObservableArrayList<>();//联系人数据
@@ -114,20 +117,37 @@ public class InviteReleaseViewModel extends BaseViewModel {
                 contactIds.add((long) selectFriendBean.getId());
             }
             recruitmentBody.setContactIds(contactIds);
-            ZLog.d(recruitmentBody);
-            IdeaApi.getApiService()
-                    .addRecruitments(recruitmentBody)
-                    .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
-                    .compose(RxUtils.schedulersTransformer())
-                    .doOnSubscribe(disposable -> showDialog())
-                    .subscribe(new DefaultObserver<SuccessEntity>(this) {
-                        @Override
-                        public void onSuccess(SuccessEntity response) {
-                            ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "发布成功");
-                            finish();
-                        }
+            if ("重新提交".equals(btn.get())) {//代表是修改
+                recruitmentBody.setId(id.get());
+                IdeaApi.getApiService()
+                        .changeRecruitments(recruitmentBody)
+                        .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                        .compose(RxUtils.schedulersTransformer())
+                        .doOnSubscribe(disposable -> showDialog())
+                        .subscribe(new DefaultObserver<SuccessEntity>(this) {
+                            @Override
+                            public void onSuccess(SuccessEntity response) {
+                                ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "修改成功");
+                                finish();
+                            }
 
-                    });
+                        });
+            }else {
+                IdeaApi.getApiService()
+                        .addRecruitments(recruitmentBody)
+                        .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                        .compose(RxUtils.schedulersTransformer())
+                        .doOnSubscribe(disposable -> showDialog())
+                        .subscribe(new DefaultObserver<SuccessEntity>(this) {
+                            @Override
+                            public void onSuccess(SuccessEntity response) {
+                                ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "发布成功");
+                                finish();
+                            }
+
+                        });
+            }
+            ZLog.d(recruitmentBody);
         }
     });
 

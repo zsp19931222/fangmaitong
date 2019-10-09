@@ -26,9 +26,11 @@ import me.goldze.mvvmhabit.http.net.body.RecruitmentListBody;
 import me.goldze.mvvmhabit.http.net.body.TcJobHuntingListBody;
 import me.goldze.mvvmhabit.http.net.entity.JobHuntingEntity;
 import me.goldze.mvvmhabit.http.net.entity.RecruitmentListEntity;
+import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.RxUtils;
 import me.goldze.mvvmhabit.utils.ToastUtil;
+import me.goldze.mvvmhabit.utils.ZLog;
 
 public class JobViewModel extends BaseViewModel {
     public ObservableList<JobHuntingEntity.DataBean> dataBeans = new ObservableArrayList<>();
@@ -75,6 +77,7 @@ public class JobViewModel extends BaseViewModel {
         }
         myMovingListBody.setPage(pageNum);
         myMovingListBody.setMax(20);
+        ZLog.d(myMovingListBody);
         IdeaApi.getApiService()
                 .getTcJobHuntingList(myMovingListBody)
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
@@ -86,6 +89,27 @@ public class JobViewModel extends BaseViewModel {
                         dataBeans.addAll(response.getData());
                         jobAdapter.notifyDataSetChanged();
                     }
+                });
+    }
+    /**
+     * description: 删除
+     * author: Andy
+     * date: 2019/10/9  23:17
+     */
+    public void delete(int position){
+        IdeaApi.getApiService()
+                .deleteTcJobHuntings(dataBeans.get(position).getId())
+                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                .compose(RxUtils.schedulersTransformer())
+                .doOnSubscribe(disposable -> showDialog())
+                .subscribe(new DefaultObserver<SuccessEntity>(this) {
+                    @Override
+                    public void onSuccess(SuccessEntity response) {
+                        ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "删除成功");
+                        dataBeans.remove(position);
+                        jobAdapter.notifyDataSetChanged();
+                    }
+
                 });
     }
 }

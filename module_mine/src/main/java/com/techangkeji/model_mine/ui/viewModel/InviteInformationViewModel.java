@@ -7,6 +7,7 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.techangkeji.model_mine.ui.activity.InviteReleaseActivity;
 import com.techangkeji.model_mine.ui.activity.JobReleaseActivity;
 import com.techangkeji.model_mine.ui.adapter.InviteInformationAdapter;
@@ -20,6 +21,7 @@ import me.goldze.mvvmhabit.http.net.body.RecruitmentBody;
 import me.goldze.mvvmhabit.http.net.body.RecruitmentListBody;
 import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
 import me.goldze.mvvmhabit.http.net.entity.RecruitmentListEntity;
+import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.RxUtils;
 import me.goldze.mvvmhabit.utils.ToastUtil;
@@ -28,6 +30,7 @@ public class InviteInformationViewModel extends BaseViewModel {
     public ObservableList<RecruitmentListEntity.DataBean> dataBeans = new ObservableArrayList<>();
     public ObservableField<InviteInformationAdapter> adapter = new ObservableField<>();
     public int pageNum = 1;
+    public ObservableField<SmartRefreshLayout> srl=new ObservableField<>();
 
     public InviteInformationViewModel(@NonNull Application application) {
         super(application);
@@ -54,6 +57,9 @@ public class InviteInformationViewModel extends BaseViewModel {
      * date: 2019/9/26  22:51
      */
     public void recruitmentsList() {
+        if (pageNum==1){
+            dataBeans.clear();
+        }
         RecruitmentListBody recruitmentBody = new RecruitmentListBody();
         recruitmentBody.setMax(20);
         recruitmentBody.setPage(pageNum);
@@ -62,11 +68,31 @@ public class InviteInformationViewModel extends BaseViewModel {
                 .recruitmentsList(recruitmentBody)
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                 .compose(RxUtils.schedulersTransformer())
-                .doOnSubscribe(disposable -> showDialog())
-                .subscribe(new DefaultObserver<RecruitmentListEntity>(this) {
+                .subscribe(new DefaultObserver<RecruitmentListEntity>(srl.get()) {
                     @Override
                     public void onSuccess(RecruitmentListEntity response) {
                         dataBeans.addAll(response.getData());
+                        adapter.get().notifyDataSetChanged();
+                    }
+
+                });
+    }
+    /**
+     * description: 删除
+     * author: Andy
+     * date: 2019/10/9  23:17
+     */
+    public void delete(int position){
+        IdeaApi.getApiService()
+                .deleteRecruitments(dataBeans.get(position).getId())
+                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                .compose(RxUtils.schedulersTransformer())
+                .doOnSubscribe(disposable -> showDialog())
+                .subscribe(new DefaultObserver<SuccessEntity>(this) {
+                    @Override
+                    public void onSuccess(SuccessEntity response) {
+                        ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "删除成功");
+                        dataBeans.remove(position);
                         adapter.get().notifyDataSetChanged();
                     }
 
