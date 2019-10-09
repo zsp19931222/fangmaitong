@@ -6,16 +6,12 @@ import android.text.TextWatcher;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.goldze.base.router.ARouterPath;
 import com.techangkeji.model_home.BR;
 import com.techangkeji.model_home.R;
 import com.techangkeji.model_home.databinding.ActivityRecommendFriendBinding;
 import com.techangkeji.model_home.ui.adapter.FriendRecommendAdapter;
 import com.techangkeji.model_home.ui.view_midel.RecommendFriendViewModel;
-
-import java.util.ArrayList;
+import com.techangkeji.module_hr.ui.popup.TypePopupwindow;
 
 import me.goldze.mvvmhabit.base.BaseActivity;
 import me.goldze.mvvmhabit.bus.RxBus;
@@ -48,8 +44,8 @@ public class RecommendFriendActivity extends BaseActivity<ActivityRecommendFrien
         binding.rv.setAdapter(viewModel.friendRecommendAdapter);
         viewModel.userList();
 
-        RxSubscriptions.add(RxBus.getDefault().toObservable(String.class).subscribe(s -> {
-            switch (s) {
+        RxSubscriptions.add(RxBus.getDefault().toObservable(TypePopupwindow.TypeRxBean.class).subscribe(typeRxBean -> {
+            switch (typeRxBean.getString()) {
                 case "不限":
                     if (viewModel.isCheckClassify) {
                         viewModel.recommendFriendBody.setIdentity(-1);
