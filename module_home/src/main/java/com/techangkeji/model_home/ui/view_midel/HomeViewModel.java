@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.blankj.utilcode.util.SPUtils;
+import com.goldze.base.constant.RxBusMessageEventConstants;
 import com.goldze.base.router.ARouterPath;
 import com.goldze.base.utils.BaiduLocationBean;
 import com.techangkeji.model_home.R;
@@ -33,6 +34,7 @@ import java.util.Map;
 
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
+import me.goldze.mvvmhabit.bus.RxBus;
 import me.goldze.mvvmhabit.http.net.DefaultObserver;
 import me.goldze.mvvmhabit.http.net.IdeaApi;
 import me.goldze.mvvmhabit.http.net.body.AuthRealNameBody;
@@ -49,6 +51,7 @@ import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.WordEntity;
 import me.goldze.mvvmhabit.http.net.entity.information.NewsListEntity;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
+import me.goldze.mvvmhabit.utils.IsNullUtil;
 import me.goldze.mvvmhabit.utils.RxUtils;
 import me.goldze.mvvmhabit.utils.ToastUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
@@ -190,6 +193,29 @@ public class HomeViewModel extends BaseViewModel {
 
     private void initBanner() {
         BannerSetting.getInstance().setBanner(context.get(), banner.get(), bannerList);
+        banner.get().setOnItemClickListener(position -> {
+            if (!IsNullUtil.getInstance().isEmpty(bannerList.get(position).getOuterUrl())) {
+                ARouter.getInstance().build(ARouterPath.Public.WebActivity).withString("url", bannerList.get(position).getOuterUrl()).navigation();
+            } else {
+                switch (bannerList.get(position).getInnerType()) {
+                    case 1://房源
+                        ARouter.getInstance().build(ARouterPath.Public.HRDetailActivity).withInt("id", bannerList.get(position).getInnerUrl()).navigation();
+                        break;
+                    case 2://资讯
+                        RxBus.getDefault().post(RxBusMessageEventConstants.ZXZX);
+                        break;
+                    case 3://招聘
+                        RxBus.getDefault().post(RxBusMessageEventConstants.ZPXX);
+                        break;
+                    case 4://求职
+                        RxBus.getDefault().post(RxBusMessageEventConstants.ZPXX);
+                        break;
+                    case 5://公告
+                        ARouter.getInstance().build(ARouterPath.Information.NoticeActivity).withInt("id", bannerList.get(position).getInnerUrl()).navigation();
+                        break;
+                }
+            }
+        });
     }
 
     /**

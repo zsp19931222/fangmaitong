@@ -27,6 +27,10 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textColor="@color/color_111212"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_marginStart="@dimen/d44"
+        android:layout_marginEnd="@dimen/d44"
         android:textSize="@dimen/font18"
         android:textStyle="bold" />
 

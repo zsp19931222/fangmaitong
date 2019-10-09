@@ -65,6 +65,7 @@ public class ARouterPath {
         public static final String SearchActivity = Public + "/SearchActivity";
         public static final String CommentActivity = Public + "/CommentActivity";
         public static final String HRListActivity = Public + "/HRListActivity";
+        public static final String WebActivity = Public + "/WebActivity";
     }
     /**
      * 我的页面

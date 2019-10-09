@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.PopupWindow;
 
 import androidx.collection.LruCache;
 import androidx.fragment.app.FragmentActivity;
@@ -23,11 +24,13 @@ import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.shareboard.ShareBoardConfig;
 
 import java.io.File;
 
 import io.reactivex.observers.DefaultObserver;
 import me.goldze.mvvmhabit.base.BaseApplication;
+import me.goldze.mvvmhabit.bus.RxBus;
 import me.goldze.mvvmhabit.utils.IsNullUtil;
 import me.goldze.mvvmhabit.utils.ToastUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
@@ -49,17 +52,20 @@ public class ShareUtil {
     private ShareUtil() {
     }
 
-    public void share(Context context, RecyclerView view) {
-        if (IsNullUtil.getInstance().isEmpty(shotRecyclerView(view))) return;
-        UMImage image = new UMImage(context, shotRecyclerView(view));//bitmap文件
+    public void share(Context context, Bitmap bitmap) {
+        if (IsNullUtil.getInstance().isEmpty(bitmap)) return;
+        UMImage image = new UMImage(context, bitmap);//bitmap文件
         new RxPermissions((FragmentActivity) context)
                 .request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
                 .subscribe(new DefaultObserver<Boolean>() {
                     @Override
                     public void onNext(Boolean aBoolean) {
                         if (aBoolean) {
+                            ShareBoardConfig config = new ShareBoardConfig();//新建ShareBoardConfig
+                            config.setOnDismissListener(() -> RxBus.getDefault().post("完成分享"));
                             new ShareAction((Activity) context).withText("hello").withMedia(image).setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
-                                    .setCallback(shareListener).open();
+                                    .setCallback(shareListener).open(config);
+
                         } else {
                             ToastUtil.errorToast(context, GET_PERMISSIONS_FAILED, false);
                         }
@@ -78,96 +84,6 @@ public class ShareUtil {
 
     }
 
-    /**
-     * 根据指定的view截图 并保存
-     *
-     * @param v 要截图的view
-     * @return Bitmap
-     */
-    public Bitmap getViewBitmap(Context context, View v) {
-        if (null == v) {
-            return null;
-        }
-        v.setDrawingCacheEnabled(true);
-        v.buildDrawingCache();
-        if (Build.VERSION.SDK_INT >= 11) {
-            v.measure(View.MeasureSpec.makeMeasureSpec(v.getWidth(), View.MeasureSpec.EXACTLY),
-                    View.MeasureSpec.makeMeasureSpec(v.getHeight(), View.MeasureSpec.EXACTLY));
-            v.layout((int) v.getX(), (int) v.getY(), (int) v.getX() + v.getMeasuredWidth(), (int) v.getY() + v.getMeasuredHeight());
-        } else {
-            v.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-            v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
-        }
-
-        Bitmap bitmap = Bitmap.createBitmap(v.getDrawingCache(), 0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
-        v.setDrawingCacheEnabled(false);
-        v.destroyDrawingCache();
-        //保存到相册
-        MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "***" + System.currentTimeMillis(), "分享图片");
-        //广播通知刷新图库
-        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-                Uri.fromFile(new File("/sdcard/fangmaitong/share_image.jpg"))));
-        return bitmap;
-    }
-
-
-    /**
-     * description:recycleview截屏
-     * author: Andy
-     * date: 2019/9/16 0016 16:26
-     */
-    public static Bitmap shotRecyclerView(RecyclerView view) {
-        RecyclerView.Adapter adapter = view.getAdapter();
-        Bitmap bigBitmap = null;
-        if (adapter != null) {
-            int size = adapter.getItemCount();
-            int height = 0;
-            Paint paint = new Paint();
-            int iHeight = 0;
-            final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
-
-            // Use 1/8th of the available memory for this memory cache.
-            final int cacheSize = maxMemory / 8;
-            LruCache<String, Bitmap> bitmaCache = new LruCache<>(cacheSize);
-            for (int i = 0; i < size; i++) {
-                if (i==1||i==2)continue;
-                RecyclerView.ViewHolder holder = adapter.createViewHolder(view, adapter.getItemViewType(i));
-                adapter.onBindViewHolder(holder, i);
-                holder.itemView.measure(
-                        View.MeasureSpec.makeMeasureSpec(view.getWidth(), View.MeasureSpec.EXACTLY),
-                        View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-                holder.itemView.layout(0, 0, holder.itemView.getMeasuredWidth(),
-                        holder.itemView.getMeasuredHeight());
-                holder.itemView.setDrawingCacheEnabled(true);
-                holder.itemView.buildDrawingCache();
-                Bitmap drawingCache = holder.itemView.getDrawingCache();
-                if (drawingCache != null) {
-
-                    bitmaCache.put(String.valueOf(i), drawingCache);
-                }
-                height += holder.itemView.getMeasuredHeight();
-            }
-
-            bigBitmap = Bitmap.createBitmap(view.getMeasuredWidth(), height, Bitmap.Config.ARGB_8888);
-            Canvas bigCanvas = new Canvas(bigBitmap);
-            Drawable lBackground = view.getBackground();
-            if (lBackground instanceof ColorDrawable) {
-                ColorDrawable lColorDrawable = (ColorDrawable) lBackground;
-                int lColor = lColorDrawable.getColor();
-                bigCanvas.drawColor(lColor);
-            }
-
-            for (int i = 0; i < size; i++) {
-                if (i==1||i==2)continue;
-                Bitmap bitmap = bitmaCache.get(String.valueOf(i));
-                bigCanvas.drawBitmap(bitmap, 0f, iHeight, paint);
-                iHeight += bitmap.getHeight();
-                bitmap.recycle();
-            }
-        }
-        return bigBitmap;
-    }
 
     private UMShareListener shareListener = new UMShareListener() {
         /**
@@ -176,7 +92,7 @@ public class ShareUtil {
          */
         @Override
         public void onStart(SHARE_MEDIA platform) {
-
+            ZLog.d("onStart");
         }
 
         /**
@@ -186,6 +102,7 @@ public class ShareUtil {
         @Override
         public void onResult(SHARE_MEDIA platform) {
             ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "分享成功");
+            RxBus.getDefault().post("完成分享");
         }
 
         /**
@@ -196,6 +113,7 @@ public class ShareUtil {
         @Override
         public void onError(SHARE_MEDIA platform, Throwable t) {
             ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "分享失败");
+            RxBus.getDefault().post("完成分享");
         }
 
         /**
@@ -205,7 +123,7 @@ public class ShareUtil {
         @Override
         public void onCancel(SHARE_MEDIA platform) {
             ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "取消分享");
-
+            RxBus.getDefault().post("完成分享");
         }
     };
 }

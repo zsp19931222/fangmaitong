@@ -10,6 +10,7 @@ import com.scwang.smartrefresh.header.WaterDropHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.tencent.bugly.Bugly;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 
@@ -55,6 +56,8 @@ public class BaseModuleInit implements IModuleInit {
         ZLog.e("基础层初始化 -- onInitAhead");
         initUM(application);
         Stetho.initializeWithDefaults(application);
+        Bugly.init(application, BuildConfig.BUGLY_APPID, BuildConfig.DEBUG);
+
         return false;
     }
 

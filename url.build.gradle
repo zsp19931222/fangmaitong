@@ -39,6 +39,7 @@ android {
             buildConfigField("String", "WEB_APP_KEY", "\"689150989\"")
             buildConfigField("String", "WEB_APP_SECRET", "\"9aa04099decfe1878cd99369b368447d\"")
             buildConfigField("String", "UMENG_APP_KEY", "\"5d7efc860cafb29e7f000de9\"")
+            buildConfigField("String", "BUGLY_APPID", "\"ed7ffacb52\"")
         }
         debug {
             signingConfig signingConfigs.debug
@@ -51,6 +52,7 @@ android {
             buildConfigField("String", "WEB_APP_KEY", "\"689150989\"")
             buildConfigField("String", "WEB_APP_SECRET", "\"9aa04099decfe1878cd99369b368447d\"")
             buildConfigField("String", "UMENG_APP_KEY", "\"5d7efc860cafb29e7f000de9\"")
+            buildConfigField("String", "BUGLY_APPID", "\"ed7ffacb52\"")
         }
     }
 }

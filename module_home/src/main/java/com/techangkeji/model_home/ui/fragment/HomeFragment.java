@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.blankj.utilcode.util.SPUtils;
 import com.goldze.base.router.ARouterPath;
 import com.techangkeji.model_home.R;
 import com.techangkeji.model_home.databinding.FragmentHomeBinding;
@@ -31,6 +32,7 @@ import java.util.List;
 import me.goldze.mvvmhabit.base.BaseLazyFragment;
 import me.goldze.mvvmhabit.bus.RxBus;
 import me.goldze.mvvmhabit.bus.RxSubscriptions;
+import me.goldze.mvvmhabit.utils.IsNullUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
 
 import static com.techangkeji.model_home.ui.bean.HomeAdapterBean.FriendRecommend;
@@ -54,11 +56,14 @@ public class HomeFragment extends BaseLazyFragment<FragmentHomeBinding, HomeView
     @Override
     public void onResume() {
         super.onResume();
-        viewModel.recommendBuildHome();
-        viewModel.recommendNewsHome();
-        viewModel.recommendFriend();
-        viewModel.getNewPlacard();
-        viewModel.RecruitmentsRecommend();
+        if (!IsNullUtil.getInstance().isEmpty(SPUtils.getInstance().getString("areaId"))) {
+            viewModel.recommendBuildHome();
+            viewModel.recommendNewsHome();
+            viewModel.recommendFriend();
+            viewModel.getNewPlacard();
+            viewModel.RecruitmentsRecommend();
+            viewModel.bannerList();
+        }
     }
 
     @Override
@@ -75,13 +80,16 @@ public class HomeFragment extends BaseLazyFragment<FragmentHomeBinding, HomeView
         RxSubscriptions.add(RxBus.getDefault().toObservable(String.class).subscribe(s -> {
             ZLog.d(s);
             if ("获取区域ID成功".equals(s)) {
-                viewModel.recommendBuildHome();
-                viewModel.recommendNewsHome();
-                viewModel.recommendFriend();
-                viewModel.getNewPlacard();
+                if (!IsNullUtil.getInstance().isEmpty(SPUtils.getInstance().getString("areaId"))) {
+                    viewModel.recommendBuildHome();
+                    viewModel.recommendNewsHome();
+                    viewModel.recommendFriend();
+                    viewModel.getNewPlacard();
+                    viewModel.RecruitmentsRecommend();
+                    viewModel.bannerList();
+                }
             }
         }));
-        viewModel.bannerList();
     }
 
     @Override

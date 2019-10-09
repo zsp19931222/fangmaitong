@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.goldze.mvvmhabit.base.BaseActivity;
+import me.goldze.mvvmhabit.bus.RxBus;
+import me.goldze.mvvmhabit.bus.RxSubscriptions;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.ZLog;
 
@@ -58,6 +60,11 @@ public class HRDetailActivity extends BaseActivity<ActivityHrDetailBinding, HRDe
 
         }
         viewModel.recyclerView.set(binding.rv);
+        RxSubscriptions.add(RxBus.getDefault().toObservable(String.class).subscribe(s -> {
+            if (s.equals("完成分享")) {
+                hrDetailAdapter.setShow();
+            }
+        }));
     }
 
     private void init(int i) {
