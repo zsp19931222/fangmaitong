@@ -354,6 +354,9 @@ public class HRDetailViewModel extends BaseViewModel {
     public ObservableList<ReviewListEntity.DataBean> dataBeans=new ObservableArrayList<>();
     public ObservableField<HRDCommentAdapter> hrdCommentAdapterObservableField=new ObservableField<>();
     public void tcReviewsList(){
+        if (pageNum==1){
+            dataBeans.clear();
+        }
         tcReviewsListBody.setMax(4);
         tcReviewsListBody.setPage(pageNum);
         tcReviewsListBody.setEntityId(id);

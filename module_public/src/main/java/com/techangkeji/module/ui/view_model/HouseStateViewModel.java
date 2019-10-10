@@ -8,6 +8,7 @@ import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
 
 import com.kcrason.highperformancefriendscircle.widgets.EmojiPanelView;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.techangkeji.module.ui.adapter.HouseStateAdapter;
 
 import me.goldze.mvvmhabit.base.BaseViewModel;
@@ -38,18 +39,23 @@ public class HouseStateViewModel extends BaseViewModel {
         super(application);
     }
 
+    public int pageNum=1;
+    public ObservableField<SmartRefreshLayout> srl=new ObservableField<>();
     /**
      * description: 获取评论列表
      * author: Andy
      * date: 2019/9/25  23:10
      */
     public void getCommentList() {
-        CommentListBody commentListBody = new CommentListBody(1, 10, 2, (long) id);
+        if (pageNum==1){
+            dataBeans.clear();
+        }
+        CommentListBody commentListBody = new CommentListBody(pageNum, 20, 2, (long) id);
         IdeaApi.getApiService()
                 .getCommentList(commentListBody)
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                 .compose(RxUtils.schedulersTransformer())
-                .subscribe(new DefaultObserver<CommentListEntity>() {
+                .subscribe(new DefaultObserver<CommentListEntity>(srl.get()) {
                     @Override
                     public void onSuccess(CommentListEntity response) {
                         dataBeans.addAll(response.getData());

@@ -4,4 +4,5 @@
     android:layout_width="match_parent"
     android:layout_marginStart="@dimen/d5"
     android:layout_height="@dimen/d85"
+    android:scaleType="fitXY"
     android:orientation="vertical" />

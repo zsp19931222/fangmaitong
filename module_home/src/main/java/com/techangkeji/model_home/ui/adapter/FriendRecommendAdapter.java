@@ -30,7 +30,7 @@ public class FriendRecommendAdapter extends BaseQuickAdapter<RecommendFriendEnti
         }
         helper.setText(R.id.iv_ifr_name,item.getRealName());
        if (item.getSex()==1){//男
-           GlideLoadUtils.getInstance().glideLoad(helper.itemView.getContext(),R.mipmap.woman_icon,helper.getView(R.id.iv_ifr_sex),0);
+           GlideLoadUtils.getInstance().glideLoad(helper.itemView.getContext(),R.mipmap.man_icon,helper.getView(R.id.iv_ifr_sex),0);
        }else if (item.getSex()==2){//女
            GlideLoadUtils.getInstance().glideLoad(helper.itemView.getContext(),R.mipmap.woman_icon,helper.getView(R.id.iv_ifr_sex),0);
        }

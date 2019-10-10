@@ -60,12 +60,21 @@ public class LocationActivity extends BaseActivity<ActivityLocationBinding, Loca
 
     @Override
     public void initData() {
+
         binding.title.setTitle("位置");
         viewModel.addressType.set(getIntent().getExtras().getInt("addressType"));
         //实例化一个地理编码查询对象
         geoCoder = GeoCoder.newInstance();
         baiduMap = binding.map.getMap();
+        try {
+            ZLog.d(getIntent().getExtras().getString("lat"));
+            LatLng latLng = new LatLng(Double.valueOf(getIntent().getExtras().getString("lat")),Double.valueOf(getIntent().getExtras().getString("lon")));
+            MapStatus.Builder builder = new MapStatus.Builder();
+            builder.target(latLng).zoom(18.0f);
+            baiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+        }catch (Exception e){
 
+        }
         initRecycleView();
         nearbyPoiSearch();
         binding.etLocation.addTextChangedListener(new TextWatcher() {

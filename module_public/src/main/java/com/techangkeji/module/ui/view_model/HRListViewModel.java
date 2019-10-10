@@ -8,9 +8,11 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
 
+import com.blankj.utilcode.util.SPUtils;
 import com.goldze.base.utils.ParameterLogUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.techangkeji.module_hr.ui.adapter.HRAdapter;
+import com.techangkeji.module_information.ui.adapter.InviteAdapter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,11 +20,14 @@ import java.util.Map;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.http.net.DefaultObserver;
 import me.goldze.mvvmhabit.http.net.IdeaApi;
+import me.goldze.mvvmhabit.http.net.body.RecruitmentListBody;
 import me.goldze.mvvmhabit.http.net.entity.BuildingListEntity;
+import me.goldze.mvvmhabit.http.net.entity.RecruitmentListEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.UserDetailEntity;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.RxUtils;
+import me.goldze.mvvmhabit.utils.ZLog;
 
 /**
  * description:
@@ -31,9 +36,8 @@ import me.goldze.mvvmhabit.utils.RxUtils;
  */
 public class HRListViewModel extends BaseViewModel {
     public int friendId;
-    public int pageNum=1;
-    public ObservableList<BuildingListEntity.DataBean> buildingList = new ObservableArrayList<>();
-    public HRAdapter hrAdapter;
+    public int pageNum = 1;
+
 
     public ObservableField<String> hrUrl = new ObservableField<>("");
     public ObservableField<String> hrName = new ObservableField<>("");
@@ -43,7 +47,8 @@ public class HRListViewModel extends BaseViewModel {
     public ObservableField<Integer> hrAuthZZ = new ObservableField<>(View.GONE);
     public ObservableField<Integer> hrAuthJJR = new ObservableField<>(View.GONE);
 
-    public ObservableField<SmartRefreshLayout> srl=new ObservableField<>();
+    public ObservableField<SmartRefreshLayout> srl = new ObservableField<>();
+
     public HRListViewModel(@NonNull Application application) {
         super(application);
     }
@@ -98,12 +103,28 @@ public class HRListViewModel extends BaseViewModel {
                 });
     }
 
+
     /**
-     * description:获取房源列表
+     * description:
      * author: Andy
      * date: 2019/9/22  14:43
      */
-    public void getData() {
+    public void getData(int from) {
+        if (from == 0) {
+            buildingList();
+        } else {
+            recruitmentsList();
+        }
+    }
+
+    /**
+     * description: 房源列表
+     * author: Andy
+     * date: 2019/10/10 0010 17:27
+     */
+    public ObservableList<BuildingListEntity.DataBean> buildingList = new ObservableArrayList<>();
+    public HRAdapter hrAdapter;
+    public void buildingList() {
         if (pageNum == 1) {
             buildingList.clear();
         }
@@ -121,6 +142,38 @@ public class HRListViewModel extends BaseViewModel {
                     public void onSuccess(BuildingListEntity response) {
                         buildingList.addAll(response.getData());
                         hrAdapter.notifyDataSetChanged();
+                    }
+
+                });
+    }
+
+    /**
+     * description:招聘列表
+     * author: Andy
+     * date: 2019/10/10 0010 17:23
+     */
+    public RecruitmentListBody recruitmentBody = new RecruitmentListBody();
+    public ObservableList<RecruitmentListEntity.DataBean> dataBeans = new ObservableArrayList<>();
+    public InviteAdapter inviteAdapter ;
+
+    public void recruitmentsList() {
+        if (pageNum == 1) {
+            dataBeans.clear();
+        }
+        recruitmentBody.setMax(30);
+        recruitmentBody.setPage(pageNum);
+        recruitmentBody.setRecruitmentHumenId(friendId);
+        ZLog.d(recruitmentBody);
+        IdeaApi.getApiService()
+                .recruitmentsList(recruitmentBody)
+                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                .compose(RxUtils.schedulersTransformer())
+                .doOnSubscribe(disposable -> showDialog())
+                .subscribe(new DefaultObserver<RecruitmentListEntity>(srl.get(), this) {
+                    @Override
+                    public void onSuccess(RecruitmentListEntity response) {
+                        dataBeans.addAll(response.getData());
+                        inviteAdapter.notifyDataSetChanged();
                     }
 
                 });

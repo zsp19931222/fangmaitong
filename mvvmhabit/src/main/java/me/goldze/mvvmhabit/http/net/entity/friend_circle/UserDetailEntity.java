@@ -114,7 +114,7 @@ public class UserDetailEntity {
     private Object mail;
     private int age;
     private int buildNum;
-    private int cumulativeLoginTime;
+    private long cumulativeLoginTime;
     private Object wxappProvince;
     private int enable;
     private Object wechatOpenId;
@@ -493,11 +493,11 @@ public class UserDetailEntity {
         this.buildNum = buildNum;
     }
 
-    public int getCumulativeLoginTime() {
+    public long getCumulativeLoginTime() {
         return cumulativeLoginTime;
     }
 
-    public void setCumulativeLoginTime(int cumulativeLoginTime) {
+    public void setCumulativeLoginTime(long cumulativeLoginTime) {
         this.cumulativeLoginTime = cumulativeLoginTime;
     }
 

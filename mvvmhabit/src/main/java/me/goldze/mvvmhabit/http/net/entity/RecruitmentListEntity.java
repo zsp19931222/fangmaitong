@@ -406,7 +406,7 @@ public class RecruitmentListEntity extends BaseEntity implements Serializable{
             private Object mail;
             private int age;
             private int buildNum;
-            private int cumulativeLoginTime;
+            private long cumulativeLoginTime;
             private int id;
             private String lastLogin;
             private int enable;
@@ -715,11 +715,11 @@ public class RecruitmentListEntity extends BaseEntity implements Serializable{
                 this.buildNum = buildNum;
             }
 
-            public int getCumulativeLoginTime() {
+            public long getCumulativeLoginTime() {
                 return cumulativeLoginTime;
             }
 
-            public void setCumulativeLoginTime(int cumulativeLoginTime) {
+            public void setCumulativeLoginTime(long cumulativeLoginTime) {
                 this.cumulativeLoginTime = cumulativeLoginTime;
             }
 
@@ -902,7 +902,7 @@ public class RecruitmentListEntity extends BaseEntity implements Serializable{
             private Object mail;
             private int age;
             private int buildNum;
-            private int cumulativeLoginTime;
+            private long cumulativeLoginTime;
             private int id;
             private Object lastLogin;
             private int enable;
@@ -1263,11 +1263,11 @@ public class RecruitmentListEntity extends BaseEntity implements Serializable{
                 this.buildNum = buildNum;
             }
 
-            public int getCumulativeLoginTime() {
+            public long getCumulativeLoginTime() {
                 return cumulativeLoginTime;
             }
 
-            public void setCumulativeLoginTime(int cumulativeLoginTime) {
+            public void setCumulativeLoginTime(long cumulativeLoginTime) {
                 this.cumulativeLoginTime = cumulativeLoginTime;
             }
 

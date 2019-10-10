@@ -276,9 +276,10 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <me.goldze.mvvmhabit.view.shape.RadiusImageView
                         android:layout_width="@dimen/d35"
                         android:layout_height="@dimen/d35"
+                        binding:rv_corner_radius="@dimen/d20"
                         android:layout_marginStart="@dimen/font16"
                         binding:url="@{viewModel.hrUrl}" />
 

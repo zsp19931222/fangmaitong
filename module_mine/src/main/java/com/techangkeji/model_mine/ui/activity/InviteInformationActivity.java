@@ -33,7 +33,6 @@ public class InviteInformationActivity extends BaseActivity<ActivityInviteInform
         viewModel.adapter.set(inviteInformationAdapter);
         binding.rv.setLayoutManager(new LinearLayoutManager(this));
         binding.rv.setAdapter(inviteInformationAdapter);
-        viewModel.recruitmentsList();
         viewModel.srl.set(binding.srl);
         binding.srl.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
@@ -48,5 +47,11 @@ public class InviteInformationActivity extends BaseActivity<ActivityInviteInform
                 viewModel.recruitmentsList();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewModel.recruitmentsList();
     }
 }

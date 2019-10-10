@@ -57,6 +57,10 @@ public class InviteReleaseActivity extends BaseActivity<ActivityInviteReleaseBin
         viewModel.linkManAdapter.set(linkManAdapter);
         binding.rv.setLayoutManager(new LinearLayoutManager(this));
         binding.rv.setAdapter(linkManAdapter);
+        linkManAdapter.setPopupSelectListener(position -> {
+            viewModel.linkManList.remove(position);
+            linkManAdapter.notifyDataSetChanged();
+        });
         try {
             RecruitmentListEntity.DataBean dataBean = (RecruitmentListEntity.DataBean) getIntent().getSerializableExtra("data");
             viewModel.title.set(dataBean.getRecruitmentTitle());

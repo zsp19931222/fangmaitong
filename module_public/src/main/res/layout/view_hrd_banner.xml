@@ -15,7 +15,6 @@
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="@dimen/d200"
-            android:background="@mipmap/default_image"
             app:canLoop="true" />
 
         <ImageView

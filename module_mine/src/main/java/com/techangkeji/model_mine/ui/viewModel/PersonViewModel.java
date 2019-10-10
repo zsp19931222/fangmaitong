@@ -202,33 +202,28 @@ public class PersonViewModel extends BaseViewModel {
      */
     public void uploadpic() {
         ZLog.d(headUrl.get());
-        if (IsNullUtil.getInstance().isEmpty(headUrl.get())) {//不需要上传图片
+        if (IsNullUtil.getInstance().isEmpty(headUrl.get()) || headUrl.get().startsWith("http")) {//不需要上传图片
             UpdateBody updateBody = new UpdateBody(nickName.get(), sexField.get(), Integer.valueOf(ageField.get()));
             updateInformation(updateBody);
         } else {
-            try {//headUrl不是来自网络图片
-                File file = new File(headUrl.get());
-                RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);//表单类型
-                MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);//表单类型
-                builder.addFormDataPart("file", file.getName(), body); //添加图片数据，body创建的请求体
-                List<MultipartBody.Part> parts = builder.build().parts();
-                IdeaApi.getApiService()
-                        .uploadpic(parts)
-                        .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
-                        .compose(RxUtils.schedulersTransformer())
-                        .doOnSubscribe(disposable1 -> showDialog())
-                        .subscribe(new DefaultObserver<SuccessEntity<String>>(this) {
-                            @Override
-                            public void onSuccess(SuccessEntity<String> response) {
-                                headUrl.set(response.getContent());
-                                UpdateBody updateBody = new UpdateBody(headUrl.get(), nickName.get(), sexField.get(), Integer.valueOf(ageField.get()));
-                                updateInformation(updateBody);
-                            }
-                        });
-            } catch (Exception e) {
-                UpdateBody updateBody = new UpdateBody(nickName.get(), sexField.get(), Integer.valueOf(ageField.get()));
-                updateInformation(updateBody);
-            }
+            File file = new File(headUrl.get());
+            RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);//表单类型
+            MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);//表单类型
+            builder.addFormDataPart("file", file.getName(), body); //添加图片数据，body创建的请求体
+            List<MultipartBody.Part> parts = builder.build().parts();
+            IdeaApi.getApiService()
+                    .uploadpic(parts)
+                    .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                    .compose(RxUtils.schedulersTransformer())
+                    .doOnSubscribe(disposable1 -> showDialog())
+                    .subscribe(new DefaultObserver<SuccessEntity<String>>(this) {
+                        @Override
+                        public void onSuccess(SuccessEntity<String> response) {
+                            headUrl.set(response.getContent());
+                            UpdateBody updateBody = new UpdateBody(headUrl.get(), nickName.get(), sexField.get(), Integer.valueOf(ageField.get()));
+                            updateInformation(updateBody);
+                        }
+                    });
         }
     }
 

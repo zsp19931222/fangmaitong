@@ -12,6 +12,7 @@
 
     <ImageView
         android:id="@+id/iv_hs"
+        android:scaleType="fitXY"
         android:layout_width="match_parent"
         android:layout_height="@dimen/d200" />
 

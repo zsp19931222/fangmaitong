@@ -23,12 +23,18 @@
                 android:id="@+id/title"
                 layout="@layout/title" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv"
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/srl"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:overScrollMode="never" />
+                android:layout_weight="1">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white" />
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -36,9 +42,9 @@
                 android:background="@color/white"
                 android:gravity="center"
                 android:text="发布新动态"
-                binding:onClickCommand="@{viewModel.commentCommand}"
                 android:textColor="@color/color_dark_333333"
-                android:textSize="@dimen/font15" />
+                android:textSize="@dimen/font15"
+                binding:onClickCommand="@{viewModel.commentCommand}" />
 
         </LinearLayout>
 

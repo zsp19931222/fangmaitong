@@ -135,7 +135,7 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
 
         viewModel.addressTextView.set(tv_vhf_address);
 
-        tv_vhf_address.setOnClickListener(v -> ARouter.getInstance().build(ARouterPath.Public.MoreAddressActivity).withInt("addressType", 0).navigation());
+        tv_vhf_address.setOnClickListener(v -> ARouter.getInstance().build(ARouterPath.Public.MoreAddressActivity).withInt("addressType", 0).withString("lat",viewModel.lat.get()).withString("lon",viewModel.lon.get()).navigation());
         cb_vhf_square.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 cb_vhf_suit.setChecked(false);
@@ -232,7 +232,7 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
 
         viewModel.officeAddressTextView.set(tv_vhd_address);
 
-        tv_vhd_address.setOnClickListener(v -> ARouter.getInstance().build(ARouterPath.Public.MoreAddressActivity).withInt("addressType", 1).navigation());
+        tv_vhd_address.setOnClickListener(v -> ARouter.getInstance().build(ARouterPath.Public.MoreAddressActivity).withInt("addressType", 1).withString("lat",viewModel.salesLat.get()).withString("lon",viewModel.salesLon.get()).navigation());
 
         tv_vhd_add.setOnClickListener(v -> new HRSDLabelPopupwindow(helper.itemView.getContext(), viewModel).showPopupWindow());
 

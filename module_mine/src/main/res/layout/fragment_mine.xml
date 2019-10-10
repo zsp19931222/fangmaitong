@@ -334,7 +334,6 @@
                 android:orientation="horizontal"
                 android:paddingTop="@dimen/d15"
                 android:paddingBottom="@dimen/d15"
-                android:visibility="@{viewModel.showHR}"
                 binding:onClickCommand="@{viewModel.houseResourceCommand}">
 
                 <ImageView

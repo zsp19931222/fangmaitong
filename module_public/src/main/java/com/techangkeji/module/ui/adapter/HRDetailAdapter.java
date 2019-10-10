@@ -215,7 +215,7 @@ public class HRDetailAdapter extends BaseQuickAdapter<HRDetailAdapterBean, BaseV
                 recyclerViewComment.setAdapter(hrdCommentAdapter);
                 helper.getView(R.id.tv_more).setOnClickListener(view -> {
                     Intent intent = new Intent(context, CommentActivity.class);
-                    intent.putExtra("entityId",viewModel.id);
+                    intent.putExtra("entityId", viewModel.id);
                     context.startActivity(intent);
                 });
                 break;
@@ -248,7 +248,7 @@ public class HRDetailAdapter extends BaseQuickAdapter<HRDetailAdapterBean, BaseV
             param.width = LinearLayout.LayoutParams.MATCH_PARENT;// 这里注意使用自己布局的根布局类型
             itemView.setVisibility(View.VISIBLE);
         } else {
-            itemView.setVisibility(View.GONE);
+            itemView.setVisibility(View.INVISIBLE);
             param.height = 0;
             param.width = 0;
         }
@@ -286,6 +286,7 @@ public class HRDetailAdapter extends BaseQuickAdapter<HRDetailAdapterBean, BaseV
             int headerSize = adapter.getHeaderLayoutCount();
             int dataSize = adapter.getData().size();
             for (int i = 0; i < headerSize + dataSize; i++) {
+                if (i == 1 || i == 2) continue;
                 BaseViewHolder holder = adapter.createViewHolder(mRecyclerView, adapter.getItemViewType(i));
                 ZLog.d(holder + "----->" + i);
                 if (i >= headerSize)
@@ -310,7 +311,7 @@ public class HRDetailAdapter extends BaseQuickAdapter<HRDetailAdapterBean, BaseV
                 }
             }
             //添加底部高度(加载更多或loading布局高度,此处为固定值:)
-            final int footHight = SizeUtils.dp2px(42);
+            final int footHight = SizeUtils.dp2px(0);
             shotHeight += footHight;
 
             //返回到顶部

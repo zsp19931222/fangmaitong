@@ -169,6 +169,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
+                    binding:onClickCommand="@{viewModel.inviteListCommand}"
                     android:text="@{viewModel.recruitmentNum}"
                     android:textColor="@color/color_dark_333333"
                     android:textSize="@dimen/font12" />

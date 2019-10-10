@@ -14,6 +14,7 @@ import com.techangkeji.module.R;
 import com.techangkeji.module.databinding.ActivityHrListBinding;
 import com.techangkeji.module.ui.view_model.HRListViewModel;
 import com.techangkeji.module_hr.ui.adapter.HRAdapter;
+import com.techangkeji.module_information.ui.adapter.InviteAdapter;
 
 import me.goldze.mvvmhabit.base.BaseActivity;
 
@@ -36,25 +37,34 @@ public class HRListActivity extends BaseActivity<ActivityHrListBinding, HRListVi
 
     @Override
     public void initData() {
-        binding.title.setTitle("房源列表");
-        viewModel.srl.set(binding.srl);
         viewModel.friendId = getIntent().getExtras().getInt("id");
+        int from=getIntent().getExtras().getInt("from");//0-房源列表，1-招聘列表
+        if (from==0){
+            binding.title.setTitle("房源列表");
+            viewModel.hrAdapter = new HRAdapter(R.layout.item_home_resource, viewModel.buildingList);
+            binding.rv.setLayoutManager(new LinearLayoutManager(this));
+            binding.rv.setAdapter(viewModel.hrAdapter);
+        }else {
+            binding.title.setTitle("招聘列表");
+            viewModel.inviteAdapter = new InviteAdapter(R.layout.item_i_invite, viewModel.dataBeans);
+            binding.rv.setLayoutManager(new LinearLayoutManager(this));
+            binding.rv.setAdapter(viewModel.inviteAdapter);
+        }
+        viewModel.srl.set(binding.srl);
         viewModel.getUserDetailData();
-        viewModel.getData();
-        viewModel.hrAdapter = new HRAdapter(com.techangkeji.module_hr.R.layout.item_home_resource, viewModel.buildingList);
-        binding.rv.setLayoutManager(new LinearLayoutManager(this));
-        binding.rv.setAdapter(viewModel.hrAdapter);
+        viewModel.getData(from);
+
         binding.srl.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 viewModel.pageNum++;
-                viewModel.getData();
+                viewModel.getData(from);
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 viewModel.pageNum=1;
-                viewModel.getData();
+                viewModel.getData(from);
             }
         });
     }

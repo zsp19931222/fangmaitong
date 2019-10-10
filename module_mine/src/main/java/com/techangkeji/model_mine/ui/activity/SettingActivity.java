@@ -28,5 +28,6 @@ public class SettingActivity extends BaseActivity<ActivitySettingBinding, Settin
     @Override
     public void initData() {
         binding.title.setTitle("设置");
+        viewModel.fragmentManagerObservableField.set(getSupportFragmentManager());
     }
 }

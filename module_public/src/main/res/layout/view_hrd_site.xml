@@ -38,7 +38,6 @@
         android:layout_marginStart="@dimen/d16"
         android:layout_marginEnd="@dimen/d16"
         android:id="@+id/iv_baiduMap"
-        android:background="@mipmap/default_image"
         app:rv_corner_radius="@dimen/d8"
         android:layout_marginTop="@dimen/d20"
         android:layout_height="@dimen/d150" />

@@ -365,5 +365,11 @@ public class UserDetailViewModel extends BaseViewModel {
     * author: Andy
     * date: 2019/10/8 0008 16:51
     */
-    public BindingCommand HrListCommand=new BindingCommand(() -> ARouter.getInstance().build(ARouterPath.Public.HRListActivity).withInt("id", friendId).navigation());
+    public BindingCommand HrListCommand=new BindingCommand(() -> ARouter.getInstance().build(ARouterPath.Public.HRListActivity).withInt("id", friendId).withInt("from",0).navigation());
+    /**
+    * description: 招聘列表
+    * author: Andy
+    * date: 2019/10/8 0008 16:51
+    */
+    public BindingCommand inviteListCommand=new BindingCommand(() -> ARouter.getInstance().build(ARouterPath.Public.HRListActivity).withInt("id", friendId).withInt("from",1).navigation());
 }

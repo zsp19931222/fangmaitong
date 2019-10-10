@@ -2,11 +2,14 @@ package com.techangkeji.module.ui.activity;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.goldze.base.view.TitleVIew;
 import com.kcrason.highperformancefriendscircle.others.DataCenter;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.techangkeji.module.BR;
 import com.techangkeji.module.R;
 import com.techangkeji.module.databinding.ActivityHouseStateBinding;
@@ -46,5 +49,20 @@ public class HouseStateActivity extends BaseActivity<ActivityHouseStateBinding, 
         RxSubscriptions.add(RxBus.getDefault().toObservable(CommentBody.class).subscribe(commentBody -> {
             viewModel.comment(commentBody);
         }));
+        viewModel.srl.set(binding.srl);
+        binding.srl.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                viewModel.pageNum++;
+                viewModel.getCommentList();
+
+            }
+
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                viewModel.pageNum=1;
+                viewModel.getCommentList();
+            }
+        });
     }
 }

@@ -271,7 +271,7 @@ public class CommentListEntity extends BaseEntity {
             private Object mail;
             private int age;
             private int buildNum;
-            private int cumulativeLoginTime;
+            private long cumulativeLoginTime;
             private Object wxappProvince;
             private int enable;
             private Object wechatOpenId;
@@ -649,11 +649,11 @@ public class CommentListEntity extends BaseEntity {
                 this.buildNum = buildNum;
             }
 
-            public int getCumulativeLoginTime() {
+            public long getCumulativeLoginTime() {
                 return cumulativeLoginTime;
             }
 
-            public void setCumulativeLoginTime(int cumulativeLoginTime) {
+            public void setCumulativeLoginTime(long cumulativeLoginTime) {
                 this.cumulativeLoginTime = cumulativeLoginTime;
             }
 
@@ -827,7 +827,7 @@ public class CommentListEntity extends BaseEntity {
             private Object mail;
             private int age;
             private int buildNum;
-            private int cumulativeLoginTime;
+            private long cumulativeLoginTime;
             private Object wxappProvince;
             private int enable;
             private Object wechatOpenId;
@@ -1205,11 +1205,11 @@ public class CommentListEntity extends BaseEntity {
                 this.buildNum = buildNum;
             }
 
-            public int getCumulativeLoginTime() {
+            public long getCumulativeLoginTime() {
                 return cumulativeLoginTime;
             }
 
-            public void setCumulativeLoginTime(int cumulativeLoginTime) {
+            public void setCumulativeLoginTime(long cumulativeLoginTime) {
                 this.cumulativeLoginTime = cumulativeLoginTime;
             }
 

@@ -246,7 +246,7 @@ public class MyStateEntity extends BaseEntity {
             private Object mail;
             private int age;
             private int buildNum;
-            private int cumulativeLoginTime;
+            private long cumulativeLoginTime;
             private int id;
             private Object lastLogin;
             private int enable;
@@ -554,11 +554,11 @@ public class MyStateEntity extends BaseEntity {
                 this.buildNum = buildNum;
             }
 
-            public int getCumulativeLoginTime() {
+            public long getCumulativeLoginTime() {
                 return cumulativeLoginTime;
             }
 
-            public void setCumulativeLoginTime(int cumulativeLoginTime) {
+            public void setCumulativeLoginTime(long cumulativeLoginTime) {
                 this.cumulativeLoginTime = cumulativeLoginTime;
             }
 
