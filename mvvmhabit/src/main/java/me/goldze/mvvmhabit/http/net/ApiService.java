@@ -27,6 +27,8 @@ import me.goldze.mvvmhabit.http.net.body.ReleaseMovingBody;
 import me.goldze.mvvmhabit.http.net.body.SendCodeBody;
 import me.goldze.mvvmhabit.http.net.body.TcJobHuntingBody;
 import me.goldze.mvvmhabit.http.net.body.TcJobHuntingListBody;
+import me.goldze.mvvmhabit.http.net.body.TcReviewBody;
+import me.goldze.mvvmhabit.http.net.body.TcReviewsListBody;
 import me.goldze.mvvmhabit.http.net.body.UntiedThirdBody;
 import me.goldze.mvvmhabit.http.net.body.UpdateBody;
 import me.goldze.mvvmhabit.http.net.body.UpdatePasswordBody;
@@ -45,6 +47,7 @@ import me.goldze.mvvmhabit.http.net.entity.NewPlacardEntity;
 import me.goldze.mvvmhabit.http.net.entity.RecommendBuildingEntity;
 import me.goldze.mvvmhabit.http.net.entity.RecommendFriendEntity;
 import me.goldze.mvvmhabit.http.net.entity.RecruitmentListEntity;
+import me.goldze.mvvmhabit.http.net.entity.ReviewListEntity;
 import me.goldze.mvvmhabit.http.net.entity.SelectFriendEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.WordEntity;
@@ -448,5 +451,15 @@ public interface ApiService<T extends BaseEntity> {
     @GET(API + "tcRecruitments/recommend/{areaId}")
     @Headers({"url_name:search"})
     Observable<RecruitmentListEntity> RecruitmentsRecommend(@Path("areaId") int entityId);
+
+    //点评列表
+    @POST(API + "tcReviews/list")
+    @Headers({"url_name:login"})
+    Observable<ReviewListEntity> tcReviewsList(@Body TcReviewsListBody tcReviewBody);
+
+    //新增点评
+    @POST(API + "tcReviews")
+    @Headers({"url_name:login"})
+    Observable<SuccessEntity> tcReviews(@Body TcReviewBody tcReviewBody);
 
 }

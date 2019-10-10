@@ -14,6 +14,8 @@ import com.techangkeji.model_mine.ui.bean.HouseResourceReleaseSizeBean;
 import com.techangkeji.model_mine.ui.bean.SelectFriendBean;
 import com.techangkeji.model_mine.ui.m_enum.HouseTypePriceEnum;
 import com.techangkeji.model_mine.ui.m_enum.HouseTypeSizeEnum;
+import com.techangkeji.module.ui.adapter.CommentStateAdapter;
+import com.techangkeji.module.ui.adapter.HRDCommentAdapter;
 import com.techangkeji.module.ui.adapter.HRDRecommendAdapter;
 import com.techangkeji.module.ui.adapter.HRDStateAdapter;
 import com.techangkeji.module.ui.adapter.HRDetailAdapter;
@@ -25,8 +27,10 @@ import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.http.net.DefaultObserver;
 import me.goldze.mvvmhabit.http.net.IdeaApi;
 import me.goldze.mvvmhabit.http.net.body.CommentListBody;
+import me.goldze.mvvmhabit.http.net.body.TcReviewsListBody;
 import me.goldze.mvvmhabit.http.net.entity.HouseResourceDetailEntity;
 import me.goldze.mvvmhabit.http.net.entity.RecommendBuildingEntity;
+import me.goldze.mvvmhabit.http.net.entity.ReviewListEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.information.CommentListEntity;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
@@ -340,10 +344,36 @@ public class HRDetailViewModel extends BaseViewModel {
                     }
                 });
     }
+    /**
+     * description: 获取点评列表
+     * author: Andy
+     * date: 2019/10/10 0010 10:25
+     */
+    public int pageNum=1;
+    public TcReviewsListBody tcReviewsListBody=new TcReviewsListBody();
+    public ObservableList<ReviewListEntity.DataBean> dataBeans=new ObservableArrayList<>();
+    public ObservableField<HRDCommentAdapter> hrdCommentAdapterObservableField=new ObservableField<>();
+    public void tcReviewsList(){
+        tcReviewsListBody.setMax(4);
+        tcReviewsListBody.setPage(pageNum);
+        tcReviewsListBody.setEntityId(id);
+        IdeaApi.getApiService()
+                .tcReviewsList(tcReviewsListBody)
+                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                .compose(RxUtils.schedulersTransformer())
+                .subscribe(new DefaultObserver<ReviewListEntity>() {
+                    @Override
+                    public void onSuccess(ReviewListEntity response) {
+                        dataBeans.addAll(response.getData());
+                        hrdCommentAdapterObservableField.get().notifyDataSetChanged();
+                    }
 
+                });
+    }
     @Override
     public void onResume() {
         super.onResume();
         getCommentList();
+        tcReviewsList();
     }
 }

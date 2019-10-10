@@ -209,16 +209,13 @@ public class HRDetailAdapter extends BaseQuickAdapter<HRDetailAdapterBean, BaseV
                 break;
             case HRDetailAdapterBean.Comment:
                 RecyclerView recyclerViewComment = helper.getView(R.id.rv_hc);
-                List<String> stringsComment = new ArrayList<>();
-                for (int i = 0; i < 4; i++) {
-                    stringsComment.add("");
-                }
-                HRDCommentAdapter hrdCommentAdapter = new HRDCommentAdapter(R.layout.item_hrd_comment, stringsComment);
+                HRDCommentAdapter hrdCommentAdapter = new HRDCommentAdapter(R.layout.item_hrd_comment, viewModel.dataBeans);
+                viewModel.hrdCommentAdapterObservableField.set(hrdCommentAdapter);
                 recyclerViewComment.setLayoutManager(new LinearLayoutManager(context));
                 recyclerViewComment.setAdapter(hrdCommentAdapter);
                 helper.getView(R.id.tv_more).setOnClickListener(view -> {
                     Intent intent = new Intent(context, CommentActivity.class);
-
+                    intent.putExtra("entityId",viewModel.id);
                     context.startActivity(intent);
                 });
                 break;
@@ -230,8 +227,8 @@ public class HRDetailAdapter extends BaseQuickAdapter<HRDetailAdapterBean, BaseV
                 recyclerViewRecommend.setAdapter(hrdRecommendAdapter);
 
                 helper.getView(R.id.tv_hr_share).setOnClickListener(view -> {
-                            setVisibility(false,ll_vhn);
-                            setVisibility(false,ll_vha);
+                            setVisibility(false, ll_vhn);
+                            setVisibility(false, ll_vha);
                             screenShotRecycleView(viewModel.recyclerView.get(), bitmap -> ShareUtil.getInstance().share(context, bitmap));
                         }
                 );
@@ -259,13 +256,13 @@ public class HRDetailAdapter extends BaseQuickAdapter<HRDetailAdapterBean, BaseV
     }
 
     /**
-    * description:
-    * author: Andy
-    * date: 2019/10/9 0009 15:54
-    */
-    public void setShow(){
-        setVisibility(true,ll_vhn);
-        setVisibility(true,ll_vha);
+     * description:
+     * author: Andy
+     * date: 2019/10/9 0009 15:54
+     */
+    public void setShow() {
+        setVisibility(true, ll_vhn);
+        setVisibility(true, ll_vha);
     }
 
     /**

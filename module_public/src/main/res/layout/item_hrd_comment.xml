@@ -26,7 +26,6 @@
                     android:id="@+id/tv_hc_site"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2楼"
                     android:textColor="@color/color_dark_333333"
                     android:textSize="@dimen/font12" />
 
@@ -35,7 +34,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/d5"
-                    android:text="name"
                     android:textColor="@color/color_FF8C00"
                     android:textSize="@dimen/font12" />
             </LinearLayout>
@@ -45,7 +43,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/d5"
-                android:text="2019-06-22  12：56"
                 android:textColor="@color/color_dark_333333"
                 android:textSize="@dimen/font12" />
         </LinearLayout>
@@ -64,6 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/d5"
                 android:text="支持（36）"
+                android:visibility="gone"
                 android:textColor="@color/color_gray_999999"
                 android:textSize="@dimen/font10" />
         </LinearLayout>
@@ -76,43 +74,50 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/iv_hc_start1"
             android:layout_width="@dimen/d13"
             android:layout_height="@dimen/d13" />
 
         <ImageView
+            android:id="@+id/iv_hc_start2"
             android:layout_width="@dimen/d13"
             android:layout_height="@dimen/d13"
             android:layout_marginStart="@dimen/d5" />
 
         <ImageView
+            android:id="@+id/iv_hc_start3"
+
             android:layout_width="@dimen/d13"
             android:layout_height="@dimen/d13"
             android:layout_marginStart="@dimen/d5" />
 
         <ImageView
+            android:id="@+id/iv_hc_start4"
+
             android:layout_width="@dimen/d13"
             android:layout_height="@dimen/d13"
             android:layout_marginStart="@dimen/d5" />
 
         <ImageView
+            android:id="@+id/iv_hc_start5"
             android:layout_width="@dimen/d13"
             android:layout_height="@dimen/d13"
             android:layout_marginStart="@dimen/d5" />
 
         <TextView
+            android:id="@+id/tv_hc_grade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/d20"
-            android:text="价格：5   地段：5   交通：4   配套：5   环境：5"
             android:textColor="@color/color_gray_999999"
             android:textSize="@dimen/font12" />
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_hc_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/d10"
-        android:text="这个楼盘的开盘时间为2019-05-25，生活配套比较完善，后期发展应该不错。"
         android:textColor="@color/color_dark_333333"
         android:textSize="@dimen/font12" />
 </LinearLayout>

@@ -25,11 +25,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/d44" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv"
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/srl"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_weight="1">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv"
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:layout_height="wrap_content" />
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -43,11 +50,11 @@
         </LinearLayout>
 
         <!--<com.kcrason.highperformancefriendscircle.widgets.EmojiPanelView-->
-            <!--android:id="@+id/emoji_panel_view"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:background="@color/transparent"-->
-            <!--android:gravity="bottom" />-->
+        <!--android:id="@+id/emoji_panel_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="@color/transparent"-->
+        <!--android:gravity="bottom" />-->
     </FrameLayout>
 
 
