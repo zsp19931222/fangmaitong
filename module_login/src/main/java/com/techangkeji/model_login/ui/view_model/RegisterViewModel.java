@@ -45,11 +45,11 @@ import static com.goldze.base.constant.TipsConstants.SEND_AUTH_CODE;
  * email:zsp872126510@gmail.com
  */
 public class RegisterViewModel extends BaseViewModel {
-    public ObservableField<String> pwField = new ObservableField<>("123456");
-    public ObservableField<String> cpwField = new ObservableField<>("123456");
-    public ObservableField<String> phoneField = new ObservableField<>("13983251013");
+    public ObservableField<String> pwField = new ObservableField<>("");
+    public ObservableField<String> cpwField = new ObservableField<>("");
+    public ObservableField<String> phoneField = new ObservableField<>("");
     public ObservableField<String> authCodeField = new ObservableField<>("获取验证码");
-    public ObservableField<String> authCodeNumField = new ObservableField<>("123456");
+    public ObservableField<String> authCodeNumField = new ObservableField<>("");
     public ObservableField<String> registerBtnTv = new ObservableField<>("注册为经纪人");
 
     public ObservableField<Integer> showViewBg1 = new ObservableField<>(ContextCompat.getColor(BaseApplication.getInstance().getBaseContext(), R.color.color_f6));

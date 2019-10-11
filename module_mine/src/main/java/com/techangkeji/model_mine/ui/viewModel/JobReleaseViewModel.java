@@ -37,11 +37,11 @@ import me.goldze.mvvmhabit.utils.ZLog;
  * email:zsp872126510@gmail.com
  */
 public class JobReleaseViewModel extends BaseViewModel {
-    public ObservableField<String> title = new ObservableField<>("标题");
-    public ObservableField<String> year = new ObservableField<>("3");
+    public ObservableField<String> title = new ObservableField<>("");
+    public ObservableField<String> year = new ObservableField<>("");
     public ObservableField<String> address = new ObservableField<>("");
-    public ObservableField<String> synopsis = new ObservableField<>("没有公司简介");
-    public ObservableField<String> job = new ObservableField<>("兼职");
+    public ObservableField<String> synopsis = new ObservableField<>("");
+    public ObservableField<String> job = new ObservableField<>("");
     public ObservableField<String> phone = new ObservableField<>(IsNullUtil.getInstance().StringNull(LocalDataHelper.getInstance().getUserInfo().getPhone()));
     public ObservableField<String> headUrl = new ObservableField<>(IsNullUtil.getInstance().StringNull(LocalDataHelper.getInstance().getUserInfo().getHeadUrl()));
     public ObservableField<String> province = new ObservableField<>("");

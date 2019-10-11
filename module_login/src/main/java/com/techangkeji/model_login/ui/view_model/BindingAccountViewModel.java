@@ -53,7 +53,7 @@ public class BindingAccountViewModel extends BaseViewModel {
     public ObservableField<Context> context=new ObservableField<>();
 
     public ObservableField<String> authCodeField = new ObservableField<>("获取验证码");
-    public ObservableField<String> authCodeNumField = new ObservableField<>("123456");
+    public ObservableField<String> authCodeNumField = new ObservableField<>("");
 
     public BindingAccountViewModel(@NonNull Application application) {
         super(application);

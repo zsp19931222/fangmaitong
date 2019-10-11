@@ -54,8 +54,8 @@ import me.goldze.mvvmhabit.utils.ZLog;
  * email:zsp872126510@gmail.com
  */
 public class LoginViewModel extends BaseViewModel {
-    public ObservableField<String> phoneNum = new ObservableField<>("13983251013");
-    public ObservableField<String> pwNum = new ObservableField<>("123456");
+    public ObservableField<String> phoneNum = new ObservableField<>("");
+    public ObservableField<String> pwNum = new ObservableField<>("");
     public ObservableField<Context> context = new ObservableField<>();
 
     public LoginViewModel(@NonNull Application application) {

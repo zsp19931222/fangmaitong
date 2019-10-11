@@ -42,15 +42,15 @@ import me.goldze.mvvmhabit.utils.ZLog;
  * email:zsp872126510@gmail.com
  */
 public class InviteReleaseViewModel extends BaseViewModel {
-    public ObservableField<String> title = new ObservableField<>("标题");
-    public ObservableField<String> position = new ObservableField<>("经理");
-    public ObservableField<String> compensation = new ObservableField<>("2000-3000");
-    public ObservableField<String> welfare = new ObservableField<>("双休");
-    public ObservableField<String> education = new ObservableField<>("本科");
+    public ObservableField<String> title = new ObservableField<>("");
+    public ObservableField<String> position = new ObservableField<>("");
+    public ObservableField<String> compensation = new ObservableField<>("");
+    public ObservableField<String> welfare = new ObservableField<>("");
+    public ObservableField<String> education = new ObservableField<>("");
     public ObservableField<String> address = new ObservableField<>("");
-    public ObservableField<String> job = new ObservableField<>("兼职");
-    public ObservableField<String> synopsis = new ObservableField<>("没有公司简介");
-    public ObservableField<String> year = new ObservableField<>("3");
+    public ObservableField<String> job = new ObservableField<>("");
+    public ObservableField<String> synopsis = new ObservableField<>("");
+    public ObservableField<String> year = new ObservableField<>("");
     public ObservableField<String> province = new ObservableField<>("");
     public ObservableField<String> city = new ObservableField<>("");
     public ObservableField<String> district = new ObservableField<>("");
