@@ -21,7 +21,7 @@ android {
                                 JPUSH_APPKEY : "05f17a90dcb5c8a75b2884e2", //JPush 上注册的包名对应的 Appkey.
                                 JPUSH_CHANNEL: "developer-default",
                                 BAIDU_MAP_KEY: "PA7crUrNaePoKptkWGbFxNM5iiE8zr8A",
-                                qqappid      : '1107813498'
+                                qqappid      : '1109969886'
         ]
 //        ndk {
 //            //设置支持的SO库架构

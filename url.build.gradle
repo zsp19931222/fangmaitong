@@ -34,7 +34,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField("String", "WECHAT_APP_ID", "\"wx45b13ad9a605f575\"")
             buildConfigField("String", "WECHAT_APP_SECRET", "\"2f5a6966d7e794b700df4e8a5d7793bf\"")
-            buildConfigField("String", "QQ_APP_ID", "\"1109888984\"")
+            buildConfigField("String", "QQ_APP_ID", "\"1109969886\"")
             buildConfigField("String", "QQ_APP_KEY", "\"Q8WY8W70Mx3elOj7\"")
             buildConfigField("String", "WEB_APP_KEY", "\"689150989\"")
             buildConfigField("String", "WEB_APP_SECRET", "\"9aa04099decfe1878cd99369b368447d\"")
@@ -47,7 +47,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField("String", "WECHAT_APP_ID", "\"wx45b13ad9a605f575\"")
             buildConfigField("String", "WECHAT_APP_SECRET", "\"2f5a6966d7e794b700df4e8a5d7793bf\"")
-            buildConfigField("String", "QQ_APP_ID", "\"1109888984\"")
+            buildConfigField("String", "QQ_APP_ID", "\"1109969886\"")
             buildConfigField("String", "QQ_APP_KEY", "\"Q8WY8W70Mx3elOj7\"")
             buildConfigField("String", "WEB_APP_KEY", "\"689150989\"")
             buildConfigField("String", "WEB_APP_SECRET", "\"9aa04099decfe1878cd99369b368447d\"")
