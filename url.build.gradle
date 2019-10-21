@@ -32,8 +32,8 @@ android {
             zipAlignEnabled false  //Zipalign优化
             shrinkResources false // 移除无用的resource文件
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "WECHAT_APP_ID", "\"wx7bfeb2862235ac4f\"")
-            buildConfigField("String", "WECHAT_APP_SECRET", "\"e85b1b987847822193c436356bd036fc\"")
+            buildConfigField("String", "WECHAT_APP_ID", "\"wx45b13ad9a605f575\"")
+            buildConfigField("String", "WECHAT_APP_SECRET", "\"2f5a6966d7e794b700df4e8a5d7793bf\"")
             buildConfigField("String", "QQ_APP_ID", "\"1109888984\"")
             buildConfigField("String", "QQ_APP_KEY", "\"Q8WY8W70Mx3elOj7\"")
             buildConfigField("String", "WEB_APP_KEY", "\"689150989\"")
@@ -45,8 +45,8 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "WECHAT_APP_ID", "\"wx7bfeb2862235ac4f\"")
-            buildConfigField("String", "WECHAT_APP_SECRET", "\"e85b1b987847822193c436356bd036fc\"")
+            buildConfigField("String", "WECHAT_APP_ID", "\"wx45b13ad9a605f575\"")
+            buildConfigField("String", "WECHAT_APP_SECRET", "\"2f5a6966d7e794b700df4e8a5d7793bf\"")
             buildConfigField("String", "QQ_APP_ID", "\"1109888984\"")
             buildConfigField("String", "QQ_APP_KEY", "\"Q8WY8W70Mx3elOj7\"")
             buildConfigField("String", "WEB_APP_KEY", "\"689150989\"")

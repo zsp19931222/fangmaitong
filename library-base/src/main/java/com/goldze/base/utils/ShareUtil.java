@@ -63,7 +63,7 @@ public class ShareUtil {
                         if (aBoolean) {
                             ShareBoardConfig config = new ShareBoardConfig();//新建ShareBoardConfig
                             config.setOnDismissListener(() -> RxBus.getDefault().post("完成分享"));
-                            new ShareAction((Activity) context).withText("hello").withMedia(image).setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
+                            new ShareAction((Activity) context).withText("hello").withMedia(image).setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
                                     .setCallback(shareListener).open(config);
 
                         } else {
