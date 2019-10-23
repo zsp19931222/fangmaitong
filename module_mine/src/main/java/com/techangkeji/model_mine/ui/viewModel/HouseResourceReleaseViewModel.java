@@ -32,6 +32,7 @@ import com.techangkeji.model_mine.ui.m_enum.HouseTypePriceEnum;
 import com.techangkeji.model_mine.ui.m_enum.HouseTypeSizeEnum;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +45,7 @@ import me.goldze.mvvmhabit.http.net.entity.BaseEntity;
 import me.goldze.mvvmhabit.http.net.entity.FeaturedLabelEntity;
 import me.goldze.mvvmhabit.http.net.entity.HouseResourceDetailEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
+import me.goldze.mvvmhabit.http.net.entity.UpLoadImageEntity;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.IsNullUtil;
 import me.goldze.mvvmhabit.utils.RxUtils;
@@ -76,10 +78,6 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
     public ObservableList<String> labelList = new ObservableArrayList<>();
     public ObservableList<SelectFriendBean> linkManList = new ObservableArrayList<>();//联系人数据
 
-
-    public ObservableField<Integer> bannerPosition = new ObservableField<>(0);
-
-    public ObservableField<Integer> typePosition = new ObservableField<>(0);
 
     public ObservableField<StringBuilder> bannerStringBuilder = new ObservableField<>(new StringBuilder());
 
@@ -251,49 +249,45 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
      * author: Andy
      * date: 2019/9/17  20:20
      */
-    public void uploadBannerImage(int p) {
+    private List<File> bannerFiles = new ArrayList<>();
+
+    public void uploadBannerImage() {
         ZLog.d(bannerPathList.size());
         if (bannerPathList.size() > 0) {
-            bannerPosition.set(p);
-            if (bannerPathList.get(p).getImagePath().startsWith("http")) {
-                bannerStringBuilder.get().append(bannerPathList.get(p).getImagePath()).append(",");
-                int position = bannerPosition.get();
-                position++;
-                if (position < bannerPathList.size()) {//角标小于图片集合上传图片
-                    uploadBannerImage(position);
-                } else {//图片上传完成
-                    bannerPosition.set(0);
-                    uploadTypeImage(typePosition.get());
+            bannerFiles.clear();
+            for (HouseResourceReleaseBannerBean houseResourceReleaseBannerBean : bannerPathList) {
+                if (houseResourceReleaseBannerBean.getImagePath().startsWith("http")) {
+                    bannerStringBuilder.get().append(houseResourceReleaseBannerBean.getImagePath()).append(",");
+                } else {
+                    bannerFiles.add(new File(houseResourceReleaseBannerBean.getImagePath()));
                 }
-            } else {
-                File file = new File(bannerPathList.get(p).getImagePath());
-                RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);//表单类型
-                MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);//表单类型
-                builder.addFormDataPart("file", file.getName(), body); //添加图片数据，body创建的请求体
+            }
+            if (bannerFiles.size() > 0) {
+                MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+                for (File file : bannerFiles) {
+                    //这里上传的是多图
+                    builder.addFormDataPart("file", file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), file));
+                }
                 List<MultipartBody.Part> parts = builder.build().parts();
                 IdeaApi.getApiService()
                         .uploadpic(parts)
                         .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                         .compose(RxUtils.schedulersTransformer())
                         .doOnSubscribe(disposable -> showDialog())
-                        .subscribe(new DefaultObserver<SuccessEntity<String>>(this) {
+                        .subscribe(new DefaultObserver<UpLoadImageEntity>(this) {
                             @Override
-                            public void onSuccess(SuccessEntity<String> response) {
-                                bannerStringBuilder.get().append(response.getContent()).append(",");
-                                ZLog.d(bannerStringBuilder.get().toString());
-                                int position = bannerPosition.get();
-                                position++;
-                                if (position < bannerPathList.size()) {//角标小于图片集合上传图片
-                                    uploadBannerImage(position);
-                                } else {//图片上传完成
-                                    bannerPosition.set(0);
-                                    uploadTypeImage(typePosition.get());
+                            public void onSuccess(UpLoadImageEntity response) {
+                                for (String datum : response.getData()) {
+                                    bannerStringBuilder.get().append(datum).append(",");
                                 }
+                                uploadTypeImage();
                             }
                         });
+            } else {
+                uploadTypeImage();
             }
         } else {
-            uploadTypeImage(typePosition.get());
+            uploadTypeImage();
         }
 
     }
@@ -303,44 +297,41 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
      * author: Andy
      * date: 2019/9/17  20:20
      */
-    private void uploadTypeImage(int p) {
+    private List<File> typeFiles = new ArrayList<>();
+
+    private void uploadTypeImage() {
         if (HouseResourceReleaseSizeData.getInstance().getList().size() > 0) {
-            typePosition.set(p);
-            if (HouseResourceReleaseSizeData.getInstance().getList().get(p).getImagePath().startsWith("http")) {
-                typeImgUrlStringBuilder.get().append(HouseResourceReleaseSizeData.getInstance().getList().get(p).getImagePath()).append(",");
-                int position = typePosition.get();
-                position++;
-                if (position < HouseResourceReleaseSizeData.getInstance().getList().size()) {//角标小于图片集合上传图片
-                    uploadTypeImage(position);
-                } else {//图片上传完成
-                    typePosition.set(0);
-                    addBuildingInfo();
+            typeFiles.clear();
+            for (HouseResourceReleaseSizeBean houseResourceReleaseSizeBean : HouseResourceReleaseSizeData.getInstance().getList()) {
+                if (houseResourceReleaseSizeBean.getImagePath().startsWith("http")) {
+                    typeImgUrlStringBuilder.get().append(houseResourceReleaseSizeBean.getImagePath()).append(",");
+                } else {
+                    typeFiles.add(new File(houseResourceReleaseSizeBean.getImagePath()));
                 }
-            } else {
-                File file = new File(HouseResourceReleaseSizeData.getInstance().getList().get(p).getImagePath());
-                RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);//表单类型
-                MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);//表单类型
-                builder.addFormDataPart("file", file.getName(), body); //添加图片数据，body创建的请求体
+            }
+            if (typeFiles.size() > 0) {
+                MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+                for (File file : typeFiles) {
+                    //这里上传的是多图
+                    builder.addFormDataPart("file", file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), file));
+                }
                 List<MultipartBody.Part> parts = builder.build().parts();
                 IdeaApi.getApiService()
                         .uploadpic(parts)
                         .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                         .compose(RxUtils.schedulersTransformer())
                         .doOnSubscribe(disposable -> showDialog())
-                        .subscribe(new DefaultObserver<SuccessEntity<String>>(this) {
+                        .subscribe(new DefaultObserver<UpLoadImageEntity>(this) {
                             @Override
-                            public void onSuccess(SuccessEntity<String> response) {
-                                typeImgUrlStringBuilder.get().append(response.getContent()).append(",");
-                                int position = typePosition.get();
-                                position++;
-                                if (position < HouseResourceReleaseSizeData.getInstance().getList().size()) {//角标小于图片集合上传图片
-                                    uploadTypeImage(position);
-                                } else {//图片上传完成
-                                    typePosition.set(0);
-                                    addBuildingInfo();
+                            public void onSuccess(UpLoadImageEntity response) {
+                                for (String datum : response.getData()) {
+                                    typeImgUrlStringBuilder.get().append(datum).append(",");
                                 }
+                                addBuildingInfo();
                             }
                         });
+            } else {
+                addBuildingInfo();
             }
         } else {
             addBuildingInfo();
@@ -531,8 +522,8 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onDestroy() {
+        super.onDestroy();
         HouseResourceReleaseSizeData.getInstance().getList().clear();
     }
 }

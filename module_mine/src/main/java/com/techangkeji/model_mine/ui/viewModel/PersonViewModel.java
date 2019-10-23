@@ -38,6 +38,7 @@ import me.goldze.mvvmhabit.http.net.IdeaApi;
 import me.goldze.mvvmhabit.http.net.body.RegisterBody;
 import me.goldze.mvvmhabit.http.net.body.UpdateBody;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
+import me.goldze.mvvmhabit.http.net.entity.UpLoadImageEntity;
 import me.goldze.mvvmhabit.http.net.entity.login.RegisterEntity;
 import me.goldze.mvvmhabit.litepal.UserInfoLitePal;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
@@ -216,10 +217,10 @@ public class PersonViewModel extends BaseViewModel {
                     .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                     .compose(RxUtils.schedulersTransformer())
                     .doOnSubscribe(disposable1 -> showDialog())
-                    .subscribe(new DefaultObserver<SuccessEntity<String>>(this) {
+                    .subscribe(new DefaultObserver<UpLoadImageEntity>(this) {
                         @Override
-                        public void onSuccess(SuccessEntity<String> response) {
-                            headUrl.set(response.getContent());
+                        public void onSuccess(UpLoadImageEntity response) {
+                            headUrl.set(response.getData().get(0));
                             UpdateBody updateBody = new UpdateBody(headUrl.get(), nickName.get(), sexField.get(), Integer.valueOf(ageField.get()));
                             updateInformation(updateBody);
                         }

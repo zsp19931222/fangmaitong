@@ -50,6 +50,7 @@ import me.goldze.mvvmhabit.http.net.entity.RecruitmentListEntity;
 import me.goldze.mvvmhabit.http.net.entity.ReviewListEntity;
 import me.goldze.mvvmhabit.http.net.entity.SelectFriendEntity;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
+import me.goldze.mvvmhabit.http.net.entity.UpLoadImageEntity;
 import me.goldze.mvvmhabit.http.net.entity.WordEntity;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.CommentBean;
 import me.goldze.mvvmhabit.http.net.entity.friend_circle.MyStateEntity;
@@ -116,7 +117,7 @@ public interface ApiService<T extends BaseEntity> {
     @Multipart
     @POST(API + "auth/uploadpic")
     @Headers({"url_name:imageUpload"})
-    Observable<SuccessEntity<String>> uploadpic(@Part List<MultipartBody.Part> partList);
+    Observable<UpLoadImageEntity> uploadpic(@Part List<MultipartBody.Part> partList);
 
     //退出登录
     @PUT(API + "auth/loginOut/{time}")

@@ -23,6 +23,7 @@ import me.goldze.mvvmhabit.http.net.DefaultObserver;
 import me.goldze.mvvmhabit.http.net.IdeaApi;
 import me.goldze.mvvmhabit.http.net.body.AuthBrokerBody;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
+import me.goldze.mvvmhabit.http.net.entity.UpLoadImageEntity;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.IsNullUtil;
 import me.goldze.mvvmhabit.utils.RxUtils;
@@ -182,14 +183,14 @@ public class BrokerAuthViewModel extends BaseViewModel {
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                 .compose(RxUtils.schedulersTransformer())
                 .doOnSubscribe(disposable1 -> showDialog())
-                .subscribe(new DefaultObserver<SuccessEntity<String>>(this) {
+                .subscribe(new DefaultObserver<UpLoadImageEntity>(this) {
                     @Override
-                    public void onSuccess(SuccessEntity<String> response) {
+                    public void onSuccess(UpLoadImageEntity response) {
                         ToastUtil.normalToast(context.get(),response.getMsg());
                         if (resultCode == badgeResultCode.get()) {
-                            badgeUrl.set(response.getContent());
+                            badgeUrl.set(response.getData().get(0));
                         } else {
-                            nameplateUrl.set(response.getContent());
+                            nameplateUrl.set(response.getData().get(0));
                         }
                     }
                 });

@@ -28,7 +28,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="3室2厅1厨1卫"
+            android:text="0室0厅0厨0卫"
             android:textColor="@color/color_dark_333333"
             android:textSize="@dimen/font12" />
 
@@ -47,7 +47,7 @@
         android:id="@+id/tv_hs_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="建面150㎡"
+        android:text="建面0㎡"
 
         android:textColor="@color/color_dark_333333"
         android:textSize="@dimen/font12" />

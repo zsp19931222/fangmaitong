@@ -371,9 +371,7 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
             viewModel.volumeRate.set(et_vhd_plot_ratio.getText().toString());
             viewModel.bannerStringBuilder.get().setLength(0);
             viewModel.typeImgUrlStringBuilder.get().setLength(0);
-            viewModel.bannerPosition.set(0);
-            viewModel.typePosition.set(0);
-            viewModel.uploadBannerImage(viewModel.bannerPosition.get());
+            viewModel.uploadBannerImage();
         });
     }
 }

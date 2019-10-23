@@ -32,6 +32,7 @@ import me.goldze.mvvmhabit.http.net.IdeaApi;
 import me.goldze.mvvmhabit.http.net.body.ReleaseMovingBody;
 import me.goldze.mvvmhabit.http.net.body.UpdateBody;
 import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
+import me.goldze.mvvmhabit.http.net.entity.UpLoadImageEntity;
 import me.goldze.mvvmhabit.http.net.entity.login.RegisterEntity;
 import me.goldze.mvvmhabit.litepal.util.LocalDataHelper;
 import me.goldze.mvvmhabit.utils.IsNullUtil;
@@ -56,7 +57,6 @@ public class ReleaseInformationViewModel extends BaseViewModel {
     public ObservableField<StringBuilder> stringBuilder = new ObservableField<>(new StringBuilder());
     public ObservableField<String> content = new ObservableField<>("");
     public ObservableField<Context> context = new ObservableField<>();
-    private int position = 0;
     private MaterialDialog dialog;
 
 
@@ -88,7 +88,7 @@ public class ReleaseInformationViewModel extends BaseViewModel {
         showDialog();
         int size = imagePathList.size();
         if (size > 0) {
-            uploadImage(position);
+            uploadImage();
         } else {
             if (content.get().length() < 0) {
                 ToastUtil.normalToast(context.get(), "请输入点什么吧");
@@ -155,31 +155,28 @@ public class ReleaseInformationViewModel extends BaseViewModel {
      * author: Andy
      * date: 2019/9/17  20:20
      */
-    private void uploadImage(int p) {
-        File file = new File(imagePathList.get(p));
-        RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);//表单类型
-        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);//表单类型
-        builder.addFormDataPart("file", file.getName(), body); //添加图片数据，body创建的请求体
+    private void uploadImage() {
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        for (ReleaseInformationBean imageUrl : imageUrls) {
+            builder.addFormDataPart("file", new File((String) imageUrl.getImage()).getName(), RequestBody.create(MediaType.parse("multipart/form-data"), new File((String) imageUrl.getImage())));
+
+        }
         List<MultipartBody.Part> parts = builder.build().parts();
         IdeaApi.getApiService()
                 .uploadpic(parts)
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                 .compose(RxUtils.schedulersTransformer())
-                .subscribe(new DefaultObserver<SuccessEntity<String>>() {
+                .subscribe(new DefaultObserver<UpLoadImageEntity>() {
                     @Override
-                    public void onSuccess(SuccessEntity<String> response) {
-                        stringBuilder.get().append(response.getContent()).append(",");
-                        position++;
-                        if (position < imagePathList.size()) {//角标小于图片集合上传图片
-                            uploadImage(position);
-                        } else {//图片上传完成
-                            position = 0;
-                            release();
+                    public void onSuccess(UpLoadImageEntity response) {
+                        for (String datum : response.getData()) {
+                            stringBuilder.get().append(datum).append(",");
                         }
+                        release();
                     }
 
                     @Override
-                    public void onFail(SuccessEntity<String> response) {
+                    public void onFail(UpLoadImageEntity response) {
                         ToastUtil.normalToast(context.get(), response.getMsg());
                         dismissDialog();
                     }
