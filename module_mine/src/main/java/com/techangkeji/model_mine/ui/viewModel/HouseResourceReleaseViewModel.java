@@ -113,6 +113,7 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
     public ObservableField<String> openTime = new ObservableField<>("");
     public ObservableField<String> priceType = new ObservableField<>("");
     public ObservableField<String> propertiesType = new ObservableField<>("");
+    public ObservableField<String> propertiesTypeText = new ObservableField<>("");
     public ObservableField<String> propertyCompany = new ObservableField<>("");
     public ObservableField<String> propertyMoney = new ObservableField<>("");
     public ObservableField<String> propertyYear = new ObservableField<>("");
@@ -140,6 +141,30 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
                     public void onSuccess(FeaturedLabelEntity response) {
                         for (FeaturedLabelEntity.DataBean datum : response.getData()) {
                             featuredLabelList.add(new FeaturedLabelBean(datum.getId(), datum.getLabel_name(), false));
+                        }
+                    }
+
+                });
+    }
+
+    /**
+     * description:
+     * 建筑类型标签
+     * author: Andy
+     * date: 2019/9/21  23:56
+     */
+    public ObservableList<FeaturedLabelBean> buildLabeList = new ObservableArrayList();//物业类型
+
+    public void getBuildingTypeLabel() {
+        IdeaApi.getApiService()
+                .getBuildLabel()
+                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                .compose(RxUtils.schedulersTransformer())
+                .subscribe(new DefaultObserver<FeaturedLabelEntity>() {
+                    @Override
+                    public void onSuccess(FeaturedLabelEntity response) {
+                        for (FeaturedLabelEntity.DataBean datum : response.getData()) {
+                            buildLabeList.add(new FeaturedLabelBean(datum.getId(), datum.getLabel_name(), false));
                         }
                     }
 
@@ -391,22 +416,22 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
                             openTime.set(response.getContent().getOpen_time());
                             switch (response.getContent().getProperties_type()) {
                                 case 3:
-                                    propertiesType.set("住宅");
+                                    propertiesTypeText.set("住宅");
                                     break;
                                 case 4:
-                                    propertiesType.set("别墅");
+                                    propertiesTypeText.set("别墅");
                                     break;
                                 case 5:
-                                    propertiesType.set("商办");
+                                    propertiesTypeText.set("商办");
                                     break;
                                 case 6:
-                                    propertiesType.set("商铺");
+                                    propertiesTypeText.set("商铺");
                                     break;
                                 case 7:
-                                    propertiesType.set("写字楼");
+                                    propertiesTypeText.set("写字楼");
                                     break;
                                 case 8:
-                                    propertiesType.set("商住");
+                                    propertiesTypeText.set("商住");
                                     break;
                             }
                             propertyCompany.set(response.getContent().getProperty_company());
@@ -520,6 +545,8 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
                 .scaleEnabled(true)// 裁剪是否可放大缩小图片 true or false
                 .forResult(CHOOSE_REQUEST);//结果回调onActivityResult code
     }
+
+
 
     @Override
     public void onDestroy() {

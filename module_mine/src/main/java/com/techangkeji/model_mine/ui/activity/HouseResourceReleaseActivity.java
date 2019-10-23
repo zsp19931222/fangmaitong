@@ -82,6 +82,7 @@ public class HouseResourceReleaseActivity extends BaseActivity<ActivityHouseReso
 
         }
         viewModel.getFeaturedLabel();
+        viewModel.getBuildingTypeLabel();
         binding.title.setTitle("发布房源");
         releaseAdapter = new HouseResourceReleaseAdapter(data, this, viewModel);
         viewModel.adapterObservableField.set(releaseAdapter);

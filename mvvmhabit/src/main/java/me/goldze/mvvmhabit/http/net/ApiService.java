@@ -283,7 +283,7 @@ public interface ApiService<T extends BaseEntity> {
     //建筑类型标签
     @GET(API + "auth/label/getTypeLabel")
     @Headers({"url_name:user_info"})
-    Observable<SuccessEntity> getTypeLabel(@QueryMap() Map<String, Object> map);
+    Observable<SuccessEntity> getTypeLabel();
 
     //建筑类型标签
     @GET(API + "auth/label/getBuildLabel")

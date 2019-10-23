@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/d10"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_pt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="住宅"
+        android:textColor="@color/color_gray_666666"
+        android:textSize="@dimen/font14" />
+
+    <View
+        android:id="@+id/v_pt"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d1"
+        android:layout_marginTop="@dimen/d8"
+        android:background="@color/color_FF8C00"
+        android:visibility="invisible" />
+</LinearLayout>

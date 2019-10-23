@@ -14,6 +14,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.util.MultiTypeDelegate;
+import com.goldze.base.bean.FeaturedLabelBean;
 import com.goldze.base.router.ARouterPath;
 import com.techangkeji.model_mine.R;
 import com.techangkeji.model_mine.ui.activity.AddSizeActivity;
@@ -135,7 +136,7 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
 
         viewModel.addressTextView.set(tv_vhf_address);
 
-        tv_vhf_address.setOnClickListener(v -> ARouter.getInstance().build(ARouterPath.Public.MoreAddressActivity).withInt("addressType", 0).withString("lat",viewModel.lat.get()).withString("lon",viewModel.lon.get()).navigation());
+        tv_vhf_address.setOnClickListener(v -> ARouter.getInstance().build(ARouterPath.Public.MoreAddressActivity).withInt("addressType", 0).withString("lat", viewModel.lat.get()).withString("lon", viewModel.lon.get()).navigation());
         cb_vhf_square.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 cb_vhf_suit.setChecked(false);
@@ -219,7 +220,7 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
         tv_vhd_open_time.setText(viewModel.openTime.get());
         tv_vhd_delivery_time.setText(viewModel.handTime.get());
         tv_vhd_address.setText(viewModel.officeAddress.get());
-        tv_vhd_property_type.setText(viewModel.propertiesType.get());
+        tv_vhd_property_type.setText(viewModel.propertiesTypeText.get());
         tv_vhd_architecture_type.setText(viewModel.buildType.get());
         tv_vhd_decoration_state.setText(viewModel.decorationType.get());
         et_vhd_households.setText(viewModel.resident.get());
@@ -232,7 +233,7 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
 
         viewModel.officeAddressTextView.set(tv_vhd_address);
 
-        tv_vhd_address.setOnClickListener(v -> ARouter.getInstance().build(ARouterPath.Public.MoreAddressActivity).withInt("addressType", 1).withString("lat",viewModel.salesLat.get()).withString("lon",viewModel.salesLon.get()).navigation());
+        tv_vhd_address.setOnClickListener(v -> ARouter.getInstance().build(ARouterPath.Public.MoreAddressActivity).withInt("addressType", 1).withString("lat", viewModel.salesLat.get()).withString("lon", viewModel.salesLon.get()).navigation());
 
         tv_vhd_add.setOnClickListener(v -> new HRSDLabelPopupwindow(helper.itemView.getContext(), viewModel).showPopupWindow());
 
@@ -261,8 +262,16 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
         });
         //住宅选择
         tv_vhd_property_type.setOnClickListener(view -> {
-            PropertyTypePopupwindow propertyTypePopupwindow = new PropertyTypePopupwindow(context, tv_vhd_property_type.getText().toString());
-            propertyTypePopupwindow.setSelectListener(s -> tv_vhd_property_type.setText(s));
+            PropertyTypePopupwindow propertyTypePopupwindow = new PropertyTypePopupwindow(context, viewModel.buildLabeList);
+            propertyTypePopupwindow.setSelectListener(position -> {
+                for (FeaturedLabelBean featuredLabelBean : viewModel.buildLabeList) {
+                    featuredLabelBean.setSelect(false);
+                }
+                viewModel.buildLabeList.get(position).setSelect(true);
+                viewModel.propertiesType.set(viewModel.buildLabeList.get(position).getId()+"");
+                viewModel.propertiesTypeText.set(viewModel.buildLabeList.get(position).getLabel_name());
+                tv_vhd_property_type.setText(viewModel.propertiesTypeText.get());
+            });
             propertyTypePopupwindow.showPopupWindow(tv_vhd_property_type);
         });
         //建筑类别
@@ -342,28 +351,27 @@ public class HouseResourceReleaseAdapter extends BaseQuickAdapter<HouseResourceR
             if (cb_vhf_suit.isChecked()) {
                 viewModel.priceType.set("2");
             }
-            String propertiesType = "";
-            switch (tv_vhd_property_type.getText().toString()) {
-                case "住宅":
-                    propertiesType = "3";
-                    break;
-                case "别墅":
-                    propertiesType = "4";
-                    break;
-                case "商办":
-                    propertiesType = "5";
-                    break;
-                case "商铺":
-                    propertiesType = "6";
-                    break;
-                case "写字楼":
-                    propertiesType = "7";
-                    break;
-                case "商住":
-                    propertiesType = "8";
-                    break;
-            }
-            viewModel.propertiesType.set(propertiesType);
+//            String propertiesType = "";
+//            switch (tv_vhd_property_type.getText().toString()) {
+//                case "住宅":
+//                    propertiesType = "3";
+//                    break;
+//                case "别墅":
+//                    propertiesType = "4";
+//                    break;
+//                case "商办":
+//                    propertiesType = "5";
+//                    break;
+//                case "商铺":
+//                    propertiesType = "6";
+//                    break;
+//                case "写字楼":
+//                    propertiesType = "7";
+//                    break;
+//                case "商住":
+//                    propertiesType = "8";
+//                    break;
+//            }
             viewModel.propertyCompany.set(et_vhd_property_company.getText().toString());
             viewModel.propertyMoney.set(et_vhd_property_fee.getText().toString());
             viewModel.propertyYear.set(et_vhd_age_limit.getText().toString());
