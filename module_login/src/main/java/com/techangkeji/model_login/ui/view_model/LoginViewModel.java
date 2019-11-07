@@ -46,6 +46,7 @@ import me.goldze.mvvmhabit.http.net.entity.SuccessEntity;
 import me.goldze.mvvmhabit.http.net.entity.login.RegisterEntity;
 import me.goldze.mvvmhabit.utils.IsNullUtil;
 import me.goldze.mvvmhabit.utils.RxUtils;
+import me.goldze.mvvmhabit.utils.ToastUtil;
 import me.goldze.mvvmhabit.utils.ZLog;
 
 /**
@@ -85,20 +86,24 @@ public class LoginViewModel extends BaseViewModel {
     );
 
     private void login() {
-        LoginBody registerBody = new LoginBody(pwNum.get(), phoneNum.get(), 1);
-        IdeaApi.getApiService()
-                .login(registerBody)
-                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
-                .compose(RxUtils.schedulersTransformer())
-                .doOnSubscribe(disposable1 -> showDialog())
-                .subscribe(new DefaultObserver<SuccessEntity<RegisterEntity>>(this) {
-                    @Override
-                    public void onSuccess(SuccessEntity<RegisterEntity> response) {
-                        showDialog("正在登录请稍后");
+        if (!IsNullUtil.getInstance().isEmpty(phoneNum.get())&&!IsNullUtil.getInstance().isEmpty(pwNum.get())) {
+            LoginBody registerBody = new LoginBody(pwNum.get(), phoneNum.get(), 1);
+            IdeaApi.getApiService()
+                    .login(registerBody)
+                    .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                    .compose(RxUtils.schedulersTransformer())
+                    .doOnSubscribe(disposable1 -> showDialog())
+                    .subscribe(new DefaultObserver<SuccessEntity<RegisterEntity>>(this) {
+                        @Override
+                        public void onSuccess(SuccessEntity<RegisterEntity> response) {
+                            showDialog("正在登录请稍后");
 //                        LoginUtil.getInstance().saveUserInfo(response);
-                        LoginUtil.getInstance().requestPermissions(context.get(),response);
-                    }
-                });
+                            LoginUtil.getInstance().requestPermissions(context.get(), response);
+                        }
+                    });
+        }else {
+            ToastUtil.normalToast(context.get(),"请输入用户名和密码");
+        }
     }
 
     /**

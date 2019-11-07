@@ -80,11 +80,11 @@ import retrofit2.http.QueryMap;
 public interface ApiService<T extends BaseEntity> {
     //20122838  123456 测试账号
     int DEFAULT_TIMEOUT = 20 * 1000;
-    String LOGIN_BASE_URL = "http://39.98.33.32:10006/";
-    String IMAGE_BASE_URL = "http://39.98.33.32:10006/";
-    String IMAGE_BASE_URL1 = "http://39.98.33.32:10002/";
-    String IMAGE_BASE_URL2 = "http://39.98.33.32:10003/";
-    String IMAGE_BASE_URL3 = "http://39.98.33.32:10005/";
+    String LOGIN_BASE_URL = "https://admin.fangmaitong.cn/api/";
+    String IMAGE_BASE_URL = "https://admin.fangmaitong.cn/api/";
+    String IMAGE_BASE_URL1 = "https://admin.fangmaitong.cn/api/";
+    String IMAGE_BASE_URL2 = "https://admin.fangmaitong.cn/api/";
+    String IMAGE_BASE_URL3 = "https://admin.fangmaitong.cn/api/";
     String IMAGE_BASE_URL4 = "http://api.map.baidu.com/";
     String API = "/api/v2/";
 

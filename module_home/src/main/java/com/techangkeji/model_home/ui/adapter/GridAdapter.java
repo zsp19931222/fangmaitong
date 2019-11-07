@@ -38,7 +38,7 @@ public class GridAdapter extends BaseQuickAdapter<HomeGridViewBean, BaseViewHold
                 RxBus.getDefault().post(RxBusMessageEventConstants.ZPXX);
             } else if ("人脉交友".equals(item.getName())) {
                 ARouter.getInstance().build(ARouterPath.Message.AddContactActivity).navigation();
-            }else if ("房贷资讯".equals(item.getName())){
+            }else if ("房贷咨询".equals(item.getName())){
                 ARouter.getInstance().build(ARouterPath.Home.HousingInformationActivity).navigation();
             }
         });

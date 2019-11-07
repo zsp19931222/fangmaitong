@@ -1,6 +1,7 @@
 package com.techangkeji.module.ui.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.View;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.blankj.utilcode.util.KeyboardUtils;
 import com.goldze.base.router.ARouterPath;
 import com.techangkeji.module.BR;
 import com.techangkeji.module.R;
@@ -40,7 +42,7 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
     public void initData() {
         viewModel.from = getIntent().getExtras().getInt("from");
         if (viewModel.from == 0) {
-            viewModel.hint.set("搜索本区房源");
+            viewModel.hint.set("搜索本区（开发商名/楼盘名/商圈/标签）");
             viewModel.showHR.set(View.VISIBLE);
             viewModel.showInformation.set(View.GONE);
         } else {
@@ -75,5 +77,6 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
 
             }
         });
+        new Handler().postDelayed(() -> KeyboardUtils.showSoftInput(binding.et),500);
     }
 }

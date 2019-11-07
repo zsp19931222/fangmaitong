@@ -13,7 +13,7 @@ import me.goldze.mvvmhabit.base.BaseActivity;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 
 /**
- * description:房贷资讯
+ * description:房贷咨询
  * author:created by Andy on 2019/9/16 0016 17:44
  * email:zsp872126510@gmail.com
  */

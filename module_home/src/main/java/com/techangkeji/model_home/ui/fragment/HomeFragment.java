@@ -167,7 +167,7 @@ public class HomeFragment extends BaseLazyFragment<FragmentHomeBinding, HomeView
         homeGridViewBeans.add(new HomeGridViewBean(R.mipmap.zpxx, "招聘信息"));
         homeGridViewBeans.add(new HomeGridViewBean(R.mipmap.xsrm, "新手入门"));
         homeGridViewBeans.add(new HomeGridViewBean(R.mipmap.rmjw, "人脉交友"));
-        homeGridViewBeans.add(new HomeGridViewBean(R.mipmap.fdzx, "房贷资讯"));
+        homeGridViewBeans.add(new HomeGridViewBean(R.mipmap.fdzx, "房贷咨询"));
         GridAdapter labelAdapter = new GridAdapter(R.layout.item_grid, homeGridViewBeans);
         rv_hh_gridview.setLayoutManager(new GridLayoutManager(getContext(), 4));
         rv_hh_gridview.setAdapter(labelAdapter);
