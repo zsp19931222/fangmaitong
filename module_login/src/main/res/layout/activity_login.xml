@@ -89,6 +89,7 @@
                     android:hint="请输入密码"
                     android:inputType="textPassword"
                     android:singleLine="true"
+                    android:maxLength="20"
                     android:text="@={viewModel.pwNum}"
                     android:textColor="@color/color_dark_333333"
                     android:textColorHint="@color/color_BDC2C0"

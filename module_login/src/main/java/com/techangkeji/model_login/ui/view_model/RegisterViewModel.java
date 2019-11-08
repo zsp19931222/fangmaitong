@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.ObservableField;
 
 import com.blankj.utilcode.util.SPUtils;
+import com.goldze.base.utils.PhoneUtil;
 import com.goldze.base.utils.RandomUtil;
 import com.goldze.base.utils.SHA1Util;
 import com.techangkeji.model_login.R;
@@ -157,8 +158,8 @@ public class RegisterViewModel extends BaseViewModel {
 
     private void sendCode() {
         if (authCodeField.get().equals(SEND_AUTH_CODE)) {
-            if (IsNullUtil.getInstance().isEmpty(phoneField.get())) {
-                ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "请输入手机号");
+            if (!PhoneUtil.getInstance().checkPhone(phoneField.get())) {
+                ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "请输入正确的手机号");
             } else {
                 String timestamp = System.currentTimeMillis() + "";
                 String randomStr = RandomUtil.getInstance().generateRandomNumber(13) + "";

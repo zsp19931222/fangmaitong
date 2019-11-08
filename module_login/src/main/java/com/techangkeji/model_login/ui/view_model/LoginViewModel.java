@@ -15,6 +15,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.SPUtils;
 import com.goldze.base.router.ARouterPath;
 import com.goldze.base.utils.OtherLoginUtil;
+import com.goldze.base.utils.PhoneUtil;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
@@ -86,7 +87,7 @@ public class LoginViewModel extends BaseViewModel {
     );
 
     private void login() {
-        if (!IsNullUtil.getInstance().isEmpty(phoneNum.get())&&!IsNullUtil.getInstance().isEmpty(pwNum.get())) {
+        if (PhoneUtil.getInstance().checkPhone(phoneNum.get())&&!IsNullUtil.getInstance().isEmpty(pwNum.get())) {
             LoginBody registerBody = new LoginBody(pwNum.get(), phoneNum.get(), 1);
             IdeaApi.getApiService()
                     .login(registerBody)
@@ -102,7 +103,7 @@ public class LoginViewModel extends BaseViewModel {
                         }
                     });
         }else {
-            ToastUtil.normalToast(context.get(),"请输入用户名和密码");
+                ToastUtil.normalToast(context.get(),"请确认手机号和密码是否正确！");
         }
     }
 

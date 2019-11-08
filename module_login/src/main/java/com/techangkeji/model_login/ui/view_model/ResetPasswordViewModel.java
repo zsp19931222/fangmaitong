@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.ObservableField;
 
+import com.goldze.base.utils.PhoneUtil;
 import com.goldze.base.utils.RandomUtil;
 import com.goldze.base.utils.SHA1Util;
 import com.techangkeji.model_login.R;
@@ -84,8 +85,8 @@ public class ResetPasswordViewModel extends BaseViewModel {
 
     private void sendCode() {
         if (Objects.equals(authCodeField.get(), SEND_AUTH_CODE)) {
-            if (IsNullUtil.getInstance().isEmpty(phone.get())) {
-                ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "请输入手机号");
+            if (!PhoneUtil.getInstance().checkPhone(phone.get())) {
+                ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "请输入正确的手机号");
             } else {
                 String timestamp = System.currentTimeMillis() + "";
                 String randomStr = RandomUtil.getInstance().generateRandomNumber(13) + "";

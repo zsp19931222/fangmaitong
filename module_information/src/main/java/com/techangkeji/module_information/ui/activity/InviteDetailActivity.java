@@ -37,54 +37,61 @@ public class InviteDetailActivity extends BaseActivity<ActivityInviteDetailBindi
 
     @Override
     public void initData() {
-        dataBean= (RecruitmentListEntity.DataBean) getIntent().getSerializableExtra("data");
-        viewModel.hrUrl.set(dataBean.getUser().getHeadUrl());
-        viewModel.hrName.set(dataBean.getUser().getRealName());
-        viewModel.hrNum.set(dataBean.getUser().getId()+"");
-        if (!IsNullUtil.getInstance().isEmpty(dataBean.getUser().getIdentity())) {
-            switch (LocalDataHelper.getInstance().getUserInfo().getIdentity()) {
-                case 1:
-                    viewModel.hrIdent.set("总代");
-                    break;
-                case 2:
-                    viewModel.hrIdent.set("渠道代理");
-                    break;
-                case 3:
-                    viewModel.hrIdent.set("联合代理");
-                    break;
-                case 4:
-                    viewModel.hrIdent.set("经纪人");
-                    break;
+        try {
+
+
+            dataBean = (RecruitmentListEntity.DataBean) getIntent().getSerializableExtra("data");
+            viewModel.hrUrl.set(dataBean.getUser().getHeadUrl());
+            viewModel.hrName.set(dataBean.getUser().getRealName());
+            viewModel.hrNum.set(dataBean.getUser().getId() + "");
+            if (!IsNullUtil.getInstance().isEmpty(dataBean.getUser().getIdentity())) {
+                switch (LocalDataHelper.getInstance().getUserInfo().getIdentity()) {
+                    case 1:
+                        viewModel.hrIdent.set("总代");
+                        break;
+                    case 2:
+                        viewModel.hrIdent.set("渠道代理");
+                        break;
+                    case 3:
+                        viewModel.hrIdent.set("联合代理");
+                        break;
+                    case 4:
+                        viewModel.hrIdent.set("经纪人");
+                        break;
+                }
             }
+            if (dataBean.getUser().getBrokerAuthenticate() == 1) {
+                viewModel.hrAuthJJR.set(View.VISIBLE);
+            } else {
+                viewModel.hrAuthJJR.set(View.GONE);
+            }
+            if (dataBean.getUser().getQualificationAuthenticate() == 1) {
+                viewModel.hrAuthZZ.set(View.VISIBLE);
+            } else {
+                viewModel.hrAuthZZ.set(View.GONE);
+            }
+            if (dataBean.getUser().getRealNameAuthenticate() == 1) {
+                viewModel.hrAuthSM.set(View.VISIBLE);
+            } else {
+                viewModel.hrAuthSM.set(View.GONE);
+            }
+            viewModel.inviteCompany.set(dataBean.getRecruitmentTitle());
+            viewModel.inviteName.set(dataBean.getPosition());
+            viewModel.invitePrice.set(dataBean.getMoneyDown() + "-" + dataBean.getMoneyUp());
+            viewModel.inviteWelfare.set(IsNullUtil.getInstance().StringNull((String) dataBean.getTreatment()));
+            viewModel.inviteEducation.set(dataBean.getEducation());
+            viewModel.inviteYear.set((String) dataBean.getWorkYear());
+            viewModel.inviteAddress.set(dataBean.getWorkAddress());
+            viewModel.inviteNature.set(dataBean.getWorkNature());
+            viewModel.inviteContent.set(dataBean.getWorkContent());
+            viewModel.id = dataBean.getRecruitmentHumenId();
+            binding.title.setTitle("招聘详情");
+            InviteDetailAdapter inviteDetailAdapter = new InviteDetailAdapter(R.layout.item_linkman, dataBean.getContactUser());
+            binding.rv.setLayoutManager(new LinearLayoutManager(this));
+            binding.rv.setAdapter(inviteDetailAdapter);
+        } catch (Exception ignored) {
+
         }
-        if (dataBean.getUser().getBrokerAuthenticate()==1){
-            viewModel.hrAuthJJR.set(View.VISIBLE);
-        }else {
-            viewModel.hrAuthJJR.set(View.GONE);
-        }
-        if (dataBean.getUser().getQualificationAuthenticate()==1){
-            viewModel.hrAuthZZ.set(View.VISIBLE);
-        }else {
-            viewModel.hrAuthZZ.set(View.GONE);
-        }
-        if (dataBean.getUser().getRealNameAuthenticate()==1){
-            viewModel.hrAuthSM.set(View.VISIBLE);
-        }else {
-            viewModel.hrAuthSM.set(View.GONE);
-        }
-        viewModel.inviteCompany.set(dataBean.getRecruitmentTitle());
-        viewModel.inviteName.set(dataBean.getPosition());
-        viewModel.invitePrice.set(dataBean.getMoneyDown()+"-"+dataBean.getMoneyUp());
-        viewModel.inviteWelfare.set(IsNullUtil.getInstance().StringNull((String) dataBean.getTreatment()));
-        viewModel.inviteEducation.set(dataBean.getEducation());
-        viewModel.inviteYear.set((String) dataBean.getWorkYear());
-        viewModel.inviteAddress.set(dataBean.getWorkAddress());
-        viewModel.inviteNature.set(dataBean.getWorkNature());
-        viewModel.inviteContent.set(dataBean.getWorkContent());
-        viewModel.id=dataBean.getRecruitmentHumenId();
-        binding.title.setTitle("招聘详情");
-        InviteDetailAdapter inviteDetailAdapter = new InviteDetailAdapter(R.layout.item_linkman, dataBean.getContactUser());
-        binding.rv.setLayoutManager(new LinearLayoutManager(this));
-        binding.rv.setAdapter(inviteDetailAdapter);
     }
+
 }

@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
+import com.goldze.base.utils.PhoneUtil;
 import com.goldze.base.utils.RandomUtil;
 import com.goldze.base.utils.SHA1Util;
 
@@ -69,13 +70,13 @@ public class ChangePhoneViewModel extends BaseViewModel {
     private void changePW() {
         UpdatePasswordBody updatePasswordBody;
         if (selectPW.get()) {//用密码修改
-            if (Objects.requireNonNull(oldPW.get()).length() < 6 || IsNullUtil.getInstance().isEmpty(newPhone.get())) {
+            if (Objects.requireNonNull(oldPW.get()).length() < 6 || !PhoneUtil.getInstance().checkPhone(newPhone.get())) {
                 ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "请确保信息输入正确");
                 return;
             }
             updatePasswordBody = new UpdatePasswordBody(newPhone.get(), oldPW.get(), null, null, 1);
         } else {//用手机号修改
-            if (IsNullUtil.getInstance().isEmpty(newPhone1.get()) || IsNullUtil.getInstance().isEmpty(code.get()) || IsNullUtil.getInstance().isEmpty(oldPhone.get())) {
+            if (IsNullUtil.getInstance().isEmpty(newPhone1.get()) || IsNullUtil.getInstance().isEmpty(code.get()) || !PhoneUtil.getInstance().checkPhone(oldPhone.get())) {
                 ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "请确保信息输入正确");
                 return;
             }
@@ -104,8 +105,8 @@ public class ChangePhoneViewModel extends BaseViewModel {
 
     private void sendCode() {
         if (Objects.equals(authCodeField.get(), SEND_AUTH_CODE)) {
-            if (IsNullUtil.getInstance().isEmpty(oldPhone.get())) {
-                ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "请输入手机号");
+            if (!PhoneUtil.getInstance().checkPhone(oldPhone.get())) {
+                ToastUtil.normalToast(BaseApplication.getInstance().getBaseContext(), "请输入正确的手机号");
             } else {
                 String timestamp = System.currentTimeMillis() + "";
                 String randomStr = RandomUtil.getInstance().generateRandomNumber(13) + "";
