@@ -50,6 +50,9 @@ public class FeedBackViewModel extends BaseViewModel {
      * date: 2019/9/28  23:03
      */
     public void appFeedbackList() {
+        if (page==1){
+            dataBeans.clear();
+        }
         appReportListBody.setPage(page);
         appReportListBody.setMax(20);
         IdeaApi.getApiService()
@@ -57,7 +60,7 @@ public class FeedBackViewModel extends BaseViewModel {
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                 .compose(RxUtils.schedulersTransformer())
                 .doOnSubscribe(disposable -> showDialog())
-                .subscribe(new DefaultObserver<AppReportListEntity>(this) {
+                .subscribe(new DefaultObserver<AppReportListEntity>(srl.get(),this) {
             @Override
             public void onSuccess(AppReportListEntity response) {
                 dataBeans.addAll(response.getData());

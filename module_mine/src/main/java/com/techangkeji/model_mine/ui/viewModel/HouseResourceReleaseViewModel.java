@@ -90,6 +90,7 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
     public ObservableField<StringBuilder> friendIdStringBuilder = new ObservableField<>(new StringBuilder());
 
     public ObservableField<StringBuilder> labelIdsStringBuilder = new ObservableField<>(new StringBuilder());
+    public ObservableField<StringBuilder> labelNameStringBuilder = new ObservableField<>(new StringBuilder());//标签名
 
     public ObservableField<String> houseID = new ObservableField<>("");//房源ID
     public ObservableField<String> address = new ObservableField<>("");
@@ -113,7 +114,7 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
     public ObservableField<String> openTime = new ObservableField<>("");
     public ObservableField<String> priceType = new ObservableField<>("");
     public ObservableField<String> propertiesType = new ObservableField<>("");
-    public ObservableField<String> propertiesTypeText = new ObservableField<>("");
+    public ObservableField<String> propertiesTypeText = new ObservableField<>("");//物业类型
     public ObservableField<String> propertyCompany = new ObservableField<>("");
     public ObservableField<String> propertyMoney = new ObservableField<>("");
     public ObservableField<String> propertyYear = new ObservableField<>("");
@@ -249,6 +250,10 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
         parameter.put("noticeId", noticeId.get());
         parameter.put("salesLat", salesLat.get());
         parameter.put("salesLon", salesLon.get());
+        parameter.put("labelName", labelNameStringBuilder.get().toString());
+        parameter.put("properties", propertiesTypeText.get());
+        parameter.put("build", buildType.get());
+        parameter.put("decoration", decorationType.get());
         ParameterLogUtil.getInstance().parameterLog(parameter);
         IdeaApi.getApiService()
                 .addBuildingInfo(parameter)
@@ -545,7 +550,6 @@ public class HouseResourceReleaseViewModel extends BaseViewModel {
                 .scaleEnabled(true)// 裁剪是否可放大缩小图片 true or false
                 .forResult(CHOOSE_REQUEST);//结果回调onActivityResult code
     }
-
 
 
     @Override

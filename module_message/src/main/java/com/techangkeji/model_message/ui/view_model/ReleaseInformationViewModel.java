@@ -158,7 +158,10 @@ public class ReleaseInformationViewModel extends BaseViewModel {
     private void uploadImage() {
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
         for (ReleaseInformationBean imageUrl : imageUrls) {
-            builder.addFormDataPart("file", new File((String) imageUrl.getImage()).getName(), RequestBody.create(MediaType.parse("multipart/form-data"), new File((String) imageUrl.getImage())));
+            try {
+                builder.addFormDataPart("file", new File((String) imageUrl.getImage()).getName(), RequestBody.create(MediaType.parse("multipart/form-data"), new File((String) imageUrl.getImage())));
+            }catch (Exception e){
+            }
 
         }
         List<MultipartBody.Part> parts = builder.build().parts();

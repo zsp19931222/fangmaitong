@@ -49,6 +49,7 @@ public class HRSDLabelPopupwindow extends BasePopupWindow {
             for (FeaturedLabelBean featuredLabelBean : viewModel.featuredLabelListConfirm) {
                 if (featuredLabelBean.isSelect()) {
                     viewModel.labelIdsStringBuilder.get().append(featuredLabelBean.getId()).append(",");
+                    viewModel.labelNameStringBuilder.get().append(featuredLabelBean.getLabel_name()).append(",");
                     viewModel.labelList.add(featuredLabelBean.getLabel_name());
                 }
             }
