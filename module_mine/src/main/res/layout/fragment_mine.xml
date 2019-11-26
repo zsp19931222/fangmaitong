@@ -403,6 +403,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingTop="@dimen/d15"
+                binding:onClickCommand="@{viewModel.calculatorCommand}"
                 android:paddingBottom="@dimen/d15">
 
                 <ImageView

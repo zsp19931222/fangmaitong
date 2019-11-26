@@ -77,5 +77,7 @@ public class MineViewModel extends BaseViewModel {
     public BindingCommand myInformationCommand = new BindingCommand(() -> ARouter.getInstance().build(ARouterPath.FriendCircle.MyStateActivity).navigation());
     //我的举报
     public BindingCommand reportCommand = new BindingCommand(() -> startActivity(ReportActivity.class));
+    //房贷计算器
+    public BindingCommand calculatorCommand = new BindingCommand(() -> ARouter.getInstance().build(ARouterPath.Public.WebActivity).withString("url","http://e.fangdd.com/boss/tools/calculator").navigation());
 
 }
