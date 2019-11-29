@@ -61,7 +61,7 @@ public class OtherBindingAccountViewModel extends BaseViewModel {
      */
     public BindingCommand weChatCommand = new BindingCommand(() -> {
         if (weChat.get().equals("绑定")) {
-            OtherLoginUtil.getInstance().login(context.get(), "WECHAGE");
+            OtherLoginUtil.getInstance().login(context.get(), "WECHAT");
         } else {
             unBindThird(3);
         }
@@ -104,7 +104,7 @@ public class OtherBindingAccountViewModel extends BaseViewModel {
                         if (type == 4) {
                             qq.set(response.getContent().getQqNickname());
                         } else {
-                            weChat.set(response.getContent().getWechatLanguage());
+                            weChat.set(response.getContent().getWechatNickname());
                         }
                         saveUserInfo(response);
                     }

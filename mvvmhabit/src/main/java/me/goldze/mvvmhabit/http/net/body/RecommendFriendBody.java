@@ -12,6 +12,7 @@ public class RecommendFriendBody {
     private int sex; //不限就不传，男传1  女传0
     private int areaId;
     private int identity = -1; // 身份 1-总代 2-渠道代理 3-联合代理 4-经纪人
+    private int rate=0;//登录率，全部传0，50-非常活跃，40-一般活跃，5-不活跃
 
     public int getIdentity() {
         return identity;
@@ -67,5 +68,13 @@ public class RecommendFriendBody {
 
     public void setAreaId(int areaId) {
         this.areaId = areaId;
+    }
+
+    public int getRate() {
+        return rate;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
     }
 }

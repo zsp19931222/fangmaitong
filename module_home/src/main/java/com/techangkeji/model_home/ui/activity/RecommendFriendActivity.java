@@ -68,6 +68,19 @@ public class RecommendFriendActivity extends BaseActivity<ActivityRecommendFrien
                 case "女":
                     viewModel.recommendFriendBody.setSex(0);
                     break;
+                case "全部":
+                    viewModel.recommendFriendBody.setRate(0);
+                    break;
+                case "非常活跃":
+                    viewModel.recommendFriendBody.setRate(50);
+                    break;
+                case "一般活跃":
+                    viewModel.recommendFriendBody.setRate(40);
+                    break;
+                case "不活跃":
+                    viewModel.recommendFriendBody.setRate(5);
+                    break;
+
             }
             viewModel.pageNum = 1;
             viewModel.userList();

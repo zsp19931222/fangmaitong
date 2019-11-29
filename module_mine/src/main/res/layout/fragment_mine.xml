@@ -228,6 +228,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingTop="@dimen/d15"
+                android:visibility="gone"
                 android:paddingBottom="@dimen/d15"
                 binding:onClickCommand="@{viewModel.informationCommentCommand}">
 

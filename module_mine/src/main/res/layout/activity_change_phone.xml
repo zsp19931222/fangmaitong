@@ -48,6 +48,7 @@
                     android:layout_width="@dimen/d12"
                     android:layout_height="@dimen/d12"
                     android:button="@drawable/cb_bg"
+                    android:clickable="false"
                     android:checked="@{viewModel.selectPW}" />
 
                 <TextView
@@ -74,6 +75,7 @@
                 <CheckBox
                     android:layout_width="@dimen/d12"
                     android:layout_height="@dimen/d12"
+                    android:clickable="false"
                     android:button="@drawable/cb_bg"
                     android:checked="@{viewModel.selectAuthCode}" />
 
