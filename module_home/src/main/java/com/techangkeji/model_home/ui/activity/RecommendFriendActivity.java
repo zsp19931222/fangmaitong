@@ -69,16 +69,20 @@ public class RecommendFriendActivity extends BaseActivity<ActivityRecommendFrien
                     viewModel.recommendFriendBody.setSex(0);
                     break;
                 case "全部":
-                    viewModel.recommendFriendBody.setRate(0);
+                    viewModel.recommendFriendBody.setMinRate(0);
+                    viewModel.recommendFriendBody.setMaxRate(100);
                     break;
                 case "非常活跃":
-                    viewModel.recommendFriendBody.setRate(50);
+                    viewModel.recommendFriendBody.setMinRate(0);
+                    viewModel.recommendFriendBody.setMaxRate(9);
                     break;
                 case "一般活跃":
-                    viewModel.recommendFriendBody.setRate(40);
+                    viewModel.recommendFriendBody.setMinRate(10);
+                    viewModel.recommendFriendBody.setMaxRate(49);
                     break;
                 case "不活跃":
-                    viewModel.recommendFriendBody.setRate(5);
+                    viewModel.recommendFriendBody.setMinRate(50);
+                    viewModel.recommendFriendBody.setMaxRate(100);
                     break;
 
             }
