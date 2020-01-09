@@ -46,7 +46,7 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding, SearchVi
             viewModel.showHR.set(View.VISIBLE);
             viewModel.showInformation.set(View.GONE);
         } else {
-            viewModel.hint.set("搜索本区资讯");
+            viewModel.hint.set("搜索本区资讯/招聘/公告");
             viewModel.showHR.set(View.GONE);
             viewModel.showInformation.set(View.VISIBLE);
         }
